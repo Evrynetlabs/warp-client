@@ -1,0 +1,10 @@
+.WarpAssetTitle {
+    .row {
+        width: 300px;
+        text-align: center;
+        margin: 0 auto;
+    }
+    &__asset, &__swap {
+        text-align: center;
+    }
+}

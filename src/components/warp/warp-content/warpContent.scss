@@ -1,0 +1,13 @@
+.WarpContent {
+    &__footer {
+        &__btn {
+            flex-grow: 0!important;
+        }
+    }
+    &__content {
+        &__amount {
+            width: 300px;
+            margin: 0 auto!important;
+        }
+    }
+}

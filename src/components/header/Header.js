@@ -5,7 +5,7 @@ import classNames from 'classnames'
 export default class Header extends Component {
   constructor(props) {
     super(props)
-    this.states = {
+    this.state = {
       styles: {
         main: classNames({
           [this.constructor.name]: true,
@@ -20,7 +20,7 @@ export default class Header extends Component {
         bg="dark"
         expand="true"
         sticky="top"
-        class={this.states.styles.main}
+        className={this.state.styles.main}
         variant="dark"
       >
         <Navbar.Brand>EV^RYNET</Navbar.Brand>
