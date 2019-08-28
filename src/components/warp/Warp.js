@@ -30,10 +30,10 @@ export default class Warp extends Component {
             <Card className={this.state.styles.content}>
               <WarpAssetTitle></WarpAssetTitle>
               <WarpContent
-                collectTxHashesData={this.props.collectTxHashesData}
-                collectTxHashesPending={this.props.collectTxHashesPending}
-                collectTxHashesError={this.props.collectTxHashesError}
+                txHashes={this.props.txHashes}
                 toEvry={this.props.toEvry}
+                whitelistedAssets={this.props.whitelistedAssets}
+                getWhitelistAssets={this.props.getWhitelistAssets}
               ></WarpContent>
             </Card>
           </Col>
@@ -44,11 +44,19 @@ export default class Warp extends Component {
 }
 
 Warp.propTypes = {
-  collectTxHashesData: PropTypes.shape({
-    stellar: PropTypes.string,
-    evry: PropTypes.string,
+  txHashes: PropTypes.shape({
+    state: PropTypes.shape({
+      stellar: PropTypes.string,
+      evry: PropTypes.string,
+    }),
+    loading: PropTypes.bool,
+    error: PropTypes.object,
   }),
-  collectTxHashesPending: PropTypes.bool,
-  collectTxHashesError: PropTypes.object,
+  whitelistedAssets: PropTypes.shape({
+    state: PropTypes.array,
+    loading: PropTypes.bool,
+    error: PropTypes.object,
+  }),
   toEvry: PropTypes.func.isRequired,
+  getWhitelistAssets: PropTypes.func.isRequired,
 }

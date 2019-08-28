@@ -1,47 +1,70 @@
-import {
-  COLLECT_HASHES_SUCESS,
-  COLLECT_HASHES_PENDING,
-  COLLECT_HASHES_ERROR,
-} from 'Components/warp/warpActionTypes'
+import actionTypes from 'Components/warp/warpActionTypes'
 
 const initState = () => {
   return {
-    collectTxHashesData: null,
-    collectTxHashesPending: false,
-    collectTxHashesError: null,
+    [actionTypes.ASYNC_COLLECT_HASHES.stateKey]: null,
+    [actionTypes.ASYNC_COLLECT_HASHES.loadingKey]: false,
+    [actionTypes.ASYNC_COLLECT_HASHES.errorKey]: null,
+    [actionTypes.ASYNC_GET_WHITELISTED_ASSETS.stateKey]: [],
+    [actionTypes.ASYNC_GET_WHITELISTED_ASSETS.loadingKey]: false,
+    [actionTypes.ASYNC_GET_WHITELISTED_ASSETS.errorKey]: null,
   }
 }
 
 const initialState = initState()
-console.log(initialState)
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case COLLECT_HASHES_SUCESS: {
+    case actionTypes.ASYNC_COLLECT_HASHES.SUCCESS: {
+      const { stellarTxHash, evrynetTxHash } = action.payload
       return {
         ...state,
-        collectTxHashesData: {
-          stellar: action.payload.stellarTxHash,
-          evry: action.payload.evrynetTxHash,
+        [actionTypes.ASYNC_COLLECT_HASHES.stateKey]: {
+          stellar: stellarTxHash,
+          evry: evrynetTxHash,
         },
-        collectTxHashesPending: false,
-        collectTxHashesError: null,
+        [actionTypes.ASYNC_COLLECT_HASHES.loadingKey]: false,
+        [actionTypes.ASYNC_COLLECT_HASHES.errorKey]: null,
       }
     }
-    case COLLECT_HASHES_PENDING: {
+    case actionTypes.ASYNC_COLLECT_HASHES.PENDING: {
       return {
         ...state,
-        collectTxHashesData: null,
-        collectTxHashesPending: action.payload,
-        collectTxHashesError: null,
+        [actionTypes.ASYNC_COLLECT_HASHES.stateKey]: null,
+        [actionTypes.ASYNC_COLLECT_HASHES.loadingKey]: action.payload,
+        [actionTypes.ASYNC_COLLECT_HASHES.errorKey]: null,
       }
     }
-    case COLLECT_HASHES_ERROR: {
+    case actionTypes.ASYNC_COLLECT_HASHES.FAILURE: {
       return {
         ...state,
-        collectTxHashesData: null,
-        collectTxHashesPending: false,
-        collectTxHashesError: action.payload,
+        [actionTypes.ASYNC_COLLECT_HASHES.stateKey]: null,
+        [actionTypes.ASYNC_COLLECT_HASHES.loadingKey]: false,
+        [actionTypes.ASYNC_COLLECT_HASHES.errorKey]: action.payload,
+      }
+    }
+    case actionTypes.ASYNC_GET_WHITELISTED_ASSETS.SUCCESS: {
+      return {
+        ...state,
+        [actionTypes.ASYNC_GET_WHITELISTED_ASSETS.stateKey]: action.payload,
+        [actionTypes.ASYNC_GET_WHITELISTED_ASSETS.loadingKey]: false,
+        [actionTypes.ASYNC_GET_WHITELISTED_ASSETS.errorKey]: null,
+      }
+    }
+    case actionTypes.ASYNC_GET_WHITELISTED_ASSETS.PENDING: {
+      return {
+        ...state,
+        [actionTypes.ASYNC_GET_WHITELISTED_ASSETS.stateKey]: [],
+        [actionTypes.ASYNC_GET_WHITELISTED_ASSETS.loadingKey]: action.payload,
+        [actionTypes.ASYNC_GET_WHITELISTED_ASSETS.errorKey]: null,
+      }
+    }
+    case actionTypes.ASYNC_GET_WHITELISTED_ASSETS.FAILURE: {
+      return {
+        ...state,
+        [actionTypes.ASYNC_GET_WHITELISTED_ASSETS.stateKey]: [],
+        [actionTypes.ASYNC_GET_WHITELISTED_ASSETS.loadingKey]: false,
+        [actionTypes.ASYNC_GET_WHITELISTED_ASSETS.errorKey]: action.payload,
       }
     }
     default:

@@ -1,12 +1,26 @@
 import { createStructuredSelector } from 'reselect'
+import actionTypes from 'Components/warp/warpActionTypes'
 
-export const collectTxHashesData = (state) => state.warp.collectTxHashesData
-export const collectTxHashesPending = (state) =>
-  state.warp.collectTxHashesPending
-export const collectTxHashesError = (state) => state.warp.collectTxHashesError
+export const selectCollectedTxHashes = createStructuredSelector({
+  state: (state) => {
+    return state.warp[actionTypes.ASYNC_COLLECT_HASHES.stateKey]
+  },
+  loading: (state) => {
+    return state.warp[actionTypes.ASYNC_COLLECT_HASHES.loadingKey]
+  },
+  error: (state) => {
+    return state.warp[actionTypes.ASYNC_COLLECT_HASHES.errorKey]
+  },
+})
 
-export const collectTxHashes = createStructuredSelector({
-  collectTxHashesData,
-  collectTxHashesPending,
-  collectTxHashesError,
+export const selectWhitelistedAssets = createStructuredSelector({
+  state: (state) => {
+    return state.warp[actionTypes.ASYNC_GET_WHITELISTED_ASSETS.stateKey]
+  },
+  loading: (state) => {
+    return state.warp[actionTypes.ASYNC_GET_WHITELISTED_ASSETS.loadingKey]
+  },
+  error: (state) => {
+    return state.warp[actionTypes.ASYNC_GET_WHITELISTED_ASSETS.errorKey]
+  },
 })

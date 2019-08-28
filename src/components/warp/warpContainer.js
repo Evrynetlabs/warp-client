@@ -1,16 +1,21 @@
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import Warp from 'Components/warp/Warp'
-import { collectTxHashes } from 'Components/warp/warpSelectors'
-import { toEvry } from 'Components/warp/warpActions'
+import {
+  selectCollectedTxHashes,
+  selectWhitelistedAssets,
+} from 'Components/warp/warpSelectors'
+import { toEvry, getWhitelistAssets } from 'Components/warp/warpActions'
 
 const mapStateToProps = (state) => ({
-  txHashes: collectTxHashes(state),
+  txHashes: selectCollectedTxHashes(state),
+  whitelistedAssets: selectWhitelistedAssets(state),
 })
 
 const mapDispatchToProps = (dispatch) => {
   return {
     toEvry: (payload) => dispatch(toEvry(payload)),
+    getWhitelistAssets: () => dispatch(getWhitelistAssets()),
   }
 }
 

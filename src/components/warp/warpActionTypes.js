@@ -1,3 +1,11 @@
-export const COLLECT_HASHES_SUCESS = 'COLLECT_HASHES_SUCESS'
-export const COLLECT_HASHES_PENDING = 'COLLECT_HASHES_PENDING'
-export const COLLECT_HASHES_ERROR = 'COLLECT_HASHES_ERROR'
+import { createAsyncMutation } from '@/utils/store'
+
+export const ASYNC_COLLECT_HASHES = createAsyncMutation('COLLECT_HASHES')
+export const ASYNC_GET_WHITELISTED_ASSETS = createAsyncMutation(
+  'GET_WHITELISTED_ASSETS',
+)
+
+export default {
+  ASYNC_COLLECT_HASHES,
+  ASYNC_GET_WHITELISTED_ASSETS,
+}

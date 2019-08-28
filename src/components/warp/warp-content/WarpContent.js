@@ -5,13 +5,18 @@ import { Container, Row, Col, Button, Form } from 'react-bootstrap'
 import 'Components/warp/warp-content/warpContent.scss'
 import { numberToCurrencyString, currencyToNumberString } from '@/utils/format'
 import PropTypes from 'prop-types'
+import * as Warp from 'warp-js'
+import map from 'lodash/map'
+import isEmpty from 'lodash/isEmpty'
+
 export default class WarpContent extends Component {
   constructor(props) {
     super(props)
+    this.warp = new Warp()
     this.initialState = {
       styles: this._initStyles(),
       amount: '',
-      asset: 'EVRY',
+      asset: this.warp.utils.getEvryAsset().getCode(),
       role: {
         source: 'source',
         destination: 'destination',
@@ -72,24 +77,45 @@ export default class WarpContent extends Component {
     })
   }
 
+  async componentDidMount() {
+    await this.props.getWhitelistAssets()
+  }
+
   async _handleSubmit(e) {
     e.preventDefault()
     let asset
-    switch (this.asset) {
+    switch (this.state.asset) {
       case 'EVRY': {
-        asset = {} //this.warp.getEvryAsset()
+        asset = this.warp.utils.getEvryAsset()
         break
       }
       case 'XLM': {
-        asset = {} //this.warp.getStellarAsset()
+        asset = this.warp.utils.getLumensAsset()
         break
       }
+      default:
+        return null
     }
-    await this.toEvry({
+    await this.props.toEvry({
       asset,
       amount: this.state.amount,
       srcStellarSecret: this.state.sourceAccount,
       destEvryAddr: this.state.destinationAccount,
+    })
+  }
+
+  _listWhitelistedAssetsOptions() {
+    if (
+      this.props.whitelistedAssets.loading ||
+      isEmpty(this.props.whitelistedAssets.state)
+    )
+      return
+    return map(this.props.whitelistedAssets.state, (ech) => {
+      return (
+        <option key={ech.getCode()} value={ech.getCode()}>
+          {ech.getCode()}
+        </option>
+      )
     })
   }
 
@@ -154,8 +180,7 @@ export default class WarpContent extends Component {
                     as="select"
                     onChange={(e) => this._saveAsset(e)}
                   >
-                    <option value="EVRY">EVRY</option>
-                    <option value="XLM">STELLAR</option>
+                    {this._listWhitelistedAssetsOptions()}
                   </Form.Control>
                 </Form.Group>
               </Col>
@@ -179,11 +204,19 @@ export default class WarpContent extends Component {
 }
 
 WarpContent.propTypes = {
-  collectTxHashesData: PropTypes.shape({
-    stellar: PropTypes.string,
-    evry: PropTypes.string,
+  txHashes: PropTypes.shape({
+    state: PropTypes.shape({
+      stellar: PropTypes.string,
+      evry: PropTypes.string,
+    }),
+    loading: PropTypes.bool,
+    error: PropTypes.object,
   }),
-  collectTxHashesPending: PropTypes.bool,
-  collectTxHashesError: PropTypes.object,
+  whitelistedAssets: PropTypes.shape({
+    state: PropTypes.array,
+    loading: PropTypes.bool,
+    error: PropTypes.object,
+  }),
   toEvry: PropTypes.func.isRequired,
+  getWhitelistAssets: PropTypes.func.isRequired,
 }
