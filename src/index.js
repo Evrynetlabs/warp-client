@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.scss'
-import App from './App'
-import registerServiceWorker from './registerServiceWorker'
+import App from '@/App'
+import registerServiceWorker from '@/registerServiceWorker'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 if (typeof window !== 'undefined') {
   ReactDOM.render(<App />, document.getElementById('root'))

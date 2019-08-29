@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import '@/App.scss'
-import { Header } from 'Components/header'
-import { WarpComponent } from 'Components/warp'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import store from '@/store'
+import { Header } from 'Components/header'
+import { WarpComponent } from 'Components/warp'
 
 class App extends Component {
   render() {

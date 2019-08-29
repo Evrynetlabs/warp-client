@@ -1,0 +1,14 @@
+{
+  "presets": ["react-app",  "@babel/preset-env"],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "@": "./src",
+          "Components": "./src/components"
+        }
+      }
+    ],
+]
+}
