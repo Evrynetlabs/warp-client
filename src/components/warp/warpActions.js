@@ -57,7 +57,6 @@ export const getWhitelistAssets = () => {
       const whitelistedAssets = await warp.client.evry.getWhitelistAssets()
       dispatch(getWhitelistAssetsSuccess(whitelistedAssets.assets))
     } catch (e) {
-      console.log(e, 'error')
       dispatch(getWhitelistAssetsError(e))
     }
   }
