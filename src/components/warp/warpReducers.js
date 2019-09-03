@@ -1,12 +1,12 @@
 import actionTypes from 'Components/warp/warpActionTypes'
 
-const initState = () => {
+export const initState = () => {
   return {
     [actionTypes.ASYNC_COLLECT_HASHES.stateKey]: null,
-    [actionTypes.ASYNC_COLLECT_HASHES.loadingKey]: false,
+    [actionTypes.ASYNC_COLLECT_HASHES.loadingKey]: true,
     [actionTypes.ASYNC_COLLECT_HASHES.errorKey]: null,
     [actionTypes.ASYNC_GET_WHITELISTED_ASSETS.stateKey]: [],
-    [actionTypes.ASYNC_GET_WHITELISTED_ASSETS.loadingKey]: false,
+    [actionTypes.ASYNC_GET_WHITELISTED_ASSETS.loadingKey]: true,
     [actionTypes.ASYNC_GET_WHITELISTED_ASSETS.errorKey]: null,
   }
 }

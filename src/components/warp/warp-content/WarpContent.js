@@ -5,7 +5,7 @@ import { Container, Row, Col, Button, Form } from 'react-bootstrap'
 import 'Components/warp/warp-content/warpContent.scss'
 import { numberToCurrencyString, currencyToNumberString } from '@/utils/format'
 import PropTypes from 'prop-types'
-import * as Warp from 'warp-js'
+import Warp from 'warp-js'
 import map from 'lodash/map'
 import isEmpty from 'lodash/isEmpty'
 
