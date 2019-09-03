@@ -2,11 +2,12 @@
 
 exports[`WarpContent With default case should render correspondingly 1`] = `
 <Form
+  className="WarpContent__form"
   inline={false}
   onSubmit={[Function]}
 >
   <CardBody
-    className="WarpContent__content"
+    className="WarpContent__form__content"
   >
     <Container
       fluid={true}
@@ -27,6 +28,7 @@ exports[`WarpContent With default case should render correspondingly 1`] = `
               </span>
             </FormLabel>
             <FormControl
+              className="WarpContent__form__content__input__src WarpContent__form__content__input"
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -46,6 +48,7 @@ exports[`WarpContent With default case should render correspondingly 1`] = `
               </span>
             </FormLabel>
             <FormControl
+              className="WarpContent__form__content__input__dest WarpContent__form__content__input"
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -54,7 +57,7 @@ exports[`WarpContent With default case should render correspondingly 1`] = `
         </Col>
       </ForwardRef>
       <ForwardRef
-        className="WarpContent__content__amount"
+        className="WarpContent__form__content__amount"
         noGutters={false}
       >
         <Col>

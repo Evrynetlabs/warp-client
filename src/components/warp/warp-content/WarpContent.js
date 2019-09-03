@@ -34,7 +34,11 @@ export default class WarpContent extends Component {
       [this.constructor.name]: true,
     })
     const stylesFooter = `${stylesMain}__footer`
-    const stylesContent = `${stylesMain}__content`
+    const stylesForm = `${stylesMain}__form`
+    const stylesContent = `${stylesForm}__content`
+    const stylesContentAccountInput = `${stylesContent}__input`
+    const stylesContentAccountInputSrc = `${stylesContentAccountInput}__src`
+    const stylesContentAccountInputDest = `${stylesContentAccountInput}__dest`
     const stylesContentAmountSelection = `${stylesContent}__amount`
     const stylesFooterButton = `${stylesFooter}__btn`
     return {
@@ -43,6 +47,10 @@ export default class WarpContent extends Component {
       footer: stylesFooter,
       footerBtn: stylesFooterButton,
       amountSelection: stylesContentAmountSelection,
+      accountInput: stylesContentAccountInput,
+      accountInputSrc: stylesContentAccountInputSrc,
+      accountInputDest: stylesContentAccountInputDest,
+      form: stylesForm,
     }
   }
 
@@ -122,6 +130,7 @@ export default class WarpContent extends Component {
   render() {
     return (
       <Form
+        className={this.state.styles.form}
         onSubmit={async (e) => {
           await this._handleSubmit(e)
         }}
@@ -135,6 +144,10 @@ export default class WarpContent extends Component {
                     <span>From:</span>
                   </Form.Label>
                   <Form.Control
+                    className={classNames({
+                      [this.state.styles.accountInputSrc]: true,
+                      [this.state.styles.accountInput]: true,
+                    })}
                     type="text"
                     placeholder="Account Number"
                     onChange={(e) =>
@@ -149,6 +162,10 @@ export default class WarpContent extends Component {
                     <span>To:</span>
                   </Form.Label>
                   <Form.Control
+                    className={classNames({
+                      [this.state.styles.accountInputDest]: true,
+                      [this.state.styles.accountInput]: true,
+                    })}
                     type="text"
                     placeholder="Account Number"
                     onChange={(e) =>

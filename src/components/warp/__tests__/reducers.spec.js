@@ -1,16 +1,7 @@
-import reducer from 'Components/warp/warpReducers'
+import reducer, { initState } from 'Components/warp/warpReducers'
 import actionTypes from 'Components/warp/warpActionTypes'
 
-const expectedInitialState = () => {
-  return {
-    [actionTypes.ASYNC_COLLECT_HASHES.stateKey]: null,
-    [actionTypes.ASYNC_COLLECT_HASHES.loadingKey]: false,
-    [actionTypes.ASYNC_COLLECT_HASHES.errorKey]: null,
-    [actionTypes.ASYNC_GET_WHITELISTED_ASSETS.stateKey]: [],
-    [actionTypes.ASYNC_GET_WHITELISTED_ASSETS.loadingKey]: false,
-    [actionTypes.ASYNC_GET_WHITELISTED_ASSETS.errorKey]: null,
-  }
-}
+const expectedInitialState = initState
 
 describe('warp reducer', () => {
   it('should return the initial state', () => {
@@ -29,6 +20,7 @@ describe('warp reducer', () => {
         stellar: 'foo',
         evry: 'bar',
       },
+      [actionTypes.ASYNC_COLLECT_HASHES.loadingKey]: false,
     })
   })
 
@@ -40,7 +32,6 @@ describe('warp reducer', () => {
       }),
     ).toEqual({
       ...expectedInitialState(),
-      [actionTypes.ASYNC_COLLECT_HASHES.loadingKey]: true,
     })
   })
 
@@ -55,6 +46,7 @@ describe('warp reducer', () => {
       [actionTypes.ASYNC_COLLECT_HASHES.errorKey]: new Error(
         'this is an error',
       ),
+      [actionTypes.ASYNC_COLLECT_HASHES.loadingKey]: false,
     })
   })
 })

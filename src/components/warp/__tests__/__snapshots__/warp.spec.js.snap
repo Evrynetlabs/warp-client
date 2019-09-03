@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`WarpContent should render correspondingly 1`] = `
+exports[`Warp should render correspondingly 1`] = `
 <ContextProvider
   value={null}
 >
