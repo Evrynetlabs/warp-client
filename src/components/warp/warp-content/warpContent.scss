@@ -1,7 +1,16 @@
+@import '../../../sass/utilities/variables';
+
 .WarpContent {
     &__footer {
+        &.card-footer {
+            border: none;
+            background: none;
+        }
         &__btn {
             flex-grow: 0!important;
+            .btn {
+                background: map-get($palette-colors, blue-110);
+            }
         }
     }
     &__form{

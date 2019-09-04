@@ -1,4 +1,10 @@
+@import '../../../sass/utilities/variables';
+
 .WarpAssetTitle {
+    &.card-header {
+        background:none;
+        border:none;
+    }
     .row {
         width: 300px;
         text-align: center;
@@ -6,5 +12,8 @@
     }
     &__asset, &__swap {
         text-align: center;
+        font-size: $font-size-h4;
+        font-weight: map-get($font-weights, semibold);
     }
+    
 }

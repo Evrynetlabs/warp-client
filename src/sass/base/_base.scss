@@ -5,6 +5,9 @@
 /**
  * Set up a decent box model on the root element
  */
+
+  @include font-face("Proxima Nova", "/src/assets/fonts/proximanova-medium",  map-get($font-weights, medium) , normal, woff);
+
   html {
     box-sizing: border-box;
   }
@@ -16,9 +19,7 @@
 
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-      "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-      sans-serif;
+    font-family: $proxima-font-stack;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     padding: 0;
@@ -44,4 +45,5 @@
 
   #root, .app {
     height: 100%;
+    background: $gradient;
   }

@@ -6,7 +6,8 @@
       {
         "alias": {
           "@": "./src",
-          "Components": "./src/components"
+          "Components": "./src/components",
+          "Styles": "./src/sass"
         }
       }
     ],
