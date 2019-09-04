@@ -1,7 +1,7 @@
 @import '../../sass/utilities/variables';
 
 .Warp {
-    height:100%;
+    height: calc(100% - #{$navbar-height});
     .row {
         height:100%;
         display: flex;
