@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Card from 'react-bootstrap/Card'
 import classNames from 'classnames'
-import WarpAssetTitle from 'Components/warp/warp-asset-title/WarpAssetTitle'
+import WarpChainTitle from 'Components/warp/warp-chain-title/WarpChainTitle'
 import WarpContent from 'Components/warp/warp-content/WarpContent'
 import { Container, Row, Col } from 'react-bootstrap'
 import PropTypes from 'prop-types'
@@ -28,7 +28,7 @@ export default class Warp extends Component {
         <Row>
           <Col>
             <Card className={this.state.styles.content}>
-              <WarpAssetTitle></WarpAssetTitle>
+              <WarpChainTitle></WarpChainTitle>
               <WarpContent
                 txHashes={this.props.txHashes}
                 toEvry={this.props.toEvry}

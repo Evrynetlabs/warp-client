@@ -4,9 +4,9 @@ import classNames from 'classnames'
 import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Container, Row, Col } from 'react-bootstrap'
-import 'Components/warp/warp-asset-title/warpAssetTitle.scss'
+import 'Components/warp/warp-chain-title/warpChainTitle.scss'
 
-export default class WarpAssetTitle extends Component {
+export default class WarpChainTitle extends Component {
   constructor(props) {
     super(props)
     this.stylesMain = classNames({

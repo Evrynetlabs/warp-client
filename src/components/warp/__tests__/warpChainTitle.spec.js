@@ -1,13 +1,13 @@
 import React from 'react'
 import Enzyme, { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import WarpAssetTitle from 'Components/warp/warp-asset-title/WarpAssetTitle'
+import WarpChainTitle from 'Components/warp/warp-chain-title/WarpChainTitle'
 
 Enzyme.configure({ adapter: new Adapter() })
 
-describe('WarpAssetTitle', () => {
+describe('WarpChainTitle', () => {
   it('should render correspondingly', () => {
-    const component = shallow(<WarpAssetTitle></WarpAssetTitle>)
+    const component = shallow(<WarpChainTitle></WarpChainTitle>)
     expect(component).toMatchSnapshot()
   })
 })
