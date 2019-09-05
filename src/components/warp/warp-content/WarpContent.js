@@ -8,6 +8,7 @@ import PropTypes from 'prop-types'
 import Warp from 'warp-js'
 import map from 'lodash/map'
 import isEmpty from 'lodash/isEmpty'
+import find from 'lodash/find'
 
 export default class WarpContent extends Component {
   constructor(props) {
@@ -59,8 +60,18 @@ export default class WarpContent extends Component {
   }
 
   _formatNumber(amount) {
+    let decimal
+    if (!isEmpty(this.props.whitelistedAssets.state)) {
+      const whitelistedAsset = find(this.props.whitelistedAssets.state, {
+        code: this.state.asset,
+      })
+      decimal = whitelistedAsset ? whitelistedAsset.decimal : whitelistedAsset
+    }
     this.setState({
-      amount: numberToCurrencyString(Number(currencyToNumberString(amount))),
+      amount: numberToCurrencyString(
+        Number(currencyToNumberString(amount)),
+        decimal,
+      ),
     })
   }
 
