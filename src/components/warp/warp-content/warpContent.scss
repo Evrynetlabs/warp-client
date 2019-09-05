@@ -1,0 +1,29 @@
+@import '../../../sass/utilities/variables';
+
+.WarpContent {
+    &__footer {
+        &.card-footer {
+            border: none;
+            background: none;
+        }
+        &__btn {
+            flex-grow: 0!important;
+            .btn {
+                &.btn-dark {
+                    &:hover {
+                        background-color: $revolver;
+                    }
+                }
+                background: map-get($palette-colors, blue-110);
+            }
+        }
+    }
+    &__form{
+        &__content {
+            &__amount {
+                width: 300px;
+                margin: 0 auto!important;
+            }
+        }
+    }
+}

@@ -1,0 +1,20 @@
+@import '../../sass/utilities/variables';
+
+.Warp {
+    height: calc(100% - #{$navbar-height});
+    .row {
+        height:100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    &__content {
+        width: 1000px;
+        margin: 0 auto;
+        &.card {
+            color: $light-grey;
+            background: none;
+            border: none;
+        }
+    }
+}

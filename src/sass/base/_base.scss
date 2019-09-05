@@ -5,8 +5,30 @@
 /**
  * Set up a decent box model on the root element
  */
- html {
+
+  @include font-face("Proxima Nova", "/src/assets/fonts/proximanova-medium",  map-get($font-weights, medium) , normal, woff);
+
+  html {
     box-sizing: border-box;
+  }
+  
+  html, 
+  body {
+      height: 100%;
+  }
+
+  body {
+    margin: 0;
+    font-family: $proxima-font-stack;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 0;
+    font-family: sans-serif;
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+      monospace;
   }
   
   /**
@@ -19,4 +41,13 @@
   *::before,
   *::after {
     box-sizing: inherit;
+  }
+
+  #root, .app {
+    height: 100%;
+    background: $gradient;
+  }
+
+  .navbar {
+    height: $navbar-height;
   }

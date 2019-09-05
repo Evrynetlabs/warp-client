@@ -19,6 +19,7 @@ $palette-colors: (
   'blue-80': #0427a7,
   'blue-90': #01158d,
   'blue-100': #000873,
+  'blue-110': #1f114f,
   'green-10': #f4fff3,
   'green-20': #c6f7c6,
   'green-30': #90e0a4,
@@ -81,3 +82,23 @@ $mid-grey: rgb(153, 153, 153) !default;
 /// Dark grey
 /// @type Color
 $dark-grey: rgb(68, 68, 68) !default;
+
+$lilac: #e7b7fe !default;
+
+$fountain: #5ebfbc !default;
+
+$galaxy: #1e124f !default;
+
+$revolver: #2e1535 !default;
+
+$gradient_hero: linear-gradient(
+  130deg,
+  $galaxy 50%,
+  $fountain 100%
+) !default;
+
+$gradient: linear-gradient(
+  130deg,
+  $galaxy 26%,
+  $fountain 100%
+) !default;

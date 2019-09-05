@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import Navbar from 'react-bootstrap/Navbar'
 import classNames from 'classnames'
+import { SvgLogo } from 'Components/logo'
 
 export default class Header extends Component {
   constructor(props) {
     super(props)
-    this.states = {
+    this.state = {
       styles: {
         main: classNames({
           [this.constructor.name]: true,
@@ -17,13 +18,14 @@ export default class Header extends Component {
   render() {
     return (
       <Navbar
-        bg="dark"
-        expand="true"
+        expand="lg"
         sticky="top"
-        class={this.states.styles.main}
-        variant="dark"
+        bg="light"
+        className={this.state.styles.main}
       >
-        <Navbar.Brand>EV^RYNET</Navbar.Brand>
+        <Navbar.Brand>
+          <SvgLogo></SvgLogo>
+        </Navbar.Brand>
       </Navbar>
     )
   }
