@@ -4,7 +4,7 @@ export const numberToCurrencyString = (number, decimals = 2) => {
   return bn
     .toFixed(decimals)
     .replace(/(\d+)(?=(\d{3})+(?!\d)*\.)/g, '$1,')
-    .replace(/0+\b/g, '')
+    .replace(/0+\b(?!\.)/g, '')
 }
 
 export const currencyToNumberString = (currency) => {
