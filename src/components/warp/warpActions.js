@@ -22,10 +22,10 @@ export const toEvry = ({ srcStellarSecret, destEvryAddr, amount, asset }) => {
     dispatch(collectTxHashesPending(true))
     try {
       const { stellarTxHash, evrynetTxHash } = await warp.toEvrynet({
-        src: srcStellarSecret,
+        evrynetPriv: destEvryAddr,
+        stellarPriv: srcStellarSecret,
         amount,
         asset,
-        evrynetAddress: destEvryAddr,
       })
       dispatch(collectTxHashesSuccess({ stellarTxHash, evrynetTxHash }))
     } catch (e) {
