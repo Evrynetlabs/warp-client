@@ -32,6 +32,7 @@ exports[`WarpContent With default case should render correspondingly 1`] = `
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
+              value=""
             />
           </FormGroup>
         </Col>
@@ -52,6 +53,7 @@ exports[`WarpContent With default case should render correspondingly 1`] = `
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
+              value=""
             />
           </FormGroup>
         </Col>

@@ -38,7 +38,7 @@ describe('WarpChainTitle', () => {
       component.find('.WarpChainTitle__swap').simulate('click')
       expect(component.state().swap).toEqual({
         dest: 'Stellar',
-        src: 'EVRY',
+        src: 'Evrynet',
       })
       expect(component).toMatchSnapshot()
     })

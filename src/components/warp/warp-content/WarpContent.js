@@ -135,21 +135,25 @@ export default class WarpContent extends Component {
     })
   }
 
-  __updateTransferFunction(prevProps) {
+  __updateTransferFunction(prevProps, prevState) {
     if (prevProps.isToEvry === this.props.isToEvry) return
     if (this.props.isToEvry) {
       this.setState({
         transferFunc: this.props.toEvry,
+        sourceAccount: prevState.destinationAccount,
+        destinationAccount: prevState.sourceAccount,
       })
       return
     }
     this.setState({
       transferFunc: this.props.toStellar,
+      sourceAccount: prevState.destinationAccount,
+      destinationAccount: prevState.sourceAccount,
     })
   }
 
-  componentDidUpdate(prevProps) {
-    this.__updateTransferFunction(prevProps)
+  componentDidUpdate(prevProps, prevState) {
+    this.__updateTransferFunction(prevProps, prevState)
   }
 
   render() {
@@ -175,6 +179,7 @@ export default class WarpContent extends Component {
                     })}
                     type="text"
                     placeholder="Account Number"
+                    value={this.state.sourceAccount}
                     onChange={(e) =>
                       this._saveTransactionAccount(e, this.state.role.source)
                     }
@@ -193,6 +198,7 @@ export default class WarpContent extends Component {
                     })}
                     type="text"
                     placeholder="Account Number"
+                    value={this.state.destinationAccount}
                     onChange={(e) =>
                       this._saveTransactionAccount(
                         e,

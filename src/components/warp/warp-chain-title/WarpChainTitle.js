@@ -11,7 +11,7 @@ export default class WarpChainTitle extends Component {
   constructor(props) {
     super(props)
     const chain = {
-      EVRY: 'EVRY',
+      EVRY: 'Evrynet',
       XLM: 'Stellar',
     }
     this.stylesMain = classNames({

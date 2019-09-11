@@ -17,7 +17,7 @@ exports[`WarpChainTitle When clicking toggle button should change source and des
         <span
           className="WarpChainTitle__asset"
         >
-          EVRY
+          Evrynet
         </span>
       </Col>
       <Col
@@ -130,7 +130,7 @@ exports[`WarpChainTitle should render correspondingly 1`] = `
         xs="5"
       >
         <span>
-          EVRY
+          Evrynet
         </span>
       </Col>
     </ForwardRef>
