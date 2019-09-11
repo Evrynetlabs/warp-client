@@ -28,12 +28,17 @@ export default class Warp extends Component {
         <Row>
           <Col>
             <Card className={this.state.styles.content}>
-              <WarpChainTitle></WarpChainTitle>
+              <WarpChainTitle
+                toggleTransferSwitch={this.props.toggleTransferSwitch}
+                isToEvry={this.props.isToEvry}
+              ></WarpChainTitle>
               <WarpContent
                 txHashes={this.props.txHashes}
                 toEvry={this.props.toEvry}
+                toStellar={this.props.toStellar}
                 whitelistedAssets={this.props.whitelistedAssets}
                 getWhitelistAssets={this.props.getWhitelistAssets}
+                isToEvry={this.props.isToEvry}
               ></WarpContent>
             </Card>
           </Col>
@@ -51,12 +56,15 @@ Warp.propTypes = {
     }),
     loading: PropTypes.bool,
     error: PropTypes.object,
-  }),
+  }).isRequired,
   whitelistedAssets: PropTypes.shape({
     state: PropTypes.array,
     loading: PropTypes.bool,
     error: PropTypes.object,
-  }),
+  }).isRequired,
+  isToEvry: PropTypes.bool.isRequired,
   toEvry: PropTypes.func.isRequired,
+  toStellar: PropTypes.func.isRequired,
   getWhitelistAssets: PropTypes.func.isRequired,
+  toggleTransferSwitch: PropTypes.func.isRequired,
 }

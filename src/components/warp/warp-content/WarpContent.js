@@ -24,6 +24,7 @@ export default class WarpContent extends Component {
       },
       sourceAccount: '',
       destinationAccount: '',
+      transferFunc: props.toEvry,
     }
     this.state = {
       ...this.initialState,
@@ -53,10 +54,6 @@ export default class WarpContent extends Component {
       accountInputDest: stylesContentAccountInputDest,
       form: stylesForm,
     }
-  }
-
-  _toAmountString() {
-    return currencyToNumberString(this.state.amount)
   }
 
   _formatNumber(amount) {
@@ -115,11 +112,11 @@ export default class WarpContent extends Component {
       default:
         return null
     }
-    await this.props.toEvry({
+    await this.state.transferFunc({
       asset,
-      amount: this.state.amount,
-      srcStellarSecret: this.state.sourceAccount,
-      destEvryAddr: this.state.destinationAccount,
+      amount: currencyToNumberString(this.state.amount),
+      src: this.state.sourceAccount,
+      dest: this.state.destinationAccount,
     })
   }
 
@@ -136,6 +133,23 @@ export default class WarpContent extends Component {
         </option>
       )
     })
+  }
+
+  __updateTransferFunction(prevProps) {
+    if (prevProps.isToEvry === this.props.isToEvry) return
+    if (this.props.isToEvry) {
+      this.setState({
+        transferFunc: this.props.toEvry,
+      })
+      return
+    }
+    this.setState({
+      transferFunc: this.props.toStellar,
+    })
+  }
+
+  componentDidUpdate(prevProps) {
+    this.__updateTransferFunction(prevProps)
   }
 
   render() {
@@ -246,5 +260,7 @@ WarpContent.propTypes = {
     error: PropTypes.object,
   }),
   toEvry: PropTypes.func.isRequired,
+  toStellar: PropTypes.func.isRequired,
+  isToEvry: PropTypes.bool.isRequired,
   getWhitelistAssets: PropTypes.func.isRequired,
 }

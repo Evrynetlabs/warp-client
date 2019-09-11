@@ -45,6 +45,7 @@ exports[`WarpChainTitle should render correspondingly 1`] = `
           inverse={false}
           listItem={false}
           mask={null}
+          onClick={[Function]}
           pull={null}
           pulse={false}
           rotation={null}
@@ -60,7 +61,7 @@ exports[`WarpChainTitle should render correspondingly 1`] = `
         xs="5"
       >
         <span>
-          Evry
+          EVRY
         </span>
       </Col>
     </ForwardRef>

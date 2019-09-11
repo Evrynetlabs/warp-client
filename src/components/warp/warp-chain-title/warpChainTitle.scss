@@ -15,5 +15,9 @@
         font-size: $font-size-h4;
         font-weight: map-get($font-weights, semibold);
     }
+
+    &__swap {
+        cursor: pointer;
+    }
     
 }

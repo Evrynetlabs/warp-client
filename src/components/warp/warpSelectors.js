@@ -1,6 +1,9 @@
 import { createStructuredSelector } from 'reselect'
 import actionTypes from 'Components/warp/warpActionTypes'
 
+export const isToEvrySelector = (state) =>
+  state.warp[actionTypes.ASYNC_TOGGLE_WARP_SWITCH.stateKey]
+
 export const selectCollectedTxHashes = createStructuredSelector({
   state: (state) => {
     return state.warp[actionTypes.ASYNC_COLLECT_HASHES.stateKey]

@@ -8,6 +8,7 @@ export const initState = () => {
     [actionTypes.ASYNC_GET_WHITELISTED_ASSETS.stateKey]: [],
     [actionTypes.ASYNC_GET_WHITELISTED_ASSETS.loadingKey]: true,
     [actionTypes.ASYNC_GET_WHITELISTED_ASSETS.errorKey]: null,
+    [actionTypes.ASYNC_TOGGLE_WARP_SWITCH.stateKey]: true,
   }
 }
 
@@ -65,6 +66,14 @@ export default function(state = initialState, action) {
         [actionTypes.ASYNC_GET_WHITELISTED_ASSETS.stateKey]: [],
         [actionTypes.ASYNC_GET_WHITELISTED_ASSETS.loadingKey]: false,
         [actionTypes.ASYNC_GET_WHITELISTED_ASSETS.errorKey]: action.payload,
+      }
+    }
+    case actionTypes.ASYNC_TOGGLE_WARP_SWITCH.SUCCESS: {
+      return {
+        ...state,
+        [actionTypes.ASYNC_TOGGLE_WARP_SWITCH.stateKey]: !state[
+          actionTypes.ASYNC_TOGGLE_WARP_SWITCH.stateKey
+        ],
       }
     }
     default:

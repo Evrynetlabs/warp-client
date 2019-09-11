@@ -32,8 +32,8 @@ describe('Warp actions', () => {
         return store
           .dispatch(
             toEvry({
-              srcStellarSecret: 'foo',
-              destEvryAddr: 'bar',
+              src: 'foo',
+              dest: 'bar',
               amount: '1',
               asset: {},
             }),
@@ -62,8 +62,8 @@ describe('Warp actions', () => {
         return store
           .dispatch(
             toEvry({
-              srcStellarSecret: 'foo',
-              destEvryAddr: 'bar',
+              src: 'foo',
+              dest: 'bar',
               amount: '1',
               asset: {},
             }),
