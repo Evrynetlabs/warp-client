@@ -66,13 +66,14 @@ export default class WarpChainTitle extends Component {
                 {this.state.swap.src}
               </span>
             </Col>
-            <Col xs="2" className={this.state.styles.swap}>
-              <FontAwesomeIcon
-                icon={faExchangeAlt}
-                onClick={() => {
-                  this.props.toggleTransferSwitch()
-                }}
-              ></FontAwesomeIcon>
+            <Col
+              xs="2"
+              className={this.state.styles.swap}
+              onClick={() => {
+                this.props.toggleTransferSwitch()
+              }}
+            >
+              <FontAwesomeIcon icon={faExchangeAlt}></FontAwesomeIcon>
             </Col>
             <Col xs="5" className={this.state.styles.asset}>
               <span>{this.state.swap.dest}</span>

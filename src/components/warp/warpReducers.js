@@ -71,9 +71,7 @@ export default function(state = initialState, action) {
     case actionTypes.ASYNC_TOGGLE_WARP_SWITCH.SUCCESS: {
       return {
         ...state,
-        [actionTypes.ASYNC_TOGGLE_WARP_SWITCH.stateKey]: !state[
-          actionTypes.ASYNC_TOGGLE_WARP_SWITCH.stateKey
-        ],
+        [actionTypes.ASYNC_TOGGLE_WARP_SWITCH.stateKey]: action.payload,
       }
     }
     default:
