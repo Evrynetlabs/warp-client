@@ -83,7 +83,7 @@ describe('Warp actions', () => {
   describe('toStellar', () => {
     describe('When success', () => {
       it('should get txHashes', () => {
-        const toEvrynetResult = {
+        const toStellarResult = {
           stellarTxHash: 'foo',
           evrynetTxHash: 'bar',
         }
@@ -91,10 +91,10 @@ describe('Warp actions', () => {
           { type: actionTypes.ASYNC_COLLECT_HASHES.PENDING, payload: true },
           {
             type: actionTypes.ASYNC_COLLECT_HASHES.SUCCESS,
-            payload: toEvrynetResult,
+            payload: toStellarResult,
           },
         ]
-        spyToStellar.mockResolvedValueOnce(toEvrynetResult)
+        spyToStellar.mockResolvedValueOnce(toStellarResult)
         const store = mockStore({
           [actionTypes.ASYNC_COLLECT_HASHES.stateKey]: null,
           [actionTypes.ASYNC_COLLECT_HASHES.loadingKey]: false,

@@ -90,7 +90,7 @@ describe('WarpContent', () => {
     })
 
     describe('When isToEvry is true', () => {
-      test('transfer function should be toStellar', () => {
+      test('transfer function should be toEvry', () => {
         component.setProps({
           isToEvry: true,
         })
