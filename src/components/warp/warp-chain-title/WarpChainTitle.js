@@ -33,7 +33,7 @@ export default class WarpChainTitle extends Component {
     }
   }
 
-  __updateSwapTitle(prevProps) {
+  _updateSwapTitle(prevProps) {
     if (prevProps.isToEvry === this.props.isToEvry) return
     if (this.props.isToEvry) {
       this.setState({
@@ -53,7 +53,7 @@ export default class WarpChainTitle extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    this.__updateSwapTitle(prevProps)
+    this._updateSwapTitle(prevProps)
   }
 
   render() {

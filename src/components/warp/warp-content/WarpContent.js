@@ -135,7 +135,7 @@ export default class WarpContent extends Component {
     })
   }
 
-  __updateTransferFunction(prevProps, prevState) {
+  _updateTransferFunction(prevProps, prevState) {
     if (prevProps.isToEvry === this.props.isToEvry) return
     if (this.props.isToEvry) {
       this.setState({
@@ -153,7 +153,7 @@ export default class WarpContent extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    this.__updateTransferFunction(prevProps, prevState)
+    this._updateTransferFunction(prevProps, prevState)
   }
 
   render() {
