@@ -1,5 +1,6 @@
 import actionTypes from 'Components/warp/warpActionTypes'
 import Warp from 'warp-js'
+import store from '@/store'
 
 export const collectTxHashesSuccess = ({ stellarTxHash, evrynetTxHash }) => ({
   type: actionTypes.ASYNC_COLLECT_HASHES.SUCCESS,
@@ -16,16 +17,34 @@ export const collectTxHashesError = (error) => ({
   payload: error,
 })
 
-export const toEvry = ({ srcStellarSecret, destEvryAddr, amount, asset }) => {
+export const toEvry = ({ src, dest, amount, asset }) => {
   const warp = new Warp()
   return async (dispatch) => {
     dispatch(collectTxHashesPending(true))
     try {
       const { stellarTxHash, evrynetTxHash } = await warp.toEvrynet({
-        evrynetPriv: destEvryAddr,
-        stellarPriv: srcStellarSecret,
+        evrynetPriv: dest,
         amount,
         asset,
+        stellarPriv: src,
+      })
+      dispatch(collectTxHashesSuccess({ stellarTxHash, evrynetTxHash }))
+    } catch (e) {
+      dispatch(collectTxHashesError(e))
+    }
+  }
+}
+
+export const toStellar = ({ src, dest, amount, asset }) => {
+  const warp = new Warp()
+  return async (dispatch) => {
+    dispatch(collectTxHashesPending(true))
+    try {
+      const { stellarTxHash, evrynetTxHash } = await warp.toStellar({
+        evrynetPriv: src,
+        amount,
+        asset,
+        stellarPriv: dest,
       })
       dispatch(collectTxHashesSuccess({ stellarTxHash, evrynetTxHash }))
     } catch (e) {
@@ -61,3 +80,10 @@ export const getWhitelistAssets = () => {
     }
   }
 }
+
+export const toggleTransferSwitch = () => ({
+  type: actionTypes.ASYNC_TOGGLE_WARP_SWITCH.SUCCESS,
+  payload: !store.getState().warp[
+    actionTypes.ASYNC_TOGGLE_WARP_SWITCH.stateKey
+  ],
+})

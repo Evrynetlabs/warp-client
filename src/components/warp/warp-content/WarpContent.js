@@ -24,6 +24,7 @@ export default class WarpContent extends Component {
       },
       sourceAccount: '',
       destinationAccount: '',
+      transferFunc: props.toEvry,
     }
     this.state = {
       ...this.initialState,
@@ -53,10 +54,6 @@ export default class WarpContent extends Component {
       accountInputDest: stylesContentAccountInputDest,
       form: stylesForm,
     }
-  }
-
-  _toAmountString() {
-    return currencyToNumberString(this.state.amount)
   }
 
   _formatNumber(amount) {
@@ -115,11 +112,11 @@ export default class WarpContent extends Component {
       default:
         return null
     }
-    await this.props.toEvry({
+    await this.state.transferFunc({
       asset,
-      amount: this.state.amount,
-      srcStellarSecret: this.state.sourceAccount,
-      destEvryAddr: this.state.destinationAccount,
+      amount: currencyToNumberString(this.state.amount),
+      src: this.state.sourceAccount,
+      dest: this.state.destinationAccount,
     })
   }
 
@@ -136,6 +133,27 @@ export default class WarpContent extends Component {
         </option>
       )
     })
+  }
+
+  _updateTransferFunction(prevProps, prevState) {
+    if (prevProps.isToEvry === this.props.isToEvry) return
+    if (this.props.isToEvry) {
+      this.setState({
+        transferFunc: this.props.toEvry,
+        sourceAccount: prevState.destinationAccount,
+        destinationAccount: prevState.sourceAccount,
+      })
+      return
+    }
+    this.setState({
+      transferFunc: this.props.toStellar,
+      sourceAccount: prevState.destinationAccount,
+      destinationAccount: prevState.sourceAccount,
+    })
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    this._updateTransferFunction(prevProps, prevState)
   }
 
   render() {
@@ -161,6 +179,7 @@ export default class WarpContent extends Component {
                     })}
                     type="text"
                     placeholder="Account Number"
+                    value={this.state.sourceAccount}
                     onChange={(e) =>
                       this._saveTransactionAccount(e, this.state.role.source)
                     }
@@ -179,6 +198,7 @@ export default class WarpContent extends Component {
                     })}
                     type="text"
                     placeholder="Account Number"
+                    value={this.state.destinationAccount}
                     onChange={(e) =>
                       this._saveTransactionAccount(
                         e,
@@ -246,5 +266,7 @@ WarpContent.propTypes = {
     error: PropTypes.object,
   }),
   toEvry: PropTypes.func.isRequired,
+  toStellar: PropTypes.func.isRequired,
+  isToEvry: PropTypes.bool.isRequired,
   getWhitelistAssets: PropTypes.func.isRequired,
 }

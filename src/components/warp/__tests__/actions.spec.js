@@ -1,9 +1,14 @@
-import { toEvry, getWhitelistAssets } from 'Components/warp/warpActions'
+import {
+  toEvry,
+  getWhitelistAssets,
+  toStellar,
+  toggleTransferSwitch,
+} from 'Components/warp/warpActions'
 import actionTypes from 'Components/warp/warpActionTypes'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 jest.mock('warp-js')
-import { spyToEvrynet, spyGetWhitelistAssets } from 'warp-js'
+import { spyToEvrynet, spyGetWhitelistAssets, spyToStellar } from 'warp-js'
 
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
@@ -32,8 +37,8 @@ describe('Warp actions', () => {
         return store
           .dispatch(
             toEvry({
-              srcStellarSecret: 'foo',
-              destEvryAddr: 'bar',
+              src: 'foo',
+              dest: 'bar',
               amount: '1',
               asset: {},
             }),
@@ -62,8 +67,74 @@ describe('Warp actions', () => {
         return store
           .dispatch(
             toEvry({
-              srcStellarSecret: 'foo',
-              destEvryAddr: 'bar',
+              src: 'foo',
+              dest: 'bar',
+              amount: '1',
+              asset: {},
+            }),
+          )
+          .then(() => {
+            expect(store.getActions()).toEqual(expectedActions)
+          })
+      })
+    })
+  })
+
+  describe('toStellar', () => {
+    describe('When success', () => {
+      it('should get txHashes', () => {
+        const toStellarResult = {
+          stellarTxHash: 'foo',
+          evrynetTxHash: 'bar',
+        }
+        const expectedActions = [
+          { type: actionTypes.ASYNC_COLLECT_HASHES.PENDING, payload: true },
+          {
+            type: actionTypes.ASYNC_COLLECT_HASHES.SUCCESS,
+            payload: toStellarResult,
+          },
+        ]
+        spyToStellar.mockResolvedValueOnce(toStellarResult)
+        const store = mockStore({
+          [actionTypes.ASYNC_COLLECT_HASHES.stateKey]: null,
+          [actionTypes.ASYNC_COLLECT_HASHES.loadingKey]: false,
+          [actionTypes.ASYNC_COLLECT_HASHES.errorKey]: null,
+        })
+        return store
+          .dispatch(
+            toStellar({
+              src: 'foo',
+              dest: 'bar',
+              amount: '1',
+              asset: {},
+            }),
+          )
+          .then(() => {
+            expect(store.getActions()).toEqual(expectedActions)
+          })
+      })
+    })
+
+    describe('when error', () => {
+      it('should report error', () => {
+        const expectedActions = [
+          { type: actionTypes.ASYNC_COLLECT_HASHES.PENDING, payload: true },
+          {
+            type: actionTypes.ASYNC_COLLECT_HASHES.FAILURE,
+            payload: new Error('this is an error'),
+          },
+        ]
+        spyToStellar.mockRejectedValue(new Error('this is an error'))
+        const store = mockStore({
+          [actionTypes.ASYNC_COLLECT_HASHES.stateKey]: null,
+          [actionTypes.ASYNC_COLLECT_HASHES.loadingKey]: false,
+          [actionTypes.ASYNC_COLLECT_HASHES.errorKey]: null,
+        })
+        return store
+          .dispatch(
+            toStellar({
+              src: 'foo',
+              dest: 'bar',
               amount: '1',
               asset: {},
             }),
@@ -125,6 +196,22 @@ describe('Warp actions', () => {
           expect(store.getActions()).toEqual(expectedActions)
         })
       })
+    })
+  })
+
+  describe('toggleTransferSwitch', () => {
+    it('should toggle warp switch successfully', async () => {
+      const expectedActions = [
+        {
+          type: actionTypes.ASYNC_TOGGLE_WARP_SWITCH.SUCCESS,
+          payload: false,
+        },
+      ]
+      const store = mockStore({
+        [actionTypes.ASYNC_TOGGLE_WARP_SWITCH.stateKey]: true,
+      })
+      await store.dispatch(toggleTransferSwitch())
+      expect(store.getActions()).toEqual(expectedActions)
     })
   })
 })

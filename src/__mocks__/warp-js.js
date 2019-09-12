@@ -4,11 +4,13 @@
 // const originalWarp = jest.requireActual('warp-js')
 // const original = new originalWarp()
 export const spyToEvrynet = jest.fn()
+export const spyToStellar = jest.fn()
 export const spyGetWhitelistAssets = jest.fn()
 export const spyGetCode = jest.fn()
 const mock = jest.fn().mockImplementation(() => {
   return {
     toEvrynet: spyToEvrynet,
+    toStellar: spyToStellar,
     client: {
       evry: {
         getWhitelistAssets: spyGetWhitelistAssets,

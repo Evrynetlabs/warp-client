@@ -18,6 +18,7 @@ describe('WarpContent', () => {
         loading: false,
         error: null,
       },
+      toStellar: jest.fn(),
       toEvry: jest.fn(),
       whitelistedAssets: {
         state: [],
@@ -25,16 +26,24 @@ describe('WarpContent', () => {
         error: null,
       },
       getWhitelistAssets: jest.fn(),
+      isToEvry: true,
     }
     spyGetCode.mockReturnValue('FOO')
-    const component = shallow(
-      <WarpContent
-        txHashes={mock.txHashes}
-        toEvry={mock.toEvry}
-        whitelistedAssets={mock.whitelistedAssets}
-        getWhitelistAssets={mock.getWhitelistAssets}
-      ></WarpContent>,
-    )
+    let component
+
+    beforeEach(() => {
+      component = shallow(
+        <WarpContent
+          txHashes={mock.txHashes}
+          toEvry={mock.toEvry}
+          toStellar={mock.toStellar}
+          whitelistedAssets={mock.whitelistedAssets}
+          getWhitelistAssets={mock.getWhitelistAssets}
+          isToEvry={mock.isToEvry}
+        ></WarpContent>,
+      )
+    })
+
     it('should render correspondingly', () => {
       expect(component).toMatchSnapshot()
     })
@@ -69,7 +78,29 @@ describe('WarpContent', () => {
       })
     })
 
-    describe('When click a transfer button', () => {
+    describe('When isToEvry is false', () => {
+      test('transfer function should be toStellar', () => {
+        component.setProps({
+          isToEvry: false,
+        })
+        component.find(Form).simulate('submit')
+        expect(component.state().transferFunc).toEqual(mock.toStellar)
+        expect(component.state().transferFunc).not.toEqual(mock.toEvry)
+      })
+    })
+
+    describe('When isToEvry is true', () => {
+      test('transfer function should be toEvry', () => {
+        component.setProps({
+          isToEvry: true,
+        })
+        component.find(Form).simulate('submit')
+        expect(component.state().transferFunc).toEqual(mock.toEvry)
+        expect(component.state().transferFunc).not.toEqual(mock.toStellar)
+      })
+    })
+
+    describe('When clicking a transfer button', () => {
       it('should save a source account state correspondingly when on chaning input', () => {
         const spy = jest.spyOn(component.instance(), '_handleSubmit')
         expect(component.find(Form)).toHaveLength(1)

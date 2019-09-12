@@ -6,6 +6,7 @@ exports[`Warp should render correspondingly 1`] = `
 >
   <Warp
     getWhitelistAssets={[Function]}
+    isToEvry={true}
     store={
       Object {
         "clearActions": [Function],
@@ -17,6 +18,8 @@ exports[`Warp should render correspondingly 1`] = `
       }
     }
     toEvry={[Function]}
+    toStellar={[Function]}
+    toggleTransferSwitch={[Function]}
     txHashes={
       Object {
         "error": null,

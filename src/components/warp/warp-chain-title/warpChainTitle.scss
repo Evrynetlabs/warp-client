@@ -6,7 +6,7 @@
         border:none;
     }
     .row {
-        width: 300px;
+        width: 350px;
         text-align: center;
         margin: 0 auto;
     }
@@ -14,6 +14,10 @@
         text-align: center;
         font-size: $font-size-h4;
         font-weight: map-get($font-weights, semibold);
+    }
+
+    &__swap {
+        cursor: pointer;
     }
     
 }

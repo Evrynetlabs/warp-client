@@ -49,4 +49,16 @@ describe('warp reducer', () => {
       [actionTypes.ASYNC_COLLECT_HASHES.loadingKey]: false,
     })
   })
+
+  it('should handle ASYNC_TOGGLE_WARP_SWITCH_SUCCESS', () => {
+    expect(
+      reducer(undefined, {
+        type: actionTypes.ASYNC_TOGGLE_WARP_SWITCH.SUCCESS,
+        payload: false,
+      }),
+    ).toEqual({
+      ...expectedInitialState(),
+      [actionTypes.ASYNC_TOGGLE_WARP_SWITCH.stateKey]: false,
+    })
+  })
 })
