@@ -16,14 +16,39 @@ export default class WarpContent extends Component {
     this.warp = new Warp()
     this.initialState = {
       styles: this._initStyles(),
-      amount: '',
-      asset: this.warp.utils.getEvryAsset().getCode(),
-      role: {
-        source: 'source',
-        destination: 'destination',
+      formControls: {
+        asset: {
+          value: this.warp.utils.getEvryAsset().getCode(),
+          touched: false,
+          valid: false,
+          onChangeValidation: () => true,
+          onBlurValidation: () => true,
+        },
+        amount: {
+          value: '',
+          placeholder: '0.00',
+          touched: false,
+          valid: false,
+          onChangeValidation: () => true,
+          onBlurValidation: () => true,
+        },
+        sourceAccount: {
+          value: '',
+          placeholder: 'Account Number',
+          touched: false,
+          valid: false,
+          onChangeValidation: () => true,
+          onBlurValidation: () => true,
+        },
+        destinationAccount: {
+          value: '',
+          placeholder: 'Account Number',
+          touched: false,
+          valid: false,
+          onChangeValidation: () => true,
+          onBlurValidation: () => true,
+        },
       },
-      sourceAccount: '',
-      destinationAccount: '',
       transferFunc: props.toEvry,
     }
     this.state = {
@@ -56,40 +81,50 @@ export default class WarpContent extends Component {
     }
   }
 
-  _formatNumber(amount) {
+  _changeHandler(event) {
+    const name = event.target.name
+    const value = event.target.value
+    const updatedControls = {
+      ...this.state.formControls,
+    }
+    const updatedFormElement = {
+      ...updatedControls[name],
+    }
+    updatedFormElement.value = value
+    updatedFormElement.touched = true
+    updatedFormElement.valid = updatedFormElement.onChangeValidation(value)
+    updatedControls[name] = updatedFormElement
+    this.setState({
+      formControls: updatedControls,
+    })
+  }
+
+  _formatNumber(event) {
+    const amount = event.target.value
+    const name = event.target.name
+
     let decimal
     if (!isEmpty(this.props.whitelistedAssets.state)) {
       const whitelistedAsset = find(this.props.whitelistedAssets.state, {
-        code: this.state.asset,
+        code: this.state.formControls.asset.value,
       })
       decimal = whitelistedAsset ? whitelistedAsset.decimal : whitelistedAsset
     }
+    const updatedControls = {
+      ...this.state.formControls,
+    }
+    const updatedFormElement = {
+      ...updatedControls[name],
+    }
+    updatedFormElement.value = numberToCurrencyString(
+      Number(currencyToNumberString(amount)),
+      decimal,
+    )
+    updatedFormElement.touched = true
+    updatedFormElement.valid = updatedFormElement.onBlurValidation(amount)
+    updatedControls[name] = updatedFormElement
     this.setState({
-      amount: numberToCurrencyString(
-        Number(currencyToNumberString(amount)),
-        decimal,
-      ),
-    })
-  }
-
-  _saveAmount(e) {
-    this.setState({
-      amount: e.target.value,
-    })
-  }
-
-  _saveAsset(e) {
-    this.setState({
-      asset: e.target.value,
-    })
-  }
-
-  _saveTransactionAccount(e, role = '') {
-    this.setState({
-      ...(this.state.role.source === role && { sourceAccount: e.target.value }),
-      ...(this.state.role.destination === role && {
-        destinationAccount: e.target.value,
-      }),
+      formControls: updatedControls,
     })
   }
 
@@ -100,7 +135,7 @@ export default class WarpContent extends Component {
   async _handleSubmit(e) {
     e.preventDefault()
     let asset
-    switch (this.state.asset) {
+    switch (this.state.formControls.asset.value) {
       case 'EVRY': {
         asset = this.warp.utils.getEvryAsset()
         break
@@ -114,9 +149,9 @@ export default class WarpContent extends Component {
     }
     await this.state.transferFunc({
       asset,
-      amount: currencyToNumberString(this.state.amount),
-      src: this.state.sourceAccount,
-      dest: this.state.destinationAccount,
+      amount: currencyToNumberString(this.state.formControls.amount.value),
+      src: this.state.formControls.sourceAccount.value,
+      dest: this.state.formControls.destinationAccount.value,
     })
   }
 
@@ -135,25 +170,33 @@ export default class WarpContent extends Component {
     })
   }
 
-  _updateTransferFunction(prevProps, prevState) {
+  _updateTransferFunction(prevProps) {
     if (prevProps.isToEvry === this.props.isToEvry) return
-    if (this.props.isToEvry) {
-      this.setState({
-        transferFunc: this.props.toEvry,
-        sourceAccount: prevState.destinationAccount,
-        destinationAccount: prevState.sourceAccount,
-      })
-      return
-    }
     this.setState({
-      transferFunc: this.props.toStellar,
-      sourceAccount: prevState.destinationAccount,
-      destinationAccount: prevState.sourceAccount,
+      transferFunc: this.props.isToEvry
+        ? this.props.toEvry
+        : this.props.toStellar,
     })
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    this._updateTransferFunction(prevProps, prevState)
+  _switchAccounts(prevProps) {
+    if (prevProps.isToEvry === this.props.isToEvry) return
+    const updatedFormControls = {
+      ...this.state.formControls,
+    }
+    const temp = updatedFormControls.sourceAccount
+    updatedFormControls.sourceAccount = {
+      ...updatedFormControls.destinationAccount,
+    }
+    updatedFormControls.destinationAccount = { ...temp }
+    this.setState({
+      formControls: updatedFormControls,
+    })
+  }
+
+  componentDidUpdate(prevProps) {
+    this._updateTransferFunction(prevProps)
+    this._switchAccounts(prevProps)
   }
 
   render() {
@@ -177,12 +220,15 @@ export default class WarpContent extends Component {
                       [this.state.styles.accountInputSrc]: true,
                       [this.state.styles.accountInput]: true,
                     })}
+                    name="sourceAccount"
                     type="text"
-                    placeholder="Account Number"
-                    value={this.state.sourceAccount}
-                    onChange={(e) =>
-                      this._saveTransactionAccount(e, this.state.role.source)
+                    placeholder={
+                      this.state.formControls.sourceAccount.placeholder
                     }
+                    value={this.state.formControls.sourceAccount.value}
+                    onChange={(e) => {
+                      this._changeHandler(e)
+                    }}
                   />
                 </Form.Group>
               </Col>
@@ -196,15 +242,15 @@ export default class WarpContent extends Component {
                       [this.state.styles.accountInputDest]: true,
                       [this.state.styles.accountInput]: true,
                     })}
+                    name="destinationAccount"
                     type="text"
-                    placeholder="Account Number"
-                    value={this.state.destinationAccount}
-                    onChange={(e) =>
-                      this._saveTransactionAccount(
-                        e,
-                        this.state.role.destination,
-                      )
+                    placeholder={
+                      this.state.formControls.destinationAccount.placeholder
                     }
+                    value={this.state.formControls.destinationAccount.value}
+                    onChange={(e) => {
+                      this._changeHandler(e)
+                    }}
                   />
                 </Form.Group>
               </Col>
@@ -213,20 +259,26 @@ export default class WarpContent extends Component {
               <Col>
                 <Form.Group controlId="assetAmount">
                   <Form.Control
+                    name="amount"
                     type="text"
-                    onChange={(e) => this._saveAmount(e)}
-                    onBlur={() => this._formatNumber(this.state.amount)}
-                    placeholder="0.00"
-                    value={this.state.amount}
+                    onChange={(e) => {
+                      this._changeHandler(e)
+                    }}
+                    onBlur={(e) => {
+                      this._formatNumber(e)
+                    }}
+                    placeholder={this.state.formControls.amount.placeholder}
+                    value={this.state.formControls.amount.value}
                   ></Form.Control>
                 </Form.Group>
               </Col>
               <Col>
                 <Form.Group controlId="assetSelection">
                   <Form.Control
-                    value={this.state.asset}
+                    name="asset"
+                    value={this.state.formControls.asset.value}
                     as="select"
-                    onChange={(e) => this._saveAsset(e)}
+                    onChange={(e) => this._changeHandler(e)}
                   >
                     {this._listWhitelistedAssetsOptions()}
                   </Form.Control>

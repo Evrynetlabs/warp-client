@@ -53,13 +53,16 @@ describe('WarpContent', () => {
       const mockEvent = {
         target: {
           value: expected,
+          name: 'sourceAccount',
         },
       }
       it('should save a source account state correspondingly when on chaning input', () => {
         component
           .find('.WarpContent__form__content__input__src')
           .simulate('change', mockEvent)
-        expect(component.state().sourceAccount).toEqual(expected)
+        expect(component.state().formControls.sourceAccount.value).toEqual(
+          expected,
+        )
       })
     })
 
@@ -68,13 +71,16 @@ describe('WarpContent', () => {
       const mockEvent = {
         target: {
           value: expected,
+          name: 'destinationAccount',
         },
       }
       it('should save a source account state correspondingly when on chaning input', () => {
         component
           .find('.WarpContent__form__content__input__dest')
           .simulate('change', mockEvent)
-        expect(component.state().destinationAccount).toEqual(expected)
+        expect(component.state().formControls.destinationAccount.value).toEqual(
+          expected,
+        )
       })
     })
 
