@@ -1,12 +1,11 @@
 // __mocks__/warp-js.js
 
-// Import this named export into your test file
-// const originalWarp = jest.requireActual('warp-js')
-// const original = new originalWarp()
 export const spyToEvrynet = jest.fn()
 export const spyToStellar = jest.fn()
 export const spyGetWhitelistAssets = jest.fn()
 export const spyGetCode = jest.fn()
+export const spyGetAccountBalance = jest.fn()
+export const spyGetPublickeyFromPrivateKey = jest.fn()
 const mock = jest.fn().mockImplementation(() => {
   return {
     toEvrynet: spyToEvrynet,
@@ -14,6 +13,12 @@ const mock = jest.fn().mockImplementation(() => {
     client: {
       evry: {
         getWhitelistAssets: spyGetWhitelistAssets,
+        getAccountBalance: spyGetAccountBalance,
+        getPublickeyFromPrivateKey: spyGetPublickeyFromPrivateKey,
+      },
+      stellar: {
+        getAccountBalance: spyGetAccountBalance,
+        getPublickeyFromPrivateKey: spyGetPublickeyFromPrivateKey,
       },
     },
     utils: {
@@ -22,6 +27,5 @@ const mock = jest.fn().mockImplementation(() => {
       }),
     },
   }
-  // Now we can track calls to playSoundFile
 })
 export default mock

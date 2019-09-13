@@ -25,8 +25,14 @@ describe('WarpContent', () => {
         loading: false,
         error: null,
       },
+      accountBalance: {
+        state: null,
+        loading: false,
+        error: null,
+      },
       getWhitelistAssets: jest.fn(),
       isToEvry: true,
+      getAccountBalance: jest.fn(),
     }
     spyGetCode.mockReturnValue('FOO')
     let component

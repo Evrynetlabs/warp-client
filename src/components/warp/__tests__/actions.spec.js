@@ -3,12 +3,19 @@ import {
   getWhitelistAssets,
   toStellar,
   toggleTransferSwitch,
+  getAccountBalance,
 } from 'Components/warp/warpActions'
 import actionTypes from 'Components/warp/warpActionTypes'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 jest.mock('warp-js')
-import { spyToEvrynet, spyGetWhitelistAssets, spyToStellar } from 'warp-js'
+import {
+  spyToEvrynet,
+  spyGetWhitelistAssets,
+  spyToStellar,
+  spyGetAccountBalance,
+  spyGetPublickeyFromPrivateKey,
+} from 'warp-js'
 
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
@@ -212,6 +219,101 @@ describe('Warp actions', () => {
       })
       await store.dispatch(toggleTransferSwitch())
       expect(store.getActions()).toEqual(expectedActions)
+    })
+  })
+
+  describe('getAccountBalance', () => {
+    describe('When success', () => {
+      it('should get an account balance', () => {
+        const getBalanceResult = {
+          balance: '1',
+        }
+        const mockInput = {
+          asset: {},
+          privateKey: 'foo',
+        }
+        const expectedActions = [
+          {
+            type: actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.PENDING,
+            payload: true,
+          },
+          {
+            type: actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.SUCCESS,
+            payload: getBalanceResult.balance,
+          },
+        ]
+        spyGetAccountBalance.mockResolvedValue(getBalanceResult)
+        spyGetPublickeyFromPrivateKey.mockReturnValue('bar')
+        const store = mockStore({
+          [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.stateKey]: null,
+          [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.loadingKey]: false,
+          [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.errorKey]: null,
+        })
+        return store.dispatch(getAccountBalance(mockInput)).then(() => {
+          expect(store.getActions()).toEqual(expectedActions)
+        })
+      })
+    })
+
+    describe('When error', () => {
+      describe('when getAccountBalance error', () => {
+        it('should send a failure action', () => {
+          const mockInput = {
+            asset: {},
+            privateKey: 'foo',
+          }
+          const expectedActions = [
+            {
+              type: actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.PENDING,
+              payload: true,
+            },
+            {
+              type: actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.FAILURE,
+              payload: new Error('this is an error'),
+            },
+          ]
+          spyGetAccountBalance.mockRejectedValue(new Error('this is an error'))
+          spyGetPublickeyFromPrivateKey.mockReturnValue('bar')
+          const store = mockStore({
+            [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.stateKey]: null,
+            [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.loadingKey]: false,
+            [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.errorKey]: null,
+          })
+          return store.dispatch(getAccountBalance(mockInput)).then(() => {
+            expect(store.getActions()).toEqual(expectedActions)
+          })
+        })
+      })
+
+      describe('when spyGetPublickeyFromPrivateKey error', () => {
+        it('should send a failure action', () => {
+          const mockInput = {
+            asset: {},
+            privateKey: 'foo',
+          }
+          const expectedActions = [
+            {
+              type: actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.PENDING,
+              payload: true,
+            },
+            {
+              type: actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.FAILURE,
+              payload: new Error('this is an error'),
+            },
+          ]
+          spyGetPublickeyFromPrivateKey.mockReturnValue(
+            new Error('this is an error'),
+          )
+          const store = mockStore({
+            [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.stateKey]: null,
+            [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.loadingKey]: false,
+            [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.errorKey]: null,
+          })
+          return store.dispatch(getAccountBalance(mockInput)).then(() => {
+            expect(store.getActions()).toEqual(expectedActions)
+          })
+        })
+      })
     })
   })
 })
