@@ -9,6 +9,9 @@ export const initState = () => {
     [actionTypes.ASYNC_GET_WHITELISTED_ASSETS.loadingKey]: true,
     [actionTypes.ASYNC_GET_WHITELISTED_ASSETS.errorKey]: null,
     [actionTypes.ASYNC_TOGGLE_WARP_SWITCH.stateKey]: true,
+    [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.stateKey]: null,
+    [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.loadingKey]: true,
+    [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.errorKey]: null,
   }
 }
 
@@ -72,6 +75,31 @@ export default function(state = initialState, action) {
       return {
         ...state,
         [actionTypes.ASYNC_TOGGLE_WARP_SWITCH.stateKey]: action.payload,
+      }
+    }
+    case actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.PENDING: {
+      return {
+        ...state,
+        [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.stateKey]: null,
+        [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.loadingKey]:
+          action.payload,
+        [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.errorKey]: null,
+      }
+    }
+    case actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.FAILURE: {
+      return {
+        ...state,
+        [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.stateKey]: null,
+        [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.loadingKey]: false,
+        [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.errorKey]: action.payload,
+      }
+    }
+    case actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.SUCCESS: {
+      return {
+        ...state,
+        [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.loadingKey]: false,
+        [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.errorKey]: null,
+        [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.stateKey]: action.payload,
       }
     }
     default:

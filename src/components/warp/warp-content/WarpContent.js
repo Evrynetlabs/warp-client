@@ -8,12 +8,16 @@ import PropTypes from 'prop-types'
 import Warp from 'warp-js'
 import map from 'lodash/map'
 import isEmpty from 'lodash/isEmpty'
+import isNull from 'lodash/isNull'
 import find from 'lodash/find'
+import BigNumber from 'bignumber.js'
 
 export default class WarpContent extends Component {
   constructor(props) {
     super(props)
     this.warp = new Warp()
+    this._toCurrencyString = this._toCurrencyString.bind(this)
+    this._amountValidation = this._amountValidation.bind(this)
     this.initialState = {
       styles: this._initStyles(),
       formControls: {
@@ -31,6 +35,7 @@ export default class WarpContent extends Component {
           valid: false,
           onChangeValidation: () => true,
           onBlurValidation: () => true,
+          onBlurValueAssign: this._toCurrencyString,
         },
         sourceAccount: {
           value: '',
@@ -48,6 +53,8 @@ export default class WarpContent extends Component {
           onChangeValidation: () => true,
           onBlurValidation: () => true,
         },
+        onSubmitValidation: this._amountValidation,
+        valid: null,
       },
       transferFunc: props.toEvry,
     }
@@ -99,10 +106,7 @@ export default class WarpContent extends Component {
     })
   }
 
-  _formatNumber(event) {
-    const amount = event.target.value
-    const name = event.target.name
-
+  _toCurrencyString(amount) {
     let decimal
     if (!isEmpty(this.props.whitelistedAssets.state)) {
       const whitelistedAsset = find(this.props.whitelistedAssets.state, {
@@ -110,48 +114,27 @@ export default class WarpContent extends Component {
       })
       decimal = whitelistedAsset ? whitelistedAsset.decimal : whitelistedAsset
     }
+    return numberToCurrencyString(
+      Number(currencyToNumberString(amount)),
+      decimal,
+    )
+  }
+
+  _blurHandler(event) {
+    const value = event.target.value
+    const name = event.target.name
     const updatedControls = {
       ...this.state.formControls,
     }
     const updatedFormElement = {
       ...updatedControls[name],
     }
-    updatedFormElement.value = numberToCurrencyString(
-      Number(currencyToNumberString(amount)),
-      decimal,
-    )
+    updatedFormElement.value = updatedFormElement.onBlurValueAssign(value)
     updatedFormElement.touched = true
-    updatedFormElement.valid = updatedFormElement.onBlurValidation(amount)
+    updatedFormElement.valid = updatedFormElement.onBlurValidation(value)
     updatedControls[name] = updatedFormElement
     this.setState({
       formControls: updatedControls,
-    })
-  }
-
-  async componentDidMount() {
-    await this.props.getWhitelistAssets()
-  }
-
-  async _handleSubmit(e) {
-    e.preventDefault()
-    let asset
-    switch (this.state.formControls.asset.value) {
-      case 'EVRY': {
-        asset = this.warp.utils.getEvryAsset()
-        break
-      }
-      case 'XLM': {
-        asset = this.warp.utils.getLumensAsset()
-        break
-      }
-      default:
-        return null
-    }
-    await this.state.transferFunc({
-      asset,
-      amount: currencyToNumberString(this.state.formControls.amount.value),
-      src: this.state.formControls.sourceAccount.value,
-      dest: this.state.formControls.destinationAccount.value,
     })
   }
 
@@ -194,14 +177,80 @@ export default class WarpContent extends Component {
     })
   }
 
+  _getAssetObject() {
+    switch (this.state.formControls.asset.value) {
+      case 'EVRY': {
+        return this.warp.utils.getEvryAsset()
+      }
+      case 'XLM': {
+        return this.warp.utils.getLumensAsset()
+      }
+      default:
+        return null
+    }
+  }
+
+  _isAmountInvalid() {
+    return isNull(this.state.formControls.valid)
+      ? null
+      : !this.state.formControls.valids
+  }
+
+  async _transfer() {
+    const asset = this._getAssetObject()
+    await this.state.transferFunc({
+      asset,
+      amount: currencyToNumberString(this.state.formControls.amount.value),
+      src: this.state.formControls.sourceAccount.value,
+      dest: this.state.formControls.destinationAccount.value,
+    })
+  }
+
+  async _amountValidation() {
+    const asset = this._getAssetObject()
+    await this.props.getAccountBalance({
+      asset,
+      privateKey: this.state.formControls.sourceAccount.value,
+    })
+    const hasValidAmount = new BigNumber(
+      this.props.accountBalance.state,
+    ).isLessThanOrEqualTo(
+      new BigNumber(
+        currencyToNumberString(this.state.formControls.amount.value),
+      ),
+    )
+    return hasValidAmount
+  }
+
+  async _validateSubmission() {
+    const updatedFormControls = {
+      ...this.state.formControls,
+    }
+    updatedFormControls.valid = await updatedFormControls.onSubmitValidation()
+    this.setState({
+      formControls: updatedFormControls,
+    })
+  }
+
+  async _handleSubmit(e) {
+    e.preventDefault()
+    await this._validateSubmission()
+    await this._transfer()
+  }
+
   componentDidUpdate(prevProps) {
     this._updateTransferFunction(prevProps)
     this._switchAccounts(prevProps)
   }
 
+  async componentDidMount() {
+    await this.props.getWhitelistAssets()
+  }
+
   render() {
     return (
       <Form
+        name="form"
         className={this.state.styles.form}
         onSubmit={async (e) => {
           await this._handleSubmit(e)
@@ -265,11 +314,15 @@ export default class WarpContent extends Component {
                       this._changeHandler(e)
                     }}
                     onBlur={(e) => {
-                      this._formatNumber(e)
+                      this._blurHandler(e)
                     }}
                     placeholder={this.state.formControls.amount.placeholder}
                     value={this.state.formControls.amount.value}
-                  ></Form.Control>
+                    isInvalid={this._isAmountInvalid()}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    Insufficient Amount
+                  </Form.Control.Feedback>
                 </Form.Group>
               </Col>
               <Col>
@@ -317,8 +370,14 @@ WarpContent.propTypes = {
     loading: PropTypes.bool,
     error: PropTypes.object,
   }),
+  accountBalance: PropTypes.shape({
+    state: PropTypes.string,
+    loading: PropTypes.bool,
+    error: PropTypes.object,
+  }),
   toEvry: PropTypes.func.isRequired,
   toStellar: PropTypes.func.isRequired,
   isToEvry: PropTypes.bool.isRequired,
   getWhitelistAssets: PropTypes.func.isRequired,
+  getAccountBalance: PropTypes.func.isRequired,
 }

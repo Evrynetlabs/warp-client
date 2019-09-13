@@ -4,6 +4,7 @@ exports[`WarpContent With default case should render correspondingly 1`] = `
 <Form
   className="WarpContent__form"
   inline={false}
+  name="form"
   onSubmit={[Function]}
 >
   <CardBody
@@ -76,6 +77,11 @@ exports[`WarpContent With default case should render correspondingly 1`] = `
               type="text"
               value=""
             />
+            <Feedback
+              type="invalid"
+            >
+              Insufficient Amount
+            </Feedback>
           </FormGroup>
         </Col>
         <Col>

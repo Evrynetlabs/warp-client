@@ -5,6 +5,14 @@ exports[`Warp should render correspondingly 1`] = `
   value={null}
 >
   <Warp
+    accountBalance={
+      Object {
+        "error": null,
+        "loading": true,
+        "state": null,
+      }
+    }
+    getAccountBalance={[Function]}
     getWhitelistAssets={[Function]}
     isToEvry={true}
     store={

@@ -81,6 +81,40 @@ export const getWhitelistAssets = () => {
   }
 }
 
+export const getAccountBalanceSuccess = (whitelistedAssets) => ({
+  type: actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.SUCCESS,
+  payload: whitelistedAssets,
+})
+
+export const getAccountBalancePending = (pendingStatus) => ({
+  type: actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.PENDING,
+  payload: pendingStatus,
+})
+
+export const getAccountBalanceError = (error) => ({
+  type: actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.FAILURE,
+  payload: error,
+})
+
+export const getAccountBalance = ({ asset = {}, privateKey = '' }) => {
+  const warp = new Warp()
+  const client = store.getState().warp[
+    actionTypes.ASYNC_TOGGLE_WARP_SWITCH.stateKey
+  ]
+    ? warp.client.stellar
+    : warp.client.evry
+  return async (dispatch) => {
+    dispatch(getAccountBalancePending(true))
+    try {
+      const address = client.getPublickeyFromPrivateKey(privateKey)
+      const accountBalance = await client.getAccountBalance(address, asset)
+      dispatch(getAccountBalanceSuccess(accountBalance.balance))
+    } catch (e) {
+      dispatch(getAccountBalanceError(e))
+    }
+  }
+}
+
 export const toggleTransferSwitch = () => ({
   type: actionTypes.ASYNC_TOGGLE_WARP_SWITCH.SUCCESS,
   payload: !store.getState().warp[
