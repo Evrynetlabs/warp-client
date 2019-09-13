@@ -9,6 +9,7 @@ import Warp from 'warp-js'
 import map from 'lodash/map'
 import isEmpty from 'lodash/isEmpty'
 import find from 'lodash/find'
+import StellarBase from 'stellar-base'
 
 export default class WarpContent extends Component {
   constructor(props) {
@@ -37,16 +38,14 @@ export default class WarpContent extends Component {
           placeholder: 'Account Number',
           touched: false,
           valid: false,
-          onChangeValidation: () => true,
-          onBlurValidation: () => true,
+          onChangeValidation: this._validateStellarAccount,
         },
         destinationAccount: {
           value: '',
           placeholder: 'Account Number',
           touched: false,
           valid: false,
-          onChangeValidation: () => true,
-          onBlurValidation: () => true,
+          onChangeValidation: this._validateEvrynetAccount,
         },
       },
       transferFunc: props.toEvry,
@@ -81,6 +80,23 @@ export default class WarpContent extends Component {
     }
   }
 
+  _validateStellarAccount(secretKey) {
+    if (!secretKey) {
+      return 'Stellar secret key is required.'
+    } else if (!StellarBase.StrKey.isValidEd25519SecretSeed(secretKey)) {
+      return 'Invalid Stellar secret key format.'
+    }
+    return null
+  }
+
+  _validateEvrynetAccount(secretKey) {
+    if (!secretKey) {
+      return 'Evrynet secret key is required.'
+    } else if (!/^[a-f0-9]{64}$/i.test(secretKey)) {
+      return 'Invalid Evrynet secret key format.'
+    }
+    return null
+  }
   _changeHandler(event) {
     const name = event.target.name
     const value = event.target.value
@@ -92,7 +108,10 @@ export default class WarpContent extends Component {
     }
     updatedFormElement.value = value
     updatedFormElement.touched = true
-    updatedFormElement.valid = updatedFormElement.onChangeValidation(value)
+    updatedFormElement.errorMessage = updatedFormElement.onChangeValidation(
+      value,
+    )
+    updatedFormElement.valid = !updatedFormElement.errorMessage
     updatedControls[name] = updatedFormElement
     this.setState({
       formControls: updatedControls,
@@ -229,7 +248,14 @@ export default class WarpContent extends Component {
                     onChange={(e) => {
                       this._changeHandler(e)
                     }}
+                    isInvalid={
+                      this.state.formControls.sourceAccount.touched &&
+                      !this.state.formControls.sourceAccount.valid
+                    }
                   />
+                  <Form.Control.Feedback type="invalid">
+                    {this.state.formControls.sourceAccount.errorMessage}
+                  </Form.Control.Feedback>
                 </Form.Group>
               </Col>
               <Col>
@@ -251,7 +277,14 @@ export default class WarpContent extends Component {
                     onChange={(e) => {
                       this._changeHandler(e)
                     }}
+                    isInvalid={
+                      this.state.formControls.destinationAccount.touched &&
+                      !this.state.formControls.destinationAccount.valid
+                    }
                   />
+                  <Form.Control.Feedback type="invalid">
+                    {this.state.formControls.destinationAccount.errorMessage}
+                  </Form.Control.Feedback>
                 </Form.Group>
               </Col>
             </Row>
