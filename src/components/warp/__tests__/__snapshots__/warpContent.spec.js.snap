@@ -70,6 +70,7 @@ exports[`WarpContent With default case should render correspondingly 1`] = `
             controlId="assetAmount"
           >
             <FormControl
+              isInvalid={null}
               name="amount"
               onBlur={[Function]}
               onChange={[Function]}
