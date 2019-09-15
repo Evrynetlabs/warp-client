@@ -55,6 +55,7 @@ export default class WarpContent extends Component {
         },
         onSubmitValidation: this._amountValidation,
         valid: null,
+        touched: false,
       },
       transferFunc: props.toEvry,
     }
@@ -74,6 +75,7 @@ export default class WarpContent extends Component {
     const stylesContentAccountInputSrc = `${stylesContentAccountInput}__src`
     const stylesContentAccountInputDest = `${stylesContentAccountInput}__dest`
     const stylesContentAmountSelection = `${stylesContent}__amount`
+    const stylesContentAmountInput = `${stylesContentAmountSelection}__input`
     const stylesFooterButton = `${stylesFooter}__btn`
     return {
       main: stylesMain,
@@ -81,6 +83,7 @@ export default class WarpContent extends Component {
       footer: stylesFooter,
       footerBtn: stylesFooterButton,
       amountSelection: stylesContentAmountSelection,
+      amountInput: stylesContentAmountInput,
       accountInput: stylesContentAccountInput,
       accountInputSrc: stylesContentAccountInputSrc,
       accountInputDest: stylesContentAccountInputDest,
@@ -193,7 +196,7 @@ export default class WarpContent extends Component {
   _isAmountInvalid() {
     return isNull(this.state.formControls.valid)
       ? null
-      : !this.state.formControls.valids
+      : !this.state.formControls.valid
   }
 
   async _transfer() {
@@ -214,7 +217,7 @@ export default class WarpContent extends Component {
     })
     const hasValidAmount = new BigNumber(
       this.props.accountBalance.state,
-    ).isLessThanOrEqualTo(
+    ).isGreaterThanOrEqualTo(
       new BigNumber(
         currencyToNumberString(this.state.formControls.amount.value),
       ),
@@ -227,15 +230,21 @@ export default class WarpContent extends Component {
       ...this.state.formControls,
     }
     updatedFormControls.valid = await updatedFormControls.onSubmitValidation()
+    updatedFormControls.touched = true
     this.setState({
       formControls: updatedFormControls,
     })
   }
 
   async _handleSubmit(e) {
-    e.preventDefault()
-    await this._validateSubmission()
-    await this._transfer()
+    try {
+      e.preventDefault()
+      await this._validateSubmission()
+      if (!this.state.formControls.valid) return
+      await this._transfer()
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -319,6 +328,7 @@ export default class WarpContent extends Component {
                     placeholder={this.state.formControls.amount.placeholder}
                     value={this.state.formControls.amount.value}
                     isInvalid={this._isAmountInvalid()}
+                    className={this.state.styles.amountInput}
                   />
                   <Form.Control.Feedback type="invalid">
                     Insufficient Amount
