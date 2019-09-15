@@ -82,17 +82,17 @@ export const getWhitelistAssets = () => {
 }
 
 export const getAccountBalanceSuccess = (whitelistedAssets) => ({
-  type: actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.SUCCESS,
+  type: actionTypes.ASYNC_GET_ACCOUNT_BALANCE.SUCCESS,
   payload: whitelistedAssets,
 })
 
 export const getAccountBalancePending = (pendingStatus) => ({
-  type: actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.PENDING,
+  type: actionTypes.ASYNC_GET_ACCOUNT_BALANCE.PENDING,
   payload: pendingStatus,
 })
 
 export const getAccountBalanceError = (error) => ({
-  type: actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.FAILURE,
+  type: actionTypes.ASYNC_GET_ACCOUNT_BALANCE.FAILURE,
   payload: error,
 })
 

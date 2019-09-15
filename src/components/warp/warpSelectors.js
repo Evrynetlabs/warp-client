@@ -30,12 +30,12 @@ export const selectWhitelistedAssets = createStructuredSelector({
 
 export const selectAccountBalance = createStructuredSelector({
   state: (state) => {
-    return state.warp[actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.stateKey]
+    return state.warp[actionTypes.ASYNC_GET_ACCOUNT_BALANCE.stateKey]
   },
   loading: (state) => {
-    return state.warp[actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.loadingKey]
+    return state.warp[actionTypes.ASYNC_GET_ACCOUNT_BALANCE.loadingKey]
   },
   error: (state) => {
-    return state.warp[actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.errorKey]
+    return state.warp[actionTypes.ASYNC_GET_ACCOUNT_BALANCE.errorKey]
   },
 })

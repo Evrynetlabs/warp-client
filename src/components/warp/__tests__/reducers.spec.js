@@ -50,6 +50,45 @@ describe('warp reducer', () => {
     })
   })
 
+  it('should handle GET_ACCOUNT_BALANCE_SUCCESS', () => {
+    expect(
+      reducer(undefined, {
+        type: actionTypes.ASYNC_GET_ACCOUNT_BALANCE.SUCCESS,
+        payload: '1',
+      }),
+    ).toEqual({
+      ...expectedInitialState(),
+      [actionTypes.ASYNC_GET_ACCOUNT_BALANCE.stateKey]: '1',
+      [actionTypes.ASYNC_GET_ACCOUNT_BALANCE.loadingKey]: false,
+    })
+  })
+
+  it('should handle GET_ACCOUNT_BALANCE_PENDING', () => {
+    expect(
+      reducer(undefined, {
+        type: actionTypes.ASYNC_GET_ACCOUNT_BALANCE.PENDING,
+        payload: true,
+      }),
+    ).toEqual({
+      ...expectedInitialState(),
+    })
+  })
+
+  it('should handle GET_ACCOUNT_BALANCE_FAILURE', () => {
+    expect(
+      reducer(undefined, {
+        type: actionTypes.ASYNC_GET_ACCOUNT_BALANCE.FAILURE,
+        payload: new Error('this is an error'),
+      }),
+    ).toEqual({
+      ...expectedInitialState(),
+      [actionTypes.ASYNC_GET_ACCOUNT_BALANCE.errorKey]: new Error(
+        'this is an error',
+      ),
+      [actionTypes.ASYNC_GET_ACCOUNT_BALANCE.loadingKey]: false,
+    })
+  })
+
   it('should handle ASYNC_TOGGLE_WARP_SWITCH_SUCCESS', () => {
     expect(
       reducer(undefined, {

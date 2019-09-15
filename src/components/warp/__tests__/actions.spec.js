@@ -234,20 +234,20 @@ describe('Warp actions', () => {
         }
         const expectedActions = [
           {
-            type: actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.PENDING,
+            type: actionTypes.ASYNC_GET_ACCOUNT_BALANCE.PENDING,
             payload: true,
           },
           {
-            type: actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.SUCCESS,
+            type: actionTypes.ASYNC_GET_ACCOUNT_BALANCE.SUCCESS,
             payload: getBalanceResult.balance,
           },
         ]
         spyGetAccountBalance.mockResolvedValue(getBalanceResult)
         spyGetPublickeyFromPrivateKey.mockReturnValue('bar')
         const store = mockStore({
-          [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.stateKey]: null,
-          [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.loadingKey]: false,
-          [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.errorKey]: null,
+          [actionTypes.ASYNC_GET_ACCOUNT_BALANCE.stateKey]: null,
+          [actionTypes.ASYNC_GET_ACCOUNT_BALANCE.loadingKey]: false,
+          [actionTypes.ASYNC_GET_ACCOUNT_BALANCE.errorKey]: null,
         })
         return store.dispatch(getAccountBalance(mockInput)).then(() => {
           expect(store.getActions()).toEqual(expectedActions)
@@ -264,20 +264,20 @@ describe('Warp actions', () => {
           }
           const expectedActions = [
             {
-              type: actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.PENDING,
+              type: actionTypes.ASYNC_GET_ACCOUNT_BALANCE.PENDING,
               payload: true,
             },
             {
-              type: actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.FAILURE,
+              type: actionTypes.ASYNC_GET_ACCOUNT_BALANCE.FAILURE,
               payload: new Error('this is an error'),
             },
           ]
           spyGetAccountBalance.mockRejectedValue(new Error('this is an error'))
           spyGetPublickeyFromPrivateKey.mockReturnValue('bar')
           const store = mockStore({
-            [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.stateKey]: null,
-            [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.loadingKey]: false,
-            [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.errorKey]: null,
+            [actionTypes.ASYNC_GET_ACCOUNT_BALANCE.stateKey]: null,
+            [actionTypes.ASYNC_GET_ACCOUNT_BALANCE.loadingKey]: false,
+            [actionTypes.ASYNC_GET_ACCOUNT_BALANCE.errorKey]: null,
           })
           return store.dispatch(getAccountBalance(mockInput)).then(() => {
             expect(store.getActions()).toEqual(expectedActions)
@@ -293,11 +293,11 @@ describe('Warp actions', () => {
           }
           const expectedActions = [
             {
-              type: actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.PENDING,
+              type: actionTypes.ASYNC_GET_ACCOUNT_BALANCE.PENDING,
               payload: true,
             },
             {
-              type: actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.FAILURE,
+              type: actionTypes.ASYNC_GET_ACCOUNT_BALANCE.FAILURE,
               payload: new Error('this is an error'),
             },
           ]
@@ -305,9 +305,9 @@ describe('Warp actions', () => {
             new Error('this is an error'),
           )
           const store = mockStore({
-            [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.stateKey]: null,
-            [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.loadingKey]: false,
-            [actionTypes.ASYNC_TOGGLE_GET_ACCOUNT_BALANCE.errorKey]: null,
+            [actionTypes.ASYNC_GET_ACCOUNT_BALANCE.stateKey]: null,
+            [actionTypes.ASYNC_GET_ACCOUNT_BALANCE.loadingKey]: false,
+            [actionTypes.ASYNC_GET_ACCOUNT_BALANCE.errorKey]: null,
           })
           return store.dispatch(getAccountBalance(mockInput)).then(() => {
             expect(store.getActions()).toEqual(expectedActions)
