@@ -113,13 +113,13 @@ describe('WarpContent', () => {
   describe('When input an amount', () => {
     const inputs = [
       ['0.112', '0.11'],
-      ['1.0', '1.00'],
+      ['1.0', '1'],
       ['1.01', '1.01'],
       ['1.012', '1.01'],
       ['1.112', '1.11'],
       ['10.112', '10.11'],
       ['1000.112', '1,000.11'],
-      ['1.0', '1.00'],
+      ['1.0', '1'],
     ]
     test.each(inputs)(
       'should create a correct currency string',
@@ -149,6 +149,14 @@ describe('WarpContent', () => {
             ...component.props().accountBalance,
             state: '0',
           },
+          whitelistedAssets: {
+            state: [
+              {
+                getCode: jest.fn().mockReturnValue('EVRY'),
+                decimal: 1,
+              },
+            ],
+          },
         })
         let updatedFormControls = { ...component.state().formControls }
         updatedFormControls.amount.value = '1'
@@ -164,7 +172,14 @@ describe('WarpContent', () => {
             ...component.props().accountBalance,
             state: '0',
           },
-          getAccountBalance: jest.fn().mockResolvedValue(),
+          whitelistedAssets: {
+            state: [
+              {
+                getCode: jest.fn().mockReturnValue('EVRY'),
+                decimal: 1,
+              },
+            ],
+          },
         })
         let updatedFormControls = { ...component.state().formControls }
         updatedFormControls.amount.value = '1'
@@ -182,7 +197,15 @@ describe('WarpContent', () => {
         component.setProps({
           accountBalance: {
             ...component.props().accountBalance,
-            state: '1000',
+            state: '100',
+          },
+          whitelistedAssets: {
+            state: [
+              {
+                getCode: jest.fn().mockReturnValue('EVRY'),
+                decimal: 1,
+              },
+            ],
           },
         })
         let updatedFormControls = { ...component.state().formControls }
@@ -199,7 +222,14 @@ describe('WarpContent', () => {
             ...component.props().accountBalance,
             state: '1000',
           },
-          getAccountBalance: jest.fn().mockResolvedValue(),
+          whitelistedAssets: {
+            state: [
+              {
+                getCode: jest.fn().mockReturnValue('EVRY'),
+                decimal: 1,
+              },
+            ],
+          },
         })
         let updatedFormControls = { ...component.state().formControls }
         updatedFormControls.amount.value = '1'

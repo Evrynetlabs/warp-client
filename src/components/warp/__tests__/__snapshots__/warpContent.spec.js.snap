@@ -95,7 +95,14 @@ exports[`WarpContent When clicking a transfer button When source accountbalance 
               name="asset"
               onChange={[Function]}
               value="EVRY"
-            />
+            >
+              <option
+                key="EVRY"
+                value="EVRY"
+              >
+                EVRY
+              </option>
+            </FormControl>
           </FormGroup>
         </Col>
       </ForwardRef>
@@ -223,7 +230,14 @@ exports[`WarpContent When clicking a transfer button When source accountbalance 
               name="asset"
               onChange={[Function]}
               value="EVRY"
-            />
+            >
+              <option
+                key="EVRY"
+                value="EVRY"
+              >
+                EVRY
+              </option>
+            </FormControl>
           </FormGroup>
         </Col>
       </ForwardRef>

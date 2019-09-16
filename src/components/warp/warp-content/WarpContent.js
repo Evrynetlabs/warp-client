@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card'
 import classNames from 'classnames'
 import { Container, Row, Col, Button, Form } from 'react-bootstrap'
 import 'Components/warp/warp-content/warpContent.scss'
-import { numberToCurrencyString, currencyToNumberString } from '@/utils/format'
+import { numberToMoneyString, moneyToNumberString } from '@/utils/format'
 import PropTypes from 'prop-types'
 import Warp from 'warp-js'
 import map from 'lodash/map'
@@ -112,15 +112,12 @@ export default class WarpContent extends Component {
   _toCurrencyString(amount) {
     let decimal
     if (!isEmpty(this.props.whitelistedAssets.state)) {
-      const whitelistedAsset = find(this.props.whitelistedAssets.state, {
-        code: this.state.formControls.asset.value,
-      })
+      const whitelistedAsset = this._getWhitelistedAssetByCode(
+        this.state.formControls.asset.value,
+      )
       decimal = whitelistedAsset ? whitelistedAsset.decimal : whitelistedAsset
     }
-    return numberToCurrencyString(
-      Number(currencyToNumberString(amount)),
-      decimal,
-    )
+    return numberToMoneyString(Number(moneyToNumberString(amount)), decimal)
   }
 
   _blurHandler(event) {
@@ -180,37 +177,34 @@ export default class WarpContent extends Component {
     })
   }
 
-  _getAssetObject() {
-    switch (this.state.formControls.asset.value) {
-      case 'EVRY': {
-        return this.warp.utils.getEvryAsset()
-      }
-      case 'XLM': {
-        return this.warp.utils.getLumensAsset()
-      }
-      default:
-        return null
-    }
-  }
-
   _isAmountInvalid() {
     return isNull(this.state.formControls.valid)
       ? null
       : !this.state.formControls.valid
   }
 
+  _getWhitelistedAssetByCode(code) {
+    return find(this.props.whitelistedAssets.state, (ech) => {
+      return ech.getCode() === code
+    })
+  }
+
   async _transfer() {
-    const asset = this._getAssetObject()
+    const asset = this._getWhitelistedAssetByCode(
+      this.state.formControls.asset.value,
+    )
     await this.state.transferFunc({
       asset,
-      amount: currencyToNumberString(this.state.formControls.amount.value),
+      amount: moneyToNumberString(this.state.formControls.amount.value),
       src: this.state.formControls.sourceAccount.value,
       dest: this.state.formControls.destinationAccount.value,
     })
   }
 
   async _amountValidation() {
-    const asset = this._getAssetObject()
+    const asset = this._getWhitelistedAssetByCode(
+      this.state.formControls.asset.value,
+    )
     await this.props.getAccountBalance({
       asset,
       privateKey: this.state.formControls.sourceAccount.value,
@@ -219,8 +213,8 @@ export default class WarpContent extends Component {
       this.props.accountBalance.state,
     ).isGreaterThanOrEqualTo(
       new BigNumber(
-        currencyToNumberString(this.state.formControls.amount.value),
-      ),
+        moneyToNumberString(this.state.formControls.amount.value),
+      ).shiftedBy(asset.decimal),
     )
     return hasValidAmount
   }
