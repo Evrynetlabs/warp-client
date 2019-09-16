@@ -209,27 +209,6 @@ describe('WarpContent', () => {
       })
     })
 
-    describe('When switch the source and destination chain', () => {
-      test('source account validation function should be validateStellarAccount', () => {
-        component.setProps({
-          isToEvry: true,
-        })
-        let validationA = component.state().formControls.sourceAccount
-          .onChangeValidation
-        let validationB = component.state().formControls.destinationAccount
-          .onChangeValidation
-        component.setProps({
-          isToEvry: false,
-        })
-        expect(
-          component.state().formControls.sourceAccount.onChangeValidation,
-        ).toEqual(validationB)
-        expect(
-          component.state().formControls.destinationAccount.onChangeValidation,
-        ).toEqual(validationA)
-      })
-    })
-
     describe('When isToEvry is false', () => {
       test('transfer function should be toStellar', () => {
         component.setProps({
@@ -238,6 +217,24 @@ describe('WarpContent', () => {
         component.find(Form).simulate('submit')
         expect(component.state().transferFunc).toEqual(mock.toStellar)
         expect(component.state().transferFunc).not.toEqual(mock.toEvry)
+      })
+
+      test('source account validation function should be validateEvrynetAccount', () => {
+        component.setProps({
+          isToEvry: false,
+        })
+        expect(
+          component.state().formControls.sourceAccount.onChangeValidation,
+        ).toEqual(component.instance()._validateEvrynetAccount)
+      })
+
+      test('destination account validation function should be validateStellarAccount', () => {
+        component.setProps({
+          isToEvry: false,
+        })
+        expect(
+          component.state().formControls.destinationAccount.onChangeValidation,
+        ).toEqual(component.instance()._validateStellarAccount)
       })
     })
 
@@ -249,6 +246,24 @@ describe('WarpContent', () => {
         component.find(Form).simulate('submit')
         expect(component.state().transferFunc).toEqual(mock.toEvry)
         expect(component.state().transferFunc).not.toEqual(mock.toStellar)
+      })
+
+      test('source account validation function should be validateStellarAccount', () => {
+        component.setProps({
+          isToEvry: true,
+        })
+        expect(
+          component.state().formControls.sourceAccount.onChangeValidation,
+        ).toEqual(component.instance()._validateStellarAccount)
+      })
+
+      test('destination account validation function should be validateEvrynetAccount', () => {
+        component.setProps({
+          isToEvry: true,
+        })
+        expect(
+          component.state().formControls.destinationAccount.onChangeValidation,
+        ).toEqual(component.instance()._validateEvrynetAccount)
       })
     })
 
