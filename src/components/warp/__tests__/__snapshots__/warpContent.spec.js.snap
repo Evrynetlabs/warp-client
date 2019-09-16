@@ -29,11 +29,15 @@ exports[`WarpContent With default case should render correspondingly 1`] = `
             </FormLabel>
             <FormControl
               className="WarpContent__form__content__input__src WarpContent__form__content__input"
+              isInvalid={false}
               name="sourceAccount"
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
               value=""
+            />
+            <Feedback
+              type="invalid"
             />
           </FormGroup>
         </Col>
@@ -51,11 +55,15 @@ exports[`WarpContent With default case should render correspondingly 1`] = `
             </FormLabel>
             <FormControl
               className="WarpContent__form__content__input__dest WarpContent__form__content__input"
+              isInvalid={false}
               name="destinationAccount"
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
               value=""
+            />
+            <Feedback
+              type="invalid"
             />
           </FormGroup>
         </Col>

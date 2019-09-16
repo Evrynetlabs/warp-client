@@ -97,6 +97,7 @@ export default class WarpContent extends Component {
     }
     return null
   }
+
   _changeHandler(event) {
     const name = event.target.name
     const value = event.target.value
@@ -302,7 +303,7 @@ export default class WarpContent extends Component {
                     }}
                     placeholder={this.state.formControls.amount.placeholder}
                     value={this.state.formControls.amount.value}
-                  ></Form.Control>
+                  />
                 </Form.Group>
               </Col>
               <Col>

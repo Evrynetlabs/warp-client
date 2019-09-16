@@ -40,7 +40,7 @@ describe('WarpContent', () => {
           whitelistedAssets={mock.whitelistedAssets}
           getWhitelistAssets={mock.getWhitelistAssets}
           isToEvry={mock.isToEvry}
-        ></WarpContent>,
+        />,
       )
     })
 
@@ -48,21 +48,82 @@ describe('WarpContent', () => {
       expect(component).toMatchSnapshot()
     })
 
-    describe('When input an account souce', () => {
-      const expected = 'foo'
-      const mockEvent = {
-        target: {
-          value: expected,
-          name: 'sourceAccount',
-        },
-      }
-      it('should save a source account state correspondingly when on chaning input', () => {
+    describe('When input an account source', () => {
+      it('should save a source account state correspondingly when on changing input', () => {
+        const expected = 'foo'
+        const mockEvent = {
+          target: {
+            value: expected,
+            name: 'sourceAccount',
+          },
+        }
         component
           .find('.WarpContent__form__content__input__src')
           .simulate('change', mockEvent)
         expect(component.state().formControls.sourceAccount.value).toEqual(
           expected,
         )
+      })
+
+      it('should get an error "Invalid Stellar secret key format."', () => {
+        let mockEvent = {
+          target: {
+            value: 'foo',
+            name: 'sourceAccount',
+          },
+        }
+
+        component
+          .find('.WarpContent__form__content__input__src')
+          .simulate('change', mockEvent)
+
+        expect(component.state().formControls.sourceAccount.valid).toEqual(
+          false,
+        )
+
+        expect(
+          component.state().formControls.sourceAccount.errorMessage,
+        ).toEqual('Invalid Stellar secret key format.')
+      })
+
+      it('should get an error "Stellar secret key is required."', () => {
+        let mockEvent = {
+          target: {
+            value: '',
+            name: 'sourceAccount',
+          },
+        }
+
+        component
+          .find('.WarpContent__form__content__input__src')
+          .simulate('change', mockEvent)
+
+        expect(component.state().formControls.sourceAccount.valid).toEqual(
+          false,
+        )
+
+        expect(
+          component.state().formControls.sourceAccount.errorMessage,
+        ).toEqual('Stellar secret key is required.')
+      })
+
+      it('should not get any errors', () => {
+        let mockEvent = {
+          target: {
+            value: 'SCIMPYI2AZKATTOQOOE5LFHRHLIDSCJP2CRBHQ6ZKHVTASCXNOQQNMKE',
+            name: 'sourceAccount',
+          },
+        }
+
+        component
+          .find('.WarpContent__form__content__input__src')
+          .simulate('change', mockEvent)
+
+        expect(component.state().formControls.sourceAccount.valid).toEqual(true)
+
+        expect(
+          component.state().formControls.sourceAccount.errorMessage,
+        ).toEqual(null)
       })
     })
 
@@ -74,13 +135,98 @@ describe('WarpContent', () => {
           name: 'destinationAccount',
         },
       }
-      it('should save a source account state correspondingly when on chaning input', () => {
+      it('should save a source account state correspondingly when on changing input', () => {
         component
           .find('.WarpContent__form__content__input__dest')
           .simulate('change', mockEvent)
         expect(component.state().formControls.destinationAccount.value).toEqual(
           expected,
         )
+      })
+
+      it('should get an error "Invalid Evrynet secret key format."', () => {
+        let mockEvent = {
+          target: {
+            value: 'foo',
+            name: 'destinationAccount',
+          },
+        }
+
+        component
+          .find('.WarpContent__form__content__input__src')
+          .simulate('change', mockEvent)
+
+        expect(component.state().formControls.destinationAccount.valid).toEqual(
+          false,
+        )
+
+        expect(
+          component.state().formControls.destinationAccount.errorMessage,
+        ).toEqual('Invalid Evrynet secret key format.')
+      })
+
+      it('should get an error "Evrynet secret key is required."', () => {
+        let mockEvent = {
+          target: {
+            value: '',
+            name: 'destinationAccount',
+          },
+        }
+
+        component
+          .find('.WarpContent__form__content__input__src')
+          .simulate('change', mockEvent)
+
+        expect(component.state().formControls.destinationAccount.valid).toEqual(
+          false,
+        )
+
+        expect(
+          component.state().formControls.destinationAccount.errorMessage,
+        ).toEqual('Evrynet secret key is required.')
+      })
+
+      it('should not get any errors', () => {
+        let mockEvent = {
+          target: {
+            value:
+              'B9CD2CCDB7CCE1EE6A2C9C21A3A7F97506666D2B02946091F2476762FA1F1039',
+            name: 'destinationAccount',
+          },
+        }
+
+        component
+          .find('.WarpContent__form__content__input__src')
+          .simulate('change', mockEvent)
+
+        expect(component.state().formControls.destinationAccount.valid).toEqual(
+          true,
+        )
+
+        expect(
+          component.state().formControls.destinationAccount.errorMessage,
+        ).toEqual(null)
+      })
+    })
+
+    describe('When switch the source and destination chain', () => {
+      test('source account validation function should be validateStellarAccount', () => {
+        component.setProps({
+          isToEvry: true,
+        })
+        let validationA = component.state().formControls.sourceAccount
+          .onChangeValidation
+        let validationB = component.state().formControls.destinationAccount
+          .onChangeValidation
+        component.setProps({
+          isToEvry: false,
+        })
+        expect(
+          component.state().formControls.sourceAccount.onChangeValidation,
+        ).toEqual(validationB)
+        expect(
+          component.state().formControls.destinationAccount.onChangeValidation,
+        ).toEqual(validationA)
       })
     })
 
@@ -107,7 +253,7 @@ describe('WarpContent', () => {
     })
 
     describe('When clicking a transfer button', () => {
-      it('should save a source account state correspondingly when on chaning input', () => {
+      it('should save a source account state correspondingly when on changing input', () => {
         const spy = jest.spyOn(component.instance(), '_handleSubmit')
         expect(component.find(Form)).toHaveLength(1)
         component.find(Form).simulate('submit')
