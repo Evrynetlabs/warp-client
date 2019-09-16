@@ -16,7 +16,7 @@ export default class WarpContent extends Component {
   constructor(props) {
     super(props)
     this.warp = new Warp()
-    this._toCurrencyString = this._toCurrencyString.bind(this)
+    this._toMoneyString = this._toMoneyString.bind(this)
     this._amountValidation = this._amountValidation.bind(this)
     this.initialState = {
       styles: this._initStyles(),
@@ -35,7 +35,7 @@ export default class WarpContent extends Component {
           valid: false,
           onChangeValidation: () => true,
           onBlurValidation: () => true,
-          onBlurValueAssign: this._toCurrencyString,
+          onBlurValueAssign: this._toMoneyString,
         },
         sourceAccount: {
           value: '',
@@ -109,7 +109,7 @@ export default class WarpContent extends Component {
     })
   }
 
-  _toCurrencyString(amount) {
+  _toMoneyString(amount) {
     let decimal
     if (!isEmpty(this.props.whitelistedAssets.state)) {
       const whitelistedAsset = this._getWhitelistedAssetByCode(
