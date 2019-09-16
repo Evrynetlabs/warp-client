@@ -25,7 +25,7 @@ exports[`Warp should render correspondingly 1`] = `
         "subscribe": [Function],
       }
     }
-    toEvry={[Function]}
+    toEvrynet={[Function]}
     toStellar={[Function]}
     toggleTransferSwitch={[Function]}
     txHashes={

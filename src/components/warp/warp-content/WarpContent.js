@@ -57,7 +57,7 @@ export default class WarpContent extends Component {
         valid: null,
         touched: false,
       },
-      transferFunc: props.toEvry,
+      transferFunc: props.toEvrynet,
     }
     this.state = {
       ...this.initialState,
@@ -157,7 +157,7 @@ export default class WarpContent extends Component {
     if (prevProps.isToEvry === this.props.isToEvry) return
     this.setState({
       transferFunc: this.props.isToEvry
-        ? this.props.toEvry
+        ? this.props.toEvrynet
         : this.props.toStellar,
     })
   }
@@ -379,7 +379,7 @@ WarpContent.propTypes = {
     loading: PropTypes.bool,
     error: PropTypes.object,
   }),
-  toEvry: PropTypes.func.isRequired,
+  toEvrynet: PropTypes.func.isRequired,
   toStellar: PropTypes.func.isRequired,
   isToEvry: PropTypes.bool.isRequired,
   getWhitelistAssets: PropTypes.func.isRequired,

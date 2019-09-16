@@ -8,7 +8,7 @@ import {
   selectAccountBalance,
 } from 'Components/warp/warpSelectors'
 import {
-  toEvry,
+  toEvrynet,
   toStellar,
   getWhitelistAssets,
   toggleTransferSwitch,
@@ -24,7 +24,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    toEvry: (payload) => dispatch(toEvry(payload)),
+    toEvrynet: (payload) => dispatch(toEvrynet(payload)),
     toStellar: (payload) => dispatch(toStellar(payload)),
     getWhitelistAssets: () => dispatch(getWhitelistAssets()),
     toggleTransferSwitch: () => dispatch(toggleTransferSwitch()),

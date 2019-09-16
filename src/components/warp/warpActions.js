@@ -17,7 +17,7 @@ export const collectTxHashesError = (error) => ({
   payload: error,
 })
 
-export const toEvry = ({ src, dest, amount, asset }) => {
+export const toEvrynet = ({ src, dest, amount, asset }) => {
   const warp = new Warp()
   return async (dispatch) => {
     dispatch(collectTxHashesPending(true))

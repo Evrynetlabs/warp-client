@@ -18,7 +18,7 @@ describe('WarpContent', () => {
       error: null,
     },
     toStellar: jest.fn(),
-    toEvry: jest.fn(),
+    toEvrynet: jest.fn(),
     whitelistedAssets: {
       state: [],
       loading: false,
@@ -40,7 +40,7 @@ describe('WarpContent', () => {
     component = shallow(
       <WarpContent
         txHashes={mock.txHashes}
-        toEvry={mock.toEvry}
+        toEvrynet={mock.toEvrynet}
         toStellar={mock.toStellar}
         whitelistedAssets={mock.whitelistedAssets}
         getWhitelistAssets={mock.getWhitelistAssets}
@@ -62,7 +62,7 @@ describe('WarpContent', () => {
         name: 'sourceAccount',
       },
     }
-    it('should save a source account state correspondingly when on chaning input', () => {
+    it('should save a source account state correspondingly when on changing input', () => {
       component
         .find('.WarpContent__form__content__input__src')
         .simulate('change', mockEvent)
@@ -80,7 +80,7 @@ describe('WarpContent', () => {
         name: 'destinationAccount',
       },
     }
-    it('should save a source account state correspondingly when on chaning input', () => {
+    it('should save a source account state correspondingly when on changing input', () => {
       component
         .find('.WarpContent__form__content__input__dest')
         .simulate('change', mockEvent)
@@ -96,16 +96,16 @@ describe('WarpContent', () => {
         isToEvry: false,
       })
       expect(component.state().transferFunc).toEqual(mock.toStellar)
-      expect(component.state().transferFunc).not.toEqual(mock.toEvry)
+      expect(component.state().transferFunc).not.toEqual(mock.toEvrynet)
     })
   })
 
   describe('When isToEvry is true', () => {
-    test('transfer function should be toEvry', () => {
+    test('transfer function should be toEvrynet', () => {
       component.setProps({
         isToEvry: true,
       })
-      expect(component.state().transferFunc).toEqual(mock.toEvry)
+      expect(component.state().transferFunc).toEqual(mock.toEvrynet)
       expect(component.state().transferFunc).not.toEqual(mock.toStellar)
     })
   })

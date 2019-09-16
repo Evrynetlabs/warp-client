@@ -34,7 +34,7 @@ export default class Warp extends Component {
               ></WarpChainTitle>
               <WarpContent
                 txHashes={this.props.txHashes}
-                toEvry={this.props.toEvry}
+                toEvrynet={this.props.toEvrynet}
                 toStellar={this.props.toStellar}
                 whitelistedAssets={this.props.whitelistedAssets}
                 getWhitelistAssets={this.props.getWhitelistAssets}
@@ -70,7 +70,7 @@ Warp.propTypes = {
     error: PropTypes.object,
   }),
   isToEvry: PropTypes.bool.isRequired,
-  toEvry: PropTypes.func.isRequired,
+  toEvrynet: PropTypes.func.isRequired,
   toStellar: PropTypes.func.isRequired,
   getWhitelistAssets: PropTypes.func.isRequired,
   toggleTransferSwitch: PropTypes.func.isRequired,

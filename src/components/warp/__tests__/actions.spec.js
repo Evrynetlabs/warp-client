@@ -1,5 +1,5 @@
 import {
-  toEvry,
+  toEvrynet,
   getWhitelistAssets,
   toStellar,
   toggleTransferSwitch,
@@ -21,7 +21,7 @@ const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
 describe('Warp actions', () => {
-  describe('toEvry', () => {
+  describe('toEvrynet', () => {
     describe('When success', () => {
       it('should get txHashes', () => {
         const toEvrynetResult = {
@@ -43,7 +43,7 @@ describe('Warp actions', () => {
         })
         return store
           .dispatch(
-            toEvry({
+            toEvrynet({
               src: 'foo',
               dest: 'bar',
               amount: '1',
@@ -73,7 +73,7 @@ describe('Warp actions', () => {
         })
         return store
           .dispatch(
-            toEvry({
+            toEvrynet({
               src: 'foo',
               dest: 'bar',
               amount: '1',
