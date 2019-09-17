@@ -80,22 +80,38 @@ export default class WarpContent extends Component {
     }
   }
 
-  _validateStellarAccount(secretKey) {
-    if (!secretKey) {
-      return 'Stellar secret key is required.'
-    } else if (!StellarBase.StrKey.isValidEd25519SecretSeed(secretKey)) {
-      return 'Invalid Stellar secret key format.'
+  _validateStellarAccount(e) {
+    let isValid = true
+    let errorMessage = null
+
+    if (!e.value) {
+      isValid = false
+      errorMessage = 'Stellar secret key is required.'
+    } else if (!StellarBase.StrKey.isValidEd25519SecretSeed(e.value)) {
+      isValid = false
+      errorMessage = 'Invalid Stellar secret key format.'
     }
-    return null
+
+    e.valid = isValid
+    e.errorMessage = errorMessage
+    return e
   }
 
-  _validateEvrynetAccount(secretKey) {
-    if (!secretKey) {
-      return 'Evrynet secret key is required.'
-    } else if (!/^[a-f0-9]{64}$/i.test(secretKey)) {
-      return 'Invalid Evrynet secret key format.'
+  _validateEvrynetAccount(e) {
+    let isValid = true
+    let errorMessage = null
+
+    if (!e.value) {
+      isValid = false
+      errorMessage = 'Evrynet secret key is required.'
+    } else if (!/^[a-f0-9]{64}$/i.test(e.value)) {
+      isValid = false
+      errorMessage = 'Invalid Evrynet secret key format.'
     }
-    return null
+
+    e.valid = isValid
+    e.errorMessage = errorMessage
+    return e
   }
 
   _changeHandler(event) {
@@ -104,15 +120,14 @@ export default class WarpContent extends Component {
     const updatedControls = {
       ...this.state.formControls,
     }
-    const updatedFormElement = {
+    let updatedFormElement = {
       ...updatedControls[name],
     }
     updatedFormElement.value = value
     updatedFormElement.touched = true
-    updatedFormElement.errorMessage = updatedFormElement.onChangeValidation(
-      value,
+    updatedFormElement = updatedFormElement.onChangeValidation(
+      updatedFormElement,
     )
-    updatedFormElement.valid = !updatedFormElement.errorMessage
     updatedControls[name] = updatedFormElement
     this.setState({
       formControls: updatedControls,
