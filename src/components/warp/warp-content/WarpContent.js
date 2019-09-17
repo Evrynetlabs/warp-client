@@ -11,6 +11,10 @@ import isEmpty from 'lodash/isEmpty'
 import find from 'lodash/find'
 import BigNumber from 'bignumber.js'
 import StellarBase from 'stellar-base'
+import config from '@/config'
+const {
+  evrynet: { ATOMIC_STELLAR_DECIMAL_UNIT },
+} = config
 
 export default class WarpContent extends Component {
   constructor(props) {
@@ -240,12 +244,16 @@ export default class WarpContent extends Component {
       asset,
       privateKey: this.state.formControls.sourceAccount.value,
     })
+    const decimal = this.props.isToEvry
+      ? ATOMIC_STELLAR_DECIMAL_UNIT
+      : asset.decimal
+    console.log(decimal, 'decimal na jah')
     const hasValidAmount = new BigNumber(
       this.props.accountBalance.state,
     ).isGreaterThanOrEqualTo(
       new BigNumber(
         moneyToNumberString(this.state.formControls.amount.value),
-      ).shiftedBy(asset.decimal),
+      ).shiftedBy(decimal),
     )
     return hasValidAmount
   }

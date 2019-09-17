@@ -209,26 +209,6 @@ describe('WarpContent', () => {
     })
   })
 
-  describe('When isToEvry is false', () => {
-    test('transfer function should be toStellar', () => {
-      component.setProps({
-        isToEvry: false,
-      })
-      expect(component.state().transferFunc).toEqual(mock.toStellar)
-      expect(component.state().transferFunc).not.toEqual(mock.toEvrynet)
-    })
-  })
-
-  describe('When isToEvry is true', () => {
-    test('transfer function should be toEvrynet', () => {
-      component.setProps({
-        isToEvry: true,
-      })
-      expect(component.state().transferFunc).toEqual(mock.toEvrynet)
-      expect(component.state().transferFunc).not.toEqual(mock.toStellar)
-    })
-  })
-
   describe('When input an amount', () => {
     const inputs = [
       ['0.112', '0.11'],
@@ -261,107 +241,238 @@ describe('WarpContent', () => {
   })
 
   describe('When clicking a transfer button', () => {
-    describe('When source accountbalance is invalid', () => {
-      it('should show an invalid feedback', async () => {
+    describe('When isToEvry is false', () => {
+      test('transfer function should be toStellar', () => {
         component.setProps({
-          accountBalance: {
-            ...component.props().accountBalance,
-            state: '0',
-          },
-          whitelistedAssets: {
-            state: [
-              {
-                getCode: jest.fn().mockReturnValue('EVRY'),
-                decimal: 1,
-              },
-            ],
-          },
+          isToEvry: false,
         })
-        let updatedFormControls = { ...component.state().formControls }
-        updatedFormControls.amount.value = '1'
-        component.setState({
-          formControls: updatedFormControls,
-        })
-        await component.instance()._validateSubmission()
-        expect(component.state().formControls.valid).toBe(false)
-        await expect(component.instance()._validateAmount()).resolves.toBe(
-          false,
-        )
+        expect(component.state().transferFunc).toEqual(mock.toStellar)
+        expect(component.state().transferFunc).not.toEqual(mock.toEvrynet)
       })
-      it('should match an invalid feedback snapshot', async () => {
-        component.setProps({
-          accountBalance: {
-            ...component.props().accountBalance,
-            state: '0',
-          },
-          whitelistedAssets: {
-            state: [
-              {
-                getCode: jest.fn().mockReturnValue('EVRY'),
-                decimal: 1,
-              },
-            ],
-          },
+      describe('When source accountbalance is invalid', () => {
+        it('should show an invalid feedback', async () => {
+          component.setProps({
+            isToEvry: false,
+            accountBalance: {
+              ...component.props().accountBalance,
+              state: '0',
+            },
+            whitelistedAssets: {
+              state: [
+                {
+                  getCode: jest.fn().mockReturnValue('EVRY'),
+                  decimal: 1,
+                },
+              ],
+            },
+          })
+          let updatedFormControls = { ...component.state().formControls }
+          updatedFormControls.amount.value = '1'
+          component.setState({
+            formControls: updatedFormControls,
+          })
+          await component.instance()._validateSubmission()
+          expect(component.state().formControls.valid).toBe(false)
+          await expect(component.instance()._validateAmount()).resolves.toBe(
+            false,
+          )
         })
-        let updatedFormControls = { ...component.state().formControls }
-        updatedFormControls.amount.value = '1'
-        component.setState({
-          formControls: updatedFormControls,
+        it('should match an invalid feedback snapshot', async () => {
+          component.setProps({
+            isToEvry: false,
+            accountBalance: {
+              ...component.props().accountBalance,
+              state: '0',
+            },
+            whitelistedAssets: {
+              state: [
+                {
+                  getCode: jest.fn().mockReturnValue('EVRY'),
+                  decimal: 1,
+                },
+              ],
+            },
+          })
+          let updatedFormControls = { ...component.state().formControls }
+          updatedFormControls.amount.value = '1'
+          component.setState({
+            formControls: updatedFormControls,
+          })
+          const form = component.find(Form)
+          await form.props().onSubmit({ preventDefault: () => {} })
+          expect(component).toMatchSnapshot()
         })
-        const form = component.find(Form)
-        await form.props().onSubmit({ preventDefault: () => {} })
-        expect(component).toMatchSnapshot()
+      })
+
+      describe('When source accountbalance is valid', () => {
+        it('should show a valid feedback', async () => {
+          component.setProps({
+            isToEvry: false,
+            accountBalance: {
+              ...component.props().accountBalance,
+              state: '10',
+            },
+            whitelistedAssets: {
+              state: [
+                {
+                  getCode: jest.fn().mockReturnValue('EVRY'),
+                  decimal: 1,
+                },
+              ],
+            },
+          })
+          let updatedFormControls = { ...component.state().formControls }
+          updatedFormControls.amount.value = '1'
+          component.setState({
+            formControls: updatedFormControls,
+          })
+          await component.instance()._validateSubmission()
+          expect(component.state().formControls.valid).toBe(true)
+          await expect(component.instance()._validateAmount()).resolves.toBe(
+            true,
+          )
+        })
+        it('should match a valid feedback snapshot', async () => {
+          component.setProps({
+            isToEvry: false,
+            accountBalance: {
+              ...component.props().accountBalance,
+              state: '10',
+            },
+            whitelistedAssets: {
+              state: [
+                {
+                  getCode: jest.fn().mockReturnValue('EVRY'),
+                  decimal: 1,
+                },
+              ],
+            },
+          })
+          let updatedFormControls = { ...component.state().formControls }
+          updatedFormControls.amount.value = '1'
+          component.setState({
+            formControls: updatedFormControls,
+          })
+          const form = component.find(Form)
+          await form.props().onSubmit({ preventDefault: () => {} })
+          expect(component).toMatchSnapshot()
+        })
       })
     })
 
-    describe('When source accountbalance is valid', () => {
-      it('should show a valid feedback', async () => {
-        component.setProps({
-          accountBalance: {
-            ...component.props().accountBalance,
-            state: '10',
-          },
-          whitelistedAssets: {
-            state: [
-              {
-                getCode: jest.fn().mockReturnValue('EVRY'),
-                decimal: 1,
-              },
-            ],
-          },
-        })
-        let updatedFormControls = { ...component.state().formControls }
-        updatedFormControls.amount.value = '1'
-        component.setState({
-          formControls: updatedFormControls,
-        })
-        await component.instance()._validateSubmission()
-        expect(component.state().formControls.valid).toBe(true)
-        await expect(component.instance()._validateAmount()).resolves.toBe(true)
+    describe('When isToEvry is true', () => {
+      test('transfer function should be toEvrynet', () => {
+        expect(component.state().transferFunc).toEqual(mock.toEvrynet)
+        expect(component.state().transferFunc).not.toEqual(mock.toStellar)
       })
-      it('should match a valid feedback snapshot', async () => {
-        component.setProps({
-          accountBalance: {
-            ...component.props().accountBalance,
-            state: '10',
-          },
-          whitelistedAssets: {
-            state: [
-              {
-                getCode: jest.fn().mockReturnValue('EVRY'),
-                decimal: 1,
-              },
-            ],
-          },
+      describe('When source accountbalance is invalid', () => {
+        it('should show an invalid feedback', async () => {
+          component.setProps({
+            isToEvry: true,
+            accountBalance: {
+              ...component.props().accountBalance,
+              state: '0',
+            },
+            whitelistedAssets: {
+              state: [
+                {
+                  getCode: jest.fn().mockReturnValue('EVRY'),
+                  decimal: 1,
+                },
+              ],
+            },
+          })
+          let updatedFormControls = { ...component.state().formControls }
+          updatedFormControls.amount.value = '1'
+          component.setState({
+            formControls: updatedFormControls,
+          })
+          await component.instance()._validateSubmission()
+          expect(component.state().formControls.valid).toBe(false)
+          await expect(component.instance()._validateAmount()).resolves.toBe(
+            false,
+          )
         })
-        let updatedFormControls = { ...component.state().formControls }
-        updatedFormControls.amount.value = '1'
-        component.setState({
-          formControls: updatedFormControls,
+        it('should match an invalid feedback snapshot', async () => {
+          component.setProps({
+            isToEvry: true,
+            accountBalance: {
+              ...component.props().accountBalance,
+              state: '0',
+            },
+            whitelistedAssets: {
+              state: [
+                {
+                  getCode: jest.fn().mockReturnValue('EVRY'),
+                  decimal: 1,
+                },
+              ],
+            },
+          })
+          let updatedFormControls = { ...component.state().formControls }
+          updatedFormControls.amount.value = '1'
+          component.setState({
+            formControls: updatedFormControls,
+          })
+          const form = component.find(Form)
+          await form.props().onSubmit({ preventDefault: () => {} })
+          expect(component).toMatchSnapshot()
         })
-        const form = component.find(Form)
-        await form.props().onSubmit({ preventDefault: () => {} })
-        expect(component).toMatchSnapshot()
+      })
+
+      describe('When source accountbalance is valid', () => {
+        it('should show a valid feedback', async () => {
+          component.setProps({
+            isToEvry: true,
+            accountBalance: {
+              ...component.props().accountBalance,
+              state: '10000000',
+            },
+            whitelistedAssets: {
+              state: [
+                {
+                  getCode: jest.fn().mockReturnValue('EVRY'),
+                  decimal: 1,
+                },
+              ],
+            },
+          })
+          let updatedFormControls = { ...component.state().formControls }
+          updatedFormControls.amount.value = '1'
+          component.setState({
+            formControls: updatedFormControls,
+          })
+          await component.instance()._validateSubmission()
+          expect(component.state().formControls.valid).toBe(true)
+          await expect(component.instance()._validateAmount()).resolves.toBe(
+            true,
+          )
+        })
+        it('should match a valid feedback snapshot', async () => {
+          component.setProps({
+            isToEvry: true,
+            accountBalance: {
+              ...component.props().accountBalance,
+              state: '10000000',
+            },
+            whitelistedAssets: {
+              state: [
+                {
+                  getCode: jest.fn().mockReturnValue('EVRY'),
+                  decimal: 1,
+                },
+              ],
+            },
+          })
+          let updatedFormControls = { ...component.state().formControls }
+          updatedFormControls.amount.value = '1'
+          component.setState({
+            formControls: updatedFormControls,
+          })
+          const form = component.find(Form)
+          await form.props().onSubmit({ preventDefault: () => {} })
+          expect(component).toMatchSnapshot()
+        })
       })
     })
   })
