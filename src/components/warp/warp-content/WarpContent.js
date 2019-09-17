@@ -10,6 +10,7 @@ import map from 'lodash/map'
 import isEmpty from 'lodash/isEmpty'
 import find from 'lodash/find'
 import BigNumber from 'bignumber.js'
+import StellarBase from 'stellar-base'
 
 export default class WarpContent extends Component {
   constructor(props) {
@@ -17,23 +18,26 @@ export default class WarpContent extends Component {
     this.warp = new Warp()
     this._toMoneyString = this._toMoneyString.bind(this)
     this._validateAmount = this._validateAmount.bind(this)
-    this.initialState = {
+    const defaultFunc = {
+      onChangeValidation: (elem) => elem,
+      onBlurValidation: (elem) => elem,
+    }
+    const initialState = {
       styles: this._initStyles(),
       formControls: {
         asset: {
           value: this.warp.utils.getEvryAsset().getCode(),
           touched: false,
           valid: false,
-          onChangeValidation: () => true,
-          onBlurValidation: () => true,
+          onChangeValidation: defaultFunc.onChangeValidation,
         },
         amount: {
           value: '',
           placeholder: '0.00',
           touched: false,
           valid: false,
-          onChangeValidation: () => true,
-          onBlurValidation: () => true,
+          onChangeValidation: defaultFunc.onChangeValidation,
+          onBlurValidation: defaultFunc.onBlurValidation,
           onBlurValueAssign: this._toMoneyString,
         },
         sourceAccount: {
@@ -41,16 +45,14 @@ export default class WarpContent extends Component {
           placeholder: 'Account Number',
           touched: false,
           valid: false,
-          onChangeValidation: () => true,
-          onBlurValidation: () => true,
+          onChangeValidation: this._validateStellarAccount,
         },
         destinationAccount: {
           value: '',
           placeholder: 'Account Number',
           touched: false,
           valid: false,
-          onChangeValidation: () => true,
-          onBlurValidation: () => true,
+          onChangeValidation: this._validateEvrynetAccount,
         },
         onSubmitValidation: this._validateAmount,
         valid: null,
@@ -59,7 +61,7 @@ export default class WarpContent extends Component {
       transferFunc: props.toEvrynet,
     }
     this.state = {
-      ...this.initialState,
+      ...initialState,
     }
   }
 
@@ -90,18 +92,72 @@ export default class WarpContent extends Component {
     }
   }
 
+  _validateStellarAccount(e) {
+    let isValid = true
+    let errorMessage = null
+
+    if (!e.value) {
+      isValid = false
+      errorMessage = 'Stellar secret key is required.'
+    } else if (!StellarBase.StrKey.isValidEd25519SecretSeed(e.value)) {
+      isValid = false
+      errorMessage = 'Invalid Stellar secret key format.'
+    }
+
+    e.valid = isValid
+    e.errorMessage = errorMessage
+    return e
+  }
+
+  _validateEvrynetAccount(e) {
+    let isValid = true
+    let errorMessage = null
+
+    if (!e.value) {
+      isValid = false
+      errorMessage = 'Evrynet secret key is required.'
+    } else if (!/^[a-f0-9]{64}$/i.test(e.value)) {
+      isValid = false
+      errorMessage = 'Invalid Evrynet secret key format.'
+    }
+
+    e.valid = isValid
+    e.errorMessage = errorMessage
+    return e
+  }
+
   _changeHandler(event) {
     const name = event.target.name
     const value = event.target.value
     const updatedControls = {
       ...this.state.formControls,
     }
-    const updatedFormElement = {
+    let updatedFormElement = {
       ...updatedControls[name],
     }
     updatedFormElement.value = value
     updatedFormElement.touched = true
-    updatedFormElement.valid = updatedFormElement.onChangeValidation(value)
+    updatedFormElement = updatedFormElement.onChangeValidation(
+      updatedFormElement,
+    )
+    updatedControls[name] = updatedFormElement
+    this.setState({
+      formControls: updatedControls,
+    })
+  }
+
+  _blurHandler(event) {
+    const value = event.target.value
+    const name = event.target.name
+    const updatedControls = {
+      ...this.state.formControls,
+    }
+    let updatedFormElement = {
+      ...updatedControls[name],
+    }
+    updatedFormElement.value = updatedFormElement.onBlurValueAssign(value)
+    updatedFormElement.touched = true
+    updatedFormElement = updatedFormElement.onBlurValidation(updatedFormElement)
     updatedControls[name] = updatedFormElement
     this.setState({
       formControls: updatedControls,
@@ -117,24 +173,6 @@ export default class WarpContent extends Component {
       decimal = whitelistedAsset ? whitelistedAsset.decimal : whitelistedAsset
     }
     return numberToMoneyString(Number(moneyToNumberString(amount)), decimal)
-  }
-
-  _blurHandler(event) {
-    const value = event.target.value
-    const name = event.target.name
-    const updatedControls = {
-      ...this.state.formControls,
-    }
-    const updatedFormElement = {
-      ...updatedControls[name],
-    }
-    updatedFormElement.value = updatedFormElement.onBlurValueAssign(value)
-    updatedFormElement.touched = true
-    updatedFormElement.valid = updatedFormElement.onBlurValidation(value)
-    updatedControls[name] = updatedFormElement
-    this.setState({
-      formControls: updatedControls,
-    })
   }
 
   _listWhitelistedAssetsOptions() {
@@ -274,7 +312,14 @@ export default class WarpContent extends Component {
                     onChange={(e) => {
                       this._changeHandler(e)
                     }}
+                    isInvalid={
+                      this.state.formControls.sourceAccount.touched &&
+                      !this.state.formControls.sourceAccount.valid
+                    }
                   />
+                  <Form.Control.Feedback type="invalid">
+                    {this.state.formControls.sourceAccount.errorMessage}
+                  </Form.Control.Feedback>
                 </Form.Group>
               </Col>
               <Col>
@@ -296,7 +341,14 @@ export default class WarpContent extends Component {
                     onChange={(e) => {
                       this._changeHandler(e)
                     }}
+                    isInvalid={
+                      this.state.formControls.destinationAccount.touched &&
+                      !this.state.formControls.destinationAccount.valid
+                    }
                   />
+                  <Form.Control.Feedback type="invalid">
+                    {this.state.formControls.destinationAccount.errorMessage}
+                  </Form.Control.Feedback>
                 </Form.Group>
               </Col>
             </Row>
