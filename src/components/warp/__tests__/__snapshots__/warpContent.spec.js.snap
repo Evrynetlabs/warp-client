@@ -135,7 +135,7 @@ exports[`WarpContent When clicking a transfer button When source accountbalance 
 </Form>
 `;
 
-exports[`WarpContent When clicking a transfer button When source accountbalance is valid should match an valid feedback snapshot 1`] = `
+exports[`WarpContent When clicking a transfer button When source accountbalance is valid should match a valid feedback snapshot 1`] = `
 <Form
   className="WarpContent__form"
   inline={false}
@@ -341,7 +341,7 @@ exports[`WarpContent should render correspondingly 1`] = `
           >
             <FormControl
               className="WarpContent__form__content__amount__input"
-              isInvalid={null}
+              isInvalid={false}
               name="amount"
               onBlur={[Function]}
               onChange={[Function]}

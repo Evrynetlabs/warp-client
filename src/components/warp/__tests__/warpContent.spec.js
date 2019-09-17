@@ -165,6 +165,9 @@ describe('WarpContent', () => {
         })
         await component.instance()._validateSubmission()
         expect(component.state().formControls.valid).toBe(false)
+        await expect(component.instance()._validateAmount()).resolves.toBe(
+          false,
+        )
       })
       it('should match an invalid feedback snapshot', async () => {
         component.setProps({
@@ -193,11 +196,11 @@ describe('WarpContent', () => {
     })
 
     describe('When source accountbalance is valid', () => {
-      it('should show an valid feedback', async () => {
+      it('should show a valid feedback', async () => {
         component.setProps({
           accountBalance: {
             ...component.props().accountBalance,
-            state: '100',
+            state: '10',
           },
           whitelistedAssets: {
             state: [
@@ -215,12 +218,13 @@ describe('WarpContent', () => {
         })
         await component.instance()._validateSubmission()
         expect(component.state().formControls.valid).toBe(true)
+        await expect(component.instance()._validateAmount()).resolves.toBe(true)
       })
-      it('should match an valid feedback snapshot', async () => {
+      it('should match a valid feedback snapshot', async () => {
         component.setProps({
           accountBalance: {
             ...component.props().accountBalance,
-            state: '1000',
+            state: '10',
           },
           whitelistedAssets: {
             state: [

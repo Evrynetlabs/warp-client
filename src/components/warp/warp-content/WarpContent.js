@@ -8,7 +8,6 @@ import PropTypes from 'prop-types'
 import Warp from 'warp-js'
 import map from 'lodash/map'
 import isEmpty from 'lodash/isEmpty'
-import isNull from 'lodash/isNull'
 import find from 'lodash/find'
 import BigNumber from 'bignumber.js'
 
@@ -17,7 +16,7 @@ export default class WarpContent extends Component {
     super(props)
     this.warp = new Warp()
     this._toMoneyString = this._toMoneyString.bind(this)
-    this._amountValidation = this._amountValidation.bind(this)
+    this._validateAmount = this._validateAmount.bind(this)
     this.initialState = {
       styles: this._initStyles(),
       formControls: {
@@ -53,7 +52,7 @@ export default class WarpContent extends Component {
           onChangeValidation: () => true,
           onBlurValidation: () => true,
         },
-        onSubmitValidation: this._amountValidation,
+        onSubmitValidation: this._validateAmount,
         valid: null,
         touched: false,
       },
@@ -177,12 +176,6 @@ export default class WarpContent extends Component {
     })
   }
 
-  _isAmountInvalid() {
-    return isNull(this.state.formControls.valid)
-      ? null
-      : !this.state.formControls.valid
-  }
-
   _getWhitelistedAssetByCode(code) {
     return find(this.props.whitelistedAssets.state, (ech) => {
       return ech.getCode() === code
@@ -201,7 +194,7 @@ export default class WarpContent extends Component {
     })
   }
 
-  async _amountValidation() {
+  async _validateAmount() {
     const asset = this._getWhitelistedAssetByCode(
       this.state.formControls.asset.value,
     )
@@ -321,7 +314,10 @@ export default class WarpContent extends Component {
                     }}
                     placeholder={this.state.formControls.amount.placeholder}
                     value={this.state.formControls.amount.value}
-                    isInvalid={this._isAmountInvalid()}
+                    isInvalid={
+                      !this.state.formControls.valid &&
+                      this.state.formControls.touched
+                    }
                     className={this.state.styles.amountInput}
                   />
                   <Form.Control.Feedback type="invalid">
