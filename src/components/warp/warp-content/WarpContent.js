@@ -247,7 +247,6 @@ export default class WarpContent extends Component {
     const decimal = this.props.isToEvry
       ? ATOMIC_STELLAR_DECIMAL_UNIT
       : asset.decimal
-    console.log(decimal, 'decimal na jah')
     const hasValidAmount = new BigNumber(
       this.props.accountBalance.state,
     ).isGreaterThanOrEqualTo(
