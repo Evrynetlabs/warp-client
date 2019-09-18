@@ -211,13 +211,13 @@ describe('WarpContent', () => {
 
   describe('When input an amount', () => {
     const inputs = [
-      ['0.112', '0.11'],
+      ['0.112', '0.112'],
       ['1.0', '1'],
       ['1.01', '1.01'],
-      ['1.012', '1.01'],
-      ['1.112', '1.11'],
-      ['10.112', '10.11'],
-      ['1000.112', '1,000.11'],
+      ['1.012', '1.012'],
+      ['1.112', '1.112'],
+      ['10.112', '10.112'],
+      ['1000.112', '1,000.112'],
       ['1.0', '1'],
     ]
     test.each(inputs)(
@@ -232,12 +232,78 @@ describe('WarpContent', () => {
         const input = component.find(
           '.WarpContent__form__content__amount__input',
         )
+        const mockWhitelistedAsset = {
+          getCode: jest.fn().mockReturnValue('EVRY'),
+          decimal: 18,
+          getDecimal: jest.fn().mockReturnValue(18),
+        }
+        component.setProps({
+          whitelistedAssets: {
+            state: [mockWhitelistedAsset],
+          },
+        })
         input.simulate('change', mockEvent)
         expect(component.state().formControls.amount.value).toEqual(amount)
         input.simulate('blur', mockEvent)
         expect(component.state().formControls.amount.value).toEqual(expected)
       },
     )
+
+    describe('When input an invalid amount', () => {
+      describe('When amount is zero', () => {
+        it('should save an invalid state with a desired error message', () => {
+          const mockEvent = {
+            target: {
+              value: '0',
+              name: 'amount',
+            },
+          }
+          const input = component.find(
+            '.WarpContent__form__content__amount__input',
+          )
+          input.simulate('change', mockEvent)
+          expect(component.state().formControls.amount.valid).toEqual(false)
+          expect(component.state().formControls.amount.errorMessage).toEqual(
+            'Amount must be greater than zero.',
+          )
+        })
+        it('should display a correct snapshot', () => {
+          expect(component).toMatchSnapshot()
+        })
+      })
+
+      describe('When amount precision exceeds limit decimal', () => {
+        it('should save an invalid state with a desired error message', () => {
+          const mockEvent = {
+            target: {
+              value: '1.00000000000000000000',
+              name: 'amount',
+            },
+          }
+          const mockWhitelistedAsset = {
+            getCode: jest.fn().mockReturnValue('EVRY'),
+            decimal: 18,
+            getDecimal: jest.fn().mockReturnValue(18),
+          }
+          component.setProps({
+            whitelistedAssets: {
+              state: [mockWhitelistedAsset],
+            },
+          })
+          const input = component.find(
+            '.WarpContent__form__content__amount__input',
+          )
+          input.simulate('change', mockEvent)
+          expect(component.state().formControls.amount.valid).toEqual(false)
+          expect(component.state().formControls.amount.errorMessage).toEqual(
+            `Amount can only support a precision of ${mockWhitelistedAsset.decimal} decimals.`,
+          )
+        })
+        it('should display a correct snapshot', () => {
+          expect(component).toMatchSnapshot()
+        })
+      })
+    })
   })
 
   describe('When clicking a transfer button', () => {
@@ -262,6 +328,7 @@ describe('WarpContent', () => {
                 {
                   getCode: jest.fn().mockReturnValue('EVRY'),
                   decimal: 1,
+                  getDecimal: jest.fn().mockReturnValue(1),
                 },
               ],
             },
@@ -271,10 +338,10 @@ describe('WarpContent', () => {
           component.setState({
             formControls: updatedFormControls,
           })
-          await component.instance()._validateSubmission()
-          expect(component.state().formControls.valid).toBe(false)
-          await expect(component.instance()._validateAmount()).resolves.toBe(
-            false,
+          await component.instance()._submitHandler('amount')
+          expect(component.state().formControls.amount.valid).toBe(false)
+          expect(component.state().formControls.amount.errorMessage).toBe(
+            'Insufficient Amount',
           )
         })
         it('should match an invalid feedback snapshot', async () => {
@@ -289,6 +356,7 @@ describe('WarpContent', () => {
                 {
                   getCode: jest.fn().mockReturnValue('EVRY'),
                   decimal: 1,
+                  getDecimal: jest.fn().mockReturnValue(1),
                 },
               ],
             },
@@ -299,7 +367,12 @@ describe('WarpContent', () => {
             formControls: updatedFormControls,
           })
           const form = component.find(Form)
-          await form.props().onSubmit({ preventDefault: () => {} })
+          await form.props().onSubmit({
+            preventDefault: () => {},
+            target: {
+              name: 'amount',
+            },
+          })
           expect(component).toMatchSnapshot()
         })
       })
@@ -317,6 +390,7 @@ describe('WarpContent', () => {
                 {
                   getCode: jest.fn().mockReturnValue('EVRY'),
                   decimal: 1,
+                  getDecimal: jest.fn().mockReturnValue(1),
                 },
               ],
             },
@@ -326,11 +400,9 @@ describe('WarpContent', () => {
           component.setState({
             formControls: updatedFormControls,
           })
-          await component.instance()._validateSubmission()
-          expect(component.state().formControls.valid).toBe(true)
-          await expect(component.instance()._validateAmount()).resolves.toBe(
-            true,
-          )
+          await component.instance()._submitHandler('amount')
+          expect(component.state().formControls.amount.valid).toBe(true)
+          expect(component.state().formControls.amount.errorMessage).toBe('')
         })
         it('should match a valid feedback snapshot', async () => {
           component.setProps({
@@ -344,6 +416,7 @@ describe('WarpContent', () => {
                 {
                   getCode: jest.fn().mockReturnValue('EVRY'),
                   decimal: 1,
+                  getDecimal: jest.fn().mockReturnValue(1),
                 },
               ],
             },
@@ -354,7 +427,12 @@ describe('WarpContent', () => {
             formControls: updatedFormControls,
           })
           const form = component.find(Form)
-          await form.props().onSubmit({ preventDefault: () => {} })
+          await form.props().onSubmit({
+            preventDefault: () => {},
+            target: {
+              name: 'amount',
+            },
+          })
           expect(component).toMatchSnapshot()
         })
       })
@@ -378,6 +456,7 @@ describe('WarpContent', () => {
                 {
                   getCode: jest.fn().mockReturnValue('EVRY'),
                   decimal: 1,
+                  getDecimal: jest.fn().mockReturnValue(1),
                 },
               ],
             },
@@ -387,11 +466,8 @@ describe('WarpContent', () => {
           component.setState({
             formControls: updatedFormControls,
           })
-          await component.instance()._validateSubmission()
-          expect(component.state().formControls.valid).toBe(false)
-          await expect(component.instance()._validateAmount()).resolves.toBe(
-            false,
-          )
+          await component.instance()._submitHandler('amount')
+          expect(component.state().formControls.amount.valid).toBe(false)
         })
         it('should match an invalid feedback snapshot', async () => {
           component.setProps({
@@ -405,6 +481,7 @@ describe('WarpContent', () => {
                 {
                   getCode: jest.fn().mockReturnValue('EVRY'),
                   decimal: 1,
+                  getDecimal: jest.fn().mockReturnValue(1),
                 },
               ],
             },
@@ -415,7 +492,12 @@ describe('WarpContent', () => {
             formControls: updatedFormControls,
           })
           const form = component.find(Form)
-          await form.props().onSubmit({ preventDefault: () => {} })
+          await form.props().onSubmit({
+            preventDefault: () => {},
+            target: {
+              name: 'amount',
+            },
+          })
           expect(component).toMatchSnapshot()
         })
       })
@@ -433,6 +515,7 @@ describe('WarpContent', () => {
                 {
                   getCode: jest.fn().mockReturnValue('EVRY'),
                   decimal: 1,
+                  getDecimal: jest.fn().mockReturnValue(1),
                 },
               ],
             },
@@ -442,11 +525,9 @@ describe('WarpContent', () => {
           component.setState({
             formControls: updatedFormControls,
           })
-          await component.instance()._validateSubmission()
-          expect(component.state().formControls.valid).toBe(true)
-          await expect(component.instance()._validateAmount()).resolves.toBe(
-            true,
-          )
+          await component.instance()._submitHandler('amount')
+          expect(component.state().formControls.amount.valid).toBe(true)
+          expect(component.state().formControls.amount.errorMessage).toBe('')
         })
         it('should match a valid feedback snapshot', async () => {
           component.setProps({
@@ -470,7 +551,12 @@ describe('WarpContent', () => {
             formControls: updatedFormControls,
           })
           const form = component.find(Form)
-          await form.props().onSubmit({ preventDefault: () => {} })
+          await form.props().onSubmit({
+            preventDefault: () => {},
+            target: {
+              name: 'amount',
+            },
+          })
           expect(component).toMatchSnapshot()
         })
       })

@@ -1,7 +1,7 @@
 import BigNumber from 'bignumber.js'
 import split from 'lodash/split'
 
-export const numberToMoneyString = (number = '', decimals = 2) => {
+export const numberToMoneyString = (number = '') => {
   const parts = split(new BigNumber(number).toString(), '.')
   const hasDecimals = parts.length >= 2
   return `${Number(parts[0]).toLocaleString()}${
@@ -9,7 +9,7 @@ export const numberToMoneyString = (number = '', decimals = 2) => {
       ? '.' +
         new BigNumber(number)
           .minus(new BigNumber(parseInt(number)))
-          .toFixed(decimals)
+          .toString()
           .slice(2)
           .replace(/0+$/g, '')
       : ''

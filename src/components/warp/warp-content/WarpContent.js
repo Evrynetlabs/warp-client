@@ -12,6 +12,9 @@ import find from 'lodash/find'
 import BigNumber from 'bignumber.js'
 import StellarBase from 'stellar-base'
 import config from '@/config'
+import split from 'lodash/split'
+import reduce from 'lodash/reduce'
+import has from 'lodash/has'
 const {
   evrynet: { ATOMIC_STELLAR_DECIMAL_UNIT },
 } = config
@@ -21,18 +24,17 @@ export default class WarpContent extends Component {
     super(props)
     this.warp = new Warp()
     this._toMoneyString = this._toMoneyString.bind(this)
-    this._validateAmount = this._validateAmount.bind(this)
+    this._validateAmountOnSubmit = this._validateAmountOnSubmit.bind(this)
+    this._validateAmountOnChange = this._validateAmountOnChange.bind(this)
     const defaultFunc = {
       onChangeValidation: (elem) => elem,
       onBlurValidation: (elem) => elem,
     }
-    const initialState = {
+    this.initialState = {
       styles: this._initStyles(),
       formControls: {
         asset: {
           value: this.warp.utils.getEvryAsset().getCode(),
-          touched: false,
-          valid: false,
           onChangeValidation: defaultFunc.onChangeValidation,
         },
         amount: {
@@ -40,9 +42,11 @@ export default class WarpContent extends Component {
           placeholder: '0.00',
           touched: false,
           valid: false,
-          onChangeValidation: defaultFunc.onChangeValidation,
+          onChangeValidation: this._validateAmountOnChange,
           onBlurValidation: defaultFunc.onBlurValidation,
           onBlurValueAssign: this._toMoneyString,
+          onSubmitValidation: this._validateAmountOnSubmit,
+          errorMessage: '',
         },
         sourceAccount: {
           value: '',
@@ -58,14 +62,11 @@ export default class WarpContent extends Component {
           valid: false,
           onChangeValidation: this._validateEvrynetAccount,
         },
-        onSubmitValidation: this._validateAmount,
-        valid: null,
-        touched: false,
       },
       transferFunc: props.toEvrynet,
     }
     this.state = {
-      ...initialState,
+      ...this.initialState,
     }
   }
 
@@ -130,6 +131,27 @@ export default class WarpContent extends Component {
     return e
   }
 
+  _validateAmountOnChange(e) {
+    const parts = split(e.value.toString(), '.')
+    const hasDecimals = parts.length >= 2
+    const whitelistedAsset = this._getWhitelistedAssetByCode(
+      this.state.formControls.asset.value,
+    )
+    if (!hasDecimals) {
+      e.valid = Number(moneyToNumberString(parts[0])) > 0
+      e.errorMessage = e.valid ? '' : 'Amount must be greater than zero.'
+      return e
+    }
+    e.valid = hasDecimals
+      ? parts[1].length <= whitelistedAsset.getDecimal()
+      : true
+    e.errorMessage = e.valid
+      ? ''
+      : `Amount can only support a precision of ${whitelistedAsset.getDecimal()} decimals.`
+
+    return e
+  }
+
   _changeHandler(event) {
     const name = event.target.name
     const value = event.target.value
@@ -139,6 +161,7 @@ export default class WarpContent extends Component {
     let updatedFormElement = {
       ...updatedControls[name],
     }
+    this._resetValidation(name)
     updatedFormElement.value = value
     updatedFormElement.touched = true
     updatedFormElement = updatedFormElement.onChangeValidation(
@@ -159,6 +182,7 @@ export default class WarpContent extends Component {
     let updatedFormElement = {
       ...updatedControls[name],
     }
+    this._resetValidation(name)
     updatedFormElement.value = updatedFormElement.onBlurValueAssign(value)
     updatedFormElement.touched = true
     updatedFormElement = updatedFormElement.onBlurValidation(updatedFormElement)
@@ -169,14 +193,7 @@ export default class WarpContent extends Component {
   }
 
   _toMoneyString(amount) {
-    let decimal
-    if (!isEmpty(this.props.whitelistedAssets.state)) {
-      const whitelistedAsset = this._getWhitelistedAssetByCode(
-        this.state.formControls.asset.value,
-      )
-      decimal = whitelistedAsset ? whitelistedAsset.decimal : whitelistedAsset
-    }
-    return numberToMoneyString(Number(moneyToNumberString(amount)), decimal)
+    return numberToMoneyString(Number(moneyToNumberString(amount)))
   }
 
   _listWhitelistedAssetsOptions() {
@@ -224,6 +241,33 @@ export default class WarpContent extends Component {
     })
   }
 
+  _resetValidation(name) {
+    const updatedControls = {
+      ...this.state.formControls,
+    }
+    let updatedFormElement = {
+      ...updatedControls[name],
+    }
+    updatedFormElement.valid = this.initialState.formControls[name].valid
+    updatedFormElement.touched = this.initialState.formControls[name].touched
+    updatedControls[name] = updatedFormElement
+    this.setState({
+      formControls: updatedControls,
+    })
+  }
+
+  _disabledTransfer() {
+    let result = reduce(
+      this.state.formControls,
+      (res, ech) => {
+        if (has(ech, 'valid')) return res || !ech.valid
+        return res
+      },
+      false,
+    )
+    return result
+  }
+
   async _transfer() {
     const asset = this._getWhitelistedAssetByCode(
       this.state.formControls.asset.value,
@@ -236,43 +280,55 @@ export default class WarpContent extends Component {
     })
   }
 
-  async _validateAmount() {
-    const asset = this._getWhitelistedAssetByCode(
+  async _validateAmountOnSubmit(e) {
+    const whitelistedAsset = this._getWhitelistedAssetByCode(
       this.state.formControls.asset.value,
     )
     await this.props.getAccountBalance({
-      asset,
+      whitelistedAsset,
       privateKey: this.state.formControls.sourceAccount.value,
     })
     const decimal = this.props.isToEvry
       ? ATOMIC_STELLAR_DECIMAL_UNIT
-      : asset.decimal
-    const hasValidAmount = new BigNumber(
+      : whitelistedAsset.getDecimal()
+    e.valid = new BigNumber(
       this.props.accountBalance.state,
     ).isGreaterThanOrEqualTo(
       new BigNumber(
         moneyToNumberString(this.state.formControls.amount.value),
       ).shiftedBy(decimal),
     )
-    return hasValidAmount
+    e.errorMessage = e.valid ? '' : 'Insufficient Amount'
+    return e
   }
 
-  async _validateSubmission() {
-    const updatedFormControls = {
+  async _submitHandler(name) {
+    const updatedControls = {
       ...this.state.formControls,
     }
-    updatedFormControls.valid = await updatedFormControls.onSubmitValidation()
-    updatedFormControls.touched = true
+    let updatedFormElement = {
+      ...updatedControls[name],
+    }
+    this._resetValidation(name)
+    updatedFormElement.touched = true
+    updatedFormElement = await updatedFormElement.onSubmitValidation(
+      updatedFormElement,
+    )
+    updatedControls[name] = updatedFormElement
     this.setState({
-      formControls: updatedFormControls,
+      formControls: updatedControls,
     })
   }
 
   async _handleSubmit(e) {
     try {
       e.preventDefault()
-      await this._validateSubmission()
-      if (!this.state.formControls.valid) return
+      let promises = []
+      const names = split(e.target.name, ',')
+      for (let name of names) {
+        promises.push(this._submitHandler(name))
+      }
+      await Promise.all(promises)
       await this._transfer()
     } catch (err) {
       console.error(err)
@@ -291,7 +347,7 @@ export default class WarpContent extends Component {
   render() {
     return (
       <Form
-        name="form"
+        name="amount"
         className={this.state.styles.form}
         onSubmit={async (e) => {
           await this._handleSubmit(e)
@@ -374,13 +430,13 @@ export default class WarpContent extends Component {
                     placeholder={this.state.formControls.amount.placeholder}
                     value={this.state.formControls.amount.value}
                     isInvalid={
-                      !this.state.formControls.valid &&
-                      this.state.formControls.touched
+                      !this.state.formControls.amount.valid &&
+                      this.state.formControls.amount.touched
                     }
                     className={this.state.styles.amountInput}
                   />
                   <Form.Control.Feedback type="invalid">
-                    Insufficient Amount
+                    {this.state.formControls.amount.errorMessage}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Col>
@@ -403,7 +459,11 @@ export default class WarpContent extends Component {
           <Container fluid>
             <Row>
               <Col className={this.state.styles.footerBtn}>
-                <Button type="submit" variant="dark">
+                <Button
+                  type="submit"
+                  variant="dark"
+                  disabled={this._disabledTransfer()}
+                >
                   Transfer
                 </Button>
               </Col>
