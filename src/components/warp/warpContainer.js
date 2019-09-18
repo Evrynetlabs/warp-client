@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import Warp from 'Components/warp/Warp'
 import {
-  isToEvrySelector,
+  isToEvrynetSelector,
   selectCollectedTxHashes,
   selectWhitelistedAssets,
   selectAccountBalance,
@@ -16,7 +16,7 @@ import {
 } from 'Components/warp/warpActions'
 
 const mapStateToProps = (state) => ({
-  isToEvry: isToEvrySelector(state),
+  isToEvrynet: isToEvrynetSelector(state),
   txHashes: selectCollectedTxHashes(state),
   whitelistedAssets: selectWhitelistedAssets(state),
   accountBalance: selectAccountBalance(state),

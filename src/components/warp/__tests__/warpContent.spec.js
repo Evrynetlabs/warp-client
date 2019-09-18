@@ -30,7 +30,7 @@ describe('WarpContent', () => {
       error: null,
     },
     getWhitelistAssets: jest.fn(),
-    isToEvry: true,
+    isToEvrynet: true,
     getAccountBalance: jest.fn(),
   }
   spyGetCode.mockReturnValue('EVRY')
@@ -44,7 +44,7 @@ describe('WarpContent', () => {
         toStellar={mock.toStellar}
         whitelistedAssets={mock.whitelistedAssets}
         getWhitelistAssets={mock.getWhitelistAssets}
-        isToEvry={mock.isToEvry}
+        isToEvrynet={mock.isToEvrynet}
         getAccountBalance={mock.getAccountBalance}
       ></WarpContent>,
     )
@@ -276,14 +276,14 @@ describe('WarpContent', () => {
         it('should save an invalid state with a desired error message', () => {
           const mockEvent = {
             target: {
-              value: '1.00000000000000000000',
+              value: '1.000',
               name: 'amount',
             },
           }
           const mockWhitelistedAsset = {
             getCode: jest.fn().mockReturnValue('EVRY'),
-            decimal: 18,
-            getDecimal: jest.fn().mockReturnValue(18),
+            decimal: 2,
+            getDecimal: jest.fn().mockReturnValue(2),
           }
           component.setProps({
             whitelistedAssets: {
@@ -307,10 +307,10 @@ describe('WarpContent', () => {
   })
 
   describe('When clicking a transfer button', () => {
-    describe('When isToEvry is false', () => {
+    describe('When isToEvrynet is false', () => {
       test('transfer function should be toStellar', () => {
         component.setProps({
-          isToEvry: false,
+          isToEvrynet: false,
         })
         expect(component.state().transferFunc).toEqual(mock.toStellar)
         expect(component.state().transferFunc).not.toEqual(mock.toEvrynet)
@@ -318,7 +318,7 @@ describe('WarpContent', () => {
       describe('When source accountbalance is invalid', () => {
         it('should show an invalid feedback', async () => {
           component.setProps({
-            isToEvry: false,
+            isToEvrynet: false,
             accountBalance: {
               ...component.props().accountBalance,
               state: '0',
@@ -346,7 +346,7 @@ describe('WarpContent', () => {
         })
         it('should match an invalid feedback snapshot', async () => {
           component.setProps({
-            isToEvry: false,
+            isToEvrynet: false,
             accountBalance: {
               ...component.props().accountBalance,
               state: '0',
@@ -380,7 +380,7 @@ describe('WarpContent', () => {
       describe('When source accountbalance is valid', () => {
         it('should show a valid feedback', async () => {
           component.setProps({
-            isToEvry: false,
+            isToEvrynet: false,
             accountBalance: {
               ...component.props().accountBalance,
               state: '10',
@@ -406,7 +406,7 @@ describe('WarpContent', () => {
         })
         it('should match a valid feedback snapshot', async () => {
           component.setProps({
-            isToEvry: false,
+            isToEvrynet: false,
             accountBalance: {
               ...component.props().accountBalance,
               state: '10',
@@ -438,7 +438,7 @@ describe('WarpContent', () => {
       })
     })
 
-    describe('When isToEvry is true', () => {
+    describe('When isToEvrynet is true', () => {
       test('transfer function should be toEvrynet', () => {
         expect(component.state().transferFunc).toEqual(mock.toEvrynet)
         expect(component.state().transferFunc).not.toEqual(mock.toStellar)
@@ -446,7 +446,7 @@ describe('WarpContent', () => {
       describe('When source accountbalance is invalid', () => {
         it('should show an invalid feedback', async () => {
           component.setProps({
-            isToEvry: true,
+            isToEvrynet: true,
             accountBalance: {
               ...component.props().accountBalance,
               state: '0',
@@ -471,7 +471,7 @@ describe('WarpContent', () => {
         })
         it('should match an invalid feedback snapshot', async () => {
           component.setProps({
-            isToEvry: true,
+            isToEvrynet: true,
             accountBalance: {
               ...component.props().accountBalance,
               state: '0',
@@ -505,7 +505,7 @@ describe('WarpContent', () => {
       describe('When source accountbalance is valid', () => {
         it('should show a valid feedback', async () => {
           component.setProps({
-            isToEvry: true,
+            isToEvrynet: true,
             accountBalance: {
               ...component.props().accountBalance,
               state: '10000000',
@@ -531,7 +531,7 @@ describe('WarpContent', () => {
         })
         it('should match a valid feedback snapshot', async () => {
           component.setProps({
-            isToEvry: true,
+            isToEvrynet: true,
             accountBalance: {
               ...component.props().accountBalance,
               state: '10000000',

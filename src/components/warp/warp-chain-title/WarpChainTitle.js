@@ -34,8 +34,8 @@ export default class WarpChainTitle extends Component {
   }
 
   _updateSwapTitle(prevProps) {
-    if (prevProps.isToEvry === this.props.isToEvry) return
-    if (this.props.isToEvry) {
+    if (prevProps.isToEvrynet === this.props.isToEvrynet) return
+    if (this.props.isToEvrynet) {
       this.setState({
         swap: {
           src: this.state.chain.XLM,
@@ -86,6 +86,6 @@ export default class WarpChainTitle extends Component {
 }
 
 WarpChainTitle.propTypes = {
-  isToEvry: PropTypes.bool.isRequired,
+  isToEvrynet: PropTypes.bool.isRequired,
   toggleTransferSwitch: PropTypes.func.isRequired,
 }

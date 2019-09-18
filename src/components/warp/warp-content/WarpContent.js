@@ -15,6 +15,7 @@ import config from '@/config'
 import split from 'lodash/split'
 import reduce from 'lodash/reduce'
 import has from 'lodash/has'
+import min from 'lodash/min'
 const {
   evrynet: { ATOMIC_STELLAR_DECIMAL_UNIT },
 } = config
@@ -108,7 +109,7 @@ export default class WarpContent extends Component {
       isValid = false
       errorMessage = 'Invalid Stellar secret key format.'
     }
-
+    e.touched = true
     e.valid = isValid
     e.errorMessage = errorMessage
     return e
@@ -125,7 +126,7 @@ export default class WarpContent extends Component {
       isValid = false
       errorMessage = 'Invalid Evrynet secret key format.'
     }
-
+    e.touched = true
     e.valid = isValid
     e.errorMessage = errorMessage
     return e
@@ -142,12 +143,15 @@ export default class WarpContent extends Component {
       e.errorMessage = e.valid ? '' : 'Amount must be greater than zero.'
       return e
     }
-    e.valid = hasDecimals
-      ? parts[1].length <= whitelistedAsset.getDecimal()
-      : true
+    e.touched = true
+    const decimal = min([
+      ATOMIC_STELLAR_DECIMAL_UNIT,
+      whitelistedAsset.getDecimal(),
+    ])
+    e.valid = hasDecimals ? parts[1].length <= decimal : true
     e.errorMessage = e.valid
       ? ''
-      : `Amount can only support a precision of ${whitelistedAsset.getDecimal()} decimals.`
+      : `Amount can only support a precision of ${decimal} decimals.`
 
     return e
   }
@@ -163,7 +167,6 @@ export default class WarpContent extends Component {
     }
     this._resetValidation(name)
     updatedFormElement.value = value
-    updatedFormElement.touched = true
     updatedFormElement = updatedFormElement.onChangeValidation(
       updatedFormElement,
     )
@@ -184,7 +187,6 @@ export default class WarpContent extends Component {
     }
     this._resetValidation(name)
     updatedFormElement.value = updatedFormElement.onBlurValueAssign(value)
-    updatedFormElement.touched = true
     updatedFormElement = updatedFormElement.onBlurValidation(updatedFormElement)
     updatedControls[name] = updatedFormElement
     this.setState({
@@ -212,16 +214,16 @@ export default class WarpContent extends Component {
   }
 
   _updateTransferFunction(prevProps) {
-    if (prevProps.isToEvry === this.props.isToEvry) return
+    if (prevProps.isToEvrynet === this.props.isToEvrynet) return
     this.setState({
-      transferFunc: this.props.isToEvry
+      transferFunc: this.props.isToEvrynet
         ? this.props.toEvrynet
         : this.props.toStellar,
     })
   }
 
   _switchAccounts(prevProps) {
-    if (prevProps.isToEvry === this.props.isToEvry) return
+    if (prevProps.isToEvrynet === this.props.isToEvrynet) return
     const updatedFormControls = {
       ...this.state.formControls,
     }
@@ -288,9 +290,10 @@ export default class WarpContent extends Component {
       whitelistedAsset,
       privateKey: this.state.formControls.sourceAccount.value,
     })
-    const decimal = this.props.isToEvry
+    const decimal = this.props.isToEvrynet
       ? ATOMIC_STELLAR_DECIMAL_UNIT
       : whitelistedAsset.getDecimal()
+    e.touched = true
     e.valid = new BigNumber(
       this.props.accountBalance.state,
     ).isGreaterThanOrEqualTo(
@@ -310,7 +313,6 @@ export default class WarpContent extends Component {
       ...updatedControls[name],
     }
     this._resetValidation(name)
-    updatedFormElement.touched = true
     updatedFormElement = await updatedFormElement.onSubmitValidation(
       updatedFormElement,
     )
@@ -496,7 +498,7 @@ WarpContent.propTypes = {
   }),
   toEvrynet: PropTypes.func.isRequired,
   toStellar: PropTypes.func.isRequired,
-  isToEvry: PropTypes.bool.isRequired,
+  isToEvrynet: PropTypes.bool.isRequired,
   getWhitelistAssets: PropTypes.func.isRequired,
   getAccountBalance: PropTypes.func.isRequired,
 }

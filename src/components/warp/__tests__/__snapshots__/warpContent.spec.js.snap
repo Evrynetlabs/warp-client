@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`WarpContent When clicking a transfer button When isToEvry is false When source accountbalance is invalid should match an invalid feedback snapshot 1`] = `
+exports[`WarpContent When clicking a transfer button When isToEvrynet is false When source accountbalance is invalid should match an invalid feedback snapshot 1`] = `
 <Form
   className="WarpContent__form"
   inline={false}
@@ -143,7 +143,7 @@ exports[`WarpContent When clicking a transfer button When isToEvry is false When
 </Form>
 `;
 
-exports[`WarpContent When clicking a transfer button When isToEvry is false When source accountbalance is valid should match a valid feedback snapshot 1`] = `
+exports[`WarpContent When clicking a transfer button When isToEvrynet is false When source accountbalance is valid should match a valid feedback snapshot 1`] = `
 <Form
   className="WarpContent__form"
   inline={false}
@@ -284,7 +284,7 @@ exports[`WarpContent When clicking a transfer button When isToEvry is false When
 </Form>
 `;
 
-exports[`WarpContent When clicking a transfer button When isToEvry is true When source accountbalance is invalid should match an invalid feedback snapshot 1`] = `
+exports[`WarpContent When clicking a transfer button When isToEvrynet is true When source accountbalance is invalid should match an invalid feedback snapshot 1`] = `
 <Form
   className="WarpContent__form"
   inline={false}
@@ -427,7 +427,7 @@ exports[`WarpContent When clicking a transfer button When isToEvry is true When 
 </Form>
 `;
 
-exports[`WarpContent When clicking a transfer button When isToEvry is true When source accountbalance is valid should match a valid feedback snapshot 1`] = `
+exports[`WarpContent When clicking a transfer button When isToEvrynet is true When source accountbalance is valid should match a valid feedback snapshot 1`] = `
 <Form
   className="WarpContent__form"
   inline={false}
