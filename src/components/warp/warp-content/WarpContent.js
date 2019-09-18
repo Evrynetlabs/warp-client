@@ -186,8 +186,10 @@ export default class WarpContent extends Component {
       ...updatedControls[name],
     }
     this._resetValidation(name)
-    updatedFormElement.value = updatedFormElement.onBlurValueAssign(value)
     updatedFormElement = updatedFormElement.onBlurValidation(updatedFormElement)
+    updatedFormElement.value = updatedFormElement.touched
+      ? updatedFormElement.onBlurValueAssign(value)
+      : value
     updatedControls[name] = updatedFormElement
     this.setState({
       formControls: updatedControls,
