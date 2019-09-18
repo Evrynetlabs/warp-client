@@ -28,7 +28,20 @@
                 width: 300px;
                 margin: 0 auto!important;
                 .invalid-feedback {
-                    position: absolute
+                    position: absolute;
+                }
+            }
+            &__input {
+                &__src {
+                    &+.invalid-feedback{
+                        position: absolute;
+                    }
+                }
+                &__dest {
+                    &+.invalid-feedback{
+                        position: absolute;
+                        right: $space-12;
+                    }
                 }
             }
         }
