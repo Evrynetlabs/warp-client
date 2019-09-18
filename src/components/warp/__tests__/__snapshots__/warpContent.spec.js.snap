@@ -84,7 +84,7 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is false W
               onBlur={[Function]}
               onChange={[Function]}
               placeholder="0.00"
-              type="number"
+              type="text"
               value="1"
             />
             <Feedback
@@ -227,7 +227,7 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is false W
               onBlur={[Function]}
               onChange={[Function]}
               placeholder="0.00"
-              type="number"
+              type="text"
               value="1"
             />
             <Feedback
@@ -368,7 +368,7 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is true Wh
               onBlur={[Function]}
               onChange={[Function]}
               placeholder="0.00"
-              type="number"
+              type="text"
               value="1"
             />
             <Feedback
@@ -511,7 +511,7 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is true Wh
               onBlur={[Function]}
               onChange={[Function]}
               placeholder="0.00"
-              type="number"
+              type="text"
               value="1"
             />
             <Feedback
@@ -652,7 +652,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               onBlur={[Function]}
               onChange={[Function]}
               placeholder="0.00"
-              type="number"
+              type="text"
               value=""
             />
             <Feedback
@@ -786,7 +786,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               onBlur={[Function]}
               onChange={[Function]}
               placeholder="0.00"
-              type="number"
+              type="text"
               value=""
             />
             <Feedback
@@ -920,7 +920,7 @@ exports[`WarpContent should render correspondingly 1`] = `
               onBlur={[Function]}
               onChange={[Function]}
               placeholder="0.00"
-              type="number"
+              type="text"
               value=""
             />
             <Feedback
