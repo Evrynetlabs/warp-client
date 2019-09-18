@@ -424,7 +424,7 @@ export default class WarpContent extends Component {
                 <Form.Group controlId="assetAmount">
                   <Form.Control
                     name="amount"
-                    type="text"
+                    type="number"
                     onChange={(e) => {
                       this._changeHandler(e)
                     }}
