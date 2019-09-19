@@ -328,6 +328,36 @@ describe('WarpContent', () => {
         )
       })
 
+      describe('When amount is empty', () => {
+        it('should display an invalid feedback', () => {
+          const mockEvent = {
+            target: {
+              value: '',
+              name: 'amount',
+            },
+          }
+          const mockWhitelistedAsset = {
+            getCode: jest.fn().mockReturnValue('EVRY'),
+            decimal: 2,
+            getDecimal: jest.fn().mockReturnValue(2),
+          }
+          component.setProps({
+            whitelistedAssets: {
+              state: [mockWhitelistedAsset],
+            },
+          })
+          const input = component.find(
+            '.WarpContent__form__content__amount__input',
+          )
+          input.simulate('change', mockEvent)
+          expect(component.state().formControls.amount.valid).toEqual(false)
+          expect(component.state().formControls.amount.errorMessage).toEqual(
+            'Amount is required.',
+          )
+          expect(component).toMatchSnapshot()
+        })
+      })
+
       describe('When amount is not a number', () => {
         test.each(['--1.000', '1.00--0000000', 'foo', 'bar', '-.', '0.--1'])(
           'should save an invalid state with a desired error message',
@@ -354,7 +384,7 @@ describe('WarpContent', () => {
             input.simulate('change', mockEvent)
             expect(component.state().formControls.amount.valid).toEqual(false)
             expect(component.state().formControls.amount.errorMessage).toEqual(
-              'Amount can only support a number.',
+              'Amount must be a number.',
             )
             expect(component).toMatchSnapshot()
           },

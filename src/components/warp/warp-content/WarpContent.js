@@ -139,9 +139,14 @@ export default class WarpContent extends Component {
       this.state.formControls.asset.value,
     )
     e.touched = true
-    if (isNaN(Number(e.value)) || e.value === '') {
+    if (isEmpty(e.value)) {
       e.valid = false
-      e.errorMessage = 'Amount can only support a number.'
+      e.errorMessage = 'Amount is required.'
+      return e
+    }
+    if (isNaN(Number(e.value))) {
+      e.valid = false
+      e.errorMessage = 'Amount must be a number.'
       return e
     }
     if (Number(e.value) <= 0) {
@@ -423,7 +428,7 @@ export default class WarpContent extends Component {
                 <Form.Group controlId="assetAmount">
                   <Form.Control
                     name="amount"
-                    type="number"
+                    type="text"
                     onChange={(e) => {
                       this._changeHandler(e)
                     }}

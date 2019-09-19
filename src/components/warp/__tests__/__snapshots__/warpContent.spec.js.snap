@@ -84,7 +84,7 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is false W
               onBlur={[Function]}
               onChange={[Function]}
               placeholder="0.00"
-              type="number"
+              type="text"
               value="1"
             />
             <Feedback
@@ -227,7 +227,7 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is false W
               onBlur={[Function]}
               onChange={[Function]}
               placeholder="0.00"
-              type="number"
+              type="text"
               value="1"
             />
             <Feedback
@@ -368,7 +368,7 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is true Wh
               onBlur={[Function]}
               onChange={[Function]}
               placeholder="0.00"
-              type="number"
+              type="text"
               value="1"
             />
             <Feedback
@@ -511,12 +511,155 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is true Wh
               onBlur={[Function]}
               onChange={[Function]}
               placeholder="0.00"
-              type="number"
+              type="text"
               value="1"
             />
             <Feedback
               type="invalid"
             />
+          </FormGroup>
+        </Col>
+        <Col>
+          <FormGroup
+            controlId="assetSelection"
+          >
+            <FormControl
+              as="select"
+              name="asset"
+              onChange={[Function]}
+              value="EVRY"
+            >
+              <option
+                key="EVRY"
+                value="EVRY"
+              >
+                EVRY
+              </option>
+            </FormControl>
+          </FormGroup>
+        </Col>
+      </ForwardRef>
+    </Container>
+  </CardBody>
+  <CardFooter
+    className="WarpContent__footer"
+  >
+    <Container
+      fluid={true}
+    >
+      <ForwardRef
+        noGutters={false}
+      >
+        <Col
+          className="WarpContent__footer__btn"
+        >
+          <Button
+            active={false}
+            disabled={true}
+            type="submit"
+            variant="dark"
+          >
+            Transfer
+          </Button>
+        </Col>
+      </ForwardRef>
+    </Container>
+  </CardFooter>
+</Form>
+`;
+
+exports[`WarpContent When input an amount When input an invalid amount When amount is empty should display an invalid feedback 1`] = `
+<Form
+  className="WarpContent__form"
+  inline={false}
+  name="amount"
+  onSubmit={[Function]}
+>
+  <CardBody
+    className="WarpContent__form__content"
+  >
+    <Container
+      fluid={true}
+    >
+      <ForwardRef
+        noGutters={false}
+      >
+        <Col>
+          <FormGroup
+            controlId="sourceAccountNumber"
+          >
+            <FormLabel
+              column={false}
+              srOnly={false}
+            >
+              <span>
+                From:
+              </span>
+            </FormLabel>
+            <FormControl
+              className="WarpContent__form__content__input__src WarpContent__form__content__input"
+              isInvalid={false}
+              name="sourceAccount"
+              onChange={[Function]}
+              placeholder="Account Number"
+              type="text"
+              value=""
+            />
+            <Feedback
+              type="invalid"
+            />
+          </FormGroup>
+        </Col>
+        <Col>
+          <FormGroup
+            controlId="destinationAccountNumber"
+          >
+            <FormLabel
+              column={false}
+              srOnly={false}
+            >
+              <span>
+                To:
+              </span>
+            </FormLabel>
+            <FormControl
+              className="WarpContent__form__content__input__dest WarpContent__form__content__input"
+              isInvalid={false}
+              name="destinationAccount"
+              onChange={[Function]}
+              placeholder="Account Number"
+              type="text"
+              value=""
+            />
+            <Feedback
+              type="invalid"
+            />
+          </FormGroup>
+        </Col>
+      </ForwardRef>
+      <ForwardRef
+        className="WarpContent__form__content__amount"
+        noGutters={false}
+      >
+        <Col>
+          <FormGroup
+            controlId="assetAmount"
+          >
+            <FormControl
+              className="WarpContent__form__content__amount__input"
+              isInvalid={true}
+              name="amount"
+              onBlur={[Function]}
+              onChange={[Function]}
+              placeholder="0.00"
+              type="text"
+              value=""
+            />
+            <Feedback
+              type="invalid"
+            >
+              Amount is required.
+            </Feedback>
           </FormGroup>
         </Col>
         <Col>
@@ -652,7 +795,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               onBlur={[Function]}
               onChange={[Function]}
               placeholder="0.00"
-              type="number"
+              type="text"
               value="-1"
             />
             <Feedback
@@ -788,7 +931,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               onBlur={[Function]}
               onChange={[Function]}
               placeholder="0.00"
-              type="number"
+              type="text"
               value="-0.01"
             />
             <Feedback
@@ -924,7 +1067,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               onBlur={[Function]}
               onChange={[Function]}
               placeholder="0.00"
-              type="number"
+              type="text"
               value="-1.2222"
             />
             <Feedback
@@ -1060,7 +1203,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               onBlur={[Function]}
               onChange={[Function]}
               placeholder="0.00"
-              type="number"
+              type="text"
               value="0"
             />
             <Feedback
@@ -1196,7 +1339,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               onBlur={[Function]}
               onChange={[Function]}
               placeholder="0.00"
-              type="number"
+              type="text"
               value="0.000"
             />
             <Feedback
@@ -1332,13 +1475,13 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               onBlur={[Function]}
               onChange={[Function]}
               placeholder="0.00"
-              type="number"
+              type="text"
               value="--1.000"
             />
             <Feedback
               type="invalid"
             >
-              Amount can only support a number.
+              Amount must be a number.
             </Feedback>
           </FormGroup>
         </Col>
@@ -1475,13 +1618,13 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               onBlur={[Function]}
               onChange={[Function]}
               placeholder="0.00"
-              type="number"
+              type="text"
               value="1.00--0000000"
             />
             <Feedback
               type="invalid"
             >
-              Amount can only support a number.
+              Amount must be a number.
             </Feedback>
           </FormGroup>
         </Col>
@@ -1618,13 +1761,13 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               onBlur={[Function]}
               onChange={[Function]}
               placeholder="0.00"
-              type="number"
+              type="text"
               value="foo"
             />
             <Feedback
               type="invalid"
             >
-              Amount can only support a number.
+              Amount must be a number.
             </Feedback>
           </FormGroup>
         </Col>
@@ -1761,13 +1904,13 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               onBlur={[Function]}
               onChange={[Function]}
               placeholder="0.00"
-              type="number"
+              type="text"
               value="bar"
             />
             <Feedback
               type="invalid"
             >
-              Amount can only support a number.
+              Amount must be a number.
             </Feedback>
           </FormGroup>
         </Col>
@@ -1904,13 +2047,13 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               onBlur={[Function]}
               onChange={[Function]}
               placeholder="0.00"
-              type="number"
+              type="text"
               value="-."
             />
             <Feedback
               type="invalid"
             >
-              Amount can only support a number.
+              Amount must be a number.
             </Feedback>
           </FormGroup>
         </Col>
@@ -2047,13 +2190,13 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               onBlur={[Function]}
               onChange={[Function]}
               placeholder="0.00"
-              type="number"
+              type="text"
               value="0.--1"
             />
             <Feedback
               type="invalid"
             >
-              Amount can only support a number.
+              Amount must be a number.
             </Feedback>
           </FormGroup>
         </Col>
@@ -2190,7 +2333,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               onBlur={[Function]}
               onChange={[Function]}
               placeholder="0.00"
-              type="number"
+              type="text"
               value="0"
             />
             <Feedback
@@ -2326,7 +2469,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               onBlur={[Function]}
               onChange={[Function]}
               placeholder="0.00"
-              type="number"
+              type="text"
               value="1.000"
             />
             <Feedback
@@ -2469,7 +2612,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               onBlur={[Function]}
               onChange={[Function]}
               placeholder="0.00"
-              type="number"
+              type="text"
               value="1.00000000"
             />
             <Feedback
@@ -2612,7 +2755,7 @@ exports[`WarpContent should render correspondingly 1`] = `
               onBlur={[Function]}
               onChange={[Function]}
               placeholder="0.00"
-              type="number"
+              type="text"
               value=""
             />
             <Feedback
