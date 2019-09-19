@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card'
 import classNames from 'classnames'
 import { Container, Row, Col, Button, Form } from 'react-bootstrap'
 import 'Components/warp/warp-content/warpContent.scss'
-import { numberToMoneyString, moneyToNumberString } from '@/utils/format'
+import { removeLeadingZero } from '@/utils/format'
 import PropTypes from 'prop-types'
 import Warp from 'warp-js'
 import map from 'lodash/map'
@@ -16,6 +16,7 @@ import split from 'lodash/split'
 import reduce from 'lodash/reduce'
 import has from 'lodash/has'
 import min from 'lodash/min'
+import isNaN from 'lodash/isNaN'
 const {
   evrynet: { ATOMIC_STELLAR_DECIMAL_UNIT },
 } = config
@@ -24,7 +25,6 @@ export default class WarpContent extends Component {
   constructor(props) {
     super(props)
     this.warp = new Warp()
-    this._toMoneyString = this._toMoneyString.bind(this)
     this._validateAmountOnSubmit = this._validateAmountOnSubmit.bind(this)
     this._validateAmountOnChange = this._validateAmountOnChange.bind(this)
     const defaultFunc = {
@@ -45,7 +45,7 @@ export default class WarpContent extends Component {
           valid: false,
           onChangeValidation: this._validateAmountOnChange,
           onBlurValidation: defaultFunc.onBlurValidation,
-          onBlurValueAssign: this._toMoneyString,
+          onBlurValueAssign: removeLeadingZero,
           onSubmitValidation: this._validateAmountOnSubmit,
           errorMessage: '',
         },
@@ -133,17 +133,22 @@ export default class WarpContent extends Component {
   }
 
   _validateAmountOnChange(e) {
-    const parts = split(e.value.toString(), '.')
+    const parts = split(e.value, '.')
     const hasDecimals = parts.length >= 2
     const whitelistedAsset = this._getWhitelistedAssetByCode(
       this.state.formControls.asset.value,
     )
-    if (!hasDecimals) {
-      e.valid = Number(moneyToNumberString(parts[0])) > 0
-      e.errorMessage = e.valid ? '' : 'Amount must be greater than zero.'
+    e.touched = true
+    if (isNaN(Number(e.value)) || e.value === '') {
+      e.valid = false
+      e.errorMessage = 'Amount can only support a number.'
       return e
     }
-    e.touched = true
+    if (Number(e.value) <= 0) {
+      e.valid = false
+      e.errorMessage = 'Amount must be greater than zero.'
+      return e
+    }
     const decimal = min([
       ATOMIC_STELLAR_DECIMAL_UNIT,
       whitelistedAsset.getDecimal(),
@@ -194,10 +199,6 @@ export default class WarpContent extends Component {
     this.setState({
       formControls: updatedControls,
     })
-  }
-
-  _toMoneyString(amount) {
-    return numberToMoneyString(Number(moneyToNumberString(amount)))
   }
 
   _listWhitelistedAssetsOptions() {
@@ -278,7 +279,7 @@ export default class WarpContent extends Component {
     )
     await this.state.transferFunc({
       asset,
-      amount: moneyToNumberString(this.state.formControls.amount.value),
+      amount: this.state.formControls.amount.value,
       src: this.state.formControls.sourceAccount.value,
       dest: this.state.formControls.destinationAccount.value,
     })
@@ -299,9 +300,7 @@ export default class WarpContent extends Component {
     e.valid = new BigNumber(
       this.props.accountBalance.state,
     ).isGreaterThanOrEqualTo(
-      new BigNumber(
-        moneyToNumberString(this.state.formControls.amount.value),
-      ).shiftedBy(decimal),
+      new BigNumber(this.state.formControls.amount.value).shiftedBy(decimal),
     )
     e.errorMessage = e.valid ? '' : 'Insufficient Amount'
     return e
@@ -424,7 +423,7 @@ export default class WarpContent extends Component {
                 <Form.Group controlId="assetAmount">
                   <Form.Control
                     name="amount"
-                    type="text"
+                    type="number"
                     onChange={(e) => {
                       this._changeHandler(e)
                     }}

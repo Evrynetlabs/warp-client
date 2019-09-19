@@ -1,27 +1,21 @@
-import { numberToMoneyString, moneyToNumberString } from '@/utils/format'
+import { formatNumber } from '@/utils/format'
+import { removeLeadingZero } from '../number'
 
-describe('numberToMoneyString', () => {
-  test.each([
-    [0.112, '0.112'],
-    [1.0, '1'],
-    [1.01, '1.01'],
-    [1.012, '1.012'],
-    [1.112, '1.112'],
-    [10.112, '10.112'],
-    [1000.112, '1,000.112'],
-    [10000000000, '10,000,000,000'],
-    [10000000000.0, '10,000,000,000'],
-  ])('should create a correct currency string', (amount, expected) => {
-    expect(numberToMoneyString(amount)).toBe(expected)
-  })
-})
-
-describe('moneyToNumberString', () => {
+describe('formatNumber', () => {
   test.each([
     ['1,000', '1000'],
     ['10,000,000', '10000000'],
     ['10,000,000.0122', '10000000.0122'],
-  ])('should create a correct number string', (currencyStr, expected) => {
-    expect(moneyToNumberString(currencyStr)).toBe(expected)
+  ])('should create a correct number string', (ech, expected) => {
+    expect(formatNumber(ech)).toBe(expected)
+  })
+})
+
+describe('removeLeadingZero', () => {
+  test.each([
+    ['00001', '1'],
+    ['0.1', '0.1'],
+  ])('should create a correct number string', (ech, expected) => {
+    expect(removeLeadingZero(ech)).toBe(expected)
   })
 })
