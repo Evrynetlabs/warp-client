@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card'
 import classNames from 'classnames'
 import { Container, Row, Col, Button, Form } from 'react-bootstrap'
 import 'Components/warp/warp-content/warpContent.scss'
-import { removeLeadingZero } from '@/utils/format'
+import { formatNumber } from '@/utils/format'
 import PropTypes from 'prop-types'
 import Warp from 'warp-js'
 import map from 'lodash/map'
@@ -45,7 +45,7 @@ export default class WarpContent extends Component {
           valid: false,
           onChangeValidation: this._validateAmountOnChange,
           onBlurValidation: defaultFunc.onBlurValidation,
-          onBlurValueAssign: removeLeadingZero,
+          onBlurValueAssign: formatNumber,
           onSubmitValidation: this._validateAmountOnSubmit,
           errorMessage: '',
         },

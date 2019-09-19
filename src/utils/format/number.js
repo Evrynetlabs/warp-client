@@ -1,5 +1,13 @@
 export const formatNumber = (amount) => {
-  return amount.replace(/[^(\d+|.)$]/g, '')
+  return removeTrailingDot(removeLeadingZero(amount))
+}
+
+export const cleanNonNumber = (amount) => {
+  return amount.replace(/[^(\d|.)]/g, '')
+}
+
+export const removeTrailingDot = (amount) => {
+  return amount.replace(/\.+$/g, '')
 }
 
 export const removeLeadingZero = (amount) => {
