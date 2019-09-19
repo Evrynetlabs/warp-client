@@ -44,7 +44,7 @@ export default class WarpContent extends Component {
           touched: false,
           valid: false,
           onChangeValidation: this._validateAmountOnChange,
-          onBlurValidation: defaultFunc.onBlurValidation,
+          onBlurValidation: this._validateAmountOnChange,
           onBlurValueAssign: formatNumber,
           onSubmitValidation: this._validateAmountOnSubmit,
           errorMessage: '',
@@ -109,7 +109,6 @@ export default class WarpContent extends Component {
       isValid = false
       errorMessage = 'Invalid Stellar secret key format.'
     }
-    e.touched = true
     e.valid = isValid
     e.errorMessage = errorMessage
     return e
@@ -126,7 +125,6 @@ export default class WarpContent extends Component {
       isValid = false
       errorMessage = 'Invalid Evrynet secret key format.'
     }
-    e.touched = true
     e.valid = isValid
     e.errorMessage = errorMessage
     return e
@@ -138,7 +136,6 @@ export default class WarpContent extends Component {
     const whitelistedAsset = this._getWhitelistedAssetByCode(
       this.state.formControls.asset.value,
     )
-    e.touched = true
     if (isEmpty(e.value)) {
       e.valid = false
       e.errorMessage = 'Amount is required.'
@@ -175,7 +172,7 @@ export default class WarpContent extends Component {
     let updatedFormElement = {
       ...updatedControls[name],
     }
-    this._resetValidation(name)
+    updatedFormElement.touched = true
     updatedFormElement.value = value
     updatedFormElement = updatedFormElement.onChangeValidation(
       updatedFormElement,
@@ -195,13 +192,12 @@ export default class WarpContent extends Component {
     let updatedFormElement = {
       ...updatedControls[name],
     }
-    this._resetValidation(name)
-    if (updatedFormElement.valid) {
-      updatedFormElement.value = updatedFormElement.touched
+    updatedFormElement.touched = true
+    updatedFormElement = updatedFormElement.onBlurValidation(updatedFormElement)
+    updatedFormElement.value =
+      updatedFormElement.touched && updatedFormElement.valid
         ? updatedFormElement.onBlurValueAssign(value)
         : value
-    }
-    updatedFormElement = updatedFormElement.onBlurValidation(updatedFormElement)
     updatedControls[name] = updatedFormElement
     this.setState({
       formControls: updatedControls,
@@ -253,21 +249,6 @@ export default class WarpContent extends Component {
     })
   }
 
-  _resetValidation(name) {
-    const updatedControls = {
-      ...this.state.formControls,
-    }
-    let updatedFormElement = {
-      ...updatedControls[name],
-    }
-    updatedFormElement.valid = this.initialState.formControls[name].valid
-    updatedFormElement.touched = this.initialState.formControls[name].touched
-    updatedControls[name] = updatedFormElement
-    this.setState({
-      formControls: updatedControls,
-    })
-  }
-
   _disabledTransfer() {
     let result = reduce(
       this.state.formControls,
@@ -303,7 +284,6 @@ export default class WarpContent extends Component {
     const decimal = this.props.isToEvrynet
       ? ATOMIC_STELLAR_DECIMAL_UNIT
       : whitelistedAsset.getDecimal()
-    e.touched = true
     e.valid = new BigNumber(
       this.props.accountBalance.state,
     ).isGreaterThanOrEqualTo(
@@ -320,7 +300,7 @@ export default class WarpContent extends Component {
     let updatedFormElement = {
       ...updatedControls[name],
     }
-    this._resetValidation(name)
+    updatedFormElement.touched = true
     updatedFormElement = await updatedFormElement.onSubmitValidation(
       updatedFormElement,
     )
