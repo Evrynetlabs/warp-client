@@ -223,7 +223,7 @@ describe('WarpContent', () => {
       ['-1', '-1'],
       ['1.', '1'],
       ['001.', '1'],
-      ['1.....', '1'],
+      ['1.....', '1.....'],
     ]
     test.each(inputs)(
       'should create a correct currency string',
