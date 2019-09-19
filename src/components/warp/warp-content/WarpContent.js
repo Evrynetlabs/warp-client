@@ -55,6 +55,7 @@ export default class WarpContent extends Component {
           touched: false,
           valid: false,
           onChangeValidation: this._validateStellarAccount,
+          onBlurValidation: this._validateStellarAccount,
         },
         destinationAccount: {
           value: '',
@@ -62,6 +63,7 @@ export default class WarpContent extends Component {
           touched: false,
           valid: false,
           onChangeValidation: this._validateEvrynetAccount,
+          onBlurValidation: this._validateEvrynetAccount,
         },
       },
       transferFunc: props.toEvrynet,
@@ -196,7 +198,9 @@ export default class WarpContent extends Component {
     updatedFormElement = updatedFormElement.onBlurValidation(updatedFormElement)
     updatedFormElement.value =
       updatedFormElement.touched && updatedFormElement.valid
-        ? updatedFormElement.onBlurValueAssign(value)
+        ? has(updatedFormElement, 'onBlurValueAssign')
+          ? updatedFormElement.onBlurValueAssign(value)
+          : value
         : value
     updatedControls[name] = updatedFormElement
     this.setState({
@@ -365,6 +369,9 @@ export default class WarpContent extends Component {
                     onChange={(e) => {
                       this._changeHandler(e)
                     }}
+                    onBlur={(e) => {
+                      this._blurHandler(e)
+                    }}
                     isInvalid={
                       this.state.formControls.sourceAccount.touched &&
                       !this.state.formControls.sourceAccount.valid
@@ -393,6 +400,9 @@ export default class WarpContent extends Component {
                     value={this.state.formControls.destinationAccount.value}
                     onChange={(e) => {
                       this._changeHandler(e)
+                    }}
+                    onBlur={(e) => {
+                      this._blurHandler(e)
                     }}
                     isInvalid={
                       this.state.formControls.destinationAccount.touched &&

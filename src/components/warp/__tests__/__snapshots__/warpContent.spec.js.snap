@@ -32,6 +32,7 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is false W
               className="WarpContent__form__content__input__src WarpContent__form__content__input"
               isInvalid={false}
               name="sourceAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -58,6 +59,7 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is false W
               className="WarpContent__form__content__input__dest WarpContent__form__content__input"
               isInvalid={false}
               name="destinationAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -175,6 +177,7 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is false W
               className="WarpContent__form__content__input__src WarpContent__form__content__input"
               isInvalid={false}
               name="sourceAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -201,6 +204,7 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is false W
               className="WarpContent__form__content__input__dest WarpContent__form__content__input"
               isInvalid={false}
               name="destinationAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -316,6 +320,7 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is true Wh
               className="WarpContent__form__content__input__src WarpContent__form__content__input"
               isInvalid={false}
               name="sourceAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -342,6 +347,7 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is true Wh
               className="WarpContent__form__content__input__dest WarpContent__form__content__input"
               isInvalid={false}
               name="destinationAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -459,6 +465,7 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is true Wh
               className="WarpContent__form__content__input__src WarpContent__form__content__input"
               isInvalid={false}
               name="sourceAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -485,6 +492,7 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is true Wh
               className="WarpContent__form__content__input__dest WarpContent__form__content__input"
               isInvalid={false}
               name="destinationAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -600,6 +608,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__src WarpContent__form__content__input"
               isInvalid={false}
               name="sourceAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -626,6 +635,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__dest WarpContent__form__content__input"
               isInvalid={false}
               name="destinationAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -743,6 +753,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__src WarpContent__form__content__input"
               isInvalid={false}
               name="sourceAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -769,6 +780,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__dest WarpContent__form__content__input"
               isInvalid={false}
               name="destinationAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -879,6 +891,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__src WarpContent__form__content__input"
               isInvalid={false}
               name="sourceAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -905,6 +918,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__dest WarpContent__form__content__input"
               isInvalid={false}
               name="destinationAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -1015,6 +1029,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__src WarpContent__form__content__input"
               isInvalid={false}
               name="sourceAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -1041,6 +1056,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__dest WarpContent__form__content__input"
               isInvalid={false}
               name="destinationAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -1151,6 +1167,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__src WarpContent__form__content__input"
               isInvalid={false}
               name="sourceAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -1177,6 +1194,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__dest WarpContent__form__content__input"
               isInvalid={false}
               name="destinationAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -1287,6 +1305,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__src WarpContent__form__content__input"
               isInvalid={false}
               name="sourceAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -1313,6 +1332,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__dest WarpContent__form__content__input"
               isInvalid={false}
               name="destinationAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -1423,6 +1443,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__src WarpContent__form__content__input"
               isInvalid={false}
               name="sourceAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -1449,6 +1470,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__dest WarpContent__form__content__input"
               isInvalid={false}
               name="destinationAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -1566,6 +1588,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__src WarpContent__form__content__input"
               isInvalid={false}
               name="sourceAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -1592,6 +1615,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__dest WarpContent__form__content__input"
               isInvalid={false}
               name="destinationAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -1709,6 +1733,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__src WarpContent__form__content__input"
               isInvalid={false}
               name="sourceAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -1735,6 +1760,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__dest WarpContent__form__content__input"
               isInvalid={false}
               name="destinationAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -1852,6 +1878,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__src WarpContent__form__content__input"
               isInvalid={false}
               name="sourceAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -1878,6 +1905,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__dest WarpContent__form__content__input"
               isInvalid={false}
               name="destinationAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -1995,6 +2023,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__src WarpContent__form__content__input"
               isInvalid={false}
               name="sourceAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -2021,6 +2050,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__dest WarpContent__form__content__input"
               isInvalid={false}
               name="destinationAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -2138,6 +2168,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__src WarpContent__form__content__input"
               isInvalid={false}
               name="sourceAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -2164,6 +2195,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__dest WarpContent__form__content__input"
               isInvalid={false}
               name="destinationAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -2281,6 +2313,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__src WarpContent__form__content__input"
               isInvalid={false}
               name="sourceAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -2307,6 +2340,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__dest WarpContent__form__content__input"
               isInvalid={false}
               name="destinationAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -2417,6 +2451,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__src WarpContent__form__content__input"
               isInvalid={false}
               name="sourceAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -2443,6 +2478,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__dest WarpContent__form__content__input"
               isInvalid={false}
               name="destinationAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -2560,6 +2596,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__src WarpContent__form__content__input"
               isInvalid={false}
               name="sourceAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -2586,6 +2623,7 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
               className="WarpContent__form__content__input__dest WarpContent__form__content__input"
               isInvalid={false}
               name="destinationAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -2703,6 +2741,7 @@ exports[`WarpContent should render correspondingly 1`] = `
               className="WarpContent__form__content__input__src WarpContent__form__content__input"
               isInvalid={false}
               name="sourceAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
@@ -2729,6 +2768,7 @@ exports[`WarpContent should render correspondingly 1`] = `
               className="WarpContent__form__content__input__dest WarpContent__form__content__input"
               isInvalid={false}
               name="destinationAccount"
+              onBlur={[Function]}
               onChange={[Function]}
               placeholder="Account Number"
               type="text"
