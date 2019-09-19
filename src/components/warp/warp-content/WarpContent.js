@@ -26,7 +26,7 @@ export default class WarpContent extends Component {
     super(props)
     this.warp = new Warp()
     this._validateAmountOnSubmit = this._validateAmountOnSubmit.bind(this)
-    this._validateAmount = this._validateAmount.bind(this)
+    this._validateAmountOnChange = this._validateAmountOnChange.bind(this)
     const defaultFunc = {
       onChangeValidation: (elem) => elem,
       onBlurValidation: (elem) => elem,
@@ -43,8 +43,8 @@ export default class WarpContent extends Component {
           placeholder: '0.00',
           touched: false,
           valid: false,
-          onChangeValidation: this._validateAmount,
-          onBlurValidation: this._validateAmount,
+          onChangeValidation: this._validateAmountOnChange,
+          onBlurValidation: defaultFunc.onBlurValidation,
           onBlurValueAssign: formatNumber,
           onSubmitValidation: this._validateAmountOnSubmit,
           errorMessage: '',
@@ -132,8 +132,7 @@ export default class WarpContent extends Component {
     return e
   }
 
-  _validateAmount(e) {
-    console.log(e.value, 'validation')
+  _validateAmountOnChange(e) {
     const parts = split(e.value, '.')
     const hasDecimals = parts.length >= 2
     const whitelistedAsset = this._getWhitelistedAssetByCode(
@@ -197,9 +196,11 @@ export default class WarpContent extends Component {
       ...updatedControls[name],
     }
     this._resetValidation(name)
-    updatedFormElement.value = updatedFormElement.touched
-      ? updatedFormElement.onBlurValueAssign(value)
-      : value
+    if (updatedFormElement.valid) {
+      updatedFormElement.value = updatedFormElement.touched
+        ? updatedFormElement.onBlurValueAssign(value)
+        : value
+    }
     updatedFormElement = updatedFormElement.onBlurValidation(updatedFormElement)
     updatedControls[name] = updatedFormElement
     this.setState({
