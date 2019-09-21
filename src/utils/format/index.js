@@ -1,1 +1,1 @@
-export * from '@/utils/format/currency'
+export * from '@/utils/format/number'

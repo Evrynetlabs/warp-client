@@ -7,14 +7,14 @@ Enzyme.configure({ adapter: new Adapter() })
 
 describe('WarpChainTitle', () => {
   const mock = {
-    isToEvry: true,
+    isToEvrynet: true,
     toggleTransferSwitch: jest.fn(),
   }
   let component
   beforeEach(() => {
     component = shallow(
       <WarpChainTitle
-        isToEvry={mock.isToEvry}
+        isToEvrynet={mock.isToEvrynet}
         toggleTransferSwitch={mock.toggleTransferSwitch}
       ></WarpChainTitle>,
     )
@@ -32,7 +32,7 @@ describe('WarpChainTitle', () => {
     it('should change source and destination of warp title', () => {
       mock.toggleTransferSwitch.mockImplementation(() => {
         component.setProps({
-          isToEvry: false,
+          isToEvrynet: false,
         })
       })
       component.find('.WarpChainTitle__swap').simulate('click')

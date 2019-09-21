@@ -30,15 +30,17 @@ export default class Warp extends Component {
             <Card className={this.state.styles.content}>
               <WarpChainTitle
                 toggleTransferSwitch={this.props.toggleTransferSwitch}
-                isToEvry={this.props.isToEvry}
+                isToEvrynet={this.props.isToEvrynet}
               ></WarpChainTitle>
               <WarpContent
                 txHashes={this.props.txHashes}
-                toEvry={this.props.toEvry}
+                toEvrynet={this.props.toEvrynet}
                 toStellar={this.props.toStellar}
                 whitelistedAssets={this.props.whitelistedAssets}
                 getWhitelistAssets={this.props.getWhitelistAssets}
-                isToEvry={this.props.isToEvry}
+                isToEvrynet={this.props.isToEvrynet}
+                getAccountBalance={this.props.getAccountBalance}
+                accountBalance={this.props.accountBalance}
               ></WarpContent>
             </Card>
           </Col>
@@ -62,9 +64,15 @@ Warp.propTypes = {
     loading: PropTypes.bool,
     error: PropTypes.object,
   }).isRequired,
-  isToEvry: PropTypes.bool.isRequired,
-  toEvry: PropTypes.func.isRequired,
+  accountBalance: PropTypes.shape({
+    state: PropTypes.string,
+    loading: PropTypes.bool,
+    error: PropTypes.object,
+  }),
+  isToEvrynet: PropTypes.bool.isRequired,
+  toEvrynet: PropTypes.func.isRequired,
   toStellar: PropTypes.func.isRequired,
   getWhitelistAssets: PropTypes.func.isRequired,
   toggleTransferSwitch: PropTypes.func.isRequired,
+  getAccountBalance: PropTypes.func.isRequired,
 }
