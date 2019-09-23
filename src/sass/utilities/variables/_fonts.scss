@@ -7,7 +7,7 @@ $text-font-stack: 'Open Sans', 'Helvetica Neue Light', 'Helvetica Neue', 'Helvet
 /// @type List
 $code-font-stack: 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Monaco', monospace !default;
 
-$brand-font-stack: 'Proxima Nova', 'FontAwesome', sans-serif;
+$brand-font-stack: 'Proxima Nova', 'Font Awesome 5 Free', sans-serif;
 
 /* Font Sizes */
 $font-size-small: 80%;
@@ -58,4 +58,17 @@ $font-weights: (
   medium: 500px,
   semibold: 600px,
   bold: 700px,
+) !default;
+
+$font-sizes: (
+  normal: 1.6rem,
+  h1: 4.8rem,
+  h2: 3.2rem,
+  h3: 2.4rem,
+  h4: 2rem,
+  h5: 1.6rem,
+  h6: 1.4rem,
+  medium: 5rem,
+  large: 7.5rem,
+  very-large: 10rem
 ) !default;

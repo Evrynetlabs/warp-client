@@ -1,0 +1,48 @@
+@import '../../sass/utilities/variables';
+
+.Result {
+    height: calc(100% - #{$navbar-height});
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    &__content {
+        &__title {
+            font-size: map-get($font-sizes, large);
+            font-weight: 100;
+            display: inline-block;
+            position: relative;
+            bottom: $space-52;
+            background-color: white;
+            border-radius: 50% 50% 0 0;
+            padding: 10px 15px 0 15px;
+            color: $galaxy;
+        }
+        .card-title {
+            height: $space-48;
+            text-align: center;
+            background-color: white;
+        }
+        &__body {
+            background-color: $light-grey;
+            width: 100%;
+            display: block;
+            &__status, &__amount {
+                text-align: center;
+            }
+            &__account, &__swap {
+                text-align: center;
+                font-weight: map-get($font-weights, semibold);
+                padding: $space-4 $space-40!important;
+            }
+            &__swap {
+                display: flex;
+                align-items: center;
+                font-size: $font-size-h4
+            }
+        }
+    }
+    &__footer {
+        text-align: center;
+        padding-top: $space-12;
+    }
+}

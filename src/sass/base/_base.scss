@@ -8,8 +8,6 @@
 
   @include font-face("Proxima Nova", "~@/assets/fonts/proximanova-medium",  map-get($font-weights, medium) , normal, woff);
 
-  @include font-face("FontAwesome", "~@/assets/fonts/fa-regular-400",  map-get($font-weights, medium) , normal, woff);
-
   html {
     box-sizing: border-box;
   }
