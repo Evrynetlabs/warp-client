@@ -6,7 +6,9 @@
  * Set up a decent box model on the root element
  */
 
-  @include font-face("Proxima Nova", "/src/assets/fonts/proximanova-medium",  map-get($font-weights, medium) , normal, woff);
+  @include font-face("Proxima Nova", "~@/assets/fonts/proximanova-medium",  map-get($font-weights, medium) , normal, woff);
+
+  @include font-face("FontAwesome", "~@/assets/fonts/fa-regular-400",  map-get($font-weights, medium) , normal, woff);
 
   html {
     box-sizing: border-box;
@@ -19,11 +21,10 @@
 
   body {
     margin: 0;
-    font-family: $proxima-font-stack;
+    font-family: $brand-font-stack!important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     padding: 0;
-    font-family: sans-serif;
   }
   
   code {
