@@ -2,29 +2,33 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import Warp from 'Components/warp/Warp'
 import {
-  isToEvrySelector,
+  isToEvrynetSelector,
   selectCollectedTxHashes,
   selectWhitelistedAssets,
+  selectAccountBalance,
 } from 'Components/warp/warpSelectors'
 import {
-  toEvry,
+  toEvrynet,
   toStellar,
   getWhitelistAssets,
   toggleTransferSwitch,
+  getAccountBalance,
 } from 'Components/warp/warpActions'
 
 const mapStateToProps = (state) => ({
-  isToEvry: isToEvrySelector(state),
+  isToEvrynet: isToEvrynetSelector(state),
   txHashes: selectCollectedTxHashes(state),
   whitelistedAssets: selectWhitelistedAssets(state),
+  accountBalance: selectAccountBalance(state),
 })
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    toEvry: (payload) => dispatch(toEvry(payload)),
+    toEvrynet: (payload) => dispatch(toEvrynet(payload)),
     toStellar: (payload) => dispatch(toStellar(payload)),
     getWhitelistAssets: () => dispatch(getWhitelistAssets()),
     toggleTransferSwitch: () => dispatch(toggleTransferSwitch()),
+    getAccountBalance: (payload) => dispatch(getAccountBalance(payload)),
   }
 }
 

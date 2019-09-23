@@ -5,8 +5,16 @@ exports[`Warp should render correspondingly 1`] = `
   value={null}
 >
   <Warp
+    accountBalance={
+      Object {
+        "error": null,
+        "loading": true,
+        "state": null,
+      }
+    }
+    getAccountBalance={[Function]}
     getWhitelistAssets={[Function]}
-    isToEvry={true}
+    isToEvrynet={true}
     store={
       Object {
         "clearActions": [Function],
@@ -17,7 +25,7 @@ exports[`Warp should render correspondingly 1`] = `
         "subscribe": [Function],
       }
     }
-    toEvry={[Function]}
+    toEvrynet={[Function]}
     toStellar={[Function]}
     toggleTransferSwitch={[Function]}
     txHashes={

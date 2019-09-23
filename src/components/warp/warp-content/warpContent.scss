@@ -11,7 +11,11 @@
             .btn {
                 &.btn-dark {
                     &:hover {
-                        background-color: $revolver;
+                        background-color: map-get($palette-colors, blue-110)!important;
+                    }
+                    &:active {
+                        opacity: 0.85;
+                        background-color: map-get($palette-colors, blue-110)!important;
                     }
                 }
                 background: map-get($palette-colors, blue-110);
@@ -23,6 +27,23 @@
             &__amount {
                 width: 300px;
                 margin: 0 auto!important;
+                .invalid-feedback {
+                    position: absolute;
+                }
+            }
+            &__input {
+                &__src {
+                    &+.invalid-feedback{
+                        position: absolute;
+                    }
+                }
+                &__dest {
+                    &+.invalid-feedback{
+                        position: absolute;
+                        right: $space-12;
+                        text-align: right;
+                    }
+                }
             }
         }
     }
