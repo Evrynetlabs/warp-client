@@ -6,7 +6,7 @@
 /// @param {String} $base - base URL for the asset
 /// @param {String} $type - asset type folder (e.g. `fonts/`)
 /// @param {String} $path - asset path
-/// @return {Url}
+/// @return {Url} - return url
 @function asset($base, $type, $path) {
     @return url($base + $type + $path);
 }
@@ -28,12 +28,3 @@
 @function font($path, $base: $base-url) {
   @return asset($base, 'fonts/', $path);
 }
-
-@function palette-color($key) {
-    @return map-get($palette-colors, $key);
-  }
-  
-  @function palette-color-level($color-name, $level) {
-    $color: palette-color($color-name + '-' + $level);
-    @return $color;
-  }

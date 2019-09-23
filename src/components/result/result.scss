@@ -12,18 +12,20 @@
             display: inline-block;
             position: relative;
             bottom: $space-52;
-            background-color: white;
+            background-color: $light-grey;
             border-radius: 50% 50% 0 0;
             padding: 10px 15px 0 15px;
             color: $galaxy;
         }
-        .card-title {
-            height: $space-48;
-            text-align: center;
-            background-color: white;
+        .card {
+            background-color: $light-grey;
+            .card-title {
+                height: $space-48;
+                text-align: center;
+            }
         }
         &__body {
-            background-color: $light-grey;
+            padding: $space-12 0;
             width: 100%;
             display: block;
             &__status, &__amount {
@@ -33,6 +35,9 @@
                 text-align: center;
                 font-weight: map-get($font-weights, semibold);
                 padding: $space-4 $space-40!important;
+            }
+            &__status {
+                color: $brand-success;
             }
             &__swap {
                 display: flex;
