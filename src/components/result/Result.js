@@ -1,13 +1,23 @@
 import React from 'react'
 import { Card, Container, Row, Col, Button } from 'react-bootstrap'
 import PropTypes from 'prop-types'
-import { useInitStyles } from 'Components/result/resultHooks'
+import {
+  useInitStyles,
+  useSourceDestinationType,
+} from 'Components/result/resultHooks'
 import 'Components/result/result.scss'
 import classNames from 'classnames'
+import { toCurrency } from '@/utils/format'
 
 const Result = (props) => {
   const { styles } = useInitStyles()
-
+  const { chain } = useSourceDestinationType(props.location.state.isToEvrynet)
+  const {
+    amount,
+    asset: { code, decimal },
+    src,
+    dest,
+  } = props.location.state
   return (
     <Container className={styles.main}>
       <Row>
@@ -36,7 +46,7 @@ const Result = (props) => {
                         [styles.amount]: true,
                       })}
                     >
-                      <h1>200,000 vTHB</h1>
+                      <h1>{`${toCurrency(amount, decimal)} ${code}`}</h1>
                     </Col>
                   </Row>
                   <Row>
@@ -61,10 +71,12 @@ const Result = (props) => {
                           <Card.Body>
                             <Container>
                               <Row>
-                                <span>Stellar</span>
+                                <span>{chain.src}</span>
                               </Row>
                               <Row>
-                                <span>Account Number: 12312313213</span>
+                                <span className={styles.accountText}>
+                                  Account Number: {src}
+                                </span>
                               </Row>
                             </Container>
                           </Card.Body>
@@ -86,10 +98,12 @@ const Result = (props) => {
                           <Card.Body>
                             <Container>
                               <Row>
-                                <span>Evrynet</span>
+                                <span>{chain.dest}</span>
                               </Row>
                               <Row>
-                                <span>Account Number: 12312313213</span>
+                                <span className={styles.accountText}>
+                                  Account Number: {dest}
+                                </span>
                               </Row>
                             </Container>
                           </Card.Body>
@@ -129,6 +143,9 @@ const Result = (props) => {
 
 Result.propTypes = {
   push: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
 }
 
 export default Result

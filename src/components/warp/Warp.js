@@ -41,6 +41,7 @@ export default class Warp extends Component {
                 isToEvrynet={this.props.isToEvrynet}
                 getAccountBalance={this.props.getAccountBalance}
                 accountBalance={this.props.accountBalance}
+                push={this.props.push}
               ></WarpContent>
             </Card>
           </Col>
@@ -75,4 +76,5 @@ Warp.propTypes = {
   getWhitelistAssets: PropTypes.func.isRequired,
   toggleTransferSwitch: PropTypes.func.isRequired,
   getAccountBalance: PropTypes.func.isRequired,
+  push: PropTypes.func.isRequired,
 }

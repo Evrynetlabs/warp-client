@@ -14,6 +14,8 @@ import {
   toggleTransferSwitch,
   getAccountBalance,
 } from 'Components/warp/warpActions'
+import { push } from 'connected-react-router'
+import { withRouter } from 'react-router'
 
 const mapStateToProps = (state) => ({
   isToEvrynet: isToEvrynetSelector(state),
@@ -29,6 +31,7 @@ const mapDispatchToProps = (dispatch) => {
     getWhitelistAssets: () => dispatch(getWhitelistAssets()),
     toggleTransferSwitch: () => dispatch(toggleTransferSwitch()),
     getAccountBalance: (payload) => dispatch(getAccountBalance(payload)),
+    push: (location) => dispatch(push(location)),
   }
 }
 
@@ -37,4 +40,7 @@ const withConnect = connect(
   mapDispatchToProps,
 )
 
-export default compose(withConnect)(Warp)
+export default compose(
+  withRouter,
+  withConnect,
+)(Warp)
