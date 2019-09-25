@@ -11,13 +11,15 @@ import { toCurrency } from '@/utils/format'
 
 const Result = (props) => {
   const { styles } = useInitStyles()
-  const { chain } = useSourceDestinationType(props.location.state.isToEvrynet)
   const {
     amount,
     asset: { code, decimal },
     src,
     dest,
+    txHashes,
+    isToEvrynet,
   } = props.location.state
+  const { chain } = useSourceDestinationType(isToEvrynet)
   return (
     <Container className={styles.main}>
       <Row>
@@ -134,7 +136,7 @@ const Result = (props) => {
                           })}
                         >
                           Stellar Transaction hash:
-                          {props.location.state.txHashes.stellar}
+                          {txHashes.stellar}
                         </Card.Body>
                       </Card>
                     </Col>
@@ -150,7 +152,7 @@ const Result = (props) => {
                           })}
                         >
                           <span>Evrynet Transaction hash: </span>
-                          <span>{props.location.state.txHashes.evrynet}</span>
+                          <span>{txHashes.evrynet}</span>
                         </Card.Body>
                       </Card>
                     </Col>

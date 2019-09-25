@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import classNames from 'classnames'
 import config from '@/config'
 const {
@@ -44,20 +44,18 @@ export const useInitStyles = () => {
 }
 
 export const useSourceDestinationType = (isToEvrynet) => {
-  const [chain, setChain] = useState({})
-  useEffect(() => {
+  const __getChain = (isToEvrynet) => {
     if (isToEvrynet) {
-      setChain({
+      return {
         src: STELLAR,
         dest: EVRYNET,
-      })
-      return
+      }
     }
-    setChain({
+    return {
       src: EVRYNET,
       dest: STELLAR,
-    })
-    return
-  }, [isToEvrynet])
+    }
+  }
+  const [chain] = useState(__getChain(isToEvrynet))
   return { chain }
 }

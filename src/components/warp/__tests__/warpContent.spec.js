@@ -1,10 +1,8 @@
 import React from 'react'
-import Enzyme, { shallow } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
+import { shallow } from 'enzyme'
 jest.mock('warp-js')
 import { spyGetCode } from 'warp-js'
 import WarpContent from 'Components/warp/warp-content/WarpContent'
-Enzyme.configure({ adapter: new Adapter() })
 import { Form } from 'react-bootstrap'
 
 describe('WarpContent', () => {
@@ -32,6 +30,7 @@ describe('WarpContent', () => {
     getWhitelistAssets: jest.fn(),
     isToEvrynet: true,
     getAccountBalance: jest.fn(),
+    push: jest.fn(),
   }
   spyGetCode.mockReturnValue('EVRY')
   let component
@@ -46,6 +45,7 @@ describe('WarpContent', () => {
         getWhitelistAssets={mock.getWhitelistAssets}
         isToEvrynet={mock.isToEvrynet}
         getAccountBalance={mock.getAccountBalance}
+        push={mock.push}
       ></WarpContent>,
     )
   })

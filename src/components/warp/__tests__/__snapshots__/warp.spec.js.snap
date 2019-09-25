@@ -1,47 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Warp should render correspondingly 1`] = `
-<ContextProvider
-  value={null}
->
-  <Warp
-    accountBalance={
-      Object {
-        "error": null,
-        "loading": true,
-        "state": null,
-      }
-    }
-    getAccountBalance={[Function]}
-    getWhitelistAssets={[Function]}
-    isToEvrynet={true}
-    store={
-      Object {
-        "clearActions": [Function],
-        "dispatch": [Function],
-        "getActions": [Function],
-        "getState": [Function],
-        "replaceReducer": [Function],
-        "subscribe": [Function],
-      }
-    }
-    toEvrynet={[Function]}
-    toStellar={[Function]}
-    toggleTransferSwitch={[Function]}
-    txHashes={
-      Object {
-        "error": null,
-        "loading": true,
-        "state": null,
-      }
-    }
-    whitelistedAssets={
-      Object {
-        "error": null,
-        "loading": true,
-        "state": Array [],
-      }
-    }
-  />
-</ContextProvider>
+<ContextConsumer>
+  <Component />
+</ContextConsumer>
 `;

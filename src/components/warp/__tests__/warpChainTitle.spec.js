@@ -1,9 +1,6 @@
 import React from 'react'
-import Enzyme, { shallow } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
+import { shallow } from 'enzyme'
 import WarpChainTitle from 'Components/warp/warp-chain-title/WarpChainTitle'
-
-Enzyme.configure({ adapter: new Adapter() })
 
 describe('WarpChainTitle', () => {
   const mock = {
