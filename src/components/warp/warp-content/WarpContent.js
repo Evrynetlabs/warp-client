@@ -283,18 +283,21 @@ export default class WarpContent extends Component {
       dest: this.state.formControls.destinationAccount.value,
     }
     await this.state.transferFunc(payload)
-    if (!this.props.txHashes.error) {
-      const locationState = {
-        ...payload,
-        asset: {
-          decimal: asset.decimal,
-          code: asset.code,
-        },
-        isToEvrynet: this.props.isToEvrynet,
-        txHashes: this.props.txHashes.state,
-      }
-      this._toResult(locationState)
+    const locationState = {
+      ...payload,
+      asset: {
+        decimal: asset.decimal,
+        code: asset.code,
+      },
+      isToEvrynet: this.props.isToEvrynet,
+      txHashes: {
+        state: this.props.txHashes.state,
+        error: this.props.txHashes.error
+          ? this.props.txHashes.error.toString()
+          : null,
+      },
     }
+    this._toResult(locationState)
   }
 
   async _validateAmountOnSubmit(e) {

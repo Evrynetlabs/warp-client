@@ -62,16 +62,6 @@ $palette-colors: (
   'yellow-100': #440900,
 );
 
-@function palette-color($key) {
-  @return map-get($palette-colors, $key);
-}
-
-@function palette-color-level($color-name, $level) {
-$color: palette-color($color-name + '-' + $level);
-@return $color;
-}
-
-
 /// Copy text color
 /// @type Color
 $text-color: rgb(34, 34, 34) !default;
