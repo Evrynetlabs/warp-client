@@ -55,7 +55,7 @@ Warp.propTypes = {
   txHashes: PropTypes.shape({
     state: PropTypes.shape({
       stellar: PropTypes.string,
-      evry: PropTypes.string,
+      evrynet: PropTypes.string,
     }),
     loading: PropTypes.bool,
     error: PropTypes.object,

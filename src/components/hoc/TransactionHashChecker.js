@@ -5,15 +5,17 @@ import PropTypes from 'prop-types'
 export default function requiredTransactionHash(Component) {
   const TransactionHashChecker = (props) => {
     const [isAuthenticated, userHasAuthenticated] = useState(false)
+    const [pending, setPending] = useState(true)
 
     useEffect(() => {
       onLoad()
-    }, [])
+      setPending(false)
+    }, [pending])
 
-    async function onLoad() {
-      userHasAuthenticated(!!props.txHashes.state && !!props.txHashes.error)
+    function onLoad() {
+      userHasAuthenticated(!!props.txHashes.state && !props.txHashes.error)
     }
-
+    if (pending) return null
     return isAuthenticated ? <Component {...props} /> : <Redirect to="/" />
   }
 
@@ -21,7 +23,7 @@ export default function requiredTransactionHash(Component) {
     txHashes: PropTypes.shape({
       state: PropTypes.shape({
         stellar: PropTypes.string,
-        evry: PropTypes.string,
+        evrynet: PropTypes.string,
       }),
       loading: PropTypes.bool,
       error: PropTypes.object,

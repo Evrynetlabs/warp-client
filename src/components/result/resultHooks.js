@@ -11,9 +11,12 @@ export const useInitStyles = () => {
       Result: true,
     })
     const content = `${main}__content`
+    const redirect = `${main}__redirect`
     const title = `${content}__title`
     const body = `${content}__body`
-    const footer = `${main}__footer`
+    const footer = `${content}__footer`
+    const footerContent = `${footer}__content`
+    const footerContentBody = `${footerContent}__body`
     const amount = `${body}__amount`
     const status = `${body}__status`
     const account = `${body}__account`
@@ -30,6 +33,9 @@ export const useInitStyles = () => {
       account,
       swap,
       accountText,
+      redirect,
+      footerContent,
+      footerContentBody,
     }
   }
   const [styles] = useState(_initStyles())

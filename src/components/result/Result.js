@@ -115,19 +115,54 @@ const Result = (props) => {
               </div>
             </Card.Body>
             <Card.Footer>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Tincidunt ornare massa eget egestas purus viverra accumsan in.
-                Tempor nec feugiat nisl pretium fusce. Id porta nibh venenatis
-                cras sed felis eget. In iaculis
-              </p>
+              <div
+                className={classNames({
+                  [styles.footer]: true,
+                })}
+              >
+                <Container>
+                  <Row>
+                    <Col
+                      className={classNames({
+                        [styles.footerContent]: true,
+                      })}
+                    >
+                      <Card>
+                        <Card.Body
+                          className={classNames({
+                            [styles.footerContentBody]: true,
+                          })}
+                        >
+                          Stellar Transaction hash:
+                          {props.location.state.txHashes.stellar}
+                        </Card.Body>
+                      </Card>
+                    </Col>
+                    <Col
+                      className={classNames({
+                        [styles.footerContent]: true,
+                      })}
+                    >
+                      <Card>
+                        <Card.Body
+                          className={classNames({
+                            [styles.footerContentBody]: true,
+                          })}
+                        >
+                          <span>Evrynet Transaction hash: </span>
+                          <span>{props.location.state.txHashes.evrynet}</span>
+                        </Card.Body>
+                      </Card>
+                    </Col>
+                  </Row>
+                </Container>
+              </div>
             </Card.Footer>
           </Card>
         </Col>
       </Row>
       <Row>
-        <Col className={styles.footer}>
+        <Col className={styles.redirect}>
           <Button
             onClick={() => {
               props.push('/')

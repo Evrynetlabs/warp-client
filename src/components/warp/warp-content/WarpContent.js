@@ -283,7 +283,7 @@ export default class WarpContent extends Component {
       dest: this.state.formControls.destinationAccount.value,
     }
     await this.state.transferFunc(payload)
-    if (this.props.txHashes.error) {
+    if (!this.props.txHashes.error) {
       const locationState = {
         ...payload,
         asset: {
@@ -291,7 +291,7 @@ export default class WarpContent extends Component {
           code: asset.code,
         },
         isToEvrynet: this.props.isToEvrynet,
-        hashes: this.props.txHashes.state,
+        txHashes: this.props.txHashes.state,
       }
       this._toResult(locationState)
     }
@@ -499,7 +499,7 @@ WarpContent.propTypes = {
   txHashes: PropTypes.shape({
     state: PropTypes.shape({
       stellar: PropTypes.string,
-      evry: PropTypes.string,
+      evrynet: PropTypes.string,
     }),
     loading: PropTypes.bool,
     error: PropTypes.object,
