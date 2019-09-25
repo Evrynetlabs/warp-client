@@ -107,10 +107,40 @@ export const getAccountBalance = ({ asset = {}, privateKey = '' }) => {
     dispatch(getAccountBalancePending(true))
     try {
       const address = client.getPublickeyFromPrivateKey(privateKey)
+      console.log(asset, 'asset')
       const accountBalance = await client.getAccountBalance(address, asset)
       dispatch(getAccountBalanceSuccess(accountBalance.balance))
     } catch (e) {
       dispatch(getAccountBalanceError(e))
+    }
+  }
+}
+
+export const getTrustlinesSuccess = (whitelistedAssets) => ({
+  type: actionTypes.ASYNC_GET_TRUSTLINES.SUCCESS,
+  payload: whitelistedAssets,
+})
+
+export const getTrustlinesPending = (pendingStatus) => ({
+  type: actionTypes.ASYNC_GET_TRUSTLINES.PENDING,
+  payload: pendingStatus,
+})
+
+export const getTrustlinesError = (error) => ({
+  type: actionTypes.ASYNC_GET_TRUSTLINES.FAILURE,
+  payload: error,
+})
+
+export const getTrustlines = ({ privateKey = '' }) => {
+  const warp = new Warp()
+  return async (dispatch) => {
+    dispatch(getTrustlinesPending(true))
+    try {
+      const address = warp.client.stellar.getPublickeyFromPrivateKey(privateKey)
+      const trustlines = await warp.client.stellar.getTrustlines(address)
+      dispatch(getTrustlinesSuccess(trustlines.assets))
+    } catch (e) {
+      dispatch(getTrustlinesError(e))
     }
   }
 }
