@@ -572,7 +572,8 @@ exports[`Result When the transfer process is success When isToEverynet should re
               >
                 <Col
                   className="Result__content__footer__content"
-                  xs={6}
+                  sm={6}
+                  xs={12}
                 >
                   <Card
                     body={false}
@@ -587,7 +588,8 @@ exports[`Result When the transfer process is success When isToEverynet should re
                 </Col>
                 <Col
                   className="Result__content__footer__content"
-                  xs={6}
+                  sm={6}
+                  xs={12}
                 >
                   <Card
                     body={false}
@@ -795,7 +797,8 @@ exports[`Result When the transfer process is success When isToStellar should ren
               >
                 <Col
                   className="Result__content__footer__content"
-                  xs={6}
+                  sm={6}
+                  xs={12}
                 >
                   <Card
                     body={false}
@@ -810,7 +813,8 @@ exports[`Result When the transfer process is success When isToStellar should ren
                 </Col>
                 <Col
                   className="Result__content__footer__content"
-                  xs={6}
+                  sm={6}
+                  xs={12}
                 >
                   <Card
                     body={false}
