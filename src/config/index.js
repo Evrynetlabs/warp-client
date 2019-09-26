@@ -5,6 +5,10 @@ const development = {
     ATOMIC_STELLAR_DECIMAL_UNIT: 7,
     ATOMIC_EVRY_DECIMAL_UNIT: 18,
   },
+  chain: {
+    EVRYNET: 'Evrynet',
+    STELLAR: 'Stellar',
+  },
 }
 
 const test = development

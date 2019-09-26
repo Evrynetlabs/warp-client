@@ -18,7 +18,7 @@ describe('warp reducer', () => {
       ...expectedInitialState(),
       [actionTypes.ASYNC_COLLECT_HASHES.stateKey]: {
         stellar: 'foo',
-        evry: 'bar',
+        evrynet: 'bar',
       },
       [actionTypes.ASYNC_COLLECT_HASHES.loadingKey]: false,
     })

@@ -1,0 +1,65 @@
+@import '../../sass/utilities/variables';
+
+.Result {
+    height: calc(100% - #{$navbar-height});
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    &__content {
+        &__title {
+            font-size: map-get($font-sizes, large);
+            font-weight: 100;
+            display: inline-block;
+            position: relative;
+            bottom: $space-52;
+            background-color: $light-grey;
+            border-radius: 50% 50% 0 0;
+            padding: 10px 15px 0 15px;
+            color: $galaxy;
+        }
+        .card {
+            background-color: $light-grey;
+            .card-title {
+                height: $space-48;
+                text-align: center;
+            }
+        }
+        &__body {
+            padding: $space-12 0;
+            width: 100%;
+            display: block;
+            &__account {
+                &__text {
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
+                }
+            }
+            &__status, &__amount {
+                text-align: center;
+            }
+            &__account, &__swap {
+                text-align: center;
+                font-weight: map-get($font-weights, semibold);
+                padding: $space-4 $space-20!important;
+            }
+            &__status {
+                color: $brand-success;
+            }
+            &__swap {
+                display: flex;
+                align-items: center;
+                font-size: $font-size-h4;
+                justify-content: center;
+            }
+        }
+        &__footer {
+            text-align: center;
+            padding-top: $space-12;
+        }
+    }
+    &__redirect {
+        text-align: center;
+        padding-top: $space-12;
+    }
+}

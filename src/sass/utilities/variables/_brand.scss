@@ -1,5 +1,3 @@
-@import 'colors';
-
 /* General */
 $space-unit: 0.8rem;
 
@@ -16,10 +14,11 @@ $space-40: $space-unit * 5; //    40px
 $space-48: $space-unit * 6; //    48px
 $space-52: $space-unit * 6.5; //  52px
 $space-84: $space-unit * 10.5; // 84px
+$space-96: $space-unit * 12; // 96px
 
 /* Brand Variations */
-$brand-default: palette-color-level('grey', 70);
-$brand-primary: palette-color-level('coral', 50);
+$brand-default: $galaxy;
+$brand-primary: $galaxy;
 $brand-secondary: palette-color-level('blue', 50);
 $brand-success: palette-color-level('green', 40);
 $brand-warning: palette-color-level('yellow', 40);

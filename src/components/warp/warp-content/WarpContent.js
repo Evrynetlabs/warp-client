@@ -265,16 +265,36 @@ export default class WarpContent extends Component {
     return result
   }
 
+  _toResult(payload) {
+    this.props.push({
+      pathname: '/result',
+      state: payload,
+    })
+  }
+
   async _transfer() {
     const asset = this._getWhitelistedAssetByCode(
       this.state.formControls.asset.value,
     )
-    await this.state.transferFunc({
+    const payload = {
       asset,
       amount: this.state.formControls.amount.value,
       src: this.state.formControls.sourceAccount.value,
       dest: this.state.formControls.destinationAccount.value,
-    })
+    }
+    await this.state.transferFunc(payload)
+    if (!this.props.txHashes.error) {
+      const locationState = {
+        ...payload,
+        asset: {
+          decimal: asset.decimal,
+          code: asset.code,
+        },
+        isToEvrynet: this.props.isToEvrynet,
+        txHashes: this.props.txHashes.state,
+      }
+      this._toResult(locationState)
+    }
   }
 
   async _validateAmountOnSubmit(e) {
@@ -479,7 +499,7 @@ WarpContent.propTypes = {
   txHashes: PropTypes.shape({
     state: PropTypes.shape({
       stellar: PropTypes.string,
-      evry: PropTypes.string,
+      evrynet: PropTypes.string,
     }),
     loading: PropTypes.bool,
     error: PropTypes.object,
@@ -499,4 +519,5 @@ WarpContent.propTypes = {
   isToEvrynet: PropTypes.bool.isRequired,
   getWhitelistAssets: PropTypes.func.isRequired,
   getAccountBalance: PropTypes.func.isRequired,
+  push: PropTypes.func.isRequired,
 }
