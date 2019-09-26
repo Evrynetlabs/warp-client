@@ -131,7 +131,7 @@ const Result = (props) => {
                       <React.Fragment>
                         <Col
                           xs={12}
-                      sm={6}
+                          sm={6}
                           className={classNames({
                             [styles.footerContent]: true,
                           })}
@@ -148,8 +148,8 @@ const Result = (props) => {
                           </Card>
                         </Col>
                         <Col
-                           xs={12}
-                      sm={6}
+                          xs={12}
+                          sm={6}
                           className={classNames({
                             [styles.footerContent]: true,
                           })}
