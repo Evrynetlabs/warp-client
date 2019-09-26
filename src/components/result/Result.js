@@ -62,7 +62,8 @@ const Result = (props) => {
                   </Row>
                   <Row>
                     <Col
-                      xs="5"
+                      xs={12}
+                      sm={5}
                       className={classNames({
                         [styles.account]: true,
                       })}
@@ -89,7 +90,8 @@ const Result = (props) => {
                       <i className="fas fa-arrow-right"></i>
                     </Col>
                     <Col
-                      xs="5"
+                      xs={12}
+                      sm={5}
                       className={classNames({
                         [styles.account]: true,
                       })}
