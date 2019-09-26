@@ -138,22 +138,26 @@ export default class WarpContent extends Component {
     return e
   }
 
-  _effect(sourceElement, formControls) {
+  async _effect(sourceElement, formControls) {
     if (has(sourceElement, 'effects')) {
-      sourceElement.effects.forEach((effected) => {
+      for (const effected of sourceElement.effects) {
         let effectedElement = formControls[effected.name]
         effectedElement.touched = true
-        effected.funcs.forEach((effect) => {
+        for (const effect of effected.funcs) {
           if (effect.constructor.name === 'AsyncFunction') {
-            effect(effectedElement, formControls).then((updatedElement) => {
-              effectedElement = updatedElement
-            })
+            await effect(effectedElement, formControls).then(
+              (updatedElement) => {
+                effectedElement = updatedElement
+              },
+            )
           } else {
             effectedElement = effect(effectedElement, formControls)
           }
-        })
+        }
+        // false positive case since this is a synchronous process
+        // eslint-disable-next-line require-atomic-updates
         formControls[effected.name] = effectedElement
-      })
+      }
     }
     return formControls
   }
@@ -274,7 +278,7 @@ export default class WarpContent extends Component {
     })
     e.errorMessage = e.valid
       ? null
-      : `The recipient Stellar account has no ${selectedAsset.code}(Issued by ${selectedAsset.issuer}) trustline.`
+      : `The recipient Stellar account has no ${selectedAsset.code} trustline.`
     return e
   }
 
@@ -282,7 +286,7 @@ export default class WarpContent extends Component {
     handler functions
    */
 
-  _changeHandler(event) {
+  async _changeHandler(event) {
     const name = event.target.name
     const value = event.target.value
     let updatedControls = {
@@ -301,7 +305,7 @@ export default class WarpContent extends Component {
     updatedControls[name] = updatedFormElement
 
     // update the effected elements
-    updatedControls = this._effect(updatedFormElement, updatedControls)
+    updatedControls = await this._effect(updatedFormElement, updatedControls)
 
     this.setState({
       formControls: updatedControls,
@@ -411,7 +415,7 @@ export default class WarpContent extends Component {
     updatedControls[name] = updatedFormElement
 
     // update the effected elements
-    updatedControls = this._effect(updatedFormElement, updatedControls)
+    updatedControls = await this._effect(updatedFormElement, updatedControls)
     this.setState({
       formControls: updatedControls,
     })

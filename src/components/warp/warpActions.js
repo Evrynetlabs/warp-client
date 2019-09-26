@@ -107,7 +107,6 @@ export const getAccountBalance = ({ asset = {}, privateKey = '' }) => {
     dispatch(getAccountBalancePending(true))
     try {
       const address = client.getPublickeyFromPrivateKey(privateKey)
-      console.log(asset, 'asset')
       const accountBalance = await client.getAccountBalance(address, asset)
       dispatch(getAccountBalanceSuccess(accountBalance.balance))
     } catch (e) {
