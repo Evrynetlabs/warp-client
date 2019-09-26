@@ -45,7 +45,7 @@
             &__account, &__swap {
                 text-align: center;
                 font-weight: map-get($font-weights, semibold);
-                padding: $space-4 $space-40!important;
+                padding: $space-4 $space-20!important;
             }
             &__status {
                 color: $brand-success;
@@ -57,7 +57,8 @@
             &__swap {
                 display: flex;
                 align-items: center;
-                font-size: $font-size-h4
+                font-size: $font-size-h4;
+                justify-content: center;
             }
         }
         &__footer {

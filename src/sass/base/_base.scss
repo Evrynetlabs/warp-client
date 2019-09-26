@@ -23,6 +23,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     padding: 0;
+    background: $gradient;
   }
   
   code {
@@ -42,11 +43,10 @@
     box-sizing: inherit;
   }
 
-  #root, .app {
-    height: 100%;
-    background: $gradient;
-  }
-
   .navbar {
     height: $navbar-height;
+  }
+
+  #root, .app {
+    height: 100%;
   }
