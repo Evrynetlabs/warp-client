@@ -89,6 +89,51 @@ describe('warp reducer', () => {
     })
   })
 
+  it('should handle GET_TRUSTLINES_SUCCESS', () => {
+    expect(
+      reducer(undefined, {
+        type: actionTypes.ASYNC_GET_TRUSTLINES.SUCCESS,
+        payload: [
+          { code: 'code_foo', issuer: 'issuer_foo' },
+          { code: 'code_bar', issuer: 'issuer_bar' },
+        ],
+      }),
+    ).toEqual({
+      ...expectedInitialState(),
+      [actionTypes.ASYNC_GET_TRUSTLINES.stateKey]: [
+        { code: 'code_foo', issuer: 'issuer_foo' },
+        { code: 'code_bar', issuer: 'issuer_bar' },
+      ],
+      [actionTypes.ASYNC_GET_TRUSTLINES.loadingKey]: false,
+    })
+  })
+
+  it('should handle GET_TRUSTLINES_PENDING', () => {
+    expect(
+      reducer(undefined, {
+        type: actionTypes.ASYNC_GET_TRUSTLINES.PENDING,
+        payload: true,
+      }),
+    ).toEqual({
+      ...expectedInitialState(),
+    })
+  })
+
+  it('should handle GET_TRUSTLINES_FAILURE', () => {
+    expect(
+      reducer(undefined, {
+        type: actionTypes.ASYNC_GET_TRUSTLINES.FAILURE,
+        payload: new Error('this is an error'),
+      }),
+    ).toEqual({
+      ...expectedInitialState(),
+      [actionTypes.ASYNC_GET_TRUSTLINES.errorKey]: new Error(
+        'this is an error',
+      ),
+      [actionTypes.ASYNC_GET_TRUSTLINES.loadingKey]: false,
+    })
+  })
+
   it('should handle ASYNC_TOGGLE_WARP_SWITCH_SUCCESS', () => {
     expect(
       reducer(undefined, {

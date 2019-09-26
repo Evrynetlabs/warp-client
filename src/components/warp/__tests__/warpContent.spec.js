@@ -29,9 +29,15 @@ describe('WarpContent', () => {
       loading: false,
       error: null,
     },
+    trustlines: {
+      state: [],
+      loading: false,
+      error: null,
+    },
     getWhitelistAssets: jest.fn(),
     isToEvrynet: true,
     getAccountBalance: jest.fn(),
+    getTrustlines: jest.fn(),
   }
   spyGetCode.mockReturnValue('EVRY')
   let component
@@ -46,6 +52,9 @@ describe('WarpContent', () => {
         getWhitelistAssets={mock.getWhitelistAssets}
         isToEvrynet={mock.isToEvrynet}
         getAccountBalance={mock.getAccountBalance}
+        accountBalance={mock.accountBalance}
+        getTrustlines={mock.getTrustlines}
+        trustlines={mock.trustlines}
       ></WarpContent>,
     )
   })
@@ -54,7 +63,7 @@ describe('WarpContent', () => {
     expect(component).toMatchSnapshot()
   })
 
-  describe('When input an account souce', () => {
+  describe('When input an account source', () => {
     const expected = 'foo'
     const mockEvent = {
       target: {
@@ -62,15 +71,15 @@ describe('WarpContent', () => {
         name: 'sourceAccount',
       },
     }
-    it('should save a source account state correspondingly when on changing input', () => {
-      component
+    it('should save a source account state correspondingly when on changing input', async () => {
+      await component
         .find('.WarpContent__form__content__input__src')
         .simulate('change', mockEvent)
       expect(component.state().formControls.sourceAccount.value).toEqual(
         expected,
       )
     })
-    it('should get an error "Invalid Stellar secret key format."', () => {
+    it('should get an error "Invalid Stellar secret key format."', async () => {
       let mockEvent = {
         target: {
           value: 'foo',
@@ -78,7 +87,7 @@ describe('WarpContent', () => {
         },
       }
 
-      component
+      await component
         .find('.WarpContent__form__content__input__src')
         .simulate('change', mockEvent)
 
@@ -89,7 +98,7 @@ describe('WarpContent', () => {
       )
     })
 
-    it('should get an error "Stellar secret key is required."', () => {
+    it('should get an error "Stellar secret key is required."', async () => {
       let mockEvent = {
         target: {
           value: '',
@@ -97,7 +106,7 @@ describe('WarpContent', () => {
         },
       }
 
-      component
+      await component
         .find('.WarpContent__form__content__input__src')
         .simulate('change', mockEvent)
 
@@ -108,7 +117,7 @@ describe('WarpContent', () => {
       )
     })
 
-    it('should not get any errors', () => {
+    it('should not get any errors', async () => {
       let mockEvent = {
         target: {
           value: 'SCIMPYI2AZKATTOQOOE5LFHRHLIDSCJP2CRBHQ6ZKHVTASCXNOQQNMKE',
@@ -116,7 +125,7 @@ describe('WarpContent', () => {
         },
       }
 
-      component
+      await component
         .find('.WarpContent__form__content__input__src')
         .simulate('change', mockEvent)
 
@@ -136,15 +145,15 @@ describe('WarpContent', () => {
         name: 'destinationAccount',
       },
     }
-    it('should save a source account state correspondingly when on chaning input', () => {
-      component
+    it('should save a source account state correspondingly when on chaning input', async () => {
+      await component
         .find('.WarpContent__form__content__input__dest')
         .simulate('change', mockEvent)
       expect(component.state().formControls.destinationAccount.value).toEqual(
         expected,
       )
     })
-    it('should get an error "Invalid Evrynet secret key format."', () => {
+    it('should get an error "Invalid Evrynet secret key format."', async () => {
       let mockEvent = {
         target: {
           value: 'foo',
@@ -152,7 +161,7 @@ describe('WarpContent', () => {
         },
       }
 
-      component
+      await component
         .find('.WarpContent__form__content__input__src')
         .simulate('change', mockEvent)
 
@@ -165,7 +174,7 @@ describe('WarpContent', () => {
       ).toEqual('Invalid Evrynet secret key format.')
     })
 
-    it('should get an error "Evrynet secret key is required."', () => {
+    it('should get an error "Evrynet secret key is required."', async () => {
       let mockEvent = {
         target: {
           value: '',
@@ -173,7 +182,7 @@ describe('WarpContent', () => {
         },
       }
 
-      component
+       await component
         .find('.WarpContent__form__content__input__src')
         .simulate('change', mockEvent)
 
@@ -186,7 +195,7 @@ describe('WarpContent', () => {
       ).toEqual('Evrynet secret key is required.')
     })
 
-    it('should not get any errors', () => {
+    it('should not get any errors', async () => {
       let mockEvent = {
         target: {
           value:
@@ -195,7 +204,7 @@ describe('WarpContent', () => {
         },
       }
 
-      component
+      await component
         .find('.WarpContent__form__content__input__src')
         .simulate('change', mockEvent)
 
@@ -227,7 +236,7 @@ describe('WarpContent', () => {
     ]
     test.each(inputs)(
       'should create a correct currency string',
-      (amount, expected) => {
+      async (amount, expected) => {
         const mockEvent = {
           target: {
             value: amount,
@@ -247,7 +256,7 @@ describe('WarpContent', () => {
             state: [mockWhitelistedAsset],
           },
         })
-        input.simulate('change', mockEvent)
+        await input.simulate('change', mockEvent)
         expect(component.state().formControls.amount.value).toEqual(amount)
         input.simulate('blur', mockEvent)
         expect(component.state().formControls.amount.value).toEqual(expected)
@@ -256,7 +265,7 @@ describe('WarpContent', () => {
 
     describe('When input an invalid amount', () => {
       describe('When amount is zero', () => {
-        it('should save an invalid state with a desired error message', () => {
+        it('should save an invalid state with a desired error message', async () => {
           const mockEvent = {
             target: {
               value: '0',
@@ -266,7 +275,7 @@ describe('WarpContent', () => {
           const input = component.find(
             '.WarpContent__form__content__amount__input',
           )
-          input.simulate('change', mockEvent)
+          await input.simulate('change', mockEvent)
           expect(component.state().formControls.amount.valid).toEqual(false)
           expect(component.state().formControls.amount.errorMessage).toEqual(
             'Amount must be greater than zero.',
@@ -278,7 +287,7 @@ describe('WarpContent', () => {
       describe('When amount is less than zero', () => {
         test.each(['-1', '-0.01', '-1.2222', '0', '0.000'])(
           'should save an invalid state with a desired error message',
-          (ech) => {
+          async (ech) => {
             const mockEvent = {
               target: {
                 value: ech,
@@ -288,7 +297,7 @@ describe('WarpContent', () => {
             const input = component.find(
               '.WarpContent__form__content__amount__input',
             )
-            input.simulate('change', mockEvent)
+            await input.simulate('change', mockEvent)
             expect(component.state().formControls.amount.valid).toEqual(false)
             expect(component.state().formControls.amount.errorMessage).toEqual(
               'Amount must be greater than zero.',
@@ -301,7 +310,7 @@ describe('WarpContent', () => {
       describe('When amount precision exceeds limit decimal', () => {
         test.each([['1.000', 2], ['1.00000000', 7]])(
           'should save an invalid state with a desired error message',
-          (ech, decimal) => {
+          async (ech, decimal) => {
             const mockEvent = {
               target: {
                 value: ech,
@@ -321,7 +330,7 @@ describe('WarpContent', () => {
             const input = component.find(
               '.WarpContent__form__content__amount__input',
             )
-            input.simulate('change', mockEvent)
+            await input.simulate('change', mockEvent)
             expect(component.state().formControls.amount.valid).toEqual(false)
             expect(component.state().formControls.amount.errorMessage).toEqual(
               `Amount can only support a precision of ${mockWhitelistedAsset.decimal} decimals.`,
@@ -332,7 +341,7 @@ describe('WarpContent', () => {
       })
 
       describe('When amount is empty', () => {
-        it('should display an invalid feedback', () => {
+        it('should display an invalid feedback', async () => {
           const mockEvent = {
             target: {
               value: '',
@@ -352,7 +361,7 @@ describe('WarpContent', () => {
           const input = component.find(
             '.WarpContent__form__content__amount__input',
           )
-          input.simulate('change', mockEvent)
+          await input.simulate('change', mockEvent)
           expect(component.state().formControls.amount.valid).toEqual(false)
           expect(component.state().formControls.amount.errorMessage).toEqual(
             'Amount is required.',
@@ -364,7 +373,7 @@ describe('WarpContent', () => {
       describe('When amount is not a number', () => {
         test.each(['--1.000', '1.00--0000000', 'foo', 'bar', '-.', '0.--1'])(
           'should save an invalid state with a desired error message',
-          (ech) => {
+          async (ech) => {
             const mockEvent = {
               target: {
                 value: ech,
@@ -384,7 +393,7 @@ describe('WarpContent', () => {
             const input = component.find(
               '.WarpContent__form__content__amount__input',
             )
-            input.simulate('change', mockEvent)
+            await input.simulate('change', mockEvent)
             expect(component.state().formControls.amount.valid).toEqual(false)
             expect(component.state().formControls.amount.errorMessage).toEqual(
               'Amount must be a number.',
@@ -397,6 +406,11 @@ describe('WarpContent', () => {
   })
 
   describe('When clicking a transfer button', () => {
+    const mockEvent = {
+      target: {
+        name: 'form',
+      },
+    }
     describe('When isToEvrynet is false', () => {
       test('transfer function should be toStellar', () => {
         component.setProps({
@@ -405,7 +419,7 @@ describe('WarpContent', () => {
         expect(component.state().transferFunc).toEqual(mock.toStellar)
         expect(component.state().transferFunc).not.toEqual(mock.toEvrynet)
       })
-      describe('When source accountbalance is invalid', () => {
+      describe('When source account balance is invalid', () => {
         it('should show an invalid feedback', async () => {
           component.setProps({
             isToEvrynet: false,
@@ -428,7 +442,7 @@ describe('WarpContent', () => {
           component.setState({
             formControls: updatedFormControls,
           })
-          await component.instance()._submitHandler('amount')
+          await component.instance()._onSubmit(mockEvent)
           expect(component.state().formControls.amount.valid).toBe(false)
           expect(component.state().formControls.amount.errorMessage).toBe(
             'Insufficient Amount',
@@ -456,18 +470,12 @@ describe('WarpContent', () => {
           component.setState({
             formControls: updatedFormControls,
           })
-          const form = component.find(Form)
-          await form.props().onSubmit({
-            preventDefault: () => {},
-            target: {
-              name: 'amount',
-            },
-          })
+          await component.instance()._onSubmit(mockEvent)
           expect(component).toMatchSnapshot()
         })
       })
 
-      describe('When source accountbalance is valid', () => {
+      describe('When source account balance is valid', () => {
         it('should show a valid feedback', async () => {
           component.setProps({
             isToEvrynet: false,
@@ -490,9 +498,9 @@ describe('WarpContent', () => {
           component.setState({
             formControls: updatedFormControls,
           })
-          await component.instance()._submitHandler('amount')
+          await component.instance()._onSubmit(mockEvent)
           expect(component.state().formControls.amount.valid).toBe(true)
-          expect(component.state().formControls.amount.errorMessage).toBe('')
+          expect(component.state().formControls.amount.errorMessage).toBe(null)
         })
         it('should match a valid feedback snapshot', async () => {
           component.setProps({
@@ -516,13 +524,7 @@ describe('WarpContent', () => {
           component.setState({
             formControls: updatedFormControls,
           })
-          const form = component.find(Form)
-          await form.props().onSubmit({
-            preventDefault: () => {},
-            target: {
-              name: 'amount',
-            },
-          })
+          await component.instance()._onSubmit(mockEvent)
           expect(component).toMatchSnapshot()
         })
       })
@@ -533,7 +535,7 @@ describe('WarpContent', () => {
         expect(component.state().transferFunc).toEqual(mock.toEvrynet)
         expect(component.state().transferFunc).not.toEqual(mock.toStellar)
       })
-      describe('When source accountbalance is invalid', () => {
+      describe('When source account balance is invalid', () => {
         it('should show an invalid feedback', async () => {
           component.setProps({
             isToEvrynet: true,
@@ -556,7 +558,7 @@ describe('WarpContent', () => {
           component.setState({
             formControls: updatedFormControls,
           })
-          await component.instance()._submitHandler('amount')
+          await component.instance()._onSubmit(mockEvent)
           expect(component.state().formControls.amount.valid).toBe(false)
         })
         it('should match an invalid feedback snapshot', async () => {
@@ -581,18 +583,12 @@ describe('WarpContent', () => {
           component.setState({
             formControls: updatedFormControls,
           })
-          const form = component.find(Form)
-          await form.props().onSubmit({
-            preventDefault: () => {},
-            target: {
-              name: 'amount',
-            },
-          })
+          await component.instance()._onSubmit(mockEvent)
           expect(component).toMatchSnapshot()
         })
       })
 
-      describe('When source accountbalance is valid', () => {
+      describe('When source account balance is valid', () => {
         it('should show a valid feedback', async () => {
           component.setProps({
             isToEvrynet: true,
@@ -615,9 +611,9 @@ describe('WarpContent', () => {
           component.setState({
             formControls: updatedFormControls,
           })
-          await component.instance()._submitHandler('amount')
+          await component.instance()._onSubmit(mockEvent)
           expect(component.state().formControls.amount.valid).toBe(true)
-          expect(component.state().formControls.amount.errorMessage).toBe('')
+          expect(component.state().formControls.amount.errorMessage).toBe(null)
         })
         it('should match a valid feedback snapshot', async () => {
           component.setProps({
@@ -640,13 +636,7 @@ describe('WarpContent', () => {
           component.setState({
             formControls: updatedFormControls,
           })
-          const form = component.find(Form)
-          await form.props().onSubmit({
-            preventDefault: () => {},
-            target: {
-              name: 'amount',
-            },
-          })
+          await component.instance()._onSubmit(mockEvent)
           expect(component).toMatchSnapshot()
         })
       })

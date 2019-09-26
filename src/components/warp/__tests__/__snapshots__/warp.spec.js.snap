@@ -13,6 +13,7 @@ exports[`Warp should render correspondingly 1`] = `
       }
     }
     getAccountBalance={[Function]}
+    getTrustlines={[Function]}
     getWhitelistAssets={[Function]}
     isToEvrynet={true}
     store={
@@ -28,6 +29,13 @@ exports[`Warp should render correspondingly 1`] = `
     toEvrynet={[Function]}
     toStellar={[Function]}
     toggleTransferSwitch={[Function]}
+    trustlines={
+      Object {
+        "error": null,
+        "loading": true,
+        "state": null,
+      }
+    }
     txHashes={
       Object {
         "error": null,

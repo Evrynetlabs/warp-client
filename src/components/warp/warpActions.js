@@ -115,9 +115,9 @@ export const getAccountBalance = ({ asset = {}, privateKey = '' }) => {
   }
 }
 
-export const getTrustlinesSuccess = (whitelistedAssets) => ({
+export const getTrustlinesSuccess = (trustlines) => ({
   type: actionTypes.ASYNC_GET_TRUSTLINES.SUCCESS,
-  payload: whitelistedAssets,
+  payload: trustlines,
 })
 
 export const getTrustlinesPending = (pendingStatus) => ({

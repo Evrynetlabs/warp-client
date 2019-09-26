@@ -144,15 +144,9 @@ export default class WarpContent extends Component {
         let effectedElement = formControls[effected.name]
         effectedElement.touched = true
         for (const effect of effected.funcs) {
-          if (effect.constructor.name === 'AsyncFunction') {
-            await effect(effectedElement, formControls).then(
-              (updatedElement) => {
-                effectedElement = updatedElement
-              },
-            )
-          } else {
-            effectedElement = effect(effectedElement, formControls)
-          }
+          await effect(effectedElement, formControls).then((updatedElement) => {
+            effectedElement = updatedElement
+          })
         }
         // false positive case since this is a synchronous process
         // eslint-disable-next-line require-atomic-updates
@@ -331,8 +325,8 @@ export default class WarpContent extends Component {
   }
 
   async _submitHandler(event) {
-    event.preventDefault()
     try {
+      event.preventDefault()
       this._onSubmit(event).then(() => this._transfer())
     } catch (err) {
       console.error(err)
@@ -464,8 +458,8 @@ export default class WarpContent extends Component {
                       this.state.formControls.sourceAccount.placeholder
                     }
                     value={this.state.formControls.sourceAccount.value}
-                    onChange={(e) => {
-                      this._changeHandler(e)
+                    onChange={async (e) => {
+                      await this._changeHandler(e)
                     }}
                     onBlur={(e) => {
                       this._blurHandler(e)

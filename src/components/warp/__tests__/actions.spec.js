@@ -4,6 +4,7 @@ import {
   toStellar,
   toggleTransferSwitch,
   getAccountBalance,
+  getTrustlines,
 } from 'Components/warp/warpActions'
 import actionTypes from 'Components/warp/warpActionTypes'
 import configureMockStore from 'redux-mock-store'
@@ -15,6 +16,7 @@ import {
   spyToStellar,
   spyGetAccountBalance,
   spyGetPublickeyFromPrivateKey,
+  spyGetTrustlines,
 } from 'warp-js'
 
 const middlewares = [thunk]
@@ -310,6 +312,103 @@ describe('Warp actions', () => {
             [actionTypes.ASYNC_GET_ACCOUNT_BALANCE.errorKey]: null,
           })
           return store.dispatch(getAccountBalance(mockInput)).then(() => {
+            expect(store.getActions()).toEqual(expectedActions)
+          })
+        })
+      })
+    })
+  })
+
+  describe('getTrustlines', () => {
+    describe('When success', () => {
+      it('should get the account trustlines', () => {
+        const getBalanceResult = {
+          assets: [
+            {
+              code: 'foo',
+              issuer: 'bar',
+            },
+          ],
+        }
+        const mockInput = {
+          privateKey: 'foo',
+        }
+        const expectedActions = [
+          {
+            type: actionTypes.ASYNC_GET_TRUSTLINES.PENDING,
+            payload: true,
+          },
+          {
+            type: actionTypes.ASYNC_GET_TRUSTLINES.SUCCESS,
+            payload: getBalanceResult.assets,
+          },
+        ]
+        spyGetTrustlines.mockResolvedValue(getBalanceResult)
+        spyGetPublickeyFromPrivateKey.mockReturnValue('bar')
+        const store = mockStore({
+          [actionTypes.ASYNC_GET_TRUSTLINES.stateKey]: null,
+          [actionTypes.ASYNC_GET_TRUSTLINES.loadingKey]: false,
+          [actionTypes.ASYNC_GET_TRUSTLINES.errorKey]: null,
+        })
+        return store.dispatch(getTrustlines(mockInput)).then(() => {
+          expect(store.getActions()).toEqual(expectedActions)
+        })
+      })
+    })
+
+    describe('When error', () => {
+      describe('when getTrustlines error', () => {
+        it('should send a failure action', () => {
+          const mockInput = {
+            privateKey: 'foo',
+          }
+          const expectedActions = [
+            {
+              type: actionTypes.ASYNC_GET_TRUSTLINES.PENDING,
+              payload: true,
+            },
+            {
+              type: actionTypes.ASYNC_GET_TRUSTLINES.FAILURE,
+              payload: new Error('this is an error'),
+            },
+          ]
+          spyGetTrustlines.mockRejectedValue(new Error('this is an error'))
+          spyGetPublickeyFromPrivateKey.mockReturnValue('bar')
+          const store = mockStore({
+            [actionTypes.ASYNC_GET_TRUSTLINES.stateKey]: null,
+            [actionTypes.ASYNC_GET_TRUSTLINES.loadingKey]: false,
+            [actionTypes.ASYNC_GET_TRUSTLINES.errorKey]: null,
+          })
+          return store.dispatch(getTrustlines(mockInput)).then(() => {
+            expect(store.getActions()).toEqual(expectedActions)
+          })
+        })
+      })
+
+      describe('when spyGetPublickeyFromPrivateKey error', () => {
+        it('should send a failure action', () => {
+          const mockInput = {
+            privateKey: 'foo',
+          }
+          const expectedActions = [
+            {
+              type: actionTypes.ASYNC_GET_TRUSTLINES.PENDING,
+              payload: true,
+            },
+            {
+              type: actionTypes.ASYNC_GET_TRUSTLINES.FAILURE,
+              payload: new Error('this is an error'),
+            },
+          ]
+          spyGetPublickeyFromPrivateKey.mockReturnValue(
+            new Error('this is an error'),
+          )
+          const store = mockStore({
+            [actionTypes.ASYNC_GET_TRUSTLINES.stateKey]: null,
+            [actionTypes.ASYNC_GET_TRUSTLINES.loadingKey]: false,
+            [actionTypes.ASYNC_GET_TRUSTLINES.errorKey]: null,
+          })
+          return store.dispatch(getTrustlines(mockInput)).then(() => {
             expect(store.getActions()).toEqual(expectedActions)
           })
         })
