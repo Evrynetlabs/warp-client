@@ -13,7 +13,7 @@ export default function requiredTransactionHash(Component) {
     }, [pending])
 
     function onLoad() {
-      userHasAuthenticated(!!props.txHashes.state && !props.txHashes.error)
+      userHasAuthenticated(!!props.txHashes.state || !!props.txHashes.error)
     }
     if (pending) return null
     return isAuthenticated ? <Component {...props} /> : <Redirect to="/" />

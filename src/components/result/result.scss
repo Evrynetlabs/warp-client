@@ -16,6 +16,10 @@
             border-radius: 50% 50% 0 0;
             padding: 10px 15px 0 15px;
             color: $galaxy;
+            &--failed {
+                @extend .Result__content__title;
+                color: $brand-danger;
+            }
         }
         .card {
             background-color: $light-grey;
@@ -45,6 +49,10 @@
             }
             &__status {
                 color: $brand-success;
+                &--failed {
+                    @extend .Result__content__body__status;
+                    color: $brand-danger;
+                }
             }
             &__swap {
                 display: flex;

@@ -3,7 +3,7 @@ import { Card, Container, Row, Col, Button } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import {
   useInitStyles,
-  useSourceDestinationType,
+  useGetPageTypeItems,
 } from 'Components/result/resultHooks'
 import 'Components/result/result.scss'
 import classNames from 'classnames'
@@ -17,9 +17,8 @@ const Result = (props) => {
     src,
     dest,
     txHashes,
-    isToEvrynet,
   } = props.location.state
-  const { chain } = useSourceDestinationType(isToEvrynet)
+  const { items } = useGetPageTypeItems(props.location.state)
   return (
     <Container className={styles.main}>
       <Row>
@@ -29,10 +28,11 @@ const Result = (props) => {
               <div
                 className={classNames({
                   'text-center': true,
-                  [styles.title]: true,
+                  [styles.title]: items.isSuccess,
+                  [styles.titleFailed]: !items.isSuccess,
                 })}
               >
-                <i className="fas fa-check-circle"></i>
+                {items.icon}
               </div>
             </Card.Title>
             <Card.Body className="p-0">
@@ -54,10 +54,11 @@ const Result = (props) => {
                   <Row>
                     <Col
                       className={classNames({
-                        [styles.status]: true,
+                        [styles.status]: items.isSuccess,
+                        [styles.statusFailed]: !items.isSuccess,
                       })}
                     >
-                      <h4>TRANSACTION CONFIRMED</h4>
+                      <h4>{items.title}</h4>
                     </Col>
                   </Row>
                   <Row>
@@ -74,7 +75,7 @@ const Result = (props) => {
                           <Card.Body>
                             <Container>
                               <Row>
-                                <span>{chain.src}</span>
+                                <span>{items.chain.src}</span>
                               </Row>
                               <Row>
                                 <span className={styles.accountText}>
@@ -102,7 +103,7 @@ const Result = (props) => {
                           <Card.Body>
                             <Container>
                               <Row>
-                                <span>{chain.dest}</span>
+                                <span>{items.chain.dest}</span>
                               </Row>
                               <Row>
                                 <span className={styles.accountText}>
@@ -126,42 +127,63 @@ const Result = (props) => {
               >
                 <Container>
                   <Row>
-                    <Col
-                      xs={12}
-                      sm={6}
-                      className={classNames({
-                        [styles.footerContent]: true,
-                      })}
-                    >
-                      <Card>
-                        <Card.Body
+                    {items.isSuccess ? (
+                      <React.Fragment>
+                        <Col
+                          xs={12}
+                          sm={6}
                           className={classNames({
-                            [styles.footerContentBody]: true,
+                            [styles.footerContent]: true,
                           })}
                         >
-                          Stellar Transaction hash:
-                          {txHashes.stellar}
-                        </Card.Body>
-                      </Card>
-                    </Col>
-                    <Col
-                      xs={12}
-                      sm={6}
-                      className={classNames({
-                        [styles.footerContent]: true,
-                      })}
-                    >
-                      <Card>
-                        <Card.Body
+                          <Card>
+                            <Card.Body
+                              className={classNames({
+                                [styles.footerContentBody]: true,
+                              })}
+                            >
+                              Stellar Transaction hash:
+                              {txHashes.state.stellar}
+                            </Card.Body>
+                          </Card>
+                        </Col>
+                        <Col
+                          xs={12}
+                          sm={6}
                           className={classNames({
-                            [styles.footerContentBody]: true,
+                            [styles.footerContent]: true,
                           })}
                         >
-                          <span>Evrynet Transaction hash: </span>
-                          <span>{txHashes.evrynet}</span>
-                        </Card.Body>
-                      </Card>
-                    </Col>
+                          <Card>
+                            <Card.Body
+                              className={classNames({
+                                [styles.footerContentBody]: true,
+                              })}
+                            >
+                              <span>Evrynet Transaction hash: </span>
+                              <span>{txHashes.state.evrynet}</span>
+                            </Card.Body>
+                          </Card>
+                        </Col>
+                      </React.Fragment>
+                    ) : (
+                      <Col
+                        xs={12}
+                        className={classNames({
+                          [styles.footerContent]: true,
+                        })}
+                      >
+                        <Card>
+                          <Card.Body
+                            className={classNames({
+                              [styles.footerContentBody]: true,
+                            })}
+                          >
+                            Error: {txHashes.error.toString()}
+                          </Card.Body>
+                        </Card>
+                      </Col>
+                    )}
                   </Row>
                 </Container>
               </div>

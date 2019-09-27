@@ -1,3 +1,4 @@
+import React from 'react'
 import { useState } from 'react'
 import classNames from 'classnames'
 import config from '@/config'
@@ -13,12 +14,14 @@ export const useInitStyles = () => {
     const content = `${main}__content`
     const redirect = `${main}__redirect`
     const title = `${content}__title`
+    const titleFailed = `${title}--failed`
     const body = `${content}__body`
     const footer = `${content}__footer`
     const footerContent = `${footer}__content`
     const footerContentBody = `${footerContent}__body`
     const amount = `${body}__amount`
     const status = `${body}__status`
+    const statusFailed = `${status}--failed`
     const account = `${body}__account`
     const accountText = `${account}__text`
     const swap = `${body}__swap`
@@ -36,6 +39,8 @@ export const useInitStyles = () => {
       redirect,
       footerContent,
       footerContentBody,
+      titleFailed,
+      statusFailed,
     }
   }
   const [styles] = useState(_initStyles())
@@ -43,19 +48,41 @@ export const useInitStyles = () => {
   return { styles }
 }
 
-export const useSourceDestinationType = (isToEvrynet) => {
-  const __getChain = (isToEvrynet) => {
-    if (isToEvrynet) {
-      return {
-        src: STELLAR,
-        dest: EVRYNET,
-      }
-    }
+export const useGetPageTypeItems = (props) => {
+  function _getChain(isToEvrynet) {
+    return isToEvrynet
+      ? {
+          src: STELLAR,
+          dest: EVRYNET,
+        }
+      : {
+          src: EVRYNET,
+          dest: STELLAR,
+        }
+  }
+
+  function _getResultIcon(isSuccess) {
+    return isSuccess ? (
+      <i className="fas fa-check-circle" />
+    ) : (
+      <i className="fas fa-times-circle" />
+    )
+  }
+
+  function _getResultTitle(isSuccess) {
+    return isSuccess ? 'TRANSACTION CONFIRMED' : 'TRANSACTION FAILED'
+  }
+
+  function _getPageItems(props) {
+    const isSuccess = !props.txHashes.error
     return {
-      src: EVRYNET,
-      dest: STELLAR,
+      chain: _getChain(props.isToEvrynet),
+      icon: _getResultIcon(isSuccess),
+      title: _getResultTitle(isSuccess),
+      isSuccess,
     }
   }
-  const [chain] = useState(__getChain(isToEvrynet))
-  return { chain }
+
+  const [items] = useState(_getPageItems(props))
+  return { items }
 }

@@ -1,6 +1,414 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Result When isToEverynet should render correspondingly 1`] = `
+exports[`Result When the transfer process is failed When isToEverynet should render correspondingly 1`] = `
+<Container
+  className="Result"
+  fluid={false}
+>
+  <ForwardRef
+    noGutters={false}
+  >
+    <Col
+      className="Result__content"
+    >
+      <Card
+        body={false}
+      >
+        <CardTitle>
+          <div
+            className="text-center Result__content__title--failed"
+          >
+            <i
+              className="fas fa-times-circle"
+            />
+          </div>
+        </CardTitle>
+        <CardBody
+          className="p-0"
+        >
+          <div
+            className="Result__content__body"
+          >
+            <Container
+              fluid={false}
+            >
+              <ForwardRef
+                noGutters={false}
+              >
+                <Col
+                  className="Result__content__body__amount"
+                >
+                  <h1>
+                    1,000 EVRY
+                  </h1>
+                </Col>
+              </ForwardRef>
+              <ForwardRef
+                noGutters={false}
+              >
+                <Col
+                  className="Result__content__body__status--failed"
+                >
+                  <h4>
+                    TRANSACTION FAILED
+                  </h4>
+                </Col>
+              </ForwardRef>
+              <ForwardRef
+                noGutters={false}
+              >
+                <Col
+                  className="Result__content__body__account"
+                  sm={5}
+                  xs={12}
+                >
+                  <div
+                    className="text-left"
+                  >
+                    <span
+                      className="label--dark"
+                    >
+                      From
+                    </span>
+                    <Card
+                      body={false}
+                    >
+                      <CardBody>
+                        <Container
+                          fluid={false}
+                        >
+                          <ForwardRef
+                            noGutters={false}
+                          >
+                            <span>
+                              Stellar
+                            </span>
+                          </ForwardRef>
+                          <ForwardRef
+                            noGutters={false}
+                          >
+                            <span
+                              className="Result__content__body__account__text"
+                            >
+                              Account Number: 
+                              foo
+                            </span>
+                          </ForwardRef>
+                        </Container>
+                      </CardBody>
+                    </Card>
+                  </div>
+                </Col>
+                <Col
+                  className="Result__content__body__swap"
+                >
+                  <i
+                    className="fas fa-arrow-right"
+                  />
+                </Col>
+                <Col
+                  className="Result__content__body__account"
+                  sm={5}
+                  xs={12}
+                >
+                  <div
+                    className="text-left"
+                  >
+                    <span
+                      className="label--dark"
+                    >
+                      To
+                    </span>
+                    <Card
+                      body={false}
+                    >
+                      <CardBody>
+                        <Container
+                          fluid={false}
+                        >
+                          <ForwardRef
+                            noGutters={false}
+                          >
+                            <span>
+                              Evrynet
+                            </span>
+                          </ForwardRef>
+                          <ForwardRef
+                            noGutters={false}
+                          >
+                            <span
+                              className="Result__content__body__account__text"
+                            >
+                              Account Number: 
+                              bar
+                            </span>
+                          </ForwardRef>
+                        </Container>
+                      </CardBody>
+                    </Card>
+                  </div>
+                </Col>
+              </ForwardRef>
+            </Container>
+          </div>
+        </CardBody>
+        <CardFooter>
+          <div
+            className="Result__content__footer"
+          >
+            <Container
+              fluid={false}
+            >
+              <ForwardRef
+                noGutters={false}
+              >
+                <Col
+                  className="Result__content__footer__content"
+                  xs={12}
+                >
+                  <Card
+                    body={false}
+                  >
+                    <CardBody
+                      className="Result__content__footer__content__body"
+                    >
+                      Error: 
+                      Error: this is an error
+                    </CardBody>
+                  </Card>
+                </Col>
+              </ForwardRef>
+            </Container>
+          </div>
+        </CardFooter>
+      </Card>
+    </Col>
+  </ForwardRef>
+  <ForwardRef
+    noGutters={false}
+  >
+    <Col
+      className="Result__redirect"
+    >
+      <Button
+        active={false}
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+        variant="primary"
+      >
+        Back to Home Page
+      </Button>
+    </Col>
+  </ForwardRef>
+</Container>
+`;
+
+exports[`Result When the transfer process is failed When isToStellar should render correspondingly 1`] = `
+<Container
+  className="Result"
+  fluid={false}
+>
+  <ForwardRef
+    noGutters={false}
+  >
+    <Col
+      className="Result__content"
+    >
+      <Card
+        body={false}
+      >
+        <CardTitle>
+          <div
+            className="text-center Result__content__title--failed"
+          >
+            <i
+              className="fas fa-times-circle"
+            />
+          </div>
+        </CardTitle>
+        <CardBody
+          className="p-0"
+        >
+          <div
+            className="Result__content__body"
+          >
+            <Container
+              fluid={false}
+            >
+              <ForwardRef
+                noGutters={false}
+              >
+                <Col
+                  className="Result__content__body__amount"
+                >
+                  <h1>
+                    1,000 EVRY
+                  </h1>
+                </Col>
+              </ForwardRef>
+              <ForwardRef
+                noGutters={false}
+              >
+                <Col
+                  className="Result__content__body__status--failed"
+                >
+                  <h4>
+                    TRANSACTION FAILED
+                  </h4>
+                </Col>
+              </ForwardRef>
+              <ForwardRef
+                noGutters={false}
+              >
+                <Col
+                  className="Result__content__body__account"
+                  sm={5}
+                  xs={12}
+                >
+                  <div
+                    className="text-left"
+                  >
+                    <span
+                      className="label--dark"
+                    >
+                      From
+                    </span>
+                    <Card
+                      body={false}
+                    >
+                      <CardBody>
+                        <Container
+                          fluid={false}
+                        >
+                          <ForwardRef
+                            noGutters={false}
+                          >
+                            <span>
+                              Stellar
+                            </span>
+                          </ForwardRef>
+                          <ForwardRef
+                            noGutters={false}
+                          >
+                            <span
+                              className="Result__content__body__account__text"
+                            >
+                              Account Number: 
+                              foo
+                            </span>
+                          </ForwardRef>
+                        </Container>
+                      </CardBody>
+                    </Card>
+                  </div>
+                </Col>
+                <Col
+                  className="Result__content__body__swap"
+                >
+                  <i
+                    className="fas fa-arrow-right"
+                  />
+                </Col>
+                <Col
+                  className="Result__content__body__account"
+                  sm={5}
+                  xs={12}
+                >
+                  <div
+                    className="text-left"
+                  >
+                    <span
+                      className="label--dark"
+                    >
+                      To
+                    </span>
+                    <Card
+                      body={false}
+                    >
+                      <CardBody>
+                        <Container
+                          fluid={false}
+                        >
+                          <ForwardRef
+                            noGutters={false}
+                          >
+                            <span>
+                              Evrynet
+                            </span>
+                          </ForwardRef>
+                          <ForwardRef
+                            noGutters={false}
+                          >
+                            <span
+                              className="Result__content__body__account__text"
+                            >
+                              Account Number: 
+                              bar
+                            </span>
+                          </ForwardRef>
+                        </Container>
+                      </CardBody>
+                    </Card>
+                  </div>
+                </Col>
+              </ForwardRef>
+            </Container>
+          </div>
+        </CardBody>
+        <CardFooter>
+          <div
+            className="Result__content__footer"
+          >
+            <Container
+              fluid={false}
+            >
+              <ForwardRef
+                noGutters={false}
+              >
+                <Col
+                  className="Result__content__footer__content"
+                  xs={12}
+                >
+                  <Card
+                    body={false}
+                  >
+                    <CardBody
+                      className="Result__content__footer__content__body"
+                    >
+                      Error: 
+                      Error: this is an error
+                    </CardBody>
+                  </Card>
+                </Col>
+              </ForwardRef>
+            </Container>
+          </div>
+        </CardFooter>
+      </Card>
+    </Col>
+  </ForwardRef>
+  <ForwardRef
+    noGutters={false}
+  >
+    <Col
+      className="Result__redirect"
+    >
+      <Button
+        active={false}
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+        variant="primary"
+      >
+        Back to Home Page
+      </Button>
+    </Col>
+  </ForwardRef>
+</Container>
+`;
+
+exports[`Result When the transfer process is success When isToEverynet should render correspondingly 1`] = `
 <Container
   className="Result"
   fluid={false}
@@ -59,7 +467,8 @@ exports[`Result When isToEverynet should render correspondingly 1`] = `
               >
                 <Col
                   className="Result__content__body__account"
-                  xs="5"
+                  sm={5}
+                  xs={12}
                 >
                   <div
                     className="text-left"
@@ -107,7 +516,8 @@ exports[`Result When isToEverynet should render correspondingly 1`] = `
                 </Col>
                 <Col
                   className="Result__content__body__account"
-                  xs="5"
+                  sm={5}
+                  xs={12}
                 >
                   <div
                     className="text-left"
@@ -162,6 +572,8 @@ exports[`Result When isToEverynet should render correspondingly 1`] = `
               >
                 <Col
                   className="Result__content__footer__content"
+                  sm={6}
+                  xs={12}
                 >
                   <Card
                     body={false}
@@ -176,6 +588,8 @@ exports[`Result When isToEverynet should render correspondingly 1`] = `
                 </Col>
                 <Col
                   className="Result__content__footer__content"
+                  sm={6}
+                  xs={12}
                 >
                   <Card
                     body={false}
@@ -219,7 +633,7 @@ exports[`Result When isToEverynet should render correspondingly 1`] = `
 </Container>
 `;
 
-exports[`Result When isToStellar should render correspondingly 1`] = `
+exports[`Result When the transfer process is success When isToStellar should render correspondingly 1`] = `
 <Container
   className="Result"
   fluid={false}
@@ -278,7 +692,8 @@ exports[`Result When isToStellar should render correspondingly 1`] = `
               >
                 <Col
                   className="Result__content__body__account"
-                  xs="5"
+                  sm={5}
+                  xs={12}
                 >
                   <div
                     className="text-left"
@@ -326,7 +741,8 @@ exports[`Result When isToStellar should render correspondingly 1`] = `
                 </Col>
                 <Col
                   className="Result__content__body__account"
-                  xs="5"
+                  sm={5}
+                  xs={12}
                 >
                   <div
                     className="text-left"
@@ -381,6 +797,8 @@ exports[`Result When isToStellar should render correspondingly 1`] = `
               >
                 <Col
                   className="Result__content__footer__content"
+                  sm={6}
+                  xs={12}
                 >
                   <Card
                     body={false}
@@ -395,6 +813,8 @@ exports[`Result When isToStellar should render correspondingly 1`] = `
                 </Col>
                 <Col
                   className="Result__content__footer__content"
+                  sm={6}
+                  xs={12}
                 >
                   <Card
                     body={false}
