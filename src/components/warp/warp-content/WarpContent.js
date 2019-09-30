@@ -116,7 +116,7 @@ export default class WarpContent extends Component {
     core state functions
    */
 
-  _validate(e, formControls) {
+  async _validate(e, formControls) {
     if (has(e, 'validations')) {
       e.valid = true
       e.errorMessage = null
@@ -252,14 +252,12 @@ export default class WarpContent extends Component {
 
   async _validateTrustlines(e, formControls) {
     // validate only on moving asset to Stellar
-    if (this.props.isToEvrynet) {
-      e.valid = true
-      e.errorMessage = null
-      return e
-    }
+    if (this.props.isToEvrynet) return e
     const selectedAsset = this._getWhitelistedAssetByCode(
       formControls.asset.value,
     )
+    // skip validation when asset type is Stellar's native
+    if (selectedAsset.code === 'XLM' && !selectedAsset.issuer) return e
     await this.props.getTrustlines({
       privateKey: formControls.destinationAccount.value,
     })
@@ -295,7 +293,10 @@ export default class WarpContent extends Component {
     // touch-update-validate
     updatedFormElement.touched = true
     updatedFormElement.value = value
-    updatedFormElement = this._validate(updatedFormElement, updatedControls)
+    updatedFormElement = await this._validate(
+      updatedFormElement,
+      updatedControls,
+    )
     updatedControls[name] = updatedFormElement
 
     // update the effected elements
@@ -306,7 +307,7 @@ export default class WarpContent extends Component {
     })
   }
 
-  _blurHandler(event) {
+  async _blurHandler(event) {
     const name = event.target.name
     const updatedControls = {
       ...this.state.formControls,
@@ -317,7 +318,10 @@ export default class WarpContent extends Component {
     // update element state
     // touch-validate-format
     updatedFormElement.touched = true
-    updatedFormElement = this._validate(updatedFormElement, updatedControls)
+    updatedFormElement = await this._validate(
+      updatedFormElement,
+      updatedControls,
+    )
     updatedControls[name] = this._format(updatedFormElement)
     this.setState({
       formControls: updatedControls,
@@ -382,15 +386,16 @@ export default class WarpContent extends Component {
     return updatedFormControls
   }
 
-  _updateAddressError(updatedFormControls) {
+  async _updateAddressError(updatedFormControls) {
     const elements = ['sourceAccount', 'destinationAccount', 'amount']
-    elements.forEach((e) => {
+    for (const e of elements) {
       updatedFormControls[e].touched = true
-      updatedFormControls[e] = this._validate(
+      // eslint-disable-next-line require-atomic-updates
+      updatedFormControls[e] = await this._validate(
         updatedFormControls[e],
         updatedFormControls,
       )
-    })
+    }
     return updatedFormControls
   }
 
@@ -415,12 +420,12 @@ export default class WarpContent extends Component {
     })
   }
 
-  componentDidUpdate(prevProps) {
+  async componentDidUpdate(prevProps) {
     if (prevProps.isToEvrynet === this.props.isToEvrynet) return
     const updatedState = this.state
     updatedState.transferFunc = this._updateTransferFunction()
     updatedState.formControls = this._switchAccounts(updatedState.formControls)
-    updatedState.formControls = this._updateAddressError(
+    updatedState.formControls = await this._updateAddressError(
       updatedState.formControls,
     )
     this.setState(updatedState)
@@ -458,8 +463,8 @@ export default class WarpContent extends Component {
                       this.state.formControls.sourceAccount.placeholder
                     }
                     value={this.state.formControls.sourceAccount.value}
-                    onChange={async (e) => {
-                      await this._changeHandler(e)
+                    onChange={(e) => {
+                      this._changeHandler(e)
                     }}
                     onBlur={(e) => {
                       this._blurHandler(e)

@@ -353,7 +353,7 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is true Wh
             </FormLabel>
             <FormControl
               className="WarpContent__form__content__input__dest WarpContent__form__content__input"
-              isInvalid={false}
+              isInvalid={true}
               name="destinationAccount"
               onBlur={[Function]}
               onChange={[Function]}
@@ -498,7 +498,7 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is true Wh
             </FormLabel>
             <FormControl
               className="WarpContent__form__content__input__dest WarpContent__form__content__input"
-              isInvalid={false}
+              isInvalid={true}
               name="destinationAccount"
               onBlur={[Function]}
               onChange={[Function]}

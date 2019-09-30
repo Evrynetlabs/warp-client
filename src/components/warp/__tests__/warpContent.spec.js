@@ -5,7 +5,6 @@ jest.mock('warp-js')
 import { spyGetCode } from 'warp-js'
 import WarpContent from 'Components/warp/warp-content/WarpContent'
 Enzyme.configure({ adapter: new Adapter() })
-import { Form } from 'react-bootstrap'
 
 describe('WarpContent', () => {
   const mock = {
@@ -75,6 +74,8 @@ describe('WarpContent', () => {
       await component
         .find('.WarpContent__form__content__input__src')
         .simulate('change', mockEvent)
+      await component.update()
+
       expect(component.state().formControls.sourceAccount.value).toEqual(
         expected,
       )
@@ -90,6 +91,7 @@ describe('WarpContent', () => {
       await component
         .find('.WarpContent__form__content__input__src')
         .simulate('change', mockEvent)
+      await component.update()
 
       expect(component.state().formControls.sourceAccount.valid).toEqual(false)
 
@@ -109,6 +111,7 @@ describe('WarpContent', () => {
       await component
         .find('.WarpContent__form__content__input__src')
         .simulate('change', mockEvent)
+      await component.update()
 
       expect(component.state().formControls.sourceAccount.valid).toEqual(false)
 
@@ -128,6 +131,7 @@ describe('WarpContent', () => {
       await component
         .find('.WarpContent__form__content__input__src')
         .simulate('change', mockEvent)
+      await component.update()
 
       expect(component.state().formControls.sourceAccount.valid).toEqual(true)
 
@@ -149,6 +153,8 @@ describe('WarpContent', () => {
       await component
         .find('.WarpContent__form__content__input__dest')
         .simulate('change', mockEvent)
+      await component.update()
+
       expect(component.state().formControls.destinationAccount.value).toEqual(
         expected,
       )
@@ -164,6 +170,7 @@ describe('WarpContent', () => {
       await component
         .find('.WarpContent__form__content__input__src')
         .simulate('change', mockEvent)
+      await component.update()
 
       expect(component.state().formControls.destinationAccount.valid).toEqual(
         false,
@@ -182,9 +189,10 @@ describe('WarpContent', () => {
         },
       }
 
-       await component
+      await component
         .find('.WarpContent__form__content__input__src')
         .simulate('change', mockEvent)
+      await component.update()
 
       expect(component.state().formControls.destinationAccount.valid).toEqual(
         false,
@@ -207,6 +215,7 @@ describe('WarpContent', () => {
       await component
         .find('.WarpContent__form__content__input__src')
         .simulate('change', mockEvent)
+      await component.update()
 
       expect(component.state().formControls.destinationAccount.valid).toEqual(
         true,
@@ -257,8 +266,12 @@ describe('WarpContent', () => {
           },
         })
         await input.simulate('change', mockEvent)
+        await component.update()
+
         expect(component.state().formControls.amount.value).toEqual(amount)
-        input.simulate('blur', mockEvent)
+        await input.simulate('blur', mockEvent)
+        await component.update()
+
         expect(component.state().formControls.amount.value).toEqual(expected)
       },
     )
@@ -276,6 +289,8 @@ describe('WarpContent', () => {
             '.WarpContent__form__content__amount__input',
           )
           await input.simulate('change', mockEvent)
+          await component.update()
+
           expect(component.state().formControls.amount.valid).toEqual(false)
           expect(component.state().formControls.amount.errorMessage).toEqual(
             'Amount must be greater than zero.',
@@ -298,6 +313,8 @@ describe('WarpContent', () => {
               '.WarpContent__form__content__amount__input',
             )
             await input.simulate('change', mockEvent)
+            await component.update()
+
             expect(component.state().formControls.amount.valid).toEqual(false)
             expect(component.state().formControls.amount.errorMessage).toEqual(
               'Amount must be greater than zero.',
@@ -331,6 +348,8 @@ describe('WarpContent', () => {
               '.WarpContent__form__content__amount__input',
             )
             await input.simulate('change', mockEvent)
+            await component.update()
+
             expect(component.state().formControls.amount.valid).toEqual(false)
             expect(component.state().formControls.amount.errorMessage).toEqual(
               `Amount can only support a precision of ${mockWhitelistedAsset.decimal} decimals.`,
@@ -362,6 +381,8 @@ describe('WarpContent', () => {
             '.WarpContent__form__content__amount__input',
           )
           await input.simulate('change', mockEvent)
+          await component.update()
+
           expect(component.state().formControls.amount.valid).toEqual(false)
           expect(component.state().formControls.amount.errorMessage).toEqual(
             'Amount is required.',
@@ -394,6 +415,8 @@ describe('WarpContent', () => {
               '.WarpContent__form__content__amount__input',
             )
             await input.simulate('change', mockEvent)
+            await component.update()
+
             expect(component.state().formControls.amount.valid).toEqual(false)
             expect(component.state().formControls.amount.errorMessage).toEqual(
               'Amount must be a number.',
@@ -442,7 +465,9 @@ describe('WarpContent', () => {
           component.setState({
             formControls: updatedFormControls,
           })
+          await component.update()
           await component.instance()._onSubmit(mockEvent)
+
           expect(component.state().formControls.amount.valid).toBe(false)
           expect(component.state().formControls.amount.errorMessage).toBe(
             'Insufficient Amount',
@@ -470,7 +495,9 @@ describe('WarpContent', () => {
           component.setState({
             formControls: updatedFormControls,
           })
+          await component.update()
           await component.instance()._onSubmit(mockEvent)
+
           expect(component).toMatchSnapshot()
         })
       })
@@ -498,7 +525,9 @@ describe('WarpContent', () => {
           component.setState({
             formControls: updatedFormControls,
           })
+          await component.update()
           await component.instance()._onSubmit(mockEvent)
+
           expect(component.state().formControls.amount.valid).toBe(true)
           expect(component.state().formControls.amount.errorMessage).toBe(null)
         })
@@ -524,7 +553,9 @@ describe('WarpContent', () => {
           component.setState({
             formControls: updatedFormControls,
           })
+          await component.update()
           await component.instance()._onSubmit(mockEvent)
+
           expect(component).toMatchSnapshot()
         })
       })
@@ -558,7 +589,9 @@ describe('WarpContent', () => {
           component.setState({
             formControls: updatedFormControls,
           })
+          await component.update()
           await component.instance()._onSubmit(mockEvent)
+
           expect(component.state().formControls.amount.valid).toBe(false)
         })
         it('should match an invalid feedback snapshot', async () => {
@@ -583,7 +616,9 @@ describe('WarpContent', () => {
           component.setState({
             formControls: updatedFormControls,
           })
+          await component.update()
           await component.instance()._onSubmit(mockEvent)
+
           expect(component).toMatchSnapshot()
         })
       })
@@ -611,7 +646,9 @@ describe('WarpContent', () => {
           component.setState({
             formControls: updatedFormControls,
           })
+          await component.update()
           await component.instance()._onSubmit(mockEvent)
+
           expect(component.state().formControls.amount.valid).toBe(true)
           expect(component.state().formControls.amount.errorMessage).toBe(null)
         })
@@ -636,7 +673,9 @@ describe('WarpContent', () => {
           component.setState({
             formControls: updatedFormControls,
           })
+          await component.update()
           await component.instance()._onSubmit(mockEvent)
+
           expect(component).toMatchSnapshot()
         })
       })
