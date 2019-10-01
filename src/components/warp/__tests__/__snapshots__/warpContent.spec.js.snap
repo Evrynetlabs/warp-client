@@ -1,5 +1,301 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`WarpContent When clicking a transfer button When isToEvrynet is false When asset is in the destination account trustlines should show a valid feedback 1`] = `
+<Form
+  className="WarpContent__form"
+  inline={false}
+  name="form"
+  onSubmit={[Function]}
+>
+  <CardBody
+    className="WarpContent__form__content"
+  >
+    <Container
+      fluid={true}
+    >
+      <ForwardRef
+        noGutters={false}
+      >
+        <Col>
+          <FormGroup
+            controlId="sourceAccountNumber"
+          >
+            <FormLabel
+              column={false}
+              srOnly={false}
+            >
+              <span>
+                From:
+              </span>
+            </FormLabel>
+            <FormControl
+              className="WarpContent__form__content__input__src WarpContent__form__content__input"
+              isInvalid={true}
+              name="sourceAccount"
+              onBlur={[Function]}
+              onChange={[Function]}
+              placeholder="Account Number"
+              type="text"
+              value=""
+            />
+            <Feedback
+              type="invalid"
+            >
+              Evrynet secret key is required.
+            </Feedback>
+          </FormGroup>
+        </Col>
+        <Col>
+          <FormGroup
+            controlId="destinationAccountNumber"
+          >
+            <FormLabel
+              column={false}
+              srOnly={false}
+            >
+              <span>
+                To:
+              </span>
+            </FormLabel>
+            <FormControl
+              className="WarpContent__form__content__input__dest WarpContent__form__content__input"
+              isInvalid={false}
+              name="destinationAccount"
+              onBlur={[Function]}
+              onChange={[Function]}
+              placeholder="Account Number"
+              type="text"
+              value=""
+            />
+            <Feedback
+              type="invalid"
+            />
+          </FormGroup>
+        </Col>
+      </ForwardRef>
+      <ForwardRef
+        className="WarpContent__form__content__amount"
+        noGutters={false}
+      >
+        <Col>
+          <FormGroup
+            controlId="assetAmount"
+          >
+            <FormControl
+              className="WarpContent__form__content__amount__input"
+              isInvalid={true}
+              name="amount"
+              onBlur={[Function]}
+              onChange={[Function]}
+              placeholder="0.00"
+              type="text"
+              value=""
+            />
+            <Feedback
+              type="invalid"
+            >
+              Insufficient Amount
+            </Feedback>
+          </FormGroup>
+        </Col>
+        <Col>
+          <FormGroup
+            controlId="assetSelection"
+          >
+            <FormControl
+              as="select"
+              name="asset"
+              onChange={[Function]}
+              value="EVRY"
+            >
+              <option
+                key="foo1"
+                value="foo1"
+              >
+                foo1
+              </option>
+            </FormControl>
+          </FormGroup>
+        </Col>
+      </ForwardRef>
+    </Container>
+  </CardBody>
+  <CardFooter
+    className="WarpContent__footer"
+  >
+    <Container
+      fluid={true}
+    >
+      <ForwardRef
+        noGutters={false}
+      >
+        <Col
+          className="WarpContent__footer__btn"
+        >
+          <Button
+            active={false}
+            disabled={true}
+            type="submit"
+            variant="dark"
+          >
+            Transfer
+          </Button>
+        </Col>
+      </ForwardRef>
+    </Container>
+  </CardFooter>
+</Form>
+`;
+
+exports[`WarpContent When clicking a transfer button When isToEvrynet is false When asset is not in the destination account trustlines should show an invalid feedback 1`] = `
+<Form
+  className="WarpContent__form"
+  inline={false}
+  name="form"
+  onSubmit={[Function]}
+>
+  <CardBody
+    className="WarpContent__form__content"
+  >
+    <Container
+      fluid={true}
+    >
+      <ForwardRef
+        noGutters={false}
+      >
+        <Col>
+          <FormGroup
+            controlId="sourceAccountNumber"
+          >
+            <FormLabel
+              column={false}
+              srOnly={false}
+            >
+              <span>
+                From:
+              </span>
+            </FormLabel>
+            <FormControl
+              className="WarpContent__form__content__input__src WarpContent__form__content__input"
+              isInvalid={true}
+              name="sourceAccount"
+              onBlur={[Function]}
+              onChange={[Function]}
+              placeholder="Account Number"
+              type="text"
+              value=""
+            />
+            <Feedback
+              type="invalid"
+            >
+              Evrynet secret key is required.
+            </Feedback>
+          </FormGroup>
+        </Col>
+        <Col>
+          <FormGroup
+            controlId="destinationAccountNumber"
+          >
+            <FormLabel
+              column={false}
+              srOnly={false}
+            >
+              <span>
+                To:
+              </span>
+            </FormLabel>
+            <FormControl
+              className="WarpContent__form__content__input__dest WarpContent__form__content__input"
+              isInvalid={true}
+              name="destinationAccount"
+              onBlur={[Function]}
+              onChange={[Function]}
+              placeholder="Account Number"
+              type="text"
+              value=""
+            />
+            <Feedback
+              type="invalid"
+            >
+              The recipient Stellar account has no foo trustline.
+            </Feedback>
+          </FormGroup>
+        </Col>
+      </ForwardRef>
+      <ForwardRef
+        className="WarpContent__form__content__amount"
+        noGutters={false}
+      >
+        <Col>
+          <FormGroup
+            controlId="assetAmount"
+          >
+            <FormControl
+              className="WarpContent__form__content__amount__input"
+              isInvalid={true}
+              name="amount"
+              onBlur={[Function]}
+              onChange={[Function]}
+              placeholder="0.00"
+              type="text"
+              value=""
+            />
+            <Feedback
+              type="invalid"
+            >
+              Insufficient Amount
+            </Feedback>
+          </FormGroup>
+        </Col>
+        <Col>
+          <FormGroup
+            controlId="assetSelection"
+          >
+            <FormControl
+              as="select"
+              name="asset"
+              onChange={[Function]}
+              value="EVRY"
+            >
+              <option
+                key="foo"
+                value="foo"
+              >
+                foo
+              </option>
+            </FormControl>
+          </FormGroup>
+        </Col>
+      </ForwardRef>
+    </Container>
+  </CardBody>
+  <CardFooter
+    className="WarpContent__footer"
+  >
+    <Container
+      fluid={true}
+    >
+      <ForwardRef
+        noGutters={false}
+      >
+        <Col
+          className="WarpContent__footer__btn"
+        >
+          <Button
+            active={false}
+            disabled={true}
+            type="submit"
+            variant="dark"
+          >
+            Transfer
+          </Button>
+        </Col>
+      </ForwardRef>
+    </Container>
+  </CardFooter>
+</Form>
+`;
+
 exports[`WarpContent When clicking a transfer button When isToEvrynet is false When source account balance is invalid should match an invalid feedback snapshot 1`] = `
 <Form
   className="WarpContent__form"
@@ -150,6 +446,153 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is false W
 `;
 
 exports[`WarpContent When clicking a transfer button When isToEvrynet is false When source account balance is valid should match a valid feedback snapshot 1`] = `
+<Form
+  className="WarpContent__form"
+  inline={false}
+  name="form"
+  onSubmit={[Function]}
+>
+  <CardBody
+    className="WarpContent__form__content"
+  >
+    <Container
+      fluid={true}
+    >
+      <ForwardRef
+        noGutters={false}
+      >
+        <Col>
+          <FormGroup
+            controlId="sourceAccountNumber"
+          >
+            <FormLabel
+              column={false}
+              srOnly={false}
+            >
+              <span>
+                From:
+              </span>
+            </FormLabel>
+            <FormControl
+              className="WarpContent__form__content__input__src WarpContent__form__content__input"
+              isInvalid={true}
+              name="sourceAccount"
+              onBlur={[Function]}
+              onChange={[Function]}
+              placeholder="Account Number"
+              type="text"
+              value=""
+            />
+            <Feedback
+              type="invalid"
+            >
+              Evrynet secret key is required.
+            </Feedback>
+          </FormGroup>
+        </Col>
+        <Col>
+          <FormGroup
+            controlId="destinationAccountNumber"
+          >
+            <FormLabel
+              column={false}
+              srOnly={false}
+            >
+              <span>
+                To:
+              </span>
+            </FormLabel>
+            <FormControl
+              className="WarpContent__form__content__input__dest WarpContent__form__content__input"
+              isInvalid={true}
+              name="destinationAccount"
+              onBlur={[Function]}
+              onChange={[Function]}
+              placeholder="Account Number"
+              type="text"
+              value=""
+            />
+            <Feedback
+              type="invalid"
+            >
+              The recipient Stellar account has no undefined trustline.
+            </Feedback>
+          </FormGroup>
+        </Col>
+      </ForwardRef>
+      <ForwardRef
+        className="WarpContent__form__content__amount"
+        noGutters={false}
+      >
+        <Col>
+          <FormGroup
+            controlId="assetAmount"
+          >
+            <FormControl
+              className="WarpContent__form__content__amount__input"
+              isInvalid={false}
+              name="amount"
+              onBlur={[Function]}
+              onChange={[Function]}
+              placeholder="0.00"
+              type="text"
+              value="1"
+            />
+            <Feedback
+              type="invalid"
+            />
+          </FormGroup>
+        </Col>
+        <Col>
+          <FormGroup
+            controlId="assetSelection"
+          >
+            <FormControl
+              as="select"
+              name="asset"
+              onChange={[Function]}
+              value="EVRY"
+            >
+              <option
+                key="EVRY"
+                value="EVRY"
+              >
+                EVRY
+              </option>
+            </FormControl>
+          </FormGroup>
+        </Col>
+      </ForwardRef>
+    </Container>
+  </CardBody>
+  <CardFooter
+    className="WarpContent__footer"
+  >
+    <Container
+      fluid={true}
+    >
+      <ForwardRef
+        noGutters={false}
+      >
+        <Col
+          className="WarpContent__footer__btn"
+        >
+          <Button
+            active={false}
+            disabled={true}
+            type="submit"
+            variant="dark"
+          >
+            Transfer
+          </Button>
+        </Col>
+      </ForwardRef>
+    </Container>
+  </CardFooter>
+</Form>
+`;
+
+exports[`WarpContent When clicking a transfer button When isToEvrynet is false When source account balance is valid should match a valid feedback snapshot 2`] = `
 <Form
   className="WarpContent__form"
   inline={false}

@@ -144,9 +144,7 @@ export default class WarpContent extends Component {
         let effectedElement = formControls[effected.name]
         effectedElement.touched = true
         for (const effect of effected.funcs) {
-          await effect(effectedElement, formControls).then((updatedElement) => {
-            effectedElement = updatedElement
-          })
+          effectedElement = await effect(effectedElement, formControls)
         }
         // false positive case since this is a synchronous process
         // eslint-disable-next-line require-atomic-updates

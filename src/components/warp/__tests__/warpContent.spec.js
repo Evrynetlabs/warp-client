@@ -559,6 +559,87 @@ describe('WarpContent', () => {
           expect(component).toMatchSnapshot()
         })
       })
+
+      describe('When asset is not in the destination account trustlines', () => {
+        it('should show an invalid feedback', async () => {
+          component.setProps({
+            isToEvrynet: false,
+            trustlines: {
+              ...component.props().trustlines,
+              state: [
+                { code: 'foo1', issuer: 'bar1' },
+                { code: 'foo2', issuer: 'bar2' },
+              ],
+            },
+            whitelistedAssets: {
+              state: [
+                {
+                  getCode: jest.fn().mockReturnValue('foo'),
+                  decimal: 1,
+                  getDecimal: jest.fn().mockReturnValue(1),
+                },
+              ],
+            },
+          })
+          component.instance()._getWhitelistedAssetByCode = jest.fn()
+          component.instance()._getWhitelistedAssetByCode.mockReturnValue({
+            code: 'foo',
+            issuer: 'bar',
+            getDecimal: () => 1,
+          })
+          await component.update()
+          await component.instance()._onSubmit(mockEvent)
+
+          expect(component.state().formControls.destinationAccount.valid).toBe(
+            false,
+          )
+          expect(
+            component.state().formControls.destinationAccount.errorMessage,
+          ).toBe('The recipient Stellar account has no foo trustline.')
+
+          expect(component).toMatchSnapshot()
+        })
+      })
+
+      describe('When asset is in the destination account trustlines', () => {
+        it('should show a valid feedback', async () => {
+          component.setProps({
+            isToEvrynet: false,
+            trustlines: {
+              ...component.props().trustlines,
+              state: [
+                { code: 'foo1', issuer: 'bar1' },
+                { code: 'foo2', issuer: 'bar2' },
+              ],
+            },
+            whitelistedAssets: {
+              state: [
+                {
+                  getCode: jest.fn().mockReturnValue('foo1'),
+                  decimal: 1,
+                  getDecimal: jest.fn().mockReturnValue(1),
+                },
+              ],
+            },
+          })
+          component.instance()._getWhitelistedAssetByCode = jest.fn()
+          component.instance()._getWhitelistedAssetByCode.mockReturnValue({
+            code: 'foo1',
+            issuer: 'bar1',
+            getDecimal: () => 1,
+          })
+          await component.update()
+          await component.instance()._onSubmit(mockEvent)
+
+          expect(component.state().formControls.destinationAccount.valid).toBe(
+            true,
+          )
+          expect(
+            component.state().formControls.destinationAccount.errorMessage,
+          ).toBe(null)
+          expect(component).toMatchSnapshot()
+        })
+      })
     })
 
     describe('When isToEvrynet is true', () => {
