@@ -43,6 +43,7 @@ export default class Warp extends Component {
                 accountBalance={this.props.accountBalance}
                 getTrustlines={this.props.getTrustlines}
                 trustlines={this.props.trustlines}
+                push={this.props.push}
               ></WarpContent>
             </Card>
           </Col>
@@ -83,4 +84,5 @@ Warp.propTypes = {
   toggleTransferSwitch: PropTypes.func.isRequired,
   getAccountBalance: PropTypes.func.isRequired,
   getTrustlines: PropTypes.func.isRequired,
+  push: PropTypes.func.isRequired,
 }

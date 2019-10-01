@@ -28,7 +28,7 @@ export default function(state = initialState, action) {
         ...state,
         [actionTypes.ASYNC_COLLECT_HASHES.stateKey]: {
           stellar: stellarTxHash,
-          evry: evrynetTxHash,
+          evrynet: evrynetTxHash,
         },
         [actionTypes.ASYNC_COLLECT_HASHES.loadingKey]: false,
         [actionTypes.ASYNC_COLLECT_HASHES.errorKey]: null,

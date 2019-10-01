@@ -10,6 +10,7 @@
 ---------- Vendor ------------
 */
 @import 'sass/vendor/bootstrap';
+@import 'sass/vendor/font-awesome';
 
 /**
 ---------- Reset ------------
@@ -19,4 +20,9 @@
 /**
 ---------- Layout ------------
 */
-@import 'sass/layout/header'
+@import 'sass/layout/header';
+
+/**
+---------- Component ------------
+*/
+@import 'sass/components/text-area'
