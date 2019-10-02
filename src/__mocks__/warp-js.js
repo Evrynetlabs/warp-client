@@ -6,6 +6,7 @@ export const spyGetWhitelistAssets = jest.fn()
 export const spyGetCode = jest.fn()
 export const spyGetAccountBalance = jest.fn()
 export const spyGetPublickeyFromPrivateKey = jest.fn()
+export const spyGetTrustlines = jest.fn()
 const mock = jest.fn().mockImplementation(() => {
   return {
     toEvrynet: spyToEvrynet,
@@ -19,6 +20,7 @@ const mock = jest.fn().mockImplementation(() => {
       stellar: {
         getAccountBalance: spyGetAccountBalance,
         getPublickeyFromPrivateKey: spyGetPublickeyFromPrivateKey,
+        getTrustlines: spyGetTrustlines,
       },
     },
     utils: {

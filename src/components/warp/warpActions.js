@@ -115,6 +115,35 @@ export const getAccountBalance = ({ asset = {}, privateKey = '' }) => {
   }
 }
 
+export const getTrustlinesSuccess = (trustlines) => ({
+  type: actionTypes.ASYNC_GET_TRUSTLINES.SUCCESS,
+  payload: trustlines,
+})
+
+export const getTrustlinesPending = (pendingStatus) => ({
+  type: actionTypes.ASYNC_GET_TRUSTLINES.PENDING,
+  payload: pendingStatus,
+})
+
+export const getTrustlinesError = (error) => ({
+  type: actionTypes.ASYNC_GET_TRUSTLINES.FAILURE,
+  payload: error,
+})
+
+export const getTrustlines = ({ privateKey = '' }) => {
+  const warp = new Warp()
+  return async (dispatch) => {
+    dispatch(getTrustlinesPending(true))
+    try {
+      const address = warp.client.stellar.getPublickeyFromPrivateKey(privateKey)
+      const trustlines = await warp.client.stellar.getTrustlines(address)
+      dispatch(getTrustlinesSuccess(trustlines.assets))
+    } catch (e) {
+      dispatch(getTrustlinesError(e))
+    }
+  }
+}
+
 export const toggleTransferSwitch = () => ({
   type: actionTypes.ASYNC_TOGGLE_WARP_SWITCH.SUCCESS,
   payload: !store.getState().warp[

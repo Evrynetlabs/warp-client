@@ -41,6 +41,8 @@ export default class Warp extends Component {
                 isToEvrynet={this.props.isToEvrynet}
                 getAccountBalance={this.props.getAccountBalance}
                 accountBalance={this.props.accountBalance}
+                getTrustlines={this.props.getTrustlines}
+                trustlines={this.props.trustlines}
                 push={this.props.push}
               ></WarpContent>
             </Card>
@@ -70,11 +72,17 @@ Warp.propTypes = {
     loading: PropTypes.bool,
     error: PropTypes.object,
   }),
+  trustlines: PropTypes.shape({
+    state: PropTypes.array,
+    loading: PropTypes.bool,
+    error: PropTypes.object,
+  }),
   isToEvrynet: PropTypes.bool.isRequired,
   toEvrynet: PropTypes.func.isRequired,
   toStellar: PropTypes.func.isRequired,
   getWhitelistAssets: PropTypes.func.isRequired,
   toggleTransferSwitch: PropTypes.func.isRequired,
   getAccountBalance: PropTypes.func.isRequired,
+  getTrustlines: PropTypes.func.isRequired,
   push: PropTypes.func.isRequired,
 }

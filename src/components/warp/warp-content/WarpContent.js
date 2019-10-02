@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card'
 import classNames from 'classnames'
 import { Container, Row, Col, Button, Form } from 'react-bootstrap'
 import 'Components/warp/warp-content/warpContent.scss'
-import { formatNumber } from '@/utils/format'
+import { removeTrailingDot, removeLeadingZero } from '@/utils/format'
 import PropTypes from 'prop-types'
 import Warp from 'warp-js'
 import map from 'lodash/map'
@@ -25,45 +25,57 @@ export default class WarpContent extends Component {
   constructor(props) {
     super(props)
     this.warp = new Warp()
-    this._validateAmountOnSubmit = this._validateAmountOnSubmit.bind(this)
-    this._validateAmountOnChange = this._validateAmountOnChange.bind(this)
-    const defaultFunc = {
-      onChangeValidation: (elem) => elem,
-      onBlurValidation: (elem) => elem,
-    }
+    this._validateAvailableAmounts = this._validateAvailableAmounts.bind(this)
+    this._validateDecimal = this._validateDecimal.bind(this)
+    this._validateTrustlines = this._validateTrustlines.bind(this)
     this.initialState = {
       styles: this._initStyles(),
       formControls: {
         asset: {
           value: this.warp.utils.getEvryAsset().getCode(),
-          onChangeValidation: defaultFunc.onChangeValidation,
+          effects: [{ name: 'amount', funcs: [this._validate] }],
         },
         amount: {
+          name: 'Amount',
           value: '',
           placeholder: '0.00',
           touched: false,
           valid: false,
-          onChangeValidation: this._validateAmountOnChange,
-          onBlurValidation: this._validateAmountOnChange,
-          onBlurValueAssign: formatNumber,
-          onSubmitValidation: this._validateAmountOnSubmit,
-          errorMessage: '',
+          validations: [
+            this._validateNotEmpty,
+            this._validateIsNumber,
+            this._validateMoreThanZero,
+            this._validateDecimal,
+          ],
+          formats: [removeLeadingZero, removeTrailingDot],
         },
         sourceAccount: {
+          name: 'Stellar secret key',
           value: '',
           placeholder: 'Account Number',
           touched: false,
           valid: false,
-          onChangeValidation: this._validateStellarAccount,
-          onBlurValidation: this._validateStellarAccount,
+          validations: [
+            this._validateNotEmpty,
+            this._validateStellarSecretFormat,
+          ],
         },
         destinationAccount: {
+          name: 'Evrynet secret key',
           value: '',
           placeholder: 'Account Number',
           touched: false,
           valid: false,
-          onChangeValidation: this._validateEvrynetAccount,
-          onBlurValidation: this._validateEvrynetAccount,
+          validations: [
+            this._validateNotEmpty,
+            this._validateEvrynetSecretFormat,
+          ],
+        },
+        form: {
+          effects: [
+            { name: 'amount', funcs: [this._validateAvailableAmounts] },
+            { name: 'destinationAccount', funcs: [this._validateTrustlines] },
+          ],
         },
       },
       transferFunc: props.toEvrynet,
@@ -100,179 +112,49 @@ export default class WarpContent extends Component {
     }
   }
 
-  _validateStellarAccount(e) {
-    let isValid = true
-    let errorMessage = null
+  /*
+    core state functions
+   */
 
-    if (!e.value) {
-      isValid = false
-      errorMessage = 'Stellar secret key is required.'
-    } else if (!StellarBase.StrKey.isValidEd25519SecretSeed(e.value)) {
-      isValid = false
-      errorMessage = 'Invalid Stellar secret key format.'
+  async _validate(e, formControls) {
+    if (has(e, 'validations')) {
+      e.valid = true
+      e.errorMessage = null
+      e.validations.forEach((validate) => {
+        if (e.valid) {
+          validate(e, formControls)
+        }
+      })
     }
-    e.valid = isValid
-    e.errorMessage = errorMessage
     return e
   }
 
-  _validateEvrynetAccount(e) {
-    let isValid = true
-    let errorMessage = null
-
-    if (!e.value) {
-      isValid = false
-      errorMessage = 'Evrynet secret key is required.'
-    } else if (!/^[a-f0-9]{64}$/i.test(e.value)) {
-      isValid = false
-      errorMessage = 'Invalid Evrynet secret key format.'
+  _format(e) {
+    if (e.valid && has(e, 'formats')) {
+      e.formats.forEach((format) => {
+        e.value = format(e.value)
+      })
     }
-    e.valid = isValid
-    e.errorMessage = errorMessage
     return e
   }
 
-  _validateAmountOnChange(e) {
-    const parts = split(e.value, '.')
-    const hasDecimals = parts.length >= 2
-    const whitelistedAsset = this._getWhitelistedAssetByCode(
-      this.state.formControls.asset.value,
-    )
-    if (isEmpty(e.value)) {
-      e.valid = false
-      e.errorMessage = 'Amount is required.'
-      return e
+  async _effect(sourceElement, formControls) {
+    let updatedFormControls = { ...formControls }
+    if (has(sourceElement, 'effects')) {
+      for (const effected of sourceElement.effects) {
+        let updatedElement = updatedFormControls[effected.name]
+        updatedElement.touched = true
+        for (const effect of effected.funcs) {
+          await effect(updatedElement, formControls)
+        }
+        updatedFormControls[effected.name] = updatedElement
+      }
     }
-    if (isNaN(Number(e.value))) {
-      e.valid = false
-      e.errorMessage = 'Amount must be a number.'
-      return e
-    }
-    if (Number(e.value) <= 0) {
-      e.valid = false
-      e.errorMessage = 'Amount must be greater than zero.'
-      return e
-    }
-    const decimal = min([
-      ATOMIC_STELLAR_DECIMAL_UNIT,
-      whitelistedAsset.getDecimal(),
-    ])
-    e.valid = hasDecimals ? parts[1].length <= decimal : true
-    e.errorMessage = e.valid
-      ? ''
-      : `Amount can only support a precision of ${decimal} decimals.`
-
-    return e
-  }
-
-  _changeHandler(event) {
-    const name = event.target.name
-    const value = event.target.value
-    const updatedControls = {
-      ...this.state.formControls,
-    }
-    let updatedFormElement = {
-      ...updatedControls[name],
-    }
-    updatedFormElement.touched = true
-    updatedFormElement.value = value
-    updatedFormElement = updatedFormElement.onChangeValidation(
-      updatedFormElement,
-    )
-    updatedControls[name] = updatedFormElement
-    this.setState({
-      formControls: updatedControls,
-    })
-  }
-
-  _blurHandler(event) {
-    const value = event.target.value
-    const name = event.target.name
-    const updatedControls = {
-      ...this.state.formControls,
-    }
-    let updatedFormElement = {
-      ...updatedControls[name],
-    }
-    updatedFormElement.touched = true
-    updatedFormElement = updatedFormElement.onBlurValidation(updatedFormElement)
-    updatedFormElement.value =
-      updatedFormElement.touched && updatedFormElement.valid
-        ? has(updatedFormElement, 'onBlurValueAssign')
-          ? updatedFormElement.onBlurValueAssign(value)
-          : value
-        : value
-    updatedControls[name] = updatedFormElement
-    this.setState({
-      formControls: updatedControls,
-    })
-  }
-
-  _listWhitelistedAssetsOptions() {
-    if (
-      this.props.whitelistedAssets.loading ||
-      isEmpty(this.props.whitelistedAssets.state)
-    )
-      return
-    return map(this.props.whitelistedAssets.state, (ech) => {
-      return (
-        <option key={ech.getCode()} value={ech.getCode()}>
-          {ech.getCode()}
-        </option>
-      )
-    })
-  }
-
-  _updateTransferFunction(prevProps) {
-    if (prevProps.isToEvrynet === this.props.isToEvrynet) return
-    this.setState({
-      transferFunc: this.props.isToEvrynet
-        ? this.props.toEvrynet
-        : this.props.toStellar,
-    })
-  }
-
-  _switchAccounts(prevProps) {
-    if (prevProps.isToEvrynet === this.props.isToEvrynet) return
-    const updatedFormControls = {
-      ...this.state.formControls,
-    }
-    const temp = updatedFormControls.sourceAccount
-    updatedFormControls.sourceAccount = {
-      ...updatedFormControls.destinationAccount,
-    }
-    updatedFormControls.destinationAccount = { ...temp }
-    this.setState({
-      formControls: updatedFormControls,
-    })
-  }
-
-  _getWhitelistedAssetByCode(code) {
-    return find(this.props.whitelistedAssets.state, (ech) => {
-      return ech.getCode() === code
-    })
-  }
-
-  _disabledTransfer() {
-    let result = reduce(
-      this.state.formControls,
-      (res, ech) => {
-        if (has(ech, 'valid')) return res || !ech.valid
-        return res
-      },
-      false,
-    )
-    return result
-  }
-
-  _toResult(payload) {
-    this.props.push({
-      pathname: '/result',
-      state: payload,
-    })
+    return updatedFormControls
   }
 
   async _transfer() {
+    if (this._disabledTransfer()) return
     const asset = this._getWhitelistedAssetByCode(
       this.state.formControls.asset.value,
     )
@@ -300,13 +182,74 @@ export default class WarpContent extends Component {
     this._toResult(locationState)
   }
 
-  async _validateAmountOnSubmit(e) {
+  /*
+    validation functions
+   */
+
+  _validateNotEmpty(e) {
+    if (!e.value) {
+      e.valid = false
+      e.errorMessage = `${e.name} is required.`
+    }
+    return e
+  }
+
+  _validateStellarSecretFormat(e) {
+    if (!StellarBase.StrKey.isValidEd25519SecretSeed(e.value)) {
+      e.valid = false
+      e.errorMessage = 'Invalid Stellar secret key format.'
+    }
+    return e
+  }
+
+  _validateEvrynetSecretFormat(e) {
+    if (!/^[a-f0-9]{64}$/i.test(e.value)) {
+      e.valid = false
+      e.errorMessage = 'Invalid Evrynet secret key format.'
+    }
+    return e
+  }
+
+  _validateIsNumber(e) {
+    if (isNaN(Number(e.value))) {
+      e.valid = false
+      e.errorMessage = 'Amount must be a number.'
+    }
+    return e
+  }
+
+  _validateMoreThanZero(e) {
+    if (Number(e.value) <= 0) {
+      e.valid = false
+      e.errorMessage = 'Amount must be greater than zero.'
+    }
+    return e
+  }
+
+  _validateDecimal(e, formControls) {
+    const parts = split(e.value, '.')
+    const hasDecimals = parts.length >= 2
     const whitelistedAsset = this._getWhitelistedAssetByCode(
-      this.state.formControls.asset.value,
+      formControls.asset.value,
+    )
+    const decimal = min([
+      ATOMIC_STELLAR_DECIMAL_UNIT,
+      whitelistedAsset.getDecimal(),
+    ])
+    if (hasDecimals && parts[1].length > decimal) {
+      e.valid = false
+      e.errorMessage = `Amount can only support a precision of ${decimal} decimals.`
+    }
+    return e
+  }
+
+  async _validateAvailableAmounts(e, formControls) {
+    const whitelistedAsset = this._getWhitelistedAssetByCode(
+      formControls.asset.value,
     )
     await this.props.getAccountBalance({
-      whitelistedAsset,
-      privateKey: this.state.formControls.sourceAccount.value,
+      asset: whitelistedAsset,
+      privateKey: formControls.sourceAccount.value,
     })
     const decimal = this.props.isToEvrynet
       ? ATOMIC_STELLAR_DECIMAL_UNIT
@@ -314,47 +257,198 @@ export default class WarpContent extends Component {
     e.valid = new BigNumber(
       this.props.accountBalance.state,
     ).isGreaterThanOrEqualTo(
-      new BigNumber(this.state.formControls.amount.value).shiftedBy(decimal),
+      new BigNumber(formControls.amount.value).shiftedBy(decimal),
     )
-    e.errorMessage = e.valid ? '' : 'Insufficient Amount'
+    e.errorMessage = e.valid ? null : 'Insufficient Amount'
     return e
   }
 
-  async _submitHandler(name) {
+  async _validateTrustlines(e, formControls) {
+    // validate only on moving asset to Stellar
+    if (this.props.isToEvrynet) return e
+    const selectedAsset = this._getWhitelistedAssetByCode(
+      formControls.asset.value,
+    )
+    // skip validation when asset type is Stellar's native
+    if (selectedAsset.code === 'XLM' && !selectedAsset.issuer) return e
+    await this.props.getTrustlines({
+      privateKey: formControls.destinationAccount.value,
+    })
+    const trustlines = this.props.trustlines.state
+    e.valid = trustlines.some((trustline) => {
+      return (
+        trustline.code === selectedAsset.code &&
+        trustline.issuer === selectedAsset.issuer
+      )
+    })
+    e.errorMessage = e.valid
+      ? null
+      : `The recipient Stellar account has no ${selectedAsset.code} trustline.`
+    return e
+  }
+
+  /*
+    handler functions
+   */
+
+  async _changeHandler(event) {
+    const name = event.target.name
+    const value = event.target.value
+    let updatedControls = {
+      ...this.state.formControls,
+    }
+
+    // update changing element
+    let updatedFormElement = {
+      ...updatedControls[name],
+    }
+    // update element state
+    // touch-update-validate
+    updatedFormElement.touched = true
+    updatedFormElement.value = value
+    updatedFormElement = await this._validate(
+      updatedFormElement,
+      updatedControls,
+    )
+    updatedControls[name] = updatedFormElement
+
+    // update the effected elements
+    updatedControls = await this._effect(updatedFormElement, updatedControls)
+
+    this.setState({
+      formControls: updatedControls,
+    })
+  }
+
+  async _blurHandler(event) {
+    const name = event.target.name
     const updatedControls = {
       ...this.state.formControls,
     }
     let updatedFormElement = {
       ...updatedControls[name],
     }
+    // update element state
+    // touch-validate-format
     updatedFormElement.touched = true
-    updatedFormElement = await updatedFormElement.onSubmitValidation(
+    updatedFormElement = await this._validate(
       updatedFormElement,
+      updatedControls,
     )
-    updatedControls[name] = updatedFormElement
+    updatedControls[name] = this._format(updatedFormElement)
     this.setState({
       formControls: updatedControls,
     })
   }
 
-  async _handleSubmit(e) {
+  async _submitHandler(event) {
     try {
-      e.preventDefault()
-      let promises = []
-      const names = split(e.target.name, ',')
-      for (let name of names) {
-        promises.push(this._submitHandler(name))
-      }
-      await Promise.all(promises)
-      await this._transfer()
+      event.preventDefault()
+      this._onSubmit(event).then(() => this._transfer())
     } catch (err) {
       console.error(err)
     }
   }
 
-  componentDidUpdate(prevProps) {
-    this._updateTransferFunction(prevProps)
-    this._switchAccounts(prevProps)
+  /*
+    others functions
+   */
+
+  _listWhitelistedAssetsOptions() {
+    if (
+      this.props.whitelistedAssets.loading ||
+      isEmpty(this.props.whitelistedAssets.state)
+    )
+      return
+    return map(this.props.whitelistedAssets.state, (ech) => {
+      return (
+        <option key={ech.getCode()} value={ech.getCode()}>
+          {ech.getCode()}
+        </option>
+      )
+    })
+  }
+  _getWhitelistedAssetByCode(code) {
+    return find(this.props.whitelistedAssets.state, (ech) => {
+      return ech.getCode() === code
+    })
+  }
+
+  _disabledTransfer() {
+    let result = reduce(
+      this.state.formControls,
+      (res, ech) => {
+        if (has(ech, 'valid')) return res || !ech.valid
+        return res
+      },
+      false,
+    )
+    return result
+  }
+
+  _toResult(payload) {
+    this.props.push({
+      pathname: '/result',
+      state: payload,
+    })
+  }
+
+  _updateTransferFunction() {
+    return this.props.isToEvrynet ? this.props.toEvrynet : this.props.toStellar
+  }
+
+  _switchAccounts(updatedFormControls) {
+    const temp = updatedFormControls.sourceAccount
+    updatedFormControls.sourceAccount = {
+      ...updatedFormControls.destinationAccount,
+    }
+    updatedFormControls.destinationAccount = { ...temp }
+    return updatedFormControls
+  }
+
+  async _updateAddressError(updatedFormControls) {
+    const elements = ['sourceAccount', 'destinationAccount', 'amount']
+    for (const e of elements) {
+      updatedFormControls[e].touched = true
+      // eslint-disable-next-line require-atomic-updates
+      updatedFormControls[e] = await this._validate(
+        updatedFormControls[e],
+        updatedFormControls,
+      )
+    }
+    return updatedFormControls
+  }
+
+  async _onSubmit(event) {
+    const name = event.target.name
+    let updatedControls = {
+      ...this.state.formControls,
+    }
+    let updatedFormElement = {
+      ...updatedControls[name],
+    }
+
+    // update element state
+    // touch-effect
+    updatedFormElement.touched = true
+    updatedControls[name] = updatedFormElement
+
+    // update the effected elements
+    updatedControls = await this._effect(updatedFormElement, updatedControls)
+    this.setState({
+      formControls: updatedControls,
+    })
+  }
+
+  async componentDidUpdate(prevProps) {
+    if (prevProps.isToEvrynet === this.props.isToEvrynet) return
+    const updatedState = this.state
+    updatedState.transferFunc = this._updateTransferFunction()
+    updatedState.formControls = this._switchAccounts(updatedState.formControls)
+    updatedState.formControls = await this._updateAddressError(
+      updatedState.formControls,
+    )
+    this.setState(updatedState)
   }
 
   async componentDidMount() {
@@ -364,10 +458,10 @@ export default class WarpContent extends Component {
   render() {
     return (
       <Form
-        name="amount"
+        name="form"
         className={this.state.styles.form}
         onSubmit={async (e) => {
-          await this._handleSubmit(e)
+          await this._submitHandler(e)
         }}
       >
         <Card.Body className={this.state.styles.content}>
@@ -517,10 +611,16 @@ WarpContent.propTypes = {
     loading: PropTypes.bool,
     error: PropTypes.object,
   }),
+  trustlines: PropTypes.shape({
+    state: PropTypes.array,
+    loading: PropTypes.bool,
+    error: PropTypes.object,
+  }),
   toEvrynet: PropTypes.func.isRequired,
   toStellar: PropTypes.func.isRequired,
   isToEvrynet: PropTypes.bool.isRequired,
   getWhitelistAssets: PropTypes.func.isRequired,
   getAccountBalance: PropTypes.func.isRequired,
+  getTrustlines: PropTypes.func.isRequired,
   push: PropTypes.func.isRequired,
 }

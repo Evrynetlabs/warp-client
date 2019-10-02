@@ -12,6 +12,9 @@ export const initState = () => {
     [actionTypes.ASYNC_GET_ACCOUNT_BALANCE.stateKey]: null,
     [actionTypes.ASYNC_GET_ACCOUNT_BALANCE.loadingKey]: true,
     [actionTypes.ASYNC_GET_ACCOUNT_BALANCE.errorKey]: null,
+    [actionTypes.ASYNC_GET_TRUSTLINES.stateKey]: [],
+    [actionTypes.ASYNC_GET_TRUSTLINES.loadingKey]: true,
+    [actionTypes.ASYNC_GET_TRUSTLINES.errorKey]: null,
   }
 }
 
@@ -99,6 +102,30 @@ export default function(state = initialState, action) {
         [actionTypes.ASYNC_GET_ACCOUNT_BALANCE.loadingKey]: false,
         [actionTypes.ASYNC_GET_ACCOUNT_BALANCE.errorKey]: null,
         [actionTypes.ASYNC_GET_ACCOUNT_BALANCE.stateKey]: action.payload,
+      }
+    }
+    case actionTypes.ASYNC_GET_TRUSTLINES.PENDING: {
+      return {
+        ...state,
+        [actionTypes.ASYNC_GET_TRUSTLINES.stateKey]: [],
+        [actionTypes.ASYNC_GET_TRUSTLINES.loadingKey]: action.payload,
+        [actionTypes.ASYNC_GET_TRUSTLINES.errorKey]: null,
+      }
+    }
+    case actionTypes.ASYNC_GET_TRUSTLINES.FAILURE: {
+      return {
+        ...state,
+        [actionTypes.ASYNC_GET_TRUSTLINES.stateKey]: [],
+        [actionTypes.ASYNC_GET_TRUSTLINES.loadingKey]: false,
+        [actionTypes.ASYNC_GET_TRUSTLINES.errorKey]: action.payload,
+      }
+    }
+    case actionTypes.ASYNC_GET_TRUSTLINES.SUCCESS: {
+      return {
+        ...state,
+        [actionTypes.ASYNC_GET_TRUSTLINES.loadingKey]: false,
+        [actionTypes.ASYNC_GET_TRUSTLINES.errorKey]: null,
+        [actionTypes.ASYNC_GET_TRUSTLINES.stateKey]: action.payload,
       }
     }
     default:

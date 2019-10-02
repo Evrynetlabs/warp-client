@@ -6,6 +6,7 @@ import {
   selectCollectedTxHashes,
   selectWhitelistedAssets,
   selectAccountBalance,
+  selectTrustlines,
 } from 'Components/warp/warpSelectors'
 import {
   toEvrynet,
@@ -13,6 +14,7 @@ import {
   getWhitelistAssets,
   toggleTransferSwitch,
   getAccountBalance,
+  getTrustlines,
 } from 'Components/warp/warpActions'
 import { push } from 'connected-react-router'
 import { withRouter } from 'react-router'
@@ -22,6 +24,7 @@ const mapStateToProps = (state) => ({
   txHashes: selectCollectedTxHashes(state),
   whitelistedAssets: selectWhitelistedAssets(state),
   accountBalance: selectAccountBalance(state),
+  trustlines: selectTrustlines(state),
 })
 
 const mapDispatchToProps = (dispatch) => {
@@ -31,6 +34,7 @@ const mapDispatchToProps = (dispatch) => {
     getWhitelistAssets: () => dispatch(getWhitelistAssets()),
     toggleTransferSwitch: () => dispatch(toggleTransferSwitch()),
     getAccountBalance: (payload) => dispatch(getAccountBalance(payload)),
+    getTrustlines: (payload) => dispatch(getTrustlines(payload)),
     push: (location) => dispatch(push(location)),
   }
 }

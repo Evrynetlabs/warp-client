@@ -39,3 +39,15 @@ export const selectAccountBalance = createStructuredSelector({
     return state.warp[actionTypes.ASYNC_GET_ACCOUNT_BALANCE.errorKey]
   },
 })
+
+export const selectTrustlines = createStructuredSelector({
+  state: (state) => {
+    return state.warp[actionTypes.ASYNC_GET_TRUSTLINES.stateKey]
+  },
+  loading: (state) => {
+    return state.warp[actionTypes.ASYNC_GET_TRUSTLINES.loadingKey]
+  },
+  error: (state) => {
+    return state.warp[actionTypes.ASYNC_GET_TRUSTLINES.errorKey]
+  },
+})
