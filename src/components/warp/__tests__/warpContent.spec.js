@@ -9,7 +9,7 @@ describe('WarpContent', () => {
     txHashes: {
       state: {
         stellar: 'foo',
-        evry: 'bar',
+        evrynet: 'bar',
       },
       loading: false,
       error: null,

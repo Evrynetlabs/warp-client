@@ -122,7 +122,7 @@ export default class WarpContent extends Component {
       e.errorMessage = null
       e.validations.forEach((validate) => {
         if (e.valid) {
-          e = validate(e, formControls)
+          validate(e, formControls)
         }
       })
     }
@@ -139,19 +139,18 @@ export default class WarpContent extends Component {
   }
 
   async _effect(sourceElement, formControls) {
+    let updatedFormControls = { ...formControls }
     if (has(sourceElement, 'effects')) {
       for (const effected of sourceElement.effects) {
-        let effectedElement = formControls[effected.name]
-        effectedElement.touched = true
+        let updatedElement = updatedFormControls[effected.name]
+        updatedElement.touched = true
         for (const effect of effected.funcs) {
-          effectedElement = await effect(effectedElement, formControls)
+          await effect(updatedElement, formControls)
         }
-        // false positive case since this is a synchronous process
-        // eslint-disable-next-line require-atomic-updates
-        formControls[effected.name] = effectedElement
+        updatedFormControls[effected.name] = updatedElement
       }
     }
-    return formControls
+    return updatedFormControls
   }
 
   async _transfer() {
