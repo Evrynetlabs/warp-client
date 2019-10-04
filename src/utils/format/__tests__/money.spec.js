@@ -42,7 +42,7 @@ describe('toCurrency', () => {
     ['1.1', 2, '1.1'],
     ['1.100000', 8, '1.1'],
     ['1000', 2, '1,000'],
-    ['1900000', 2, '1,900,000'],
+    ['1001.0010', 4, '1,001.001'],
   ])('should create a correct number string', (ech, decimals, expected) => {
     expect(toCurrency(ech, decimals)).toBe(expected)
   })
