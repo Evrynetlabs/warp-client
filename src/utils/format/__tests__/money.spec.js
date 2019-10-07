@@ -1,4 +1,9 @@
-import { cleanNonNumber, removeLeadingZero, removeTrailingDot } from '@/utils/format'
+import {
+  cleanNonNumber,
+  removeLeadingZero,
+  removeTrailingDot,
+  toCurrency,
+} from '@/utils/format'
 
 describe('formatNumber', () => {
   test.each([
@@ -11,16 +16,34 @@ describe('formatNumber', () => {
 })
 
 describe('removeLeadingZero', () => {
-  test.each([
-    ['00001', '1'],
-    ['0.1', '0.1'],
-  ])('should create a correct number string', (ech, expected) => {
-    expect(removeLeadingZero(ech)).toBe(expected)
-  })
+  test.each([['00001', '1'], ['0.1', '0.1']])(
+    'should create a correct number string',
+    (ech, expected) => {
+      expect(removeLeadingZero(ech)).toBe(expected)
+    },
+  )
 })
 
 describe('removeTrailingDot', () => {
-  test.each([['00001.', '00001'], ['1.', '1']])('should create a correct number string', (ech, expected) => {
-    expect(removeTrailingDot(ech)).toBe(expected)
+  test.each([['00001.', '00001'], ['1.', '1']])(
+    'should create a correct number string',
+    (ech, expected) => {
+      expect(removeTrailingDot(ech)).toBe(expected)
+    },
+  )
+})
+
+describe('toCurrency', () => {
+  test.each([
+    ['1', 2, '1'],
+    ['1.000', 2, '1'],
+    ['1.111', 2, '1.11'],
+    ['1111.111', 2, '1,111.11'],
+    ['1.1', 2, '1.1'],
+    ['1.100000', 8, '1.1'],
+    ['1000', 2, '1,000'],
+    ['1001.0010', 4, '1,001.001'],
+  ])('should create a correct number string', (ech, decimals, expected) => {
+    expect(toCurrency(ech, decimals)).toBe(expected)
   })
 })
