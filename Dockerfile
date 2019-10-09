@@ -14,7 +14,9 @@ RUN apk update && \
 # TODO: add the priv content to the evry-deploykey.
 # TODO: remove the priv when the repo has been published.
 RUN mkdir /root/.ssh
-COPY ./warp-deploykey /root/.ssh/id_rsa
+COPY ./docker/warp-deploykey /root/.ssh/id_rsa
+
+RUN cat /root/.ssh/id_rsa
 
 RUN cat /root/.ssh/id_rsa
 RUN chmod 600 /root/.ssh
@@ -39,14 +41,15 @@ RUN yarn link
 
 WORKDIR /app
 
-COPY ./package.json ./
-COPY ./yarn.lock ./
+COPY package.json ./
+COPY yarn.lock ./
 
 RUN yarn install
 RUN yarn add node-sass --force
+RUN yarn link warp-js
 
 COPY . .
 
-RUN yarn link warp-js
+RUN ls /app
 
 CMD yarn start

@@ -2,7 +2,7 @@ version: '3'
 services:
   warp:
     build:
-      context: ./
+      context: ../
       dockerfile: Dockerfile
     ports:
       - 3000:3000
@@ -11,5 +11,5 @@ services:
       HOST: 0.0.0.0
       NODE_ENV: development
     volumes:
-      - ./:/app
+      - ../:/app
       - /app/node_modules/
