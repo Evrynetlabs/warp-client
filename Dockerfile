@@ -16,12 +16,8 @@ RUN apk update && \
 RUN mkdir /root/.ssh
 COPY ./docker/warp-deploykey /root/.ssh/id_rsa
 
-RUN cat /root/.ssh/id_rsa
-
-RUN cat /root/.ssh/id_rsa
 RUN chmod 600 /root/.ssh
 RUN chmod 600 /root/.ssh/id_rsa
-RUN ls -la /root/.ssh/id_rsa
 
 # make sure your domain is accepted
 RUN ssh-keyscan -H github.com >> /root/.ssh/known_hosts
@@ -49,7 +45,5 @@ RUN yarn add node-sass --force
 RUN yarn link warp-js
 
 COPY . .
-
-RUN ls /app
 
 CMD yarn start
