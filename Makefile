@@ -16,6 +16,7 @@ run:
 	docker-compose -f docker/docker-compose.yml run --service-ports \
 	-e WARP_ADDRESS=$(warp_address) \
 	-e WARP_GRPC_HOST=$(grpc_host) \
+	-e WARP_HTTP_PROVIDER_HOST=$(http_provider_host) \
 	$(APP_NAME)
 
 .PHONY: up
