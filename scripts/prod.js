@@ -1,9 +1,5 @@
 'use strict'
 
-// Do this as the first thing so that any code reading it knows the right env.
-process.env.BABEL_ENV = 'production'
-process.env.NODE_ENV = 'production'
-
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
 // terminate the Node.js process with a non-zero exit code.
@@ -14,6 +10,7 @@ process.on('unhandledRejection', (err) => {
 // Ensure environment variables are read.
 require('../config/env')
 
+const express = require('express')
 const path = require('path')
 const chalk = require('react-dev-utils/chalk')
 const fs = require('fs-extra')
@@ -47,74 +44,89 @@ const config = configFactory('production')
 // We require that you explicitly set browsers and do not fall back to
 // browserslist defaults.
 const { checkBrowsers } = require('react-dev-utils/browsersHelper')
-checkBrowsers(paths.appPath, isInteractive)
-  .then(() => {
-    // First, read the current file sizes in build directory.
-    // This lets us display how much they changed later.
-    return measureFileSizesBeforeBuild(paths.appBuild)
-  })
-  .then((previousFileSizes) => {
-    // Remove all content but keep the directory so that
-    // if you're in it, you don't end up in Trash
-    fs.emptyDirSync(paths.appBuild)
-    // Merge with the public folder
-    copyPublicFolder()
-    // Start the webpack build
-    return build(previousFileSizes)
-  })
-  .then(
-    ({ stats, previousFileSizes, warnings }) => {
-      if (warnings.length) {
-        console.log(chalk.yellow('Compiled with warnings.\n'))
-        console.log(warnings.join('\n\n'))
-        console.log(
-          '\nSearch for the ' +
-            chalk.underline(chalk.yellow('keywords')) +
-            ' to learn more about each warning.',
+
+const app = express()
+
+const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000
+const HOST = process.env.HOST || '0.0.0.0'
+
+function run() {
+  checkBrowsers(paths.appPath, isInteractive)
+    .then(() => {
+      // First, read the current file sizes in build directory.
+      // This lets us display how much they changed later.
+      return measureFileSizesBeforeBuild(paths.appBuild)
+    })
+    .then((previousFileSizes) => {
+      // Remove all content but keep the directory so that
+      // if you're in it, you don't end up in Trash
+      fs.emptyDirSync(paths.appBuild)
+      // Merge with the public folder
+      copyPublicFolder()
+      // Start the webpack build
+      return build(previousFileSizes)
+    })
+    .then(
+      ({ stats, previousFileSizes, warnings }) => {
+        if (warnings.length) {
+          console.log(chalk.yellow('Compiled with warnings.\n'))
+          console.log(warnings.join('\n\n'))
+          console.log(
+            '\nSearch for the ' +
+              chalk.underline(chalk.yellow('keywords')) +
+              ' to learn more about each warning.',
+          )
+          console.log(
+            'To ignore, add ' +
+              chalk.cyan('// eslint-disable-next-line') +
+              ' to the line before.\n',
+          )
+        } else {
+          console.log(chalk.green('Compiled successfully.\n'))
+        }
+
+        console.log('File sizes after gzip:\n')
+        printFileSizesAfterBuild(
+          stats,
+          previousFileSizes,
+          paths.appBuild,
+          WARN_AFTER_BUNDLE_GZIP_SIZE,
+          WARN_AFTER_CHUNK_GZIP_SIZE,
         )
-        console.log(
-          'To ignore, add ' +
-            chalk.cyan('// eslint-disable-next-line') +
-            ' to the line before.\n',
+        console.log()
+
+        const appPackage = require(paths.appPackageJson)
+        const publicUrl = paths.publicUrl
+        const publicPath = config.output.publicPath
+        const buildFolder = path.relative(process.cwd(), paths.appBuild)
+        printHostingInstructions(
+          appPackage,
+          publicUrl,
+          publicPath,
+          buildFolder,
+          useYarn,
         )
-      } else {
-        console.log(chalk.green('Compiled successfully.\n'))
+        app.use(express.static(path.join(__dirname, 'build')))
+
+        app.get('/', function(req, res) {
+          res.sendFile(path.join(__dirname, 'build', 'index.html'))
+        })
+
+        app.listen(DEFAULT_PORT, HOST)
+      },
+      (err) => {
+        console.log(chalk.red('Failed to compile.\n'))
+        printBuildError(err)
+        process.exit(1)
+      },
+    )
+    .catch((err) => {
+      if (err && err.message) {
+        console.log(err.message)
       }
-
-      console.log('File sizes after gzip:\n')
-      printFileSizesAfterBuild(
-        stats,
-        previousFileSizes,
-        paths.appBuild,
-        WARN_AFTER_BUNDLE_GZIP_SIZE,
-        WARN_AFTER_CHUNK_GZIP_SIZE,
-      )
-      console.log()
-
-      const appPackage = require(paths.appPackageJson)
-      const publicUrl = paths.publicUrl
-      const publicPath = config.output.publicPath
-      const buildFolder = path.relative(process.cwd(), paths.appBuild)
-      printHostingInstructions(
-        appPackage,
-        publicUrl,
-        publicPath,
-        buildFolder,
-        useYarn,
-      )
-    },
-    (err) => {
-      console.log(chalk.red('Failed to compile.\n'))
-      printBuildError(err)
       process.exit(1)
-    },
-  )
-  .catch((err) => {
-    if (err && err.message) {
-      console.log(err.message)
-    }
-    process.exit(1)
-  })
+    })
+}
 
 // Create the production build and print the deployment instructions.
 function build(previousFileSizes) {
@@ -186,4 +198,8 @@ function copyPublicFolder() {
     dereference: true,
     filter: (file) => file !== paths.appHtml,
   })
+}
+
+module.exports = {
+  run,
 }
