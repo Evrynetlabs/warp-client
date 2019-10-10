@@ -1,4 +1,4 @@
-import { Warp, WarpConfig, initWarpConfig } from 'warp-js'
+import Warp, { WarpConfig, initWarpConfig } from 'warp-js'
 let warpInstance
 
 export default function getWarpInstance() {

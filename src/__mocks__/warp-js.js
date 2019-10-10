@@ -30,6 +30,6 @@ const mock = jest.fn().mockImplementation(() => {
     },
   }
 })
-export default {
-  Warp: mock,
-}
+export const WarpConfig = jest.fn()
+export const initWarpConfig = jest.fn()
+export default mock
