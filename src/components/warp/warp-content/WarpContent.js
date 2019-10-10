@@ -5,7 +5,7 @@ import { Container, Row, Col, Button, Form } from 'react-bootstrap'
 import 'Components/warp/warp-content/warpContent.scss'
 import { removeTrailingDot, removeLeadingZero } from '@/utils/format'
 import PropTypes from 'prop-types'
-import Warp from 'warp-js'
+import { getWarpInstance } from '@/utils/singleton'
 import map from 'lodash/map'
 import isEmpty from 'lodash/isEmpty'
 import find from 'lodash/find'
@@ -24,7 +24,7 @@ const {
 export default class WarpContent extends Component {
   constructor(props) {
     super(props)
-    this.warp = new Warp()
+    this.warp = getWarpInstance()
     this._validateAvailableAmounts = this._validateAvailableAmounts.bind(this)
     this._validateDecimal = this._validateDecimal.bind(this)
     this._validateTrustlines = this._validateTrustlines.bind(this)

@@ -9,7 +9,6 @@ import Routes from '@/routes'
 
 class App extends Component {
   render() {
-    console.log(process.env, 'test envs')
     return (
       <Provider store={store}>
         <ConnectedRouter history={history}>

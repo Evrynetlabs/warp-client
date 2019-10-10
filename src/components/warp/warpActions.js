@@ -1,5 +1,5 @@
 import actionTypes from 'Components/warp/warpActionTypes'
-import Warp from 'warp-js'
+import { getWarpInstance } from '@/utils/singleton'
 import store from '@/store'
 
 export const collectTxHashesSuccess = ({ stellarTxHash, evrynetTxHash }) => ({
@@ -18,7 +18,7 @@ export const collectTxHashesError = (error) => ({
 })
 
 export const toEvrynet = ({ src, dest, amount, asset }) => {
-  const warp = new Warp()
+  const warp = getWarpInstance()
   return async (dispatch) => {
     dispatch(collectTxHashesPending(true))
     try {
@@ -36,7 +36,7 @@ export const toEvrynet = ({ src, dest, amount, asset }) => {
 }
 
 export const toStellar = ({ src, dest, amount, asset }) => {
-  const warp = new Warp()
+  const warp = getWarpInstance()
   return async (dispatch) => {
     dispatch(collectTxHashesPending(true))
     try {
@@ -69,7 +69,7 @@ export const getWhitelistAssetsError = (error) => ({
 })
 
 export const getWhitelistAssets = () => {
-  const warp = new Warp()
+  const warp = getWarpInstance()
   return async (dispatch) => {
     dispatch(getWhitelistAssetsPending(true))
     try {
@@ -97,7 +97,7 @@ export const getAccountBalanceError = (error) => ({
 })
 
 export const getAccountBalance = ({ asset = {}, privateKey = '' }) => {
-  const warp = new Warp()
+  const warp = getWarpInstance()
   const client = store.getState().warp[
     actionTypes.ASYNC_TOGGLE_WARP_SWITCH.stateKey
   ]
@@ -131,7 +131,7 @@ export const getTrustlinesError = (error) => ({
 })
 
 export const getTrustlines = ({ privateKey = '' }) => {
-  const warp = new Warp()
+  const warp = getWarpInstance()
   return async (dispatch) => {
     dispatch(getTrustlinesPending(true))
     try {

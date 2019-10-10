@@ -14,7 +14,6 @@ build-nocache:
 .PHONY: run
 run: 
 	docker-compose -f docker/docker-compose.yml run --service-ports \
-	-e WARP_RPC=$(rpc) \
 	-e WARP_ADDRESS=$(warp_address) \
 	-e WARP_GRPC_HOST=$(grpc_host) \
 	$(APP_NAME)
