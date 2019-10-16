@@ -13,7 +13,7 @@ const Result = (props) => {
   const { styles } = useInitStyles()
   const {
     amount,
-    asset: { code, decimal },
+    asset: { code },
     src,
     dest,
     txHashes,
@@ -48,7 +48,7 @@ const Result = (props) => {
                         [styles.amount]: true,
                       })}
                     >
-                      <h1>{`${toCurrency(amount, decimal)} ${code}`}</h1>
+                      <h1>{`${toCurrency(amount)} ${code}`}</h1>
                     </Col>
                   </Row>
                   <Row>
