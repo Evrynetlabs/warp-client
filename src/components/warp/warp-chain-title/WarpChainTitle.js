@@ -1,34 +1,39 @@
 import React, { Component } from 'react'
 import Card from 'react-bootstrap/Card'
 import classNames from 'classnames'
-import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Container, Row, Col } from 'react-bootstrap'
 import PropTypes from 'prop-types'
+import { ReactComponent as EvrynetIcon } from '@/assets/icons/evrynet.svg'
+import { ReactComponent as StellarIcon } from '@/assets/icons/stellar.svg'
+import { ReactComponent as SwapIcon } from '@/assets/icons/swap.svg'
 import 'Components/warp/warp-chain-title/warpChainTitle.scss'
 
 export default class WarpChainTitle extends Component {
   constructor(props) {
     super(props)
     const chain = {
-      EVRY: 'Evrynet',
-      XLM: 'Stellar',
+      EVRYNET: EvrynetIcon,
+      XLM: StellarIcon,
     }
     this.stylesMain = classNames({
       [this.constructor.name]: true,
     })
-    this.stylesAssetElem = `${this.stylesMain}__asset`
-    this.stylesSwapElem = `${this.stylesMain}__swap`
+    this.stylesRow = `${this.stylesMain}__row`
+    this.stylesAssetElem = `${this.stylesRow}__asset`
+    this.stylesAssetText = `${this.stylesAssetElem}__text`
+    this.stylesSwapElem = `${this.stylesRow}__swap`
     this.state = {
       styles: {
         main: this.stylesMain,
         asset: this.stylesAssetElem,
         swap: this.stylesSwapElem,
+        row: this.stylesRow,
+        assetText: this.stylesAssetText,
       },
-      chain: chain,
+      chain,
       swap: {
         src: chain.XLM,
-        dest: chain.EVRY,
+        dest: chain.EVRYNET,
       },
     }
   }
@@ -39,14 +44,14 @@ export default class WarpChainTitle extends Component {
       this.setState({
         swap: {
           src: this.state.chain.XLM,
-          dest: this.state.chain.EVRY,
+          dest: this.state.chain.EVRYNET,
         },
       })
       return
     }
     this.setState({
       swap: {
-        src: this.state.chain.EVRY,
+        src: this.state.chain.EVRYNET,
         dest: this.state.chain.XLM,
       },
     })
@@ -57,14 +62,22 @@ export default class WarpChainTitle extends Component {
   }
 
   render() {
+    const SrcAsset = this.state.swap.src
+    const DestAsset = this.state.swap.dest
     return (
       <Card.Header className={this.state.styles.main}>
         <Container fluid>
-          <Row>
-            <Col xs="5" className={this.state.styles.asset}>
-              <span className={this.state.styles.asset}>
-                {this.state.swap.src}
-              </span>
+          <Row className={this.state.styles.row}>
+            <Col
+              xs="5"
+              className={classNames({
+                [this.state.styles.asset]: true,
+                'text-format-title': true,
+              })}
+            >
+              <div className={this.state.styles.assetText}>
+                <span>From</span> <SrcAsset></SrcAsset>
+              </div>
             </Col>
             <Col
               xs="2"
@@ -73,10 +86,18 @@ export default class WarpChainTitle extends Component {
                 this.props.toggleTransferSwitch()
               }}
             >
-              <FontAwesomeIcon icon={faExchangeAlt}></FontAwesomeIcon>
+              <SwapIcon></SwapIcon>
             </Col>
-            <Col xs="5" className={this.state.styles.asset}>
-              <span>{this.state.swap.dest}</span>
+            <Col
+              xs="5"
+              className={classNames({
+                [this.state.styles.asset]: true,
+                'text-format-title': true,
+              })}
+            >
+              <div className={this.state.styles.assetText}>
+                <span>To</span> <DestAsset></DestAsset>
+              </div>
             </Col>
           </Row>
         </Container>

@@ -10,6 +10,7 @@
 
   html {
     box-sizing: border-box;
+    font-size: 62.5%
   }
   
   html, 
@@ -23,7 +24,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     padding: 0;
-    background: $gradient;
+    background: map-get($gradient, 'body');
   }
   
   code {

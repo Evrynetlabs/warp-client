@@ -90,14 +90,7 @@ $galaxy: #1e124f !default;
 
 $revolver: #2e1535 !default;
 
-$gradient_hero: linear-gradient(
-  130deg,
-  $galaxy 50%,
-  $fountain 100%
-) !default;
-
-$gradient: linear-gradient(
-  130deg,
-  $galaxy 26%,
-  $fountain 100%
+$gradient: (
+  'body': linear-gradient(136deg, #1d114e -7%, #1e124f 51%, #2d3e6b 63%, #5abfbc 99%),
+  'title': linear-gradient(to right, #000000, #1d114e 50%, #5abfbc)
 ) !default;
