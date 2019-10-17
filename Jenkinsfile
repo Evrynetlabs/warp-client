@@ -26,7 +26,7 @@ pipeline {
                     sh '''
                         echo "Build Image"
                         docker login -u ${gitlabUsername} -p ${gitlabPassword} registry.gitlab.com
-                        cp /var/lib/jenkins/evry/evry-deploykey docker/evry-deploykey
+                        cp /var/lib/jenkins/evry/warp-js-deploykey docker/evry-deploykey
                         docker build --pull -t ${dockerImage} -f docker/Dockerfile .
                     '''
                 }
