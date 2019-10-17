@@ -14,7 +14,7 @@ RUN apk update && \
 # TODO: add the priv content to the evry-deploykey.
 # TODO: remove the priv when the repo has been published.
 RUN mkdir /root/.ssh
-COPY ./docker/warp-deploykey /root/.ssh/id_rsa
+COPY ./docker/evry-deploykey /root/.ssh/id_rsa
 
 RUN chmod 600 /root/.ssh
 RUN chmod 600 /root/.ssh/id_rsa
