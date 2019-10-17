@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Navbar from 'react-bootstrap/Navbar'
 import classNames from 'classnames'
-import { SvgLogoCopyright } from 'Components/logo'
+import { ReactComponent as Copyright } from '@/assets/icons/copyright.svg'
 
 export default class Header extends Component {
   constructor(props) {
@@ -24,7 +24,7 @@ export default class Header extends Component {
         className={this.state.styles.main}
       >
         <Navbar.Brand>
-          <SvgLogoCopyright></SvgLogoCopyright>
+          <Copyright></Copyright>
         </Navbar.Brand>
       </Navbar>
     )
