@@ -69,19 +69,22 @@ export default class WarpChainTitle extends Component {
         <Container fluid>
           <Row className={this.state.styles.row}>
             <Col
-              xs="5"
-              className={classNames({
-                [this.state.styles.asset]: true,
-                'text-format-title': true,
-              })}
+              className={classNames(
+                this.state.styles.asset,
+                'text-format-title',
+                'px-0',
+              )}
             >
               <div className={this.state.styles.assetText}>
                 <span>From</span> <SrcAsset></SrcAsset>
               </div>
             </Col>
             <Col
-              xs="2"
-              className={this.state.styles.swap}
+              className={classNames(
+                this.state.styles.swap,
+                'px-0',
+                'flex-grow-0',
+              )}
               onClick={() => {
                 this.props.toggleTransferSwitch()
               }}
@@ -89,11 +92,11 @@ export default class WarpChainTitle extends Component {
               <SwapIcon></SwapIcon>
             </Col>
             <Col
-              xs="5"
-              className={classNames({
-                [this.state.styles.asset]: true,
-                'text-format-title': true,
-              })}
+              className={classNames(
+                this.state.styles.asset,
+                'text-format-title',
+                'px-0',
+              )}
             >
               <div className={this.state.styles.assetText}>
                 <span>To</span> <DestAsset></DestAsset>
