@@ -1,5 +1,4 @@
-import numeral from 'numeral'
-import min from 'lodash/min'
+import numbro from 'numbro'
 import split from 'lodash/split'
 
 export const formatNumber = (amount) => {
@@ -22,16 +21,16 @@ export const removeTrailingZero = (amount) => {
   return amount.replace(/0+$/g, '')
 }
 
-export const toCurrency = (amount, maxDecimals) => {
-  const _decimals = split(amount, '.')[1]
-    ? min([maxDecimals, split(amount, '.')[1].length])
-    : 0
-  if (!_decimals) return numeral(amount).format(`0,0`)
-  let zeroes = ''
+export const toCurrency = (amount) => {
+  const _decimals = split(amount, '.')[1] ? split(amount, '.')[1].length : 0
+  if (!_decimals) return numbro(amount).format({ thousandSeparated: true })
+  let mantissa = 0
   for (let i = 0; i < _decimals; i++) {
-    zeroes += 0
+    mantissa += 1
   }
   return removeTrailingDot(
-    removeTrailingZero(numeral(amount).format(`0,0.${zeroes}`)),
+    removeTrailingZero(
+      numbro(amount).format({ thousandSeparated: true, mantissa }),
+    ),
   )
 }
