@@ -3,6 +3,8 @@
 .WarpChainTitle {
     &.card-header {
         background: map-get($gradient, 'title');
+        border-top-left-radius: 4px!important;
+        border-top-right-radius: 4px!important;
     }
     &__row {
         &__asset, &__swap {

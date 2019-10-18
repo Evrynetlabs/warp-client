@@ -17,6 +17,7 @@ import reduce from 'lodash/reduce'
 import has from 'lodash/has'
 import min from 'lodash/min'
 import isNaN from 'lodash/isNaN'
+import { Select } from 'Components/shared'
 const {
   evrynet: { ATOMIC_STELLAR_DECIMAL_UNIT },
 } = config
@@ -89,21 +90,21 @@ export default class WarpContent extends Component {
     const stylesMain = classNames({
       [this.constructor.name]: true,
     })
-    const stylesFooter = `${stylesMain}__footer`
     const stylesForm = `${stylesMain}__form`
     const stylesContent = `${stylesForm}__content`
+    const stylesContentLabel = `${stylesContent}__label`
+    const stylesContentColumn = `${stylesContent}__col`
     const stylesContentAccountInput = `${stylesContent}__input`
     const stylesContentAccountInputSrc = `${stylesContentAccountInput}__src`
     const stylesContentAccountInputDest = `${stylesContentAccountInput}__dest`
-    const stylesContentAmountSelection = `${stylesContent}__amount`
-    const stylesContentAmountInput = `${stylesContentAmountSelection}__input`
-    const stylesFooterButton = `${stylesFooter}__btn`
+    const stylesContentAmountInput = `${stylesContentAccountInput}__amount`
+    const stylesContentTransferButton = `${stylesContent}__btn`
     return {
       main: stylesMain,
       content: stylesContent,
-      footer: stylesFooter,
-      footerBtn: stylesFooterButton,
-      amountSelection: stylesContentAmountSelection,
+      contentCol: stylesContentColumn,
+      contentLabel: stylesContentLabel,
+      transfer: stylesContentTransferButton,
       amountInput: stylesContentAmountInput,
       accountInput: stylesContentAccountInput,
       accountInputSrc: stylesContentAccountInputSrc,
@@ -291,9 +292,7 @@ export default class WarpContent extends Component {
     handler functions
    */
 
-  async _changeHandler(event) {
-    const name = event.target.name
-    const value = event.target.value
+  async _changeHandler({ name, value }) {
     let updatedControls = {
       ...this.state.formControls,
     }
@@ -320,8 +319,7 @@ export default class WarpContent extends Component {
     })
   }
 
-  async _blurHandler(event) {
-    const name = event.target.name
+  async _blurHandler({ name }) {
     const updatedControls = {
       ...this.state.formControls,
     }
@@ -361,13 +359,14 @@ export default class WarpContent extends Component {
     )
       return
     return map(this.props.whitelistedAssets.state, (ech) => {
-      return (
-        <option key={ech.getCode()} value={ech.getCode()}>
-          {ech.getCode()}
-        </option>
-      )
+      return {
+        value: ech.getCode(),
+        label: ech.getCode(),
+        name: 'asset',
+      }
     })
   }
+
   _getWhitelistedAssetByCode(code) {
     return find(this.props.whitelistedAssets.state, (ech) => {
       return ech.getCode() === code
@@ -419,8 +418,7 @@ export default class WarpContent extends Component {
     return updatedFormControls
   }
 
-  async _onSubmit(event) {
-    const name = event.target.name
+  async _onSubmit({ name }) {
     let updatedControls = {
       ...this.state.formControls,
     }
@@ -461,22 +459,32 @@ export default class WarpContent extends Component {
         name="form"
         className={this.state.styles.form}
         onSubmit={async (e) => {
-          await this._submitHandler(e)
+          await this._submitHandler(e.target)
         }}
       >
         <Card.Body className={this.state.styles.content}>
-          <Container fluid>
-            <Row>
-              <Col>
+          <Container fluid className="px-0">
+            <Row className="mx-auto my-0">
+              <Col
+                className={classNames('flex-grow-1', 'px-0', [
+                  this.state.styles.contentCol,
+                ])}
+              >
                 <Form.Group controlId="sourceAccountNumber">
-                  <Form.Label>
-                    <span>From:</span>
+                  <Form.Label
+                    className={classNames(
+                      'text-format-label',
+                      this.state.styles.contentLabel,
+                    )}
+                  >
+                    <span>From</span>
                   </Form.Label>
                   <Form.Control
-                    className={classNames({
-                      [this.state.styles.accountInputSrc]: true,
-                      [this.state.styles.accountInput]: true,
-                    })}
+                    className={classNames(
+                      [this.state.styles.accountInputSrc],
+                      [this.state.styles.accountInput],
+                      'input-form',
+                    )}
                     name="sourceAccount"
                     type="text"
                     placeholder={
@@ -484,10 +492,10 @@ export default class WarpContent extends Component {
                     }
                     value={this.state.formControls.sourceAccount.value}
                     onChange={(e) => {
-                      this._changeHandler(e)
+                      this._changeHandler(e.target)
                     }}
                     onBlur={(e) => {
-                      this._blurHandler(e)
+                      this._blurHandler(e.target)
                     }}
                     isInvalid={
                       this.state.formControls.sourceAccount.touched &&
@@ -499,16 +507,35 @@ export default class WarpContent extends Component {
                   </Form.Control.Feedback>
                 </Form.Group>
               </Col>
-              <Col>
+              <Col
+                className={classNames([this.state.styles.contentCol], 'px-0')}
+              >
+                <span>
+                  <i className="fas fa-arrow-right"></i>
+                </span>
+              </Col>
+              <Col
+                className={classNames(
+                  [this.state.styles.contentCol],
+                  'flex-grow-1',
+                  'px-0',
+                )}
+              >
                 <Form.Group controlId="destinationAccountNumber">
-                  <Form.Label>
-                    <span>To:</span>
+                  <Form.Label
+                    className={classNames(
+                      'text-format-label',
+                      this.state.styles.contentLabel,
+                    )}
+                  >
+                    <span>To</span>
                   </Form.Label>
                   <Form.Control
-                    className={classNames({
-                      [this.state.styles.accountInputDest]: true,
-                      [this.state.styles.accountInput]: true,
-                    })}
+                    className={classNames(
+                      [this.state.styles.accountInputDest],
+                      [this.state.styles.accountInput],
+                      'input-form',
+                    )}
                     name="destinationAccount"
                     type="text"
                     placeholder={
@@ -516,10 +543,10 @@ export default class WarpContent extends Component {
                     }
                     value={this.state.formControls.destinationAccount.value}
                     onChange={(e) => {
-                      this._changeHandler(e)
+                      this._changeHandler(e.target)
                     }}
                     onBlur={(e) => {
-                      this._blurHandler(e)
+                      this._blurHandler(e.target)
                     }}
                     isInvalid={
                       this.state.formControls.destinationAccount.touched &&
@@ -532,61 +559,90 @@ export default class WarpContent extends Component {
                 </Form.Group>
               </Col>
             </Row>
-            <Row className={this.state.styles.amountSelection}>
-              <Col>
+            <Row className="mx-auto my-0">
+              <Col className="text-center py-5">
+                <span
+                  className={classNames(
+                    'text-format-title',
+                    'font-weight-bold',
+                  )}
+                >
+                  Amount
+                </span>
+              </Col>
+            </Row>
+            <Row
+              className={classNames('justify-content-start', 'mx-auto', 'my-0')}
+            >
+              <Col xs={8} className={classNames('px-0')}>
                 <Form.Group controlId="assetAmount">
-                  <Form.Control
-                    name="amount"
-                    type="text"
-                    onChange={(e) => {
-                      this._changeHandler(e)
-                    }}
-                    onBlur={(e) => {
-                      this._blurHandler(e)
-                    }}
-                    placeholder={this.state.formControls.amount.placeholder}
-                    value={this.state.formControls.amount.value}
-                    isInvalid={
-                      !this.state.formControls.amount.valid &&
-                      this.state.formControls.amount.touched
-                    }
-                    className={this.state.styles.amountInput}
-                  />
+                  <Form.Label
+                    className={classNames(
+                      'text-format-label',
+                      this.state.styles.contentLabel,
+                    )}
+                  >
+                    <span>Credit</span>
+                  </Form.Label>
+                  <Container fluid className="px-0">
+                    <Row className={classNames('mx-auto', 'my-0')}>
+                      <Col className={classNames('px-0', 'flex-grow-0')}>
+                        <Select
+                          options={this._listWhitelistedAssetsOptions()}
+                          selectedItem={this.state.formControls.asset.value}
+                          onChange={({ name, value }) => {
+                            this._changeHandler({ name, value })
+                          }}
+                        ></Select>
+                      </Col>
+                      <Col className={classNames('px-0')}>
+                        <Form.Control
+                          name="amount"
+                          type="text"
+                          onChange={(e) => {
+                            this._changeHandler(e.target)
+                          }}
+                          onBlur={(e) => {
+                            this._blurHandler(e.target)
+                          }}
+                          placeholder={
+                            this.state.formControls.amount.placeholder
+                          }
+                          value={this.state.formControls.amount.value}
+                          isInvalid={
+                            !this.state.formControls.amount.valid &&
+                            this.state.formControls.amount.touched
+                          }
+                          className={classNames(
+                            this.state.styles.accountInput,
+                            this.state.styles.amountInput,
+                            'input-form',
+                          )}
+                        />
+                      </Col>
+                    </Row>
+                  </Container>
                   <Form.Control.Feedback type="invalid">
                     {this.state.formControls.amount.errorMessage}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Col>
-              <Col>
-                <Form.Group controlId="assetSelection">
-                  <Form.Control
-                    name="asset"
-                    value={this.state.formControls.asset.value}
-                    as="select"
-                    onChange={(e) => this._changeHandler(e)}
-                  >
-                    {this._listWhitelistedAssetsOptions()}
-                  </Form.Control>
-                </Form.Group>
-              </Col>
-            </Row>
-          </Container>
-        </Card.Body>
-        <Card.Footer className={this.state.styles.footer}>
-          <Container fluid>
-            <Row>
-              <Col className={this.state.styles.footerBtn}>
+              <Col xs={4} className={classNames('pl-5', 'pr-0', 'col-4')}>
                 <Button
                   type="submit"
-                  variant="dark"
                   disabled={this._disabledTransfer()}
+                  className={classNames(
+                    'w-100',
+                    'input-form',
+                    this.state.styles.transfer,
+                  )}
                 >
                   Transfer
                 </Button>
               </Col>
             </Row>
           </Container>
-        </Card.Footer>
+        </Card.Body>
       </Form>
     )
   }

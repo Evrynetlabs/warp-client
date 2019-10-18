@@ -1,3 +1,11 @@
 .text-format-title {
+    @include text($light-grey, $font-size-h4)
+}
+
+.text-format-placeholder {
+    @include text($light-grey, $font-size-h5)
+}
+
+.text-format-label {
     @include text($light-grey, $font-size-h6)
 }

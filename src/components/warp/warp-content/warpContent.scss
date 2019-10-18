@@ -1,37 +1,30 @@
-@import '../../../sass/utilities/variables';
+@import '~@/sass/utilities/variables';
+@import '~@/sass/utilities/mixins';
 
 .WarpContent {
-    &__footer {
-        &.card-footer {
-            border: none;
-            background: none;
-        }
-        &__btn {
-            flex-grow: 0!important;
-            .btn {
-                &.btn-dark {
-                    &:hover {
-                        background-color: map-get($palette-colors, blue-110)!important;
-                    }
-                    &:active {
-                        opacity: 0.85;
-                        background-color: map-get($palette-colors, blue-110)!important;
-                    }
-                }
-                background: map-get($palette-colors, blue-110);
-            }
-        }
-    }
     &__form{
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        @include background-opacity($light-grey, 0.2);
         &__content {
-            &__amount {
-                width: 300px;
-                margin: 0 auto!important;
-                .invalid-feedback {
-                    position: absolute;
+            width: 790px;
+            margin: 0 auto;
+            padding: 56px 0;
+
+            &__label {
+                bottom: 63px;
+                position: absolute;         
+            }
+
+            &__col {
+                &:nth-child(2) {
+                    flex-basis: 24px;
+                    max-width: 24px;
+                    text-align: center;
                 }
             }
             &__input {
+                @include text($dark-grey, $font-size-h5);
                 &__src {
                     &+.invalid-feedback{
                         position: absolute;
@@ -43,6 +36,42 @@
                         right: $space-12;
                         text-align: right;
                     }
+                }
+                &__amount {
+                    .invalid-feedback {
+                        position: absolute;
+                    }
+                    border-bottom-left-radius: 0px;
+                    border-top-left-radius: 0px;
+                }
+            }
+            
+            &__btn {
+                @include text($light-grey, $font-size-h4, $font-weight-bold);
+                margin-bottom: 1rem;
+                background-color: map-get($palette-colors, blue-120)!important;
+                &.btn {
+                    &:hover {
+                        opacity: 0.85;
+                        background-color: map-get($palette-colors, blue-120)!important;
+                    }
+                    &:disabled {
+                        opacity: 0.2;
+                        background-color: map-get($palette-colors, blue-120)!important;
+                    }
+                }
+            }
+
+            .ui-select {
+                &__value-display {
+                    border-bottom-left-radius: 4px;
+                    border-top-left-radius: 4px;
+                }
+
+                &__options {
+                    top: 44px;
+                    border-bottom-left-radius: 4px;
+                    border-bottom-right-radius: 4px;
                 }
             }
         }
