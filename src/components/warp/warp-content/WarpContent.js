@@ -168,7 +168,6 @@ export default class WarpContent extends Component {
     const locationState = {
       ...payload,
       asset: {
-        decimal: asset.decimal,
         code: asset.code,
       },
       isToEvrynet: this.props.isToEvrynet,

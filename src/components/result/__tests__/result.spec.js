@@ -21,7 +21,7 @@ describe('Result', () => {
       state: {
         isToEvrynet: true,
         amount: '1000',
-        asset: { code: 'EVRY', decimal: 7 },
+        asset: { code: 'EVRY' },
         src: 'foo',
         dest: 'bar',
       },
