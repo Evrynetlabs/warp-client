@@ -23,6 +23,25 @@
         &__swap {
             cursor: pointer;
             font-size: $font-size-h6;
+            &:hover {
+                .speech-bubble {
+                    visibility: visible;
+                    opacity: 1;
+                }
+            }
+            .speech-bubble {
+                position: absolute;
+                bottom: 36px;
+                right: -99px;
+                visibility: hidden;
+                opacity: 0;
+                transition: visibility 0s, opacity 0.5s linear;
+            }
+            &__bubble {
+                width: 104px;
+                height: 20px;
+                display: block;
+            }
         }
     }   
 }

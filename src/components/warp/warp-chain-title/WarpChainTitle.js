@@ -22,6 +22,7 @@ export default class WarpChainTitle extends Component {
     this.stylesAssetElem = `${this.stylesRow}__asset`
     this.stylesAssetText = `${this.stylesAssetElem}__text`
     this.stylesSwapElem = `${this.stylesRow}__swap`
+    this.stylesSwapBubble = `${this.stylesSwapElem}__bubble`
     this.state = {
       styles: {
         main: this.stylesMain,
@@ -29,6 +30,7 @@ export default class WarpChainTitle extends Component {
         swap: this.stylesSwapElem,
         row: this.stylesRow,
         assetText: this.stylesAssetText,
+        swapBubble: this.stylesSwapBubble,
       },
       chain,
       swap: {
@@ -89,6 +91,11 @@ export default class WarpChainTitle extends Component {
                 this.props.toggleTransferSwitch()
               }}
             >
+              <div className="speech-bubble">
+                <span className={this.state.styles.swapBubble}>
+                  Swap account
+                </span>
+              </div>
               <SwapIcon></SwapIcon>
             </Col>
             <Col
