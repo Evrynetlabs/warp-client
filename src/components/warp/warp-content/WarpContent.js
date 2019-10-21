@@ -654,7 +654,7 @@ export default class WarpContent extends Component {
                     this.state.styles.transfer,
                   )}
                 >
-                  Transfer
+                  TRANSFER
                 </Button>
               </Col>
             </Row>
