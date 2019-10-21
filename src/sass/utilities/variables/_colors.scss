@@ -45,7 +45,7 @@ $palette-colors: (
   'red-20': #fdb5ac,
   'red-30': #f9846c,
   'red-40': #e84606,
-  'red-50': #de3700,
+  'red-50': #fe3636,
   'red-60': #c82600,
   'red-70': #b11900,
   'red-80': #950e00,
@@ -62,15 +62,6 @@ $palette-colors: (
   'yellow-90': #561700,
   'yellow-100': #440900,
 );
-
-/// Copy text color
-/// @type Color
-$text-color: rgb(34, 34, 34) !default;
-
-/// Main brand color
-/// @type Color
-$brand-color: rgb(229, 0, 80) !default;
-
 /// Light grey
 /// @type Color
 $light-grey: rgb(237, 237, 237) !default;

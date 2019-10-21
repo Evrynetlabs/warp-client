@@ -89,6 +89,17 @@
     color: $color;
 }
 
+
+@mixin text-format-title {
+    @include text($light-grey, $font-size-h4);
+}
+@mixin text-format-placeholder {
+    @include text($light-grey, $font-size-h5);
+}
+@mixin text-format-label {
+    @include text($light-grey, $font-size-h5);
+}
+
 @mixin background-opacity($color, $opacity: 0.3) {
     background: $color; /* The Fallback */
     background: rgba($color, $opacity);

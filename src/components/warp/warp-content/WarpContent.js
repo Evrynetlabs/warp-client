@@ -99,6 +99,7 @@ export default class WarpContent extends Component {
     const stylesContentAccountInputDest = `${stylesContentAccountInput}__dest`
     const stylesContentAmountInput = `${stylesContentAccountInput}__amount`
     const stylesContentTransferButton = `${stylesContent}__btn`
+    const stylesErrorFeedback = `${stylesContent}__errorFeedback`
     return {
       main: stylesMain,
       content: stylesContent,
@@ -110,6 +111,7 @@ export default class WarpContent extends Component {
       accountInputSrc: stylesContentAccountInputSrc,
       accountInputDest: stylesContentAccountInputDest,
       form: stylesForm,
+      errorFeedback: stylesErrorFeedback,
     }
   }
 
@@ -502,8 +504,13 @@ export default class WarpContent extends Component {
                       !this.state.formControls.sourceAccount.valid
                     }
                   />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.formControls.sourceAccount.errorMessage}
+                  <Form.Control.Feedback
+                    className="position-absolute"
+                    type="invalid"
+                  >
+                    <div className={this.state.styles.errorFeedback}>
+                      {this.state.formControls.sourceAccount.errorMessage}
+                    </div>
                   </Form.Control.Feedback>
                 </Form.Group>
               </Col>
@@ -553,8 +560,13 @@ export default class WarpContent extends Component {
                       !this.state.formControls.destinationAccount.valid
                     }
                   />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.formControls.destinationAccount.errorMessage}
+                  <Form.Control.Feedback
+                    className="position-absolute"
+                    type="invalid"
+                  >
+                    <div className={this.state.styles.errorFeedback}>
+                      {this.state.formControls.destinationAccount.errorMessage}
+                    </div>
                   </Form.Control.Feedback>
                 </Form.Group>
               </Col>
@@ -619,12 +631,17 @@ export default class WarpContent extends Component {
                             'input-form',
                           )}
                         />
+                        <Form.Control.Feedback
+                          className="position-absolute"
+                          type="invalid"
+                        >
+                          <div className={this.state.styles.errorFeedback}>
+                            {this.state.formControls.amount.errorMessage}
+                          </div>
+                        </Form.Control.Feedback>
                       </Col>
                     </Row>
                   </Container>
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.formControls.amount.errorMessage}
-                  </Form.Control.Feedback>
                 </Form.Group>
               </Col>
               <Col xs={4} className={classNames('pl-5', 'pr-0', 'col-4')}>
