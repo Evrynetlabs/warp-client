@@ -31,6 +31,7 @@ export default class WarpContent extends Component {
     this._validateTrustlines = this._validateTrustlines.bind(this)
     this.initialState = {
       styles: this._initStyles(),
+      error: null,
       formControls: {
         asset: {
           value: this.warp.utils.getEvryAsset().getCode(),
@@ -100,6 +101,8 @@ export default class WarpContent extends Component {
     const stylesContentAmountInput = `${stylesContentAccountInput}__amount`
     const stylesContentTransferButton = `${stylesContent}__btn`
     const stylesErrorFeedback = `${stylesContent}__errorFeedback`
+    const stylesErrorFeedbackForm = `${stylesErrorFeedback}__form`
+    const stylesErrorFeedbackSubmit = `${stylesErrorFeedback}__submit`
     return {
       main: stylesMain,
       content: stylesContent,
@@ -111,7 +114,8 @@ export default class WarpContent extends Component {
       accountInputSrc: stylesContentAccountInputSrc,
       accountInputDest: stylesContentAccountInputDest,
       form: stylesForm,
-      errorFeedback: stylesErrorFeedback,
+      errorFeedbackForm: stylesErrorFeedbackForm,
+      errorFeedbackSubmit: stylesErrorFeedbackSubmit,
     }
   }
 
@@ -161,21 +165,27 @@ export default class WarpContent extends Component {
     this.props.startLoading()
     await this.state.transferFunc(payload)
     this.props.stopLoading()
-    const locationState = {
-      ...payload,
-      asset: {
-        decimal: asset.decimal,
-        code: asset.code,
-      },
-      isToEvrynet: this.props.isToEvrynet,
-      txHashes: {
-        state: this.props.txHashes.state,
-        error: this.props.txHashes.error
-          ? this.props.txHashes.error.toString()
-          : null,
-      },
+    if (this.props.txHashes.state) {
+      const locationState = {
+        ...payload,
+        asset: {
+          decimal: asset.decimal,
+          code: asset.code,
+        },
+        isToEvrynet: this.props.isToEvrynet,
+        txHashes: {
+          state: this.props.txHashes.state,
+          error: this.props.txHashes.error
+            ? this.props.txHashes.error.toString()
+            : null,
+        },
+      }
+      this._toResult(locationState)
+      return
     }
-    this._toResult(locationState)
+    this.setState({
+      error: this.props.txHashes.error.toString(),
+    })
   }
 
   _format(e) {
@@ -348,7 +358,9 @@ export default class WarpContent extends Component {
       await this._onSubmit({ name })
       await this._transfer()
     } catch (err) {
-      console.error(err)
+      this.setState({
+        error: err.toString(),
+      })
     }
   }
 
@@ -461,211 +473,231 @@ export default class WarpContent extends Component {
 
   render() {
     return (
-      <Form
-        name="form"
-        className={this.state.styles.form}
-        onSubmit={async (e) => {
-          event.preventDefault()
-          await this._submitHandler(e)
-        }}
-      >
-        <Card.Body className={this.state.styles.content}>
-          <Container fluid className="px-0">
-            <Row className="mx-auto my-0">
-              <Col
-                className={classNames('flex-grow-1', 'px-0', [
-                  this.state.styles.contentCol,
-                ])}
-              >
-                <Form.Group controlId="sourceAccountNumber">
-                  <Form.Label
+      <React.Fragment>
+        <Form
+          name="form"
+          className={this.state.styles.form}
+          onSubmit={async (e) => {
+            event.preventDefault()
+            await this._submitHandler(e)
+          }}
+        >
+          <Card.Body className={this.state.styles.content}>
+            <Container fluid className="px-0">
+              <Row className="mx-auto my-0">
+                <Col
+                  className={classNames('flex-grow-1', 'px-0', [
+                    this.state.styles.contentCol,
+                  ])}
+                >
+                  <Form.Group controlId="sourceAccountNumber">
+                    <Form.Label
+                      className={classNames(
+                        'text-format-label',
+                        this.state.styles.contentLabel,
+                      )}
+                    >
+                      <span>From</span>
+                    </Form.Label>
+                    <Form.Control
+                      className={classNames(
+                        [this.state.styles.accountInputSrc],
+                        [this.state.styles.accountInput],
+                        'input-form',
+                      )}
+                      name="sourceAccount"
+                      type="text"
+                      placeholder={
+                        this.state.formControls.sourceAccount.placeholder
+                      }
+                      value={this.state.formControls.sourceAccount.value}
+                      onChange={(e) => {
+                        this._changeHandler(e.target)
+                      }}
+                      onBlur={(e) => {
+                        this._blurHandler(e.target)
+                      }}
+                      isInvalid={
+                        this.state.formControls.sourceAccount.touched &&
+                        !this.state.formControls.sourceAccount.valid
+                      }
+                    />
+                    <Form.Control.Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div className={this.state.styles.errorFeedbackForm}>
+                        {this.state.formControls.sourceAccount.errorMessage}
+                      </div>
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Col>
+                <Col
+                  className={classNames([this.state.styles.contentCol], 'px-0')}
+                >
+                  <span>
+                    <i className="fas fa-arrow-right"></i>
+                  </span>
+                </Col>
+                <Col
+                  className={classNames(
+                    [this.state.styles.contentCol],
+                    'flex-grow-1',
+                    'px-0',
+                  )}
+                >
+                  <Form.Group controlId="destinationAccountNumber">
+                    <Form.Label
+                      className={classNames(
+                        'text-format-label',
+                        this.state.styles.contentLabel,
+                      )}
+                    >
+                      <span>To</span>
+                    </Form.Label>
+                    <Form.Control
+                      className={classNames(
+                        [this.state.styles.accountInputDest],
+                        [this.state.styles.accountInput],
+                        'input-form',
+                      )}
+                      name="destinationAccount"
+                      type="text"
+                      placeholder={
+                        this.state.formControls.destinationAccount.placeholder
+                      }
+                      value={this.state.formControls.destinationAccount.value}
+                      onChange={(e) => {
+                        this._changeHandler(e.target)
+                      }}
+                      onBlur={(e) => {
+                        this._blurHandler(e.target)
+                      }}
+                      isInvalid={
+                        this.state.formControls.destinationAccount.touched &&
+                        !this.state.formControls.destinationAccount.valid
+                      }
+                    />
+                    <Form.Control.Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div className={this.state.styles.errorFeedbackForm}>
+                        {
+                          this.state.formControls.destinationAccount
+                            .errorMessage
+                        }
+                      </div>
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row className="mx-auto my-0">
+                <Col className="text-center py-5">
+                  <span
                     className={classNames(
-                      'text-format-label',
-                      this.state.styles.contentLabel,
+                      'text-format-title',
+                      'font-weight-bold',
                     )}
                   >
-                    <span>From</span>
-                  </Form.Label>
-                  <Form.Control
-                    className={classNames(
-                      [this.state.styles.accountInputSrc],
-                      [this.state.styles.accountInput],
-                      'input-form',
-                    )}
-                    name="sourceAccount"
-                    type="text"
-                    placeholder={
-                      this.state.formControls.sourceAccount.placeholder
-                    }
-                    value={this.state.formControls.sourceAccount.value}
-                    onChange={(e) => {
-                      this._changeHandler(e.target)
-                    }}
-                    onBlur={(e) => {
-                      this._blurHandler(e.target)
-                    }}
-                    isInvalid={
-                      this.state.formControls.sourceAccount.touched &&
-                      !this.state.formControls.sourceAccount.valid
-                    }
-                  />
-                  <Form.Control.Feedback
-                    className="position-absolute"
-                    type="invalid"
-                  >
-                    <div className={this.state.styles.errorFeedback}>
-                      {this.state.formControls.sourceAccount.errorMessage}
-                    </div>
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Col>
-              <Col
-                className={classNames([this.state.styles.contentCol], 'px-0')}
-              >
-                <span>
-                  <i className="fas fa-arrow-right"></i>
-                </span>
-              </Col>
-              <Col
+                    Amount
+                  </span>
+                </Col>
+              </Row>
+              <Row
                 className={classNames(
-                  [this.state.styles.contentCol],
-                  'flex-grow-1',
-                  'px-0',
+                  'justify-content-start',
+                  'mx-auto',
+                  'my-0',
                 )}
               >
-                <Form.Group controlId="destinationAccountNumber">
-                  <Form.Label
+                <Col xs={8} className={classNames('px-0')}>
+                  <Form.Group controlId="assetAmount">
+                    <Form.Label
+                      className={classNames(
+                        'text-format-label',
+                        this.state.styles.contentLabel,
+                      )}
+                    >
+                      <span>Credit</span>
+                    </Form.Label>
+                    <Container fluid className="px-0">
+                      <Row className={classNames('mx-auto', 'my-0')}>
+                        <Col className={classNames('px-0', 'flex-grow-0')}>
+                          <Select
+                            options={this._listWhitelistedAssetsOptions()}
+                            selectedItem={this.state.formControls.asset.value}
+                            onChange={({ name, value }) => {
+                              this._changeHandler({ name, value })
+                            }}
+                          ></Select>
+                        </Col>
+                        <Col className={classNames('px-0')}>
+                          <Form.Control
+                            name="amount"
+                            type="text"
+                            onChange={(e) => {
+                              this._changeHandler(e.target)
+                            }}
+                            onBlur={(e) => {
+                              this._blurHandler(e.target)
+                            }}
+                            placeholder={
+                              this.state.formControls.amount.placeholder
+                            }
+                            value={this.state.formControls.amount.value}
+                            isInvalid={
+                              !this.state.formControls.amount.valid &&
+                              this.state.formControls.amount.touched
+                            }
+                            className={classNames(
+                              this.state.styles.accountInput,
+                              this.state.styles.amountInput,
+                              'input-form',
+                            )}
+                          />
+                          <Form.Control.Feedback
+                            className="position-absolute"
+                            type="invalid"
+                          >
+                            <div
+                              className={this.state.styles.errorFeedbackForm}
+                            >
+                              {this.state.formControls.amount.errorMessage}
+                            </div>
+                          </Form.Control.Feedback>
+                        </Col>
+                      </Row>
+                    </Container>
+                  </Form.Group>
+                </Col>
+                <Col xs={4} className={classNames('pl-5', 'pr-0', 'col-4')}>
+                  <Button
+                    type="submit"
+                    disabled={this._disabledTransfer()}
                     className={classNames(
-                      'text-format-label',
-                      this.state.styles.contentLabel,
-                    )}
-                  >
-                    <span>To</span>
-                  </Form.Label>
-                  <Form.Control
-                    className={classNames(
-                      [this.state.styles.accountInputDest],
-                      [this.state.styles.accountInput],
+                      'w-100',
                       'input-form',
-                    )}
-                    name="destinationAccount"
-                    type="text"
-                    placeholder={
-                      this.state.formControls.destinationAccount.placeholder
-                    }
-                    value={this.state.formControls.destinationAccount.value}
-                    onChange={(e) => {
-                      this._changeHandler(e.target)
-                    }}
-                    onBlur={(e) => {
-                      this._blurHandler(e.target)
-                    }}
-                    isInvalid={
-                      this.state.formControls.destinationAccount.touched &&
-                      !this.state.formControls.destinationAccount.valid
-                    }
-                  />
-                  <Form.Control.Feedback
-                    className="position-absolute"
-                    type="invalid"
-                  >
-                    <div className={this.state.styles.errorFeedback}>
-                      {this.state.formControls.destinationAccount.errorMessage}
-                    </div>
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Col>
-            </Row>
-            <Row className="mx-auto my-0">
-              <Col className="text-center py-5">
-                <span
-                  className={classNames(
-                    'text-format-title',
-                    'font-weight-bold',
-                  )}
-                >
-                  Amount
-                </span>
-              </Col>
-            </Row>
-            <Row
-              className={classNames('justify-content-start', 'mx-auto', 'my-0')}
-            >
-              <Col xs={8} className={classNames('px-0')}>
-                <Form.Group controlId="assetAmount">
-                  <Form.Label
-                    className={classNames(
-                      'text-format-label',
-                      this.state.styles.contentLabel,
+                      this.state.styles.transfer,
                     )}
                   >
-                    <span>Credit</span>
-                  </Form.Label>
-                  <Container fluid className="px-0">
-                    <Row className={classNames('mx-auto', 'my-0')}>
-                      <Col className={classNames('px-0', 'flex-grow-0')}>
-                        <Select
-                          options={this._listWhitelistedAssetsOptions()}
-                          selectedItem={this.state.formControls.asset.value}
-                          onChange={({ name, value }) => {
-                            this._changeHandler({ name, value })
-                          }}
-                        ></Select>
-                      </Col>
-                      <Col className={classNames('px-0')}>
-                        <Form.Control
-                          name="amount"
-                          type="text"
-                          onChange={(e) => {
-                            this._changeHandler(e.target)
-                          }}
-                          onBlur={(e) => {
-                            this._blurHandler(e.target)
-                          }}
-                          placeholder={
-                            this.state.formControls.amount.placeholder
-                          }
-                          value={this.state.formControls.amount.value}
-                          isInvalid={
-                            !this.state.formControls.amount.valid &&
-                            this.state.formControls.amount.touched
-                          }
-                          className={classNames(
-                            this.state.styles.accountInput,
-                            this.state.styles.amountInput,
-                            'input-form',
-                          )}
-                        />
-                        <Form.Control.Feedback
-                          className="position-absolute"
-                          type="invalid"
-                        >
-                          <div className={this.state.styles.errorFeedback}>
-                            {this.state.formControls.amount.errorMessage}
-                          </div>
-                        </Form.Control.Feedback>
-                      </Col>
-                    </Row>
-                  </Container>
-                </Form.Group>
-              </Col>
-              <Col xs={4} className={classNames('pl-5', 'pr-0', 'col-4')}>
-                <Button
-                  type="submit"
-                  disabled={this._disabledTransfer()}
-                  className={classNames(
-                    'w-100',
-                    'input-form',
-                    this.state.styles.transfer,
-                  )}
-                >
-                  TRANSFER
-                </Button>
+                    TRANSFER
+                  </Button>
+                </Col>
+              </Row>
+            </Container>
+          </Card.Body>
+        </Form>
+        {this.state.error && (
+          <Container>
+            <Row>
+              <Col className={this.state.styles.errorFeedbackSubmit}>
+                <span> {this.state.error} </span>
               </Col>
             </Row>
           </Container>
-        </Card.Body>
-      </Form>
+        )}
+      </React.Fragment>
     )
   }
 }

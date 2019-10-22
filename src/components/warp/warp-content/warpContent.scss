@@ -63,12 +63,22 @@ $radius-size: 4px;
                 }
             }
 
+            
+
             &__errorFeedback {
-                @include text-format-label;
-                border-radius: $radius-size;
-                background-color: $brand-danger;
-                padding: $space-4;
-                text-align: center;
+                &__form {
+                    @include text-format-label;
+                    border-radius: $radius-size;
+                    background-color: $brand-danger;
+                    padding: $space-4;
+                    text-align: center;
+                }
+                &__submit {
+                    @include text-format-label;
+                    color: $brand-danger;
+                    padding: $space-4;
+                    text-align: center;
+                }
             }
         }
     }
