@@ -1,18 +1,14 @@
-@import '~@/sass/utilities/functions';
-@import '~@/sass/utilities/mixins';
-@import '~@/sass/utilities/variables';
-
 $radius-size: 4px;
 
 .WarpContent {
     &__form{
-        border-bottom-left-radius: 4px;
-        border-bottom-right-radius: 4px;
+        border-bottom-left-radius: $radius-size;
+        border-bottom-right-radius: $radius-size;
         @include background-opacity($light-grey, 0.2);
         &__content {
             width: 790px;
             margin: 0 auto;
-            padding: 56px 0;
+            padding: $space-52 0!important;
 
             &__label {
                 bottom: 63px;
@@ -27,7 +23,7 @@ $radius-size: 4px;
                 }
             }
             &__input {
-                @include text($dark-grey, $font-size-h5);
+                @extend .text-format-input;
                 &__amount {
                     border-bottom-left-radius: 0px;
                     border-top-left-radius: 0px;
@@ -36,7 +32,7 @@ $radius-size: 4px;
             }
             
             &__btn {
-                @include text($light-grey, $font-size-h4, $font-weight-bold);
+                @extend .text-format-button;
                 margin-bottom: 1rem;
                 background-color: map-get($palette-colors, blue-120)!important;
                 &.btn {
@@ -53,14 +49,14 @@ $radius-size: 4px;
 
             .ui-select {
                 &__value-display {
-                    border-bottom-left-radius: 4px;
-                    border-top-left-radius: 4px;
+                    border-bottom-left-radius: $radius-size;
+                    border-top-left-radius: $radius-size;
                 }
 
                 &__options {
                     top: 44px;
-                    border-bottom-left-radius: 4px;
-                    border-bottom-right-radius: 4px;
+                    border-bottom-left-radius: $radius-size;
+                    border-bottom-right-radius: $radius-size;
                 }
             }
 
@@ -68,14 +64,14 @@ $radius-size: 4px;
 
             &__errorFeedback {
                 &__form {
-                    @include text-format-label;
+                    @extend .text-format-label;
                     border-radius: $radius-size;
                     background-color: $brand-danger;
                     padding: $space-4;
                     text-align: center;
                 }
                 &__submit {
-                    @include text-format-label;
+                    @extend .text-format-label;
                     color: $brand-danger;
                     padding: $space-24;
                     text-align: center;

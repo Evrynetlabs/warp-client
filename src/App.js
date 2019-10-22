@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import '@/App.scss'
 import { ConnectedRouter } from 'connected-react-router'
 import { Provider } from 'react-redux'
 import store, { history } from '@/store'

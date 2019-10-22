@@ -1,15 +1,19 @@
 .text-format-title {
-    @include text($light-grey, $font-size-h4)
+    @include text($light-grey, $font-size-h4);
 }
 
 .text-format-small {
-    @include text($dark-grey, 14px)
+    @include text($dark-grey, 14px);
 }
 
-.text-format-placeholder {
-    @include text($light-grey, $font-size-h5)
+.text-format-button {
+    @include text($light-grey, $font-size-h4, $font-weight-bold);
+}
+
+.text-format-input {
+    @include text($dark-grey, $font-size-h5);
 }
 
 .text-format-label {
-    @include text($light-grey, $font-size-h6)
+    @include text($light-grey, $font-size-h6);
 }
