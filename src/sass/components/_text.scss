@@ -3,7 +3,7 @@
 }
 
 .text-format-small {
-    @include text($dark-grey, $font-size-h4)
+    @include text($dark-grey, 14px)
 }
 
 .text-format-placeholder {

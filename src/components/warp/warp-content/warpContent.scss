@@ -77,7 +77,7 @@ $radius-size: 4px;
                 &__submit {
                     @include text-format-label;
                     color: $brand-danger;
-                    padding: $space-4;
+                    padding: $space-24;
                     text-align: center;
                 }
             }

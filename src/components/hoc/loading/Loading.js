@@ -55,7 +55,7 @@ export default function withLoading(Component) {
         >
           <div className="text-center">
             <span className="d-block pb-4 text-format-small">
-              Processing...
+              processing...
             </span>
             <Spinner animation="border" role="status">
               <span className="sr-only">Loading...</span>
