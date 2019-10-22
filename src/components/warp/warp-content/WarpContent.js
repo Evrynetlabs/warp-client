@@ -30,7 +30,7 @@ export default class WarpContent extends Component {
     this._validateDecimal = this._validateDecimal.bind(this)
     this._validateTrustlines = this._validateTrustlines.bind(this)
     this.initialState = {
-      styles: this._initStyles(),
+      stylesMain: this.constructor.name,
       error: null,
       formControls: {
         asset: {
@@ -84,38 +84,6 @@ export default class WarpContent extends Component {
     }
     this.state = {
       ...this.initialState,
-    }
-  }
-
-  _initStyles() {
-    const stylesMain = classNames({
-      [this.constructor.name]: true,
-    })
-    const stylesForm = `${stylesMain}__form`
-    const stylesContent = `${stylesForm}__content`
-    const stylesContentLabel = `${stylesContent}__label`
-    const stylesContentColumn = `${stylesContent}__col`
-    const stylesContentAccountInput = `${stylesContent}__input`
-    const stylesContentAccountInputSrc = `${stylesContentAccountInput}__src`
-    const stylesContentAccountInputDest = `${stylesContentAccountInput}__dest`
-    const stylesContentAmountInput = `${stylesContentAccountInput}__amount`
-    const stylesContentTransferButton = `${stylesContent}__btn`
-    const stylesErrorFeedback = `${stylesContent}__errorFeedback`
-    const stylesErrorFeedbackForm = `${stylesErrorFeedback}__form`
-    const stylesErrorFeedbackSubmit = `${stylesErrorFeedback}__submit`
-    return {
-      main: stylesMain,
-      content: stylesContent,
-      contentCol: stylesContentColumn,
-      contentLabel: stylesContentLabel,
-      transfer: stylesContentTransferButton,
-      amountInput: stylesContentAmountInput,
-      accountInput: stylesContentAccountInput,
-      accountInputSrc: stylesContentAccountInputSrc,
-      accountInputDest: stylesContentAccountInputDest,
-      form: stylesForm,
-      errorFeedbackForm: stylesErrorFeedbackForm,
-      errorFeedbackSubmit: stylesErrorFeedbackSubmit,
     }
   }
 
@@ -476,33 +444,33 @@ export default class WarpContent extends Component {
       <React.Fragment>
         <Form
           name="form"
-          className={this.state.styles.form}
+          className={`${this.state.stylesMain}__form`}
           onSubmit={async (e) => {
             event.preventDefault()
             await this._submitHandler(e)
           }}
         >
-          <Card.Body className={this.state.styles.content}>
+          <Card.Body className={`${this.state.stylesMain}__form__content`}>
             <Container fluid className="px-0">
               <Row className="mx-auto my-0">
                 <Col
                   className={classNames('flex-grow-1', 'px-0', [
-                    this.state.styles.contentCol,
+                    `${this.state.stylesMain}__form__content__col`,
                   ])}
                 >
                   <Form.Group controlId="sourceAccountNumber">
                     <Form.Label
                       className={classNames(
                         'text-format-label',
-                        this.state.styles.contentLabel,
+                        `${this.state.stylesMain}__form__content__label`,
                       )}
                     >
                       <span>From</span>
                     </Form.Label>
                     <Form.Control
                       className={classNames(
-                        [this.state.styles.accountInputSrc],
-                        [this.state.styles.accountInput],
+                        `${this.state.stylesMain}__form__content__input__src`,
+                        `${this.state.stylesMain}__form__content__input`,
                         'input-form',
                       )}
                       name="sourceAccount"
@@ -526,14 +494,19 @@ export default class WarpContent extends Component {
                       className="position-absolute"
                       type="invalid"
                     >
-                      <div className={this.state.styles.errorFeedbackForm}>
+                      <div
+                        className={`${this.state.stylesMain}__form__content__errorFeedback__form`}
+                      >
                         {this.state.formControls.sourceAccount.errorMessage}
                       </div>
                     </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
                 <Col
-                  className={classNames([this.state.styles.contentCol], 'px-0')}
+                  className={classNames(
+                    `${this.state.stylesMain}__form__content__col`,
+                    'px-0',
+                  )}
                 >
                   <span>
                     <i className="fas fa-arrow-right"></i>
@@ -541,7 +514,7 @@ export default class WarpContent extends Component {
                 </Col>
                 <Col
                   className={classNames(
-                    [this.state.styles.contentCol],
+                    `${this.state.stylesMain}__form__content__col`,
                     'flex-grow-1',
                     'px-0',
                   )}
@@ -550,15 +523,15 @@ export default class WarpContent extends Component {
                     <Form.Label
                       className={classNames(
                         'text-format-label',
-                        this.state.styles.contentLabel,
+                        `${this.state.stylesMain}__form__content__label`,
                       )}
                     >
                       <span>To</span>
                     </Form.Label>
                     <Form.Control
                       className={classNames(
-                        [this.state.styles.accountInputDest],
-                        [this.state.styles.accountInput],
+                        `${this.state.stylesMain}__form__content__input__dest`,
+                        `${this.state.stylesMain}__form__content__input`,
                         'input-form',
                       )}
                       name="destinationAccount"
@@ -582,7 +555,9 @@ export default class WarpContent extends Component {
                       className="position-absolute"
                       type="invalid"
                     >
-                      <div className={this.state.styles.errorFeedbackForm}>
+                      <div
+                        className={`${this.state.stylesMain}__form__content__errorFeedback__form`}
+                      >
                         {
                           this.state.formControls.destinationAccount
                             .errorMessage
@@ -616,7 +591,7 @@ export default class WarpContent extends Component {
                     <Form.Label
                       className={classNames(
                         'text-format-label',
-                        this.state.styles.contentLabel,
+                        `${this.state.stylesMain}__form__content__label`,
                       )}
                     >
                       <span>Credit</span>
@@ -651,8 +626,8 @@ export default class WarpContent extends Component {
                               this.state.formControls.amount.touched
                             }
                             className={classNames(
-                              this.state.styles.accountInput,
-                              this.state.styles.amountInput,
+                              `${this.state.stylesMain}__form__content__input`,
+                              `${this.state.stylesMain}__form__content__input__amount`,
                               'input-form',
                             )}
                           />
@@ -661,7 +636,7 @@ export default class WarpContent extends Component {
                             type="invalid"
                           >
                             <div
-                              className={this.state.styles.errorFeedbackForm}
+                              className={`${this.state.stylesMain}__form__content__errorFeedback__form`}
                             >
                               {this.state.formControls.amount.errorMessage}
                             </div>
@@ -678,7 +653,7 @@ export default class WarpContent extends Component {
                     className={classNames(
                       'w-100',
                       'input-form',
-                      this.state.styles.transfer,
+                      `${this.state.stylesMain}__form__content__btn`,
                     )}
                   >
                     TRANSFER
@@ -691,7 +666,9 @@ export default class WarpContent extends Component {
         {this.state.error && (
           <Container>
             <Row>
-              <Col className={this.state.styles.errorFeedbackSubmit}>
+              <Col
+                className={`${this.state.stylesMain}__form__content__errorFeedback__submit`}
+              >
                 <span> {this.state.error} </span>
               </Col>
             </Row>
