@@ -1,0 +1,29 @@
+@import '~@/sass/utilities/functions';
+@import '~@/sass/utilities/mixins';
+@import '~@/sass/utilities/variables';
+
+.Loading {
+ &__item {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 100px;
+    border-radius: 4px;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3);
+    background-color: #ededed;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+ }
+ 
+ &__overlay {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    @include background-opacity(palette-color-level('grey', '100'), 0.6);
+ }
+}

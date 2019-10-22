@@ -1,2 +1,2 @@
-export { default as WarpComponent } from 'Components/warp/warpContainer'
-export { default as WarpReducer } from 'Components/warp/warpReducers'
+export { default as WarpComponent } from 'Components/warp/WarpContainer'
+export { default as warpReducer } from 'Components/warp/warpReducers'

@@ -132,15 +132,6 @@ export default class WarpContent extends Component {
     return e
   }
 
-  _format(e) {
-    if (e.valid && has(e, 'formats')) {
-      e.formats.forEach((format) => {
-        e.value = format(e.value)
-      })
-    }
-    return e
-  }
-
   async _effect(sourceElement, formControls) {
     let updatedFormControls = { ...formControls }
     if (has(sourceElement, 'effects')) {
@@ -167,7 +158,9 @@ export default class WarpContent extends Component {
       src: this.state.formControls.sourceAccount.value,
       dest: this.state.formControls.destinationAccount.value,
     }
+    this.props.startLoading()
     await this.state.transferFunc(payload)
+    this.props.stopLoading()
     const locationState = {
       ...payload,
       asset: {
@@ -183,6 +176,15 @@ export default class WarpContent extends Component {
       },
     }
     this._toResult(locationState)
+  }
+
+  _format(e) {
+    if (e.valid && has(e, 'formats')) {
+      e.formats.forEach((format) => {
+        e.value = format(e.value)
+      })
+    }
+    return e
   }
 
   /*
@@ -341,10 +343,10 @@ export default class WarpContent extends Component {
     })
   }
 
-  async _submitHandler(event) {
+  async _submitHandler({ name }) {
     try {
-      event.preventDefault()
-      this._onSubmit(event).then(() => this._transfer())
+      await this._onSubmit({ name })
+      await this._transfer()
     } catch (err) {
       console.error(err)
     }
@@ -452,7 +454,9 @@ export default class WarpContent extends Component {
   }
 
   async componentDidMount() {
+    this.props.startLoading()
     await this.props.getWhitelistAssets()
+    this.props.stopLoading()
   }
 
   render() {
@@ -461,7 +465,8 @@ export default class WarpContent extends Component {
         name="form"
         className={this.state.styles.form}
         onSubmit={async (e) => {
-          await this._submitHandler(e.target)
+          event.preventDefault()
+          await this._submitHandler(e)
         }}
       >
         <Card.Body className={this.state.styles.content}>
@@ -696,4 +701,6 @@ WarpContent.propTypes = {
   getAccountBalance: PropTypes.func.isRequired,
   getTrustlines: PropTypes.func.isRequired,
   push: PropTypes.func.isRequired,
+  startLoading: PropTypes.func.isRequired,
+  stopLoading: PropTypes.func.isRequired,
 }

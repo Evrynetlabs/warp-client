@@ -2,6 +2,10 @@
     @include text($light-grey, $font-size-h4)
 }
 
+.text-format-small {
+    @include text($dark-grey, $font-size-h4)
+}
+
 .text-format-placeholder {
     @include text($light-grey, $font-size-h5)
 }

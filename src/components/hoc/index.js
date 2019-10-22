@@ -1,3 +1,2 @@
-export {
-  default as WithRequireTransactionHash,
-} from 'Components/hoc/TransactionHashCheckerContainer'
+export * from 'Components/hoc/loading'
+export * from 'Components/hoc/transaction-hash-checker'

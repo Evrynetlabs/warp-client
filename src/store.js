@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware } from 'redux'
 import createReducer from '@/reducers'
-import { WarpReducer } from 'Components/warp'
+import { warpReducer } from 'Components/warp'
+import { loadingReducer } from 'Components/hoc/loading'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { connectRouter, routerMiddleware } from 'connected-react-router'
@@ -9,7 +10,8 @@ import { createBrowserHistory } from 'history'
 export const history = createBrowserHistory()
 
 const rootReducer = createReducer({
-  warp: WarpReducer,
+  warp: warpReducer,
+  loading: loadingReducer,
   router: connectRouter(history),
 })
 
