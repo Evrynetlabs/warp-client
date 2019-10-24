@@ -83,27 +83,8 @@ export default class WarpContent extends Component {
         },
       },
       transferFunc: props.toEvrynet,
-      result: {
-        asset: {
-          decimal: 18,
-          code: 'EVRY',
-        },
-        amount: '1',
-        src: 'SADFSJ45OOSLJZMRSN4X3577NBC5NNKTK4JYE4DS5M34UIVILDC7EW3O',
-        dest:
-          '0a05a1645d8a0a5b8f593c84324ea36194211814ccc51211e81e6b09cf7a5460',
-        isToEvrynet: true,
-        txHashes: {
-          state: {
-            evrynet:
-              '57B22BC23588A9D4B87FFD2752EC8857B8BE78FFCBC8E54F1458B15EBEFB0B41',
-            stellar:
-              '57B22BC23588A9D4B87FFD2752EC8857B8BE78FFCBC8E54F1458B15EBEFB0B41',
-          },
-          error: null,
-        },
-      },
-      showResult: true,
+      result: null,
+      showResult: false,
     }
     this.state = {
       ...this.initialState,
@@ -156,29 +137,28 @@ export default class WarpContent extends Component {
     this.props.startLoading()
     await this.state.transferFunc(payload)
     this.props.stopLoading()
-    // if (this.props.txHashes.state) {
-    const result = {
-      ...payload,
-      asset: {
-        decimal: asset.decimal,
-        code: asset.code,
-      },
-      isToEvrynet: this.props.isToEvrynet,
-      txHashes: {
-        state: this.props.txHashes.state,
-        error: this.props.txHashes.error
-          ? this.props.txHashes.error.toString()
-          : null,
-      },
+    if (this.props.txHashes.state) {
+      const result = {
+        ...payload,
+        asset: {
+          decimal: asset.decimal,
+          code: asset.code,
+        },
+        isToEvrynet: this.props.isToEvrynet,
+        txHashes: {
+          state: this.props.txHashes.state,
+        },
+      }
+      this.setState({
+        result,
+      })
+      return
     }
-    this.setState({
-      result,
-    })
-    //   return
-    // }
-    this.setState({
-      error: this.props.txHashes.error.toString(),
-    })
+    if (this.props.txHashes.error) {
+      this.setState((_, props) => ({
+        error: props.txHashes.error.toString(),
+      }))
+    }
   }
 
   _format(e) {
@@ -440,6 +420,13 @@ export default class WarpContent extends Component {
     })
   }
 
+  _removeResult() {
+    this.setState({
+      result: null,
+      showResult: false,
+    })
+  }
+
   async _handleIsToEvrynet(prevProps) {
     if (prevProps.isToEvrynet === this.props.isToEvrynet) return
     const updatedState = this.state
@@ -451,18 +438,11 @@ export default class WarpContent extends Component {
     this.setState(updatedState)
   }
 
-  _removeResult() {
-    this.setState({
-      result: null,
-      showResult: false,
-    })
-  }
-
   _handleResult(prevState) {
     if (prevState.result === this.state.result) return
-    this.setState({
-      showResult: !!this.state.result,
-    })
+    this.setState((state) => ({
+      showResult: !!state.result,
+    }))
   }
 
   async componentDidUpdate(prevProps, prevState) {
@@ -720,7 +700,9 @@ export default class WarpContent extends Component {
           overlayClassName={`${this.state.stylesMain}__resultModal__overlay`}
           className={`${this.state.stylesMain}__resultModal__item`}
         >
-          <ResultComponent {...resultProps}></ResultComponent>
+          {this.state.showResult && (
+            <ResultComponent {...resultProps}></ResultComponent>
+          )}
         </Modal>
       </React.Fragment>
     )
