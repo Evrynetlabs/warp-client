@@ -39,10 +39,6 @@
                 padding: $space-45;
                 font-size: $font-size-h2;
                 color: $brand-success;
-                &--failed {
-                    @extend .Result__content__body__status;
-                    color: $brand-danger;
-                }
             }
             &__swap {
                 display: flex;

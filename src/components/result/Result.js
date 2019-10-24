@@ -40,10 +40,9 @@ const Result = (props) => {
                     )}
                   >
                     <Col
-                      className={classNames({
-                        [`${stylesMain}__content__body__status`]: items.isSuccess,
-                        [`${stylesMain}__content__body__status--failed`]: !items.isSuccess,
-                      })}
+                      className={classNames(
+                        `${stylesMain}__content__body__status`,
+                      )}
                     >
                       <span>{items.title}</span>
                     </Col>
@@ -205,7 +204,7 @@ const Result = (props) => {
                                   {txHashes.state.stellar}
                                 </span>
                               </Col>
-                              <Col>
+                              <Col className="text-right">
                                 <CopyToClipboard text={txHashes.state.stellar}>
                                   <Button>Copy</Button>
                                 </CopyToClipboard>
@@ -250,7 +249,7 @@ const Result = (props) => {
                                   {txHashes.state.evrynet}
                                 </span>
                               </Col>
-                              <Col>
+                              <Col className="text-right">
                                 <CopyToClipboard text={txHashes.state.evrynet}>
                                   <Button>Copy</Button>
                                 </CopyToClipboard>
