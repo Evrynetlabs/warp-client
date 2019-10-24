@@ -1,5 +1,5 @@
 .Warp {
-    height: calc(100% - #{$navbar-height});
+    height: calc(100% - #{$navbar-height * 2});
     .row {
         height:100%;
         display: flex;

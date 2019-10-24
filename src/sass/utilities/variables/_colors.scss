@@ -33,7 +33,7 @@ $palette-colors: (
   'green-100': #003023,
   'grey-10': #ffffff,
   'grey-20': #ececee,
-  'grey-30': #c9cbcf,
+  'grey-30': #ededed,
   'grey-40': #9ca2aa,
   'grey-50': #6f7a86,
   'grey-60': #55616c,
@@ -76,7 +76,7 @@ $dark-grey: rgb(68, 68, 68) !default;
 
 $lilac: #e7b7fe !default;
 
-$fountain: palette-color-level('blue', '40') !default;
+$brand-secondary: palette-color-level('blue', '40') !default;
 
 $galaxy: palette-color-level('blue', '120')!default;
 

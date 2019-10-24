@@ -15,11 +15,6 @@
  }
  
  &__overlay {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    @include background-opacity(palette-color-level('grey', '100'), 0.6);
+   @extend .modal__overlay;
  }
 }

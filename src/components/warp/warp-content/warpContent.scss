@@ -1,7 +1,7 @@
 $radius-size: 4px;
 
 .WarpContent {
-    &__form{
+    &__form {
         border-bottom-left-radius: $radius-size;
         border-bottom-right-radius: $radius-size;
         @include background-opacity($light-grey, 0.2);
@@ -32,7 +32,7 @@ $radius-size: 4px;
             }
             
             &__btn {
-                @extend .text-format-button;
+                @extend .text-format-button-light;
                 margin-bottom: 1rem;
                 background-color: map-get($palette-colors, blue-120)!important;
                 &.btn {
@@ -64,19 +64,28 @@ $radius-size: 4px;
 
             &__errorFeedback {
                 &__form {
-                    @extend .text-format-label;
+                    @extend .text-format-label-light;
                     border-radius: $radius-size;
                     background-color: $brand-danger;
                     padding: $space-4;
                     text-align: center;
                 }
                 &__submit {
-                    @extend .text-format-label;
+                    @extend .text-format-label-light;
                     color: $brand-danger!important;
                     padding: $space-24;
                     text-align: center;
                 }
             }
+        }
+    }
+    &__resultModal {
+        &__item {
+            @extend .modal__item;
+        }
+
+        &__overlay {
+            @extend .modal__overlay;
         }
     }
 }

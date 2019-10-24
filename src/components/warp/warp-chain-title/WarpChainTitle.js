@@ -73,7 +73,7 @@ export default class WarpChainTitle extends Component {
             <Col
               className={classNames(
                 this.state.styles.asset,
-                'text-format-title',
+                'text-format-title-light',
                 'px-0',
               )}
             >
@@ -101,7 +101,7 @@ export default class WarpChainTitle extends Component {
             <Col
               className={classNames(
                 this.state.styles.asset,
-                'text-format-title',
+                'text-format-title-light',
                 'px-0',
               )}
             >

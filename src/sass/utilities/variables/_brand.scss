@@ -12,6 +12,7 @@ $space-20: $space-unit * 2.5 * 0.8; //  20px
 $space-24: $space-unit * 3 * 0.8; //    24px
 $space-32: $space-unit * 4 * 0.8; //    32px
 $space-40: $space-unit * 5 * 0.8; //    40px
+$space-45: $space-unit * 4.5; //    45spx
 $space-48: $space-unit * 6 * 0.8; //    48px
 $space-52: $space-unit * 6.5 * 0.8; //  52px
 $space-63: $space-unit * 6.3; //  63px
@@ -22,7 +23,7 @@ $space-96: $space-unit * 12 * 0.8; // 96px
 $brand-default: $galaxy;
 $brand-primary: $galaxy;
 $brand-secondary: palette-color-level('blue', 40);
-$brand-success: palette-color-level('green', 40);
+$brand-success: $brand-secondary;
 $brand-warning: palette-color-level('yellow', 40);
 $brand-danger: palette-color-level('red', 50);
 

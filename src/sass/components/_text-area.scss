@@ -10,3 +10,9 @@
         color: $dark-grey
     }
 }
+
+.ellipsis {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}

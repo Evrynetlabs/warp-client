@@ -1,12 +1,20 @@
-.text-format-title {
+.text-format-title-light {
     @include text($light-grey, $font-size-h4);
+}
+
+.text-format-title {
+    @include text($dark-grey, $font-size-h4);
+}
+
+.text-format-title-bold {
+    @include text($dark-grey, $font-size-h4, $font-weight-bold);
 }
 
 .text-format-small {
     @include text($dark-grey, 14px);
 }
 
-.text-format-button {
+.text-format-button-light {
     @include text($light-grey, $font-size-h4, $font-weight-bold);
 }
 
@@ -14,6 +22,10 @@
     @include text($dark-grey, $font-size-h5);
 }
 
-.text-format-label {
+.text-format-label-light {
     @include text($light-grey, $font-size-h6);
+}
+
+.text-format-label {
+    @include text($dark-grey, $font-size-h6);
 }
