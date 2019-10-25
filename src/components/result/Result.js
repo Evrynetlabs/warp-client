@@ -11,7 +11,7 @@ const Result = (props) => {
   const [stylesMain] = useState('Result')
   const {
     amount,
-    asset: { code, decimal },
+    asset: { code },
     src,
     dest,
     txHashes,
@@ -166,7 +166,7 @@ const Result = (props) => {
                         'text-format-title-bold',
                       )}
                     >
-                      <span>{`${toCurrency(amount, decimal)} ${code}`}</span>
+                      <span>{`${toCurrency(amount)} ${code}`}</span>
                     </Col>
                   </Row>
                   <hr />
