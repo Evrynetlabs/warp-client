@@ -3,12 +3,18 @@ import classNames from 'classnames'
 import 'Components/shared/select.scss'
 import map from 'lodash/map'
 import PropTypes from 'prop-types'
-import { useInitStyles } from 'Components/shared/selectHooks'
+import { useInitStyles, useEventListener } from 'Components/shared/selectHooks'
 
 export default function Select(props) {
   const [isOpen, setOpen] = useState(false)
   const { styles } = useInitStyles()
   const { options, selectedItem, children, onChange } = props
+
+  useEventListener('click', () => {
+    if (isOpen) {
+      handleClick()
+    }
+  })
 
   function renderOptions() {
     return map(options, (option, idx) => {
@@ -24,6 +30,7 @@ export default function Select(props) {
               name: option.name,
               value: option.value,
             })
+            handleClick()
           }}
         >
           {option.label}
