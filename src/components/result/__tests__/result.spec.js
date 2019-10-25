@@ -10,23 +10,14 @@ describe('Result', () => {
     },
     error: null,
   }
-  const mockFailedHashes = {
-    state: null,
-    error: new Error('this is an error'),
-  }
   const mock = {
     push: jest.fn(),
-    match: {},
-    location: {
-      state: {
-        isToEvrynet: true,
-        amount: '1000',
-        asset: { code: 'EVRY', decimal: 7 },
-        src: 'foo',
-        dest: 'bar',
-      },
-    },
-    history: {},
+    isToEvrynet: true,
+    amount: '1000',
+    asset: { code: 'EVRY', decimal: 7 },
+    src: 'foo',
+    dest: 'bar',
+    removeResult: jest.fn(),
   }
 
   describe('When the transfer process is success', () => {
@@ -34,15 +25,11 @@ describe('Result', () => {
       it('should render correspondingly', () => {
         const component = shallow(
           <Result
-            push={mock.push}
-            match={mock.match}
-            location={{
-              state: {
-                ...mock.location.state,
-                txHashes: mockSuccessHashes,
-              },
+            {...{
+              ...mock,
+              txHashes: mockSuccessHashes,
             }}
-            history={mock.history}
+            push={mock.push}
           ></Result>,
         )
         expect(component).toMatchSnapshot()
@@ -53,15 +40,12 @@ describe('Result', () => {
       it('should render correspondingly', () => {
         const component = shallow(
           <Result
-            push={mock.push}
-            match={mock.match}
-            location={{
-              state: {
-                ...mock.location.state,
-                txHashes: mockSuccessHashes,
-              },
+            {...{
+              ...mock,
+              txHashes: mockSuccessHashes,
+              isToEvrynet: false,
             }}
-            history={mock.history}
+            push={mock.push}
           ></Result>,
         )
         expect(component).toMatchSnapshot()
@@ -69,43 +53,19 @@ describe('Result', () => {
     })
   })
 
-  describe('When the transfer process is failed', () => {
-    describe('When isToEverynet', () => {
-      it('should render correspondingly', () => {
-        const component = shallow(
-          <Result
-            push={mock.push}
-            match={mock.match}
-            location={{
-              state: {
-                ...mock.location.state,
-                txHashes: mockFailedHashes,
-              },
-            }}
-            history={mock.history}
-          ></Result>,
-        )
-        expect(component).toMatchSnapshot()
-      })
-    })
-
-    describe('When isToStellar', () => {
-      it('should render correspondingly', () => {
-        const component = shallow(
-          <Result
-            push={mock.push}
-            match={mock.match}
-            location={{
-              state: {
-                ...mock.location.state,
-                txHashes: mockFailedHashes,
-              },
-            }}
-            history={mock.history}
-          ></Result>,
-        )
-        expect(component).toMatchSnapshot()
-      })
+  describe('When close the modal', () => {
+    it('should call a removeResult', () => {
+      const component = shallow(
+        <Result
+          {...{
+            ...mock,
+            txHashes: mockSuccessHashes,
+          }}
+          push={mock.push}
+        ></Result>,
+      )
+      component.find('.Result__close__btn').simulate('click')
+      expect(mock.removeResult).toHaveBeenCalled()
     })
   })
 })

@@ -1,1 +1,1 @@
-export { default as ResultComponent } from 'Components/result/ResultContainer'
+export { default as ResultComponent } from 'Components/result/resultContainer'

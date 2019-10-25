@@ -468,7 +468,7 @@ export default class WarpContent extends Component {
           className={`${this.state.stylesMain}__form`}
           onSubmit={async (e) => {
             event.preventDefault()
-            await this._submitHandler(e)
+            await this._submitHandler(e.target)
           }}
         >
           <Card.Body className={`${this.state.stylesMain}__form__content`}>

@@ -1,6 +1,8 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import WarpChainTitle from 'Components/warp/warp-chain-title/WarpChainTitle'
+import { ReactComponent as EvrynetIcon } from '@/assets/icons/evrynet.svg'
+import { ReactComponent as StellarIcon } from '@/assets/icons/stellar.svg'
 
 describe('WarpChainTitle', () => {
   const mock = {
@@ -22,7 +24,7 @@ describe('WarpChainTitle', () => {
 
   describe('When clicking toggle button', () => {
     it('should toggle a toggleTransferSwitch button', () => {
-      component.find('.WarpChainTitle__swap').simulate('click')
+      component.find('.WarpChainTitle__row__swap').simulate('click')
       expect(mock.toggleTransferSwitch).toBeCalled()
     })
 
@@ -32,10 +34,10 @@ describe('WarpChainTitle', () => {
           isToEvrynet: false,
         })
       })
-      component.find('.WarpChainTitle__swap').simulate('click')
+      component.find('.WarpChainTitle__row__swap').simulate('click')
       expect(component.state().swap).toEqual({
-        dest: 'Stellar',
-        src: 'Evrynet',
+        dest: StellarIcon,
+        src: EvrynetIcon,
       })
       expect(component).toMatchSnapshot()
     })

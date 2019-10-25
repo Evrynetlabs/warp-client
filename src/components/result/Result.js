@@ -305,6 +305,7 @@ Result.propTypes = {
     error: PropTypes.object,
   }).isRequired,
   removeResult: PropTypes.func.isRequired,
+  isToEvrynet: PropTypes.bool.isRequired,
 }
 
 export default Result
