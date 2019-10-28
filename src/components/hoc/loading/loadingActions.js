@@ -1,15 +1,13 @@
 import actionTypes from 'Components/hoc/loading/loadingActionTypes'
 
-export const startLoading = (id) => {
+export const startLoading = () => {
   return {
     type: actionTypes.START_LOADING,
-    id,
   }
 }
 
-export const stopLoading = (id) => {
+export const stopLoading = () => {
   return {
     type: actionTypes.STOP_LOADING,
-    id,
   }
 }

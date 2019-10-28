@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import uuiv4 from 'uuid/v4'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Modal from 'react-modal'
 import { Spinner } from 'react-bootstrap'
@@ -7,38 +6,16 @@ import 'Components/hoc/loading/loading.scss'
 
 export default function withLoading(Component) {
   const Loading = (props) => {
-    const [loadingID] = useState(uuiv4())
-    const [isLoading, setIsLoading] = useState(false)
-    const [styles] = useState(_initStyles())
-    const { loadingObjs, startLoading, stopLoading } = props
-
-    function _initStyles() {
-      const main = 'Loading'
-      const overlay = `${main}__overlay`
-      const item = `${main}__item`
-      return {
-        main,
-        overlay,
-        item,
-      }
-    }
+    const [styleMain] = useState('Loading')
+    const { isLoading, startLoading, stopLoading } = props
 
     function handleStartLoading() {
-      startLoading(loadingID)
+      startLoading()
     }
 
     function handleStopLoading() {
-      stopLoading(loadingID)
+      stopLoading()
     }
-
-    useEffect(() => {
-      const loadingObj = loadingObjs[loadingID]
-      if (loadingObj && loadingObj.isLoading) {
-        setIsLoading(true)
-        return
-      }
-      setIsLoading(false)
-    }, [loadingObjs])
 
     const childProps = {
       startLoading: handleStartLoading,
@@ -50,16 +27,14 @@ export default function withLoading(Component) {
         <Component {...props} {...childProps}></Component>
         <Modal
           isOpen={isLoading}
-          overlayClassName={styles.overlay}
-          className={styles.item}
+          overlayClassName={`${styleMain}__overlay`}
+          className={`${styleMain}__item`}
         >
           <div className="text-center">
             <span className="d-block pb-4 text-format-small">
               processing...
             </span>
-            <Spinner animation="border" role="status">
-              <span className="sr-only">Loading...</span>
-            </Spinner>
+            <Spinner animation="border" role="status"></Spinner>
           </div>
         </Modal>
       </React.Fragment>
@@ -69,11 +44,7 @@ export default function withLoading(Component) {
   Loading.propTypes = {
     startLoading: PropTypes.func.isRequired,
     stopLoading: PropTypes.func.isRequired,
-    loadingObjs: PropTypes.objectOf(
-      PropTypes.shape({
-        isLoading: PropTypes.bool,
-      }),
-    ),
+    isLoading: PropTypes.bool.isRequired,
   }
   return Loading
 }

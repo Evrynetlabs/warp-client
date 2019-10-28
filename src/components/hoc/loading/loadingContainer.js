@@ -7,12 +7,12 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 
 const mapStateToProps = (state) => ({
-  loadingObjs: state.loading,
+  isLoading: state.loading.isLoading,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  startLoading: (loadingID) => dispatch(startLoading(loadingID)),
-  stopLoading: (loadingID) => dispatch(stopLoading(loadingID)),
+  startLoading: () => dispatch(startLoading()),
+  stopLoading: () => dispatch(stopLoading()),
 })
 
 const withConnect = connect(
