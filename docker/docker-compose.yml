@@ -2,8 +2,8 @@ version: '3'
 services:
   warp:
     build:
-      context: ../
-      dockerfile: Dockerfile
+      context: ..
+      dockerfile: ./docker/Dockerfile
     ports:
       - 3000:3000
     environment:
