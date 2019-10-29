@@ -29,4 +29,4 @@ down:
 
 .PHONY: unit-test
 unit-test:
-	yarn test
+	yarn test --watchAll=false

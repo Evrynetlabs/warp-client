@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Navbar from 'react-bootstrap/Navbar'
 import classNames from 'classnames'
-import { SvgLogo } from 'Components/logo'
+import { ReactComponent as Logo } from '@/assets/icons/logo.svg'
 
 export default class Header extends Component {
   constructor(props) {
@@ -24,7 +24,7 @@ export default class Header extends Component {
         className={this.state.styles.main}
       >
         <Navbar.Brand>
-          <SvgLogo></SvgLogo>
+          <Logo></Logo>
         </Navbar.Brand>
       </Navbar>
     )

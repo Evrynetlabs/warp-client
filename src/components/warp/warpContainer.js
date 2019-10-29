@@ -18,6 +18,7 @@ import {
 } from 'Components/warp/warpActions'
 import { push } from 'connected-react-router'
 import { withRouter } from 'react-router'
+import { withLoading } from 'Components/hoc'
 
 const mapStateToProps = (state) => ({
   isToEvrynet: isToEvrynetSelector(state),
@@ -47,4 +48,5 @@ const withConnect = connect(
 export default compose(
   withRouter,
   withConnect,
+  withLoading,
 )(Warp)

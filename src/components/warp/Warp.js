@@ -28,23 +28,8 @@ export default class Warp extends Component {
         <Row>
           <Col>
             <Card className={this.state.styles.content}>
-              <WarpChainTitle
-                toggleTransferSwitch={this.props.toggleTransferSwitch}
-                isToEvrynet={this.props.isToEvrynet}
-              ></WarpChainTitle>
-              <WarpContent
-                txHashes={this.props.txHashes}
-                toEvrynet={this.props.toEvrynet}
-                toStellar={this.props.toStellar}
-                whitelistedAssets={this.props.whitelistedAssets}
-                getWhitelistAssets={this.props.getWhitelistAssets}
-                isToEvrynet={this.props.isToEvrynet}
-                getAccountBalance={this.props.getAccountBalance}
-                accountBalance={this.props.accountBalance}
-                getTrustlines={this.props.getTrustlines}
-                trustlines={this.props.trustlines}
-                push={this.props.push}
-              ></WarpContent>
+              <WarpChainTitle {...this.props}></WarpChainTitle>
+              <WarpContent {...this.props}></WarpContent>
             </Card>
           </Col>
         </Row>
@@ -85,4 +70,6 @@ Warp.propTypes = {
   getAccountBalance: PropTypes.func.isRequired,
   getTrustlines: PropTypes.func.isRequired,
   push: PropTypes.func.isRequired,
+  startLoading: PropTypes.func.isRequired,
+  stopLoading: PropTypes.func.isRequired,
 }

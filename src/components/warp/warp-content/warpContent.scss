@@ -1,50 +1,91 @@
-@import '../../../sass/utilities/variables';
+$radius-size: 4px;
 
 .WarpContent {
-    &__footer {
-        &.card-footer {
-            border: none;
-            background: none;
-        }
-        &__btn {
-            flex-grow: 0!important;
-            .btn {
-                &.btn-dark {
-                    &:hover {
-                        background-color: map-get($palette-colors, blue-110)!important;
-                    }
-                    &:active {
-                        opacity: 0.85;
-                        background-color: map-get($palette-colors, blue-110)!important;
-                    }
-                }
-                background: map-get($palette-colors, blue-110);
-            }
-        }
-    }
-    &__form{
+    &__form {
+        border-bottom-left-radius: $radius-size;
+        border-bottom-right-radius: $radius-size;
+        @include background-opacity($light-grey, 0.2);
         &__content {
-            &__amount {
-                width: 300px;
-                margin: 0 auto!important;
-                .invalid-feedback {
-                    position: absolute;
+            width: 790px;
+            margin: 0 auto;
+            padding: $space-52 0!important;
+
+            &__label {
+                bottom: 63px;
+                position: absolute;         
+            }
+
+            &__col {
+                &:nth-child(2) {
+                    flex-basis: 24px;
+                    max-width: 24px;
+                    text-align: center;
                 }
             }
             &__input {
-                &__src {
-                    &+.invalid-feedback{
-                        position: absolute;
-                    }
+                @extend .text-format-input;
+                &__amount {
+                    border-bottom-left-radius: 0px;
+                    border-top-left-radius: 0px;
+                    text-align: right;
                 }
-                &__dest {
-                    &+.invalid-feedback{
-                        position: absolute;
-                        right: $space-12;
-                        text-align: right;
+            }
+            
+            &__btn {
+                @extend .text-format-button-light;
+                margin-bottom: 1rem;
+                background-color: map-get($palette-colors, blue-120)!important;
+                &.btn {
+                    &:hover {
+                        opacity: 0.85;
+                        background-color: map-get($palette-colors, blue-120)!important;
+                    }
+                    &:disabled {
+                        opacity: 0.2;
+                        background-color: map-get($palette-colors, blue-120)!important;
                     }
                 }
             }
+
+            .ui-select {
+                &__value-display {
+                    border-bottom-left-radius: $radius-size;
+                    border-top-left-radius: $radius-size;
+                }
+
+                &__options {
+                    top: 44px;
+                    border-bottom-left-radius: $radius-size;
+                    border-bottom-right-radius: $radius-size;
+                }
+            }
+
+            
+
+            &__errorFeedback {
+                &__form {
+                    @extend .text-format-label-light;
+                    border-radius: $radius-size;
+                    background-color: $brand-danger;
+                    padding: $space-4;
+                    text-align: center;
+                }
+                &__submit {
+                    @extend .text-format-label-light;
+                    color: $brand-danger!important;
+                    padding: $space-24;
+                    text-align: center;
+                }
+            }
+        }
+    }
+    &__resultModal {
+        &__item {
+            @extend .modal__item;
+        }
+
+        &__overlay {
+            @extend .modal__overlay;
         }
     }
 }

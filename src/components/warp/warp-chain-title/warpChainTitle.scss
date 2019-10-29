@@ -1,23 +1,47 @@
-@import '../../../sass/utilities/variables';
+$radius-size: 4px;
 
 .WarpChainTitle {
     &.card-header {
-        background:none;
-        border:none;
+        background: map-get($gradient, 'title');
+        border-top-left-radius: $radius-size!important;
+        border-top-right-radius: $radius-size!important;
     }
-    .row {
-        width: 350px;
-        text-align: center;
-        margin: 0 auto;
-    }
-    &__asset, &__swap {
-        text-align: center;
-        font-size: $font-size-h4;
-        font-weight: map-get($font-weights, semibold);
-    }
-
-    &__swap {
-        cursor: pointer;
-    }
+    &__row {
+        &__asset, &__swap {
+            text-align: center;
+        }
     
+        &__asset {
+            font-size: $font-size-h4;
+            &__text {
+                span {
+                    padding-right: $space-16;
+                }
+            }
+        }
+    
+        &__swap {
+            cursor: pointer;
+            font-size: $font-size-h6;
+            &:hover {
+                .speech-bubble {
+                    visibility: visible;
+                    opacity: 1;
+                }
+            }
+            .speech-bubble {
+                position: absolute;
+                bottom: 36px;
+                right: -99px;
+                visibility: hidden;
+                opacity: 0;
+                transition: visibility 0s, opacity 0.5s linear;
+            }
+            &__bubble {
+                width: 104px;
+                height: 20px;
+                display: block;
+            }
+        }
+    }
 }

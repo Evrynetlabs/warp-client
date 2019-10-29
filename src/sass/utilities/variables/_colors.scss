@@ -11,15 +11,16 @@ $palette-colors: (
   'coral-100': #4d0014,
   'blue-10': #f2f9ff,
   'blue-20': #d8ecfe,
-  'blue-30': #8dc3f9,
-  'blue-40': #61a6f3,
-  'blue-50': #3d8beb,
-  'blue-60': #216fe0,
-  'blue-70': #063cbe,
-  'blue-80': #0427a7,
-  'blue-90': #01158d,
-  'blue-100': #000873,
-  'blue-110': #1f114f,
+  'blue-30': #99f8f7,
+  'blue-40': #5abebc,
+  'blue-50': #61a6f3,
+  'blue-60': #3d8beb,
+  'blue-70': #216fe0,
+  'blue-80': #063cbe,
+  'blue-90': #0427a7,
+  'blue-100': #01158d,
+  'blue-110': #000873,
+  'blue-120': #1d114e,
   'green-10': #f4fff3,
   'green-20': #c6f7c6,
   'green-30': #90e0a4,
@@ -32,7 +33,7 @@ $palette-colors: (
   'green-100': #003023,
   'grey-10': #ffffff,
   'grey-20': #ececee,
-  'grey-30': #c9cbcf,
+  'grey-30': #ededed,
   'grey-40': #9ca2aa,
   'grey-50': #6f7a86,
   'grey-60': #55616c,
@@ -44,7 +45,7 @@ $palette-colors: (
   'red-20': #fdb5ac,
   'red-30': #f9846c,
   'red-40': #e84606,
-  'red-50': #de3700,
+  'red-50': #fe3636,
   'red-60': #c82600,
   'red-70': #b11900,
   'red-80': #950e00,
@@ -61,15 +62,6 @@ $palette-colors: (
   'yellow-90': #561700,
   'yellow-100': #440900,
 );
-
-/// Copy text color
-/// @type Color
-$text-color: rgb(34, 34, 34) !default;
-
-/// Main brand color
-/// @type Color
-$brand-color: rgb(229, 0, 80) !default;
-
 /// Light grey
 /// @type Color
 $light-grey: rgb(237, 237, 237) !default;
@@ -84,20 +76,13 @@ $dark-grey: rgb(68, 68, 68) !default;
 
 $lilac: #e7b7fe !default;
 
-$fountain: #5ebfbc !default;
+$brand-secondary: palette-color-level('blue', '40') !default;
 
-$galaxy: #1e124f !default;
+$galaxy: palette-color-level('blue', '120')!default;
 
 $revolver: #2e1535 !default;
 
-$gradient_hero: linear-gradient(
-  130deg,
-  $galaxy 50%,
-  $fountain 100%
-) !default;
-
-$gradient: linear-gradient(
-  130deg,
-  $galaxy 26%,
-  $fountain 100%
+$gradient: (
+  'body': linear-gradient(136deg, #1d114e -7%, #1e124f 51%, #2d3e6b 63%, #5abfbc 99%),
+  'title': linear-gradient(to right, #000000, #1d114e 50%, #5abfbc)
 ) !default;

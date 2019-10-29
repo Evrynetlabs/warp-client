@@ -1,7 +1,5 @@
-@import '../../sass/utilities/variables';
-
 .Warp {
-    height: calc(100% - #{$navbar-height});
+    height: calc(100% - #{$navbar-height * 2});
     .row {
         height:100%;
         display: flex;
@@ -9,12 +7,12 @@
         justify-content: center;
     }
     &__content {
-        width: 1000px;
+        width: 1050px;
         margin: 0 auto;
         &.card {
             color: $light-grey;
             background: none;
-            border: none;
+            border: none
         }
     }
 }

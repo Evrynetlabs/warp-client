@@ -17,6 +17,9 @@ import reduce from 'lodash/reduce'
 import has from 'lodash/has'
 import min from 'lodash/min'
 import isNaN from 'lodash/isNaN'
+import { Select } from 'Components/shared'
+import { ResultComponent } from 'Components/result'
+import Modal from 'react-modal'
 const {
   evrynet: { ATOMIC_STELLAR_DECIMAL_UNIT },
 } = config
@@ -29,7 +32,8 @@ export default class WarpContent extends Component {
     this._validateDecimal = this._validateDecimal.bind(this)
     this._validateTrustlines = this._validateTrustlines.bind(this)
     this.initialState = {
-      styles: this._initStyles(),
+      stylesMain: this.constructor.name,
+      error: null,
       formControls: {
         asset: {
           value: this.warp.utils.getEvryAsset().getCode(),
@@ -79,36 +83,11 @@ export default class WarpContent extends Component {
         },
       },
       transferFunc: props.toEvrynet,
+      result: null,
+      showResult: false,
     }
     this.state = {
       ...this.initialState,
-    }
-  }
-
-  _initStyles() {
-    const stylesMain = classNames({
-      [this.constructor.name]: true,
-    })
-    const stylesFooter = `${stylesMain}__footer`
-    const stylesForm = `${stylesMain}__form`
-    const stylesContent = `${stylesForm}__content`
-    const stylesContentAccountInput = `${stylesContent}__input`
-    const stylesContentAccountInputSrc = `${stylesContentAccountInput}__src`
-    const stylesContentAccountInputDest = `${stylesContentAccountInput}__dest`
-    const stylesContentAmountSelection = `${stylesContent}__amount`
-    const stylesContentAmountInput = `${stylesContentAmountSelection}__input`
-    const stylesFooterButton = `${stylesFooter}__btn`
-    return {
-      main: stylesMain,
-      content: stylesContent,
-      footer: stylesFooter,
-      footerBtn: stylesFooterButton,
-      amountSelection: stylesContentAmountSelection,
-      amountInput: stylesContentAmountInput,
-      accountInput: stylesContentAccountInput,
-      accountInputSrc: stylesContentAccountInputSrc,
-      accountInputDest: stylesContentAccountInputDest,
-      form: stylesForm,
     }
   }
 
@@ -124,15 +103,6 @@ export default class WarpContent extends Component {
         if (e.valid) {
           validate(e, formControls)
         }
-      })
-    }
-    return e
-  }
-
-  _format(e) {
-    if (e.valid && has(e, 'formats')) {
-      e.formats.forEach((format) => {
-        e.value = format(e.value)
       })
     }
     return e
@@ -164,21 +134,40 @@ export default class WarpContent extends Component {
       src: this.state.formControls.sourceAccount.value,
       dest: this.state.formControls.destinationAccount.value,
     }
+    this.props.startLoading()
     await this.state.transferFunc(payload)
-    const locationState = {
-      ...payload,
-      asset: {
-        code: asset.code,
-      },
-      isToEvrynet: this.props.isToEvrynet,
-      txHashes: {
-        state: this.props.txHashes.state,
-        error: this.props.txHashes.error
-          ? this.props.txHashes.error.toString()
-          : null,
-      },
+    this.props.stopLoading()
+    if (this.props.txHashes.state) {
+      const result = {
+        ...payload,
+        asset: {
+          decimal: asset.decimal,
+          code: asset.code,
+        },
+        isToEvrynet: this.props.isToEvrynet,
+        txHashes: {
+          state: this.props.txHashes.state,
+        },
+      }
+      this.setState({
+        result,
+      })
+      return
     }
-    this._toResult(locationState)
+    if (this.props.txHashes.error) {
+      this.setState((_, props) => ({
+        error: props.txHashes.error.toString(),
+      }))
+    }
+  }
+
+  _format(e) {
+    if (e.valid && has(e, 'formats')) {
+      e.formats.forEach((format) => {
+        e.value = format(e.value)
+      })
+    }
+    return e
   }
 
   /*
@@ -290,9 +279,7 @@ export default class WarpContent extends Component {
     handler functions
    */
 
-  async _changeHandler(event) {
-    const name = event.target.name
-    const value = event.target.value
+  async _changeHandler({ name, value }) {
     let updatedControls = {
       ...this.state.formControls,
     }
@@ -319,8 +306,7 @@ export default class WarpContent extends Component {
     })
   }
 
-  async _blurHandler(event) {
-    const name = event.target.name
+  async _blurHandler({ name }) {
     const updatedControls = {
       ...this.state.formControls,
     }
@@ -340,12 +326,14 @@ export default class WarpContent extends Component {
     })
   }
 
-  async _submitHandler(event) {
+  async _submitHandler({ name }) {
     try {
-      event.preventDefault()
-      this._onSubmit(event).then(() => this._transfer())
+      await this._onSubmit({ name })
+      await this._transfer()
     } catch (err) {
-      console.error(err)
+      this.setState({
+        error: err.toString(),
+      })
     }
   }
 
@@ -360,13 +348,14 @@ export default class WarpContent extends Component {
     )
       return
     return map(this.props.whitelistedAssets.state, (ech) => {
-      return (
-        <option key={ech.getCode()} value={ech.getCode()}>
-          {ech.getCode()}
-        </option>
-      )
+      return {
+        value: ech.getCode(),
+        label: ech.getCode(),
+        name: 'asset',
+      }
     })
   }
+
   _getWhitelistedAssetByCode(code) {
     return find(this.props.whitelistedAssets.state, (ech) => {
       return ech.getCode() === code
@@ -383,13 +372,6 @@ export default class WarpContent extends Component {
       false,
     )
     return result
-  }
-
-  _toResult(payload) {
-    this.props.push({
-      pathname: '/result',
-      state: payload,
-    })
   }
 
   _updateTransferFunction() {
@@ -418,8 +400,7 @@ export default class WarpContent extends Component {
     return updatedFormControls
   }
 
-  async _onSubmit(event) {
-    const name = event.target.name
+  async _onSubmit({ name }) {
     let updatedControls = {
       ...this.state.formControls,
     }
@@ -439,7 +420,14 @@ export default class WarpContent extends Component {
     })
   }
 
-  async componentDidUpdate(prevProps) {
+  _removeResult() {
+    this.setState({
+      result: null,
+      showResult: false,
+    })
+  }
+
+  async _handleIsToEvrynet(prevProps) {
     if (prevProps.isToEvrynet === this.props.isToEvrynet) return
     const updatedState = this.state
     updatedState.transferFunc = this._updateTransferFunction()
@@ -450,143 +438,273 @@ export default class WarpContent extends Component {
     this.setState(updatedState)
   }
 
+  _handleResult(prevState) {
+    if (prevState.result === this.state.result) return
+    this.setState((state) => ({
+      showResult: !!state.result,
+    }))
+  }
+
+  async componentDidUpdate(prevProps, prevState) {
+    await this._handleIsToEvrynet(prevProps)
+    this._handleResult(prevState)
+  }
+
   async componentDidMount() {
+    this.props.startLoading()
     await this.props.getWhitelistAssets()
+    this.props.stopLoading()
   }
 
   render() {
+    const resultProps = {
+      removeResult: this._removeResult.bind(this),
+      ...this.state.result,
+    }
     return (
-      <Form
-        name="form"
-        className={this.state.styles.form}
-        onSubmit={async (e) => {
-          await this._submitHandler(e)
-        }}
-      >
-        <Card.Body className={this.state.styles.content}>
-          <Container fluid>
-            <Row>
-              <Col>
-                <Form.Group controlId="sourceAccountNumber">
-                  <Form.Label>
-                    <span>From:</span>
-                  </Form.Label>
-                  <Form.Control
-                    className={classNames({
-                      [this.state.styles.accountInputSrc]: true,
-                      [this.state.styles.accountInput]: true,
-                    })}
-                    name="sourceAccount"
-                    type="text"
-                    placeholder={
-                      this.state.formControls.sourceAccount.placeholder
-                    }
-                    value={this.state.formControls.sourceAccount.value}
-                    onChange={(e) => {
-                      this._changeHandler(e)
-                    }}
-                    onBlur={(e) => {
-                      this._blurHandler(e)
-                    }}
-                    isInvalid={
-                      this.state.formControls.sourceAccount.touched &&
-                      !this.state.formControls.sourceAccount.valid
-                    }
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.formControls.sourceAccount.errorMessage}
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Col>
-              <Col>
-                <Form.Group controlId="destinationAccountNumber">
-                  <Form.Label>
-                    <span>To:</span>
-                  </Form.Label>
-                  <Form.Control
-                    className={classNames({
-                      [this.state.styles.accountInputDest]: true,
-                      [this.state.styles.accountInput]: true,
-                    })}
-                    name="destinationAccount"
-                    type="text"
-                    placeholder={
-                      this.state.formControls.destinationAccount.placeholder
-                    }
-                    value={this.state.formControls.destinationAccount.value}
-                    onChange={(e) => {
-                      this._changeHandler(e)
-                    }}
-                    onBlur={(e) => {
-                      this._blurHandler(e)
-                    }}
-                    isInvalid={
-                      this.state.formControls.destinationAccount.touched &&
-                      !this.state.formControls.destinationAccount.valid
-                    }
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.formControls.destinationAccount.errorMessage}
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Col>
-            </Row>
-            <Row className={this.state.styles.amountSelection}>
-              <Col>
-                <Form.Group controlId="assetAmount">
-                  <Form.Control
-                    name="amount"
-                    type="text"
-                    onChange={(e) => {
-                      this._changeHandler(e)
-                    }}
-                    onBlur={(e) => {
-                      this._blurHandler(e)
-                    }}
-                    placeholder={this.state.formControls.amount.placeholder}
-                    value={this.state.formControls.amount.value}
-                    isInvalid={
-                      !this.state.formControls.amount.valid &&
-                      this.state.formControls.amount.touched
-                    }
-                    className={this.state.styles.amountInput}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {this.state.formControls.amount.errorMessage}
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Col>
-              <Col>
-                <Form.Group controlId="assetSelection">
-                  <Form.Control
-                    name="asset"
-                    value={this.state.formControls.asset.value}
-                    as="select"
-                    onChange={(e) => this._changeHandler(e)}
-                  >
-                    {this._listWhitelistedAssetsOptions()}
-                  </Form.Control>
-                </Form.Group>
-              </Col>
-            </Row>
-          </Container>
-        </Card.Body>
-        <Card.Footer className={this.state.styles.footer}>
-          <Container fluid>
-            <Row>
-              <Col className={this.state.styles.footerBtn}>
-                <Button
-                  type="submit"
-                  variant="dark"
-                  disabled={this._disabledTransfer()}
+      <React.Fragment>
+        <Form
+          name="form"
+          className={`${this.state.stylesMain}__form`}
+          onSubmit={async (e) => {
+            event.preventDefault()
+            await this._submitHandler(e.target)
+          }}
+        >
+          <Card.Body className={`${this.state.stylesMain}__form__content`}>
+            <Container fluid className="px-0">
+              <Row className="mx-auto my-0">
+                <Col
+                  className={classNames('flex-grow-1', 'px-0', [
+                    `${this.state.stylesMain}__form__content__col`,
+                  ])}
                 >
-                  Transfer
-                </Button>
+                  <Form.Group controlId="sourceAccountNumber">
+                    <Form.Label
+                      className={classNames(
+                        'text-format-label-light',
+                        `${this.state.stylesMain}__form__content__label`,
+                      )}
+                    >
+                      <span>From</span>
+                    </Form.Label>
+                    <Form.Control
+                      className={classNames(
+                        `${this.state.stylesMain}__form__content__input__src`,
+                        `${this.state.stylesMain}__form__content__input`,
+                        'input-form',
+                      )}
+                      name="sourceAccount"
+                      type="text"
+                      placeholder={
+                        this.state.formControls.sourceAccount.placeholder
+                      }
+                      value={this.state.formControls.sourceAccount.value}
+                      onChange={(e) => {
+                        this._changeHandler(e.target)
+                      }}
+                      onBlur={(e) => {
+                        this._blurHandler(e.target)
+                      }}
+                      isInvalid={
+                        this.state.formControls.sourceAccount.touched &&
+                        !this.state.formControls.sourceAccount.valid
+                      }
+                    />
+                    <Form.Control.Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div
+                        className={`${this.state.stylesMain}__form__content__errorFeedback__form`}
+                      >
+                        {this.state.formControls.sourceAccount.errorMessage}
+                      </div>
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Col>
+                <Col
+                  className={classNames(
+                    `${this.state.stylesMain}__form__content__col`,
+                    'px-0',
+                  )}
+                >
+                  <span>
+                    <i className="fas fa-arrow-right"></i>
+                  </span>
+                </Col>
+                <Col
+                  className={classNames(
+                    `${this.state.stylesMain}__form__content__col`,
+                    'flex-grow-1',
+                    'px-0',
+                  )}
+                >
+                  <Form.Group controlId="destinationAccountNumber">
+                    <Form.Label
+                      className={classNames(
+                        'text-format-label-light',
+                        `${this.state.stylesMain}__form__content__label`,
+                      )}
+                    >
+                      <span>To</span>
+                    </Form.Label>
+                    <Form.Control
+                      className={classNames(
+                        `${this.state.stylesMain}__form__content__input__dest`,
+                        `${this.state.stylesMain}__form__content__input`,
+                        'input-form',
+                      )}
+                      name="destinationAccount"
+                      type="text"
+                      placeholder={
+                        this.state.formControls.destinationAccount.placeholder
+                      }
+                      value={this.state.formControls.destinationAccount.value}
+                      onChange={(e) => {
+                        this._changeHandler(e.target)
+                      }}
+                      onBlur={(e) => {
+                        this._blurHandler(e.target)
+                      }}
+                      isInvalid={
+                        this.state.formControls.destinationAccount.touched &&
+                        !this.state.formControls.destinationAccount.valid
+                      }
+                    />
+                    <Form.Control.Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div
+                        className={`${this.state.stylesMain}__form__content__errorFeedback__form`}
+                      >
+                        {
+                          this.state.formControls.destinationAccount
+                            .errorMessage
+                        }
+                      </div>
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row className="mx-auto my-0">
+                <Col className="text-center py-5">
+                  <span
+                    className={classNames(
+                      'text-format-title-light',
+                      'font-weight-bold',
+                    )}
+                  >
+                    Amount
+                  </span>
+                </Col>
+              </Row>
+              <Row
+                className={classNames(
+                  'justify-content-start',
+                  'mx-auto',
+                  'my-0',
+                )}
+              >
+                <Col xs={8} className={classNames('px-0')}>
+                  <Form.Group controlId="assetAmount">
+                    <Form.Label
+                      className={classNames(
+                        'text-format-label-light',
+                        `${this.state.stylesMain}__form__content__label`,
+                      )}
+                    >
+                      <span>Credit</span>
+                    </Form.Label>
+                    <Container fluid className="px-0">
+                      <Row className={classNames('mx-auto', 'my-0')}>
+                        <Col className={classNames('px-0', 'flex-grow-0')}>
+                          <Select
+                            options={this._listWhitelistedAssetsOptions()}
+                            selectedItem={this.state.formControls.asset.value}
+                            onChange={({ name, value }) => {
+                              this._changeHandler({ name, value })
+                            }}
+                          ></Select>
+                        </Col>
+                        <Col className={classNames('px-0')}>
+                          <Form.Control
+                            name="amount"
+                            type="text"
+                            onChange={(e) => {
+                              this._changeHandler(e.target)
+                            }}
+                            onBlur={(e) => {
+                              this._blurHandler(e.target)
+                            }}
+                            placeholder={
+                              this.state.formControls.amount.placeholder
+                            }
+                            value={this.state.formControls.amount.value}
+                            isInvalid={
+                              !this.state.formControls.amount.valid &&
+                              this.state.formControls.amount.touched
+                            }
+                            className={classNames(
+                              `${this.state.stylesMain}__form__content__input`,
+                              `${this.state.stylesMain}__form__content__input__amount`,
+                              'input-form',
+                            )}
+                          />
+                          <Form.Control.Feedback
+                            className="position-absolute"
+                            type="invalid"
+                          >
+                            <div
+                              className={`${this.state.stylesMain}__form__content__errorFeedback__form`}
+                            >
+                              {this.state.formControls.amount.errorMessage}
+                            </div>
+                          </Form.Control.Feedback>
+                        </Col>
+                      </Row>
+                    </Container>
+                  </Form.Group>
+                </Col>
+                <Col xs={4} className={classNames('pl-5', 'pr-0', 'col-4')}>
+                  <Button
+                    type="submit"
+                    disabled={this._disabledTransfer()}
+                    className={classNames(
+                      'w-100',
+                      'input-form',
+                      `${this.state.stylesMain}__form__content__btn`,
+                    )}
+                  >
+                    TRANSFER
+                  </Button>
+                </Col>
+              </Row>
+            </Container>
+          </Card.Body>
+        </Form>
+        {this.state.error && (
+          <Container>
+            <Row>
+              <Col
+                className={`${this.state.stylesMain}__form__content__errorFeedback__submit`}
+              >
+                <span> {this.state.error} </span>
               </Col>
             </Row>
           </Container>
-        </Card.Footer>
-      </Form>
+        )}
+        <Modal
+          isOpen={this.state.showResult}
+          overlayClassName={`${this.state.stylesMain}__resultModal__overlay`}
+          className={`${this.state.stylesMain}__resultModal__item`}
+        >
+          {this.state.showResult && (
+            <ResultComponent {...resultProps}></ResultComponent>
+          )}
+        </Modal>
+      </React.Fragment>
     )
   }
 }
@@ -622,4 +740,6 @@ WarpContent.propTypes = {
   getAccountBalance: PropTypes.func.isRequired,
   getTrustlines: PropTypes.func.isRequired,
   push: PropTypes.func.isRequired,
+  startLoading: PropTypes.func.isRequired,
+  stopLoading: PropTypes.func.isRequired,
 }

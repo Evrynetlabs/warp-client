@@ -28,3 +28,12 @@
 @function font($path, $base: $base-url) {
   @return asset($base, 'fonts/', $path);
 }
+
+@function palette-color($key) {
+  @return map-get($palette-colors, $key);
+}
+
+@function palette-color-level($color-name, $level) {
+  $color: palette-color($color-name + '-' + $level);
+  @return $color;
+}

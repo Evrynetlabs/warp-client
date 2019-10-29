@@ -36,6 +36,8 @@ describe('WarpContent', () => {
     getAccountBalance: jest.fn(),
     getTrustlines: jest.fn(),
     push: jest.fn(),
+    startLoading: jest.fn(),
+    stopLoading: jest.fn(),
   }
   spyGetCode.mockReturnValue('EVRY')
   let component
@@ -54,6 +56,8 @@ describe('WarpContent', () => {
         getTrustlines={mock.getTrustlines}
         trustlines={mock.trustlines}
         push={mock.push}
+        startLoading={mock.startLoading}
+        stopLoading={mock.stopLoading}
       ></WarpContent>,
     )
   })
@@ -253,7 +257,7 @@ describe('WarpContent', () => {
           },
         }
         const input = component.find(
-          '.WarpContent__form__content__amount__input',
+          '.WarpContent__form__content__input__amount',
         )
         const mockWhitelistedAsset = {
           getCode: jest.fn().mockReturnValue('EVRY'),
@@ -286,7 +290,7 @@ describe('WarpContent', () => {
             },
           }
           const input = component.find(
-            '.WarpContent__form__content__amount__input',
+            '.WarpContent__form__content__input__amount',
           )
           await input.simulate('change', mockEvent)
           await component.update()
@@ -310,7 +314,7 @@ describe('WarpContent', () => {
               },
             }
             const input = component.find(
-              '.WarpContent__form__content__amount__input',
+              '.WarpContent__form__content__input__amount',
             )
             await input.simulate('change', mockEvent)
             await component.update()
@@ -345,7 +349,7 @@ describe('WarpContent', () => {
               },
             })
             const input = component.find(
-              '.WarpContent__form__content__amount__input',
+              '.WarpContent__form__content__input__amount',
             )
             await input.simulate('change', mockEvent)
             await component.update()
@@ -378,7 +382,7 @@ describe('WarpContent', () => {
             },
           })
           const input = component.find(
-            '.WarpContent__form__content__amount__input',
+            '.WarpContent__form__content__input__amount',
           )
           await input.simulate('change', mockEvent)
           await component.update()
@@ -412,7 +416,7 @@ describe('WarpContent', () => {
               },
             })
             const input = component.find(
-              '.WarpContent__form__content__amount__input',
+              '.WarpContent__form__content__input__amount',
             )
             await input.simulate('change', mockEvent)
             await component.update()
@@ -466,8 +470,7 @@ describe('WarpContent', () => {
             formControls: updatedFormControls,
           })
           await component.update()
-          await component.instance()._onSubmit(mockEvent)
-
+          await component.instance()._onSubmit(mockEvent.target)
           expect(component.state().formControls.amount.valid).toBe(false)
           expect(component.state().formControls.amount.errorMessage).toBe(
             'Insufficient Amount',
@@ -496,7 +499,7 @@ describe('WarpContent', () => {
             formControls: updatedFormControls,
           })
           await component.update()
-          await component.instance()._onSubmit(mockEvent)
+          await component.instance()._onSubmit(mockEvent.target)
 
           expect(component).toMatchSnapshot()
         })
@@ -526,7 +529,7 @@ describe('WarpContent', () => {
             formControls: updatedFormControls,
           })
           await component.update()
-          await component.instance()._onSubmit(mockEvent)
+          await component.instance()._onSubmit(mockEvent.target)
 
           expect(component.state().formControls.amount.valid).toBe(true)
           expect(component.state().formControls.amount.errorMessage).toBe(null)
@@ -554,7 +557,7 @@ describe('WarpContent', () => {
             formControls: updatedFormControls,
           })
           await component.update()
-          await component.instance()._onSubmit(mockEvent)
+          await component.instance()._onSubmit(mockEvent.target)
 
           expect(component).toMatchSnapshot()
         })
@@ -588,7 +591,7 @@ describe('WarpContent', () => {
             getDecimal: () => 1,
           })
           await component.update()
-          await component.instance()._onSubmit(mockEvent)
+          await component.instance()._onSubmit(mockEvent.target)
 
           expect(component.state().formControls.destinationAccount.valid).toBe(
             false,
@@ -629,7 +632,7 @@ describe('WarpContent', () => {
             getDecimal: () => 1,
           })
           await component.update()
-          await component.instance()._onSubmit(mockEvent)
+          await component.instance()._onSubmit(mockEvent.target)
 
           expect(component.state().formControls.destinationAccount.valid).toBe(
             true,
@@ -671,7 +674,7 @@ describe('WarpContent', () => {
             formControls: updatedFormControls,
           })
           await component.update()
-          await component.instance()._onSubmit(mockEvent)
+          await component.instance()._onSubmit(mockEvent.target)
 
           expect(component.state().formControls.amount.valid).toBe(false)
         })
@@ -698,7 +701,7 @@ describe('WarpContent', () => {
             formControls: updatedFormControls,
           })
           await component.update()
-          await component.instance()._onSubmit(mockEvent)
+          await component.instance()._onSubmit(mockEvent.target)
 
           expect(component).toMatchSnapshot()
         })
@@ -728,7 +731,7 @@ describe('WarpContent', () => {
             formControls: updatedFormControls,
           })
           await component.update()
-          await component.instance()._onSubmit(mockEvent)
+          await component.instance()._onSubmit(mockEvent.target)
 
           expect(component.state().formControls.amount.valid).toBe(true)
           expect(component.state().formControls.amount.errorMessage).toBe(null)
@@ -755,7 +758,7 @@ describe('WarpContent', () => {
             formControls: updatedFormControls,
           })
           await component.update()
-          await component.instance()._onSubmit(mockEvent)
+          await component.instance()._onSubmit(mockEvent.target)
 
           expect(component).toMatchSnapshot()
         })

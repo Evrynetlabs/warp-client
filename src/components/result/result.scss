@@ -1,42 +1,29 @@
-@import '../../sass/utilities/variables';
-
 .Result {
-    height: calc(100% - #{$navbar-height});
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     &__content {
-        &__title {
-            font-size: map-get($font-sizes, large);
-            font-weight: 100;
-            display: inline-block;
-            position: relative;
-            bottom: $space-52;
-            background-color: $light-grey;
-            border-radius: 50% 50% 0 0;
-            padding: 10px 15px 0 15px;
-            color: $galaxy;
-            &--failed {
-                @extend .Result__content__title;
-                color: $brand-danger;
-            }
+        &__card {
+            width: 880px;
+            border-radius: 4px;
+            background-color: palette-color-level(grey, 30)!important;
         }
-        .card {
-            background-color: $light-grey;
-            .card-title {
-                height: $space-48;
-                text-align: center;
-            }
-        }
+
         &__body {
             padding: $space-12 0;
             width: 100%;
             display: block;
+            &__row {
+                padding: 0rem calc(4.5rem - 20px)!important;
+            }
             &__account {
+                max-width: calc((100% - 57.5px) / 2)!important;
                 &__text {
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                    overflow: hidden;
+                    @extend .ellipsis;
+                }
+            }
+            &__title {
+                padding-bottom: $space-12;
+                &__text {
+                    padding-right: $space-12;
+                    vertical-align: middle;
                 }
             }
             &__status, &__amount {
@@ -46,28 +33,39 @@
                 text-align: center;
                 font-weight: map-get($font-weights, semibold);
                 padding: $space-4 $space-20!important;
+                padding-bottom: $space-32!important;
             }
             &__status {
+                padding: $space-45;
+                font-size: $font-size-h2;
                 color: $brand-success;
-                &--failed {
-                    @extend .Result__content__body__status;
-                    color: $brand-danger;
-                }
             }
             &__swap {
                 display: flex;
                 align-items: center;
                 font-size: $font-size-h4;
                 justify-content: center;
+                flex-grow: 0!important;
+            }
+            hr {
+                margin: $space-16 $space-45 $space-32;
             }
         }
-        &__footer {
-            text-align: center;
-            padding-top: $space-12;
+
+        &__hash {
+            .card {
+                background: transparent!important;
+            }
         }
     }
-    &__redirect {
+    &__close {
+        padding: $space-40 0rem;
         text-align: center;
-        padding-top: $space-12;
+        &__btn {
+            @include text($light-grey, $font-size-h5);
+            width: 167px;
+            height: 50px;
+            border-radius: 4px;
+        }
     }
 }

@@ -1,7 +1,7 @@
-import requiredTransactionHash from 'Components/hoc/TransactionHashChecker'
+import requiredTransactionHash from 'Components/hoc/transaction-hash-checker/TransactionHashChecker'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import { selectCollectedTxHashes } from 'Components/hoc/transactionHashCheckerSelectors'
+import { selectCollectedTxHashes } from 'Components/hoc/transaction-hash-checker/transactionHashCheckerSelectors'
 
 const mapStateToProps = (state) => ({
   txHashes: selectCollectedTxHashes(state),

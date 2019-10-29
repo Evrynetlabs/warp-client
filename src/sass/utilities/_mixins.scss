@@ -78,3 +78,18 @@
 		src: $src;
 	}
 }
+
+@mixin text($color, $size, $weight: normal, $stretch: normal, $style: normal, $line-height: normal, $letter-spacing: 0.59px) {
+    font-size: $size!important;
+    font-weight: $weight!important;
+    font-stretch: $stretch!important;
+    font-style: $style!important;
+    line-height: $line-height!important;
+    letter-spacing: $letter-spacing!important;
+    color: $color!important;
+}
+
+@mixin background-opacity($color, $opacity: 0.3) {
+    background: $color; /* The Fallback */
+    background: rgba($color, $opacity);
+}

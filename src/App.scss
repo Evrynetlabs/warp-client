@@ -1,10 +1,9 @@
 /**
 ---------- Variables ------------
 */
-@import 'sass/utilities/variables';
 @import 'sass/utilities/functions';
 @import 'sass/utilities/mixins';
-
+@import 'sass/utilities/variables';
 
 /**
 ---------- Vendor ------------
@@ -25,4 +24,8 @@
 /**
 ---------- Component ------------
 */
-@import 'sass/components/text-area'
+@import 'sass/components/text-area';
+@import 'sass/components/text';
+@import 'sass/components/input';
+@import 'sass/components/speech-bubble';
+@import 'sass/components/modal';
