@@ -13,7 +13,7 @@ export default class WarpChainTitle extends Component {
     super(props)
     const chain = {
       EVRYNET: EvrynetIcon,
-      XLM: StellarIcon,
+      STELLAR: StellarIcon,
     }
     this.stylesMain = classNames({
       [this.constructor.name]: true,
@@ -34,7 +34,7 @@ export default class WarpChainTitle extends Component {
       },
       chain,
       swap: {
-        src: chain.XLM,
+        src: chain.STELLAR,
         dest: chain.EVRYNET,
       },
     }
@@ -45,7 +45,7 @@ export default class WarpChainTitle extends Component {
     if (this.props.isToEvrynet) {
       this.setState({
         swap: {
-          src: this.state.chain.XLM,
+          src: this.state.chain.STELLAR,
           dest: this.state.chain.EVRYNET,
         },
       })
@@ -54,7 +54,7 @@ export default class WarpChainTitle extends Component {
     this.setState({
       swap: {
         src: this.state.chain.EVRYNET,
-        dest: this.state.chain.XLM,
+        dest: this.state.chain.STELLAR,
       },
     })
   }
