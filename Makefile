@@ -1,30 +1,31 @@
-APP_NAME = warp
-
 .PHONY: dev
-dev: build run
+dev: yarn start
 
 .PHONY: build
-build: 
-	docker-compose -f docker/docker-compose.yml build $(APP_NAME)
+build: yarn build
 
-.PHONY: build-nocache
-build-nocache: 
-	docker-compose -f docker/docker-compose.yml build --no-cache $(APP_NAME)
+.PHONY: compose-build
+compose-build: 
+	docker-compose -f docker/docker-compose.yml build $(app_name)
 
-.PHONY: run
-run: 
+.PHONY: compose-build-nocache
+compose-build-nocache: 
+	docker-compose -f docker/docker-compose.yml build --no-cache $(app_name)
+
+.PHONY: compose-run
+compose-run: 
 	docker-compose -f docker/docker-compose.yml run --service-ports \
 	-e WARP_ADDRESS=$(warp_address) \
 	-e WARP_GRPC_HOST=$(grpc_host) \
 	-e WARP_HTTP_PROVIDER_HOST=$(http_provider_host) \
-	$(APP_NAME)
+	$(app_name)
 
-.PHONY: up
-up: 
-	docker-compose -f docker/docker-compose.yml up --build
+.PHONY: compose-up
+compose-up: 
+	docker-compose -f docker/docker-compose.yml up $(app_name)
 
-.PHONY: down
-down: 
+.PHONY: compose-down
+compose-down: 
 	docker-compose -f docker/docker-compose.yml down
 
 .PHONY: unit-test

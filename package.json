@@ -84,8 +84,9 @@
   },
   "scripts": {
     "requirements-check": "babel-node check-node-version.js",
-    "start": "NODE_ENV=development node scripts/server.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "start": "node scripts/start.js",
+    "build": "node scripts/build.js",
+    "test": "node scripts/test.js",
   },
   "eslintConfig": {
     "extends": "react-app"

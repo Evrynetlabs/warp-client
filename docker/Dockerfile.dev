@@ -1,9 +1,9 @@
 # ------------------------------------------------------------------------------
-# BUILDER image
+# Development image
 # ------------------------------------------------------------------------------
 
 # Create the container from the alpine linux image
-FROM node:10.16.3-alpine AS builder
+FROM node:10.16.3-alpine
 
 RUN apk update && \
     apk add git && \
@@ -46,29 +46,4 @@ RUN yarn link warp-js
 
 COPY . .
 
-RUN make build
-
-
-# ------------------------------------------------------------------------------
-# DEPLOYMENT image
-# ------------------------------------------------------------------------------
-
-FROM nginx:alpine
-
-RUN apk add --no-cache tini tzdata
-
-RUN mkdir -p /app
-
-COPY ./scripts/entrypoints.sh /app
-
-COPY --from=builder /app/build /var/www
-
-COPY nginx.conf /etc/nginx/nginx.conf
-
-RUN chmod +x /app/entrypoints.sh
-
-EXPOSE 80
-
-ENTRYPOINT ["/sbin/tini", "-sg", "--", "/app/entrypoints.sh"]
-
-
+CMD make dev
