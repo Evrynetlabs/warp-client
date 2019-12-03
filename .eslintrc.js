@@ -23,5 +23,10 @@ module.exports = {
     parser: "babel-eslint",
     ecmaVersion: 2018,
     sourceType: "module"
+  },
+  settings: {
+    react: {
+      version: 'detect'
+    }
   }
 };
