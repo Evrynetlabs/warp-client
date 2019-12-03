@@ -46,7 +46,7 @@ pipeline {
             steps {
                 sh '''
                     echo "Run lint -> ${dockerImage}"
-                    docker run --rm ${dockerImage} sh -c "make unit-test"
+                    docker run --rm ${dockerImage} sh -c "make test"
                 '''
             }
         }

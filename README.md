@@ -21,7 +21,7 @@ And if you only want to run the application with existing build services as well
 
 For unit testing, run:
 
->  `make unit-test`
+>  `make test`
 
 For Lint check, run:
 

@@ -35,8 +35,8 @@ compose-up:
 compose-down: 
 	docker-compose -f docker/docker-compose.yml down
 
-.PHONY: unit-test
-unit-test:
+.PHONY: test
+test:
 	yarn test --watchAll=false --coverage
 
 .PHONY: lint
