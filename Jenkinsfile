@@ -27,7 +27,7 @@ pipeline {
                         echo "Build Image"
                         docker login -u ${gitlabUsername} -p ${gitlabPassword} registry.gitlab.com
                         cp /var/lib/jenkins/evry/warp-js-deploykey docker/warp-deploykey
-                        docker build --pull --target builder -t ${dockerImage}:${dockerTag}-test -f docker/Dockerfile .
+                        docker build --pull --target builder -t ${dockerImage} -f docker/Dockerfile .
                     '''
                 }
             }
@@ -37,7 +37,7 @@ pipeline {
             steps {
                 sh '''
                     echo "Run lint -> ${dockerImage}"
-                    docker run --rm ${CONTAINER_IMAGE}:${dockerTag}-test sh -c "make lint"
+                    docker run --rm ${dockerImage} sh -c "make lint"
                 '''
             }
         }
@@ -46,7 +46,7 @@ pipeline {
             steps {
                 sh '''
                     echo "Run lint -> ${dockerImage}"
-                    docker run --rm ${CONTAINER_IMAGE}:${dockerTag}-test sh -c "make unit-test"
+                    docker run --rm ${dockerImage} sh -c "make unit-test"
                 '''
             }
         }
@@ -82,6 +82,7 @@ pipeline {
                     sh '''
                         echo "Push to Registry"
                         docker login -u ${gitlabUsername} -p ${gitlabPassword} registry.gitlab.com
+                        docker build --pull -t ${dockerImage} -f docker/Dockerfile .
                         docker push ${dockerImage}
                         docker tag ${dockerImage} ${CONTAINER_IMAGE}:${branchName}
                         docker push ${CONTAINER_IMAGE}:${branchName}
