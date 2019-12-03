@@ -196,7 +196,7 @@ module.exports = function(webpackEnv) {
     optimization: {
       minimize: isEnvProduction,
       minimizer: [
-        // This is only used in production mode
+        //This is only used in production mode
         new TerserPlugin({
           terserOptions: {
             parse: {
@@ -224,6 +224,8 @@ module.exports = function(webpackEnv) {
             mangle: {
               safari10: true,
             },
+            keep_classnames: true,
+            keep_fnames: true,
             output: {
               ecma: 5,
               comments: false,
