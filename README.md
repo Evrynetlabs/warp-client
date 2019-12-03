@@ -7,23 +7,27 @@
 
 In the project directory, you can run:
 
-> ### `make dev`
+> `make compose-dev`
 
-For starting a dev server
+For full docker-compose local run, or
 
-If you want to only want to build the application, simply run:
+> `make compose-build`
 
-> ### `make build`
+For only building a docker compose images.
 
-And if you want to run the application as well, run:
+And if you only want to run the application with existing build services as well, run:
 
-> ### `make run`
+>  `make compose-run`
 
 For unit testing, run:
 
-> ### `make unit-test`
+>  `make unit-test`
 
-On `make run` and `make build`, you can specify warp configuration environments through flags
+For Lint check, run:
+
+>  `make lint`
+
+On `make compose-run` and `make compose-build`, you can specify warp configuration environments through flags
 
 Available flags: 
 
@@ -35,7 +39,7 @@ Available flags:
 
 Example:
 
-> ### `make dev warp_address=foo grpc_host=http://localhost:8080 http_provider_host=http://localhost:8080`
+> ### `make compose-dev warp_address=foo grpc_host=http://localhost:8080 http_provider_host=http://localhost:8080`
 
 
 
