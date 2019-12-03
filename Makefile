@@ -31,3 +31,7 @@ compose-down:
 .PHONY: unit-test
 unit-test:
 	yarn test --watchAll=false
+
+.PHONY: lint
+lint:
+	yarn eslint:check
