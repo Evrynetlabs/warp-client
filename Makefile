@@ -37,7 +37,7 @@ compose-down:
 
 .PHONY: unit-test
 unit-test:
-	yarn test --watchAll=false
+	yarn test --watchAll=false --coverage
 
 .PHONY: lint
 lint:
