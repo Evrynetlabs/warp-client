@@ -1,8 +1,15 @@
+app_name = warp
+
 .PHONY: dev
-dev: yarn start
+dev: 
+	yarn start
 
 .PHONY: build
-build: yarn build
+build: 
+	yarn build
+
+.PHONY: compose-dev
+compose-dev: compose-build compose-run
 
 .PHONY: compose-build
 compose-build: 
