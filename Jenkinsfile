@@ -20,11 +20,31 @@ pipeline {
             }
         }
 
+        stage('Get config from app-configs') {
+            steps {
+                dir('evry-app-configs') {
+                    echo "Clone app-configs"
+                    git branch: 'master',
+                    credentialsId: 'devopsautomate',
+                    url: 'https://gitlab.com/evry/evry-app-configs.git'
+                }
+                sh '''
+                    cp evry-app-configs/develop/${appName}/configuration/app.properties .env
+                '''
+            }
+        }
+
         stage('Build Image Test') {
+            when {
+                anyOf {
+                    branch 'feat/warp-jenkins-config';
+                    branch 'develop';
+                }
+            }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'devopsautomate', passwordVariable: 'gitlabPassword', usernameVariable: 'gitlabUsername')]) {
+                    echo "Build Image"
                     sh '''
-                        echo "Build Image"
                         docker login -u ${gitlabUsername} -p ${gitlabPassword} registry.gitlab.com
                         cp /var/lib/jenkins/evry/warp-js-deploykey docker/warp-deploykey
                         docker build --pull --target builder -t ${dockerImage} -f docker/Dockerfile .
