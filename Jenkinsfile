@@ -28,8 +28,9 @@ pipeline {
                 url: 'https://gitlab.com/evry/evry-app-configs.git'
                 sh '''
                     ls -l
-                    cd
+                    cd ..
                     ls -l
+                    pwd
                 '''
             }
         }
@@ -44,6 +45,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'devopsautomate', passwordVariable: 'gitlabPassword', usernameVariable: 'gitlabUsername')]) {
                     sh '''
+                        ls -l
                         echo "Build Image"
                         docker login -u ${gitlabUsername} -p ${gitlabPassword} registry.gitlab.com
                         cp evry-app-configs/develop/${appName}/configuration/app.properties .env
