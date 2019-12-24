@@ -1,4 +1,5 @@
 const env = process.env.NODE_ENV
+import cloneDeep from 'lodash/cloneDeep'
 
 const development = {
   evrynet: {
@@ -7,9 +8,9 @@ const development = {
   },
 }
 
-const test = development
+const test = cloneDeep(development)
 
-const production = {}
+const production = cloneDeep(development)
 
 const config = {
   development,
