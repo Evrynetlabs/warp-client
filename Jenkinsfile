@@ -25,13 +25,18 @@ pipeline {
                 sh '''
                     ls -l
                 '''
-                echo "Clone app-configs"
-                git branch: 'master',
-                credentialsId: 'devopsautomate',
-                url: 'https://gitlab.com/evry/evry-app-configs.git'
-                sh '''
-                    ls -l
-                '''
+                dir('evry-app-configs') {
+                    sh '''
+                        ls -l
+                    '''
+                    echo "Clone app-configs"
+                    git branch: 'master',
+                    credentialsId: 'devopsautomate',
+                    url: 'https://gitlab.com/evry/evry-app-configs.git'
+                    sh '''
+                        ls -l
+                    '''
+                }
             }
         }
 
