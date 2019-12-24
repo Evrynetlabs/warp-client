@@ -77,7 +77,7 @@ pipeline {
             }
         }
 
-        stage('Move config to build directory') {
+        stages('Move config to build directory') {
             paralell {
                 stage('Move develop config to build directory') {
                     when {
