@@ -22,15 +22,15 @@ pipeline {
 
         stage('Get config from app-configs') {
             steps {
+                sh '''
+                    ls -l
+                '''
                 echo "Clone app-configs"
                 git branch: 'master',
                 credentialsId: 'devopsautomate',
                 url: 'https://gitlab.com/evry/evry-app-configs.git'
                 sh '''
                     ls -l
-                    cd ..
-                    ls -l
-                    pwd
                 '''
             }
         }
