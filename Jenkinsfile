@@ -77,34 +77,36 @@ pipeline {
             }
         }
 
-        paralell {
-            stage('Move develop config to build directory') {
-                when {
-                    anyOf {
-                        branch 'feat/warp-jenkins-config';
-                        branch 'develop';
+        stage('Move config to build directory') {
+            parallel {
+                stage('Move develop config to build directory') {
+                    when {
+                        anyOf {
+                            branch 'feat/warp-jenkins-config';
+                            branch 'develop';
+                        }
+                    }
+                    steps {
+                        sh '''
+                            cp evry-app-configs/develop/${appName}/configuration/app.properties .env
+                        '''
                     }
                 }
-                steps {
-                    sh '''
-                        cp evry-app-configs/develop/${appName}/configuration/app.properties .env
-                    '''
+                stage('Move test config to build directory') {
+                    when { branch 'release/*'; }
+                    steps {
+                        sh '''
+                            cp evry-app-configs/test/${appName}/configuration/app.properties .env
+                        '''
+                    }
                 }
-            }
-            stage('Move test config to build directory') {
-                when { branch 'release/*'; }
-                steps {
-                    sh '''
-                        cp evry-app-configs/test/${appName}/configuration/app.properties .env
-                    '''
-                }
-            }
-            stage('Move staging config to build directory') {
-                when { branch 'master' }
-                steps {
-                    sh '''
-                        cp evry-app-configs/staging/${appName}/configuration/app.properties .env
-                    '''
+                stage('Move staging config to build directory') {
+                    when { branch 'master' }
+                    steps {
+                        sh '''
+                            cp evry-app-configs/staging/${appName}/configuration/app.properties .env
+                        '''
+                    }
                 }
             }
         }
