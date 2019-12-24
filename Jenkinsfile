@@ -30,6 +30,7 @@ pipeline {
             steps {
                 sh '''
                     echo "Clone app-configs"
+                    ls -l
                 '''
                 git branch: 'master',
                 credentialsId: 'devopsautomate',
@@ -37,6 +38,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'devopsautomate', passwordVariable: 'gitlabPassword', usernameVariable: 'gitlabUsername')]) {
                     sh '''
                         echo "Build Image"
+                        ls -l
                         docker login -u ${gitlabUsername} -p ${gitlabPassword} registry.gitlab.com
                         cp evry-app-configs/develop/${appName}/configuration/app.properties .env
                         cp /var/lib/jenkins/evry/warp-js-deploykey docker/warp-deploykey
