@@ -20,30 +20,9 @@ pipeline {
             }
         }
 
-#        stage('Get config from app-configs') {
-#            steps {
-#                dir('evry-app-configs') {
-#                    echo "Clone app-configs"
-#                    git branch: 'master',
-#                    credentialsId: 'devopsautomate',
-#                    url: 'https://gitlab.com/evry/evry-app-configs.git'
-#                }
-#                sh '''
-#                    cp evry-app-configs/develop/${appName}/configuration/app.properties .env
-#                '''
-#            }
-#        }
-
         stage('Build Image Test') {
-            when {
-                anyOf {
-                    branch 'feat/warp-jenkins-config';
-                    branch 'develop';
-                }
-            }
             steps {
-                withCredentials([usernamePassword(credentialsId: 'devopsautomate', passwordVariable: 'gitlabPassword', usernameVariable: 'gitlabUsername')]) {
-                    echo "Build Image"
+                withCredentials([usernamePassword(credentialsId: 'devopsautomate', passwordVariable: 'gitlabPassword', usernameVariable: 'gitlabUsername')]) { echo "Build Image"
                     sh '''
                         docker login -u ${gitlabUsername} -p ${gitlabPassword} registry.gitlab.com
                         cp /var/lib/jenkins/evry/warp-js-deploykey docker/warp-deploykey
@@ -87,9 +66,49 @@ pipeline {
             }
         }
 
+        stage('Get config from app-configs') {
+            steps {
+                dir('evry-app-configs') {
+                    echo "Clone app-configs"
+                    git branch: 'master',
+                    credentialsId: 'devopsautomate',
+                    url: 'https://gitlab.com/evry/evry-app-configs.git'
+                }
+            }
+        }
+
+        stage('Move config to build directory') {
+            paralell {
+                stage('Move develop config to build directory') {
+                    when {
+                        anyOf {
+                            branch 'feat/warp-jenkins-config';
+                            branch 'develop';
+                        }
+                    }
+                    sh '''
+                        cp evry-app-configs/develop/${appName}/configuration/app.properties .env
+                    '''
+                }
+                stage('Move test config to build directory') {
+                    when { branch 'release/*'; }
+                    sh '''
+                        cp evry-app-configs/test/${appName}/configuration/app.properties .env
+                    '''
+                }
+                stage('Move staging config to build directory') {
+                    when { branch 'master' }
+                    sh '''
+                        cp evry-app-configs/staging/${appName}/configuration/app.properties .env
+                    '''
+                }
+            }
+        }
+
         stage('Build and Push to Registry') {
             when {
                 anyOf {
+                    branch 'feat/warp-jenkins-config';
                     branch 'feat/docker';
                     branch 'feature/pipeline';
                     branch 'develop';
