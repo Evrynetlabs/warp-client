@@ -20,17 +20,6 @@ pipeline {
             }
         }
 
-        stage('Get config from app-configs') {
-            steps {
-                sh '''
-                    echo "Clone app-configs"
-                '''
-                git branch: 'master',
-                credentialsId: 'devopsautomate',
-                url: 'https://gitlab.com/evry/evry-app-configs.git'
-            }
-        }
-
         stage('Build Image Test') {
             when {
                 anyOf {
@@ -39,6 +28,12 @@ pipeline {
                 }
             }
             steps {
+                sh '''
+                    echo "Clone app-configs"
+                '''
+                git branch: 'master',
+                credentialsId: 'devopsautomate',
+                url: 'https://gitlab.com/evry/evry-app-configs.git'
                 withCredentials([usernamePassword(credentialsId: 'devopsautomate', passwordVariable: 'gitlabPassword', usernameVariable: 'gitlabUsername')]) {
                     sh '''
                         echo "Build Image"
