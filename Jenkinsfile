@@ -86,21 +86,27 @@ pipeline {
                             branch 'develop';
                         }
                     }
-                    sh '''
-                        cp evry-app-configs/develop/${appName}/configuration/app.properties .env
-                    '''
+                    steps {
+                        sh '''
+                            cp evry-app-configs/develop/${appName}/configuration/app.properties .env
+                        '''
+                    }
                 }
                 stage('Move test config to build directory') {
                     when { branch 'release/*'; }
-                    sh '''
-                        cp evry-app-configs/test/${appName}/configuration/app.properties .env
-                    '''
+                    steps {
+                        sh '''
+                            cp evry-app-configs/test/${appName}/configuration/app.properties .env
+                        '''
+                    }
                 }
                 stage('Move staging config to build directory') {
                     when { branch 'master' }
-                    sh '''
-                        cp evry-app-configs/staging/${appName}/configuration/app.properties .env
-                    '''
+                    steps {
+                        sh '''
+                            cp evry-app-configs/staging/${appName}/configuration/app.properties .env
+                        '''
+                    }
                 }
             }
         }
