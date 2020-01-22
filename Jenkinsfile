@@ -117,8 +117,6 @@ pipeline {
         stage('Build and Push to Registry') {
             when {
                 anyOf {
-                    branch 'feat/docker';
-                    branch 'feature/pipeline';
                     branch 'develop';
                     branch 'release/*';
                     branch 'master'
