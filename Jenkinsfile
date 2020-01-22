@@ -86,7 +86,6 @@ pipeline {
                 stage('Move develop config to build directory') {
                     when {
                         anyOf {
-                            branch 'feat/warp-jenkins-config';
                             branch 'develop';
                         }
                     }
@@ -118,7 +117,6 @@ pipeline {
         stage('Build and Push to Registry') {
             when {
                 anyOf {
-                    branch 'feat/warp-jenkins-config';
                     branch 'feat/docker';
                     branch 'feature/pipeline';
                     branch 'develop';
