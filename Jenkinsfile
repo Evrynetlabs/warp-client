@@ -26,7 +26,8 @@ pipeline {
 
         stage('Build Image Test') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'devopsautomate', passwordVariable: 'gitlabPassword', usernameVariable: 'gitlabUsername')]) { echo "Build Image"
+                withCredentials([usernamePassword(credentialsId: 'devopsautomate', passwordVariable: 'gitlabPassword', usernameVariable: 'gitlabUsername')]) { 
+                    echo "Build Image"
                     sh '''
                         docker login -u ${gitlabUsername} -p ${gitlabPassword} registry.gitlab.com
                         cp /var/lib/jenkins/evry/warp-js-deploykey docker/warp-deploykey
