@@ -14,11 +14,11 @@ const mock = jest.fn().mockImplementation(() => {
     client: {
       evry: {
         getWhitelistAssets: spyGetWhitelistAssets,
-        getAccountBalance: spyGetAccountBalance,
+        getBalance: spyGetAccountBalance,
         getPublickeyFromPrivateKey: spyGetPublickeyFromPrivateKey,
       },
       stellar: {
-        getAccountBalance: spyGetAccountBalance,
+        getBalance: spyGetAccountBalance,
         getPublickeyFromPrivateKey: spyGetPublickeyFromPrivateKey,
         getTrustlines: spyGetTrustlines,
       },

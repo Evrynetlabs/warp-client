@@ -107,7 +107,7 @@ export const getAccountBalance = ({ asset = {}, privateKey = '' }) => {
     dispatch(getAccountBalancePending(true))
     try {
       const address = client.getPublickeyFromPrivateKey(privateKey)
-      const accountBalance = await client.getAccountBalance(address, asset)
+      const accountBalance = await client.getBalance({ address, asset })
       dispatch(getAccountBalanceSuccess(accountBalance.balance))
     } catch (e) {
       dispatch(getAccountBalanceError(e))
@@ -136,8 +136,8 @@ export const getTrustlines = ({ privateKey = '' }) => {
     dispatch(getTrustlinesPending(true))
     try {
       const address = warp.client.stellar.getPublickeyFromPrivateKey(privateKey)
-      const trustlines = await warp.client.stellar.getTrustlines(address)
-      dispatch(getTrustlinesSuccess(trustlines.assets))
+      const { assets } = await warp.client.stellar.getTrustlines(address)
+      dispatch(getTrustlinesSuccess(assets))
     } catch (e) {
       dispatch(getTrustlinesError(e))
     }
