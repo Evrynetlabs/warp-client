@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import classNames from 'classnames'
-import 'Components/shared/select.scss'
 import map from 'lodash/map'
 import PropTypes from 'prop-types'
-import { useInitStyles, useEventListener } from 'Components/shared/selectHooks'
+import {
+  useInitStyles,
+  useEventListener,
+} from 'Components/shared/select/selectHooks'
 
 export default function Select(props) {
   const [isOpen, setOpen] = useState(false)

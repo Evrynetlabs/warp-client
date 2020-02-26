@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Card from 'react-bootstrap/Card'
 import classNames from 'classnames'
 import { Container, Row, Col, Button, Form } from 'react-bootstrap'
-import 'Components/warp/warp-content/warpContent.scss'
+import { MaskPasswordInput } from 'Components/shared'
 import { removeTrailingDot, removeLeadingZero } from '@/utils/format'
 import PropTypes from 'prop-types'
 import { getWarpInstance } from '@/utils/singleton'
@@ -488,7 +488,7 @@ export default class WarpContent extends Component {
                     >
                       <span>From</span>
                     </Form.Label>
-                    <Form.Control
+                    <MaskPasswordInput
                       className={classNames(
                         `${this.state.stylesMain}__form__content__input__src`,
                         `${this.state.stylesMain}__form__content__input`,
@@ -549,7 +549,7 @@ export default class WarpContent extends Component {
                     >
                       <span>To</span>
                     </Form.Label>
-                    <Form.Control
+                    <MaskPasswordInput
                       className={classNames(
                         `${this.state.stylesMain}__form__content__input__dest`,
                         `${this.state.stylesMain}__form__content__input`,

@@ -34,9 +34,10 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is false W
                   From
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
                 isInvalid={true}
+                maskIconProps={Object {}}
                 name="sourceAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -80,9 +81,10 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is false W
                   To
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="destinationAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -258,9 +260,10 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is false W
                   From
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
                 isInvalid={true}
+                maskIconProps={Object {}}
                 name="sourceAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -304,9 +307,10 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is false W
                   To
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
                 isInvalid={true}
+                maskIconProps={Object {}}
                 name="destinationAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -484,9 +488,10 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is false W
                   From
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
                 isInvalid={true}
+                maskIconProps={Object {}}
                 name="sourceAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -530,9 +535,10 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is false W
                   To
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
                 isInvalid={true}
+                maskIconProps={Object {}}
                 name="destinationAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -710,9 +716,10 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is false W
                   From
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
                 isInvalid={true}
+                maskIconProps={Object {}}
                 name="sourceAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -756,9 +763,10 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is false W
                   To
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
                 isInvalid={true}
+                maskIconProps={Object {}}
                 name="destinationAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -934,9 +942,10 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is true Wh
                   From
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="sourceAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -978,9 +987,10 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is true Wh
                   To
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
                 isInvalid={true}
+                maskIconProps={Object {}}
                 name="destinationAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -1156,9 +1166,10 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is true Wh
                   From
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="sourceAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -1200,9 +1211,10 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is true Wh
                   To
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
                 isInvalid={true}
+                maskIconProps={Object {}}
                 name="destinationAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -1376,9 +1388,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   From
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="sourceAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -1420,9 +1433,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   To
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="destinationAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -1598,9 +1612,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   From
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="sourceAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -1642,9 +1657,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   To
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="destinationAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -1811,9 +1827,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   From
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="sourceAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -1855,9 +1872,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   To
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="destinationAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -2024,9 +2042,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   From
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="sourceAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -2068,9 +2087,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   To
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="destinationAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -2237,9 +2257,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   From
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="sourceAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -2281,9 +2302,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   To
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="destinationAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -2450,9 +2472,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   From
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="sourceAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -2494,9 +2517,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   To
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="destinationAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -2663,9 +2687,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   From
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="sourceAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -2707,9 +2732,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   To
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="destinationAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -2885,9 +2911,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   From
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="sourceAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -2929,9 +2956,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   To
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="destinationAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -3107,9 +3135,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   From
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="sourceAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -3151,9 +3180,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   To
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="destinationAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -3329,9 +3359,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   From
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="sourceAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -3373,9 +3404,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   To
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="destinationAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -3551,9 +3583,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   From
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="sourceAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -3595,9 +3628,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   To
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="destinationAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -3773,9 +3807,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   From
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="sourceAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -3817,9 +3852,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   To
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="destinationAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -3995,9 +4031,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   From
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="sourceAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -4039,9 +4076,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   To
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="destinationAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -4208,9 +4246,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   From
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="sourceAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -4252,9 +4291,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   To
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="destinationAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -4430,9 +4470,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   From
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="sourceAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -4474,9 +4515,10 @@ exports[`WarpContent When input an amount When input an invalid amount When amou
                   To
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="destinationAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -4652,9 +4694,10 @@ exports[`WarpContent should render correspondingly 1`] = `
                   From
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="sourceAccount"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -4696,9 +4739,10 @@ exports[`WarpContent should render correspondingly 1`] = `
                   To
                 </span>
               </FormLabel>
-              <FormControl
+              <MaskPasswordInput
                 className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
                 isInvalid={false}
+                maskIconProps={Object {}}
                 name="destinationAccount"
                 onBlur={[Function]}
                 onChange={[Function]}

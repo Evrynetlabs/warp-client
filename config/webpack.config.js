@@ -461,7 +461,12 @@ module.exports = function(webpackEnv) {
                   loader: 'sass-resources-loader',
                   options: {
                     // Provide path to the file with resources
-                    resources: path.resolve(__dirname, '../src/*.scss'),
+                    resources: [
+                      path.resolve(__dirname, '../src/sass/utilities/*.scss'),
+                      path.resolve(__dirname, '../src/sass/vendor/*.scss'),
+                      path.resolve(__dirname, '../src/sass/base/*.scss'),
+                      path.resolve(__dirname, '../src/sass/components/*.scss'),
+                    ],
                   },
                 },
               ],

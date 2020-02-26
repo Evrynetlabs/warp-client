@@ -79,7 +79,6 @@ describe('WarpContent', () => {
         .find('.WarpContent__form__content__input__src')
         .simulate('change', mockEvent)
       await component.update()
-
       expect(component.state().formControls.sourceAccount.value).toEqual(
         expected,
       )

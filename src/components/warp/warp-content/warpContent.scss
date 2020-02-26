@@ -10,11 +10,6 @@ $radius-size: 4px;
             margin: 0 auto;
             padding: $space-52 0!important;
 
-            &__label {
-                bottom: 63px;
-                position: absolute;         
-            }
-
             &__col {
                 &:nth-child(2) {
                     flex-basis: 24px;
