@@ -25,7 +25,7 @@ RUN ssh-keyscan -H github.com >> /root/.ssh/known_hosts
 # make sure using ssh instead of https
 RUN git config --global url."git@github.com:".insteadOf "https://github.com/"
 
-RUN git clone git@github.com:evrynet-official/warp-js.git
+RUN git clone git@github.com:Evrynetlabs/warp-js.git
 
 WORKDIR /warp-js
 

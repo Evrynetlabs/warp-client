@@ -1,7 +1,7 @@
 
 # WARP-CLIENT
 
-## This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), [Warp-js](https://github.com/evrynet-official/warp-js), and [Evrynet](https://evrynet.io).
+## This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), [Warp-js](https://github.com/Evrynetlabs/warp-js), and [Evrynet](https://evrynet.io).
 
 ## Available Scripts
 
