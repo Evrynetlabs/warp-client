@@ -14,7 +14,7 @@ describe('MaskPasswordInput', () => {
   })
 
   describe('When close mask input', () => {
-    test('icon should contain slash', () => {
+    test('icon should not contain slash', () => {
       const component = shallow(<MaskPassInput></MaskPassInput>)
       component.find('.MaskPasswordInput__mask__btn').simulate('click')
       expect(component.find('.fa-eye').length).toBe(1)
