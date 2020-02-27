@@ -512,7 +512,13 @@ export default class WarpContent extends Component {
                       }
                     />
                     <Form.Control.Feedback
-                      className="position-absolute"
+                      className={classNames(
+                        'position-absolute',
+                        this.state.formControls.sourceAccount.touched &&
+                          !this.state.formControls.sourceAccount.valid
+                          ? 'd-block'
+                          : '',
+                      )}
                       type="invalid"
                     >
                       <div
@@ -573,7 +579,13 @@ export default class WarpContent extends Component {
                       }
                     />
                     <Form.Control.Feedback
-                      className="position-absolute"
+                      className={classNames(
+                        'position-absolute',
+                        this.state.formControls.destinationAccount.touched &&
+                          !this.state.formControls.destinationAccount.valid
+                          ? 'd-block'
+                          : '',
+                      )}
                       type="invalid"
                     >
                       <div
@@ -657,7 +669,10 @@ export default class WarpContent extends Component {
                             type="invalid"
                           >
                             <div
-                              className={`${this.state.stylesMain}__form__content__errorFeedback__form`}
+                              className={classNames(
+                                `${this.state.stylesMain}__form__content__errorFeedback__form`,
+                                `${this.state.stylesMain}__form__content__errorFeedback__amount`,
+                              )}
                             >
                               {this.state.formControls.amount.errorMessage}
                             </div>
