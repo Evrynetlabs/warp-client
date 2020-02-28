@@ -5,7 +5,6 @@ import WarpChainTitle from 'Components/warp/warp-chain-title/WarpChainTitle'
 import WarpContent from 'Components/warp/warp-content/WarpContent'
 import { Container, Row, Col } from 'react-bootstrap'
 import PropTypes from 'prop-types'
-import 'Components/warp/warp.scss'
 
 export default class Warp extends Component {
   constructor(props) {

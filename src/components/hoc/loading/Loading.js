@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Modal from 'react-modal'
 import { Spinner } from 'react-bootstrap'
-import 'Components/hoc/loading/loading.scss'
 
 export default function withLoading(Component) {
   const Loading = (props) => {

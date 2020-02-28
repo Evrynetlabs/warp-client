@@ -5,6 +5,7 @@ import store, { history } from '@/store'
 import { Header } from 'Components/header'
 import { Footer } from 'Components/footer'
 import Routes from '@/routes'
+import '@/App.scss'
 
 class App extends Component {
   render() {

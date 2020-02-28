@@ -69,6 +69,10 @@ $radius-size: 4px;
                     background-color: $brand-danger;
                     padding: $space-4;
                     text-align: center;
+                    width: 90%;
+                }
+                &__amount {
+                    width: 100%;
                 }
                 &__submit {
                     @extend .text-format-label-light;
