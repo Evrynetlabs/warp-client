@@ -1,10 +1,16 @@
 import React from 'react'
-import { Route, Switch } from 'react-router'
+import { Switch, Redirect } from 'react-router'
 import { WarpComponent } from 'Components/warp'
+import { HealthCheckRoute } from 'Components/healthcheck'
 
 const routes = (
   <Switch>
-    <Route exact path="/" component={WarpComponent}></Route>
+    <HealthCheckRoute
+      exact
+      path="/"
+      component={WarpComponent}
+    ></HealthCheckRoute>
+    <Redirect from="/:else" to="/" />
   </Switch>
 )
 
