@@ -1,0 +1,16 @@
+.ErrorPage {
+    height: 100%;
+    background-color: #{map-get($colors, 'shades-white')};
+    &__icon {
+        padding: 128px;
+    }
+    &__content {
+        &__logo {
+            flex-grow: 0;
+        }
+        &__message {
+            flex-basis: 308px;
+            flex-grow: 0;
+        }
+    }
+}
