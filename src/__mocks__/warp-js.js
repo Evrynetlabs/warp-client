@@ -7,6 +7,7 @@ export const spyGetCode = jest.fn()
 export const spyGetAccountBalance = jest.fn()
 export const spyGetPublickeyFromPrivateKey = jest.fn()
 export const spyGetTrustlines = jest.fn()
+export const spyIsListening = jest.fn()
 const mock = jest.fn().mockImplementation(() => {
   return {
     toEvrynet: spyToEvrynet,
@@ -21,6 +22,9 @@ const mock = jest.fn().mockImplementation(() => {
         getBalance: spyGetAccountBalance,
         getPublickeyFromPrivateKey: spyGetPublickeyFromPrivateKey,
         getTrustlines: spyGetTrustlines,
+      },
+      net: {
+        isListening: spyIsListening,
       },
     },
     utils: {
