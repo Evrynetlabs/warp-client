@@ -9,7 +9,6 @@ import {
 import actionTypes from 'Components/warp/warpActionTypes'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-jest.mock('warp-js')
 import {
   spyToEvrynet,
   spyGetWhitelistAssets,
@@ -17,7 +16,7 @@ import {
   spyGetAccountBalance,
   spyGetPublickeyFromPrivateKey,
   spyGetTrustlines,
-} from 'warp-js'
+} from '@Evrynetlabs/warp-js'
 
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)

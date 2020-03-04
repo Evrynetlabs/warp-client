@@ -1,5 +1,3 @@
-// __mocks__/warp-js.js
-
 export const spyToEvrynet = jest.fn()
 export const spyToStellar = jest.fn()
 export const spyGetWhitelistAssets = jest.fn()
