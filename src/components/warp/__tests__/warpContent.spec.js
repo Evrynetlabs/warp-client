@@ -1,7 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-jest.mock('warp-js')
-import { spyGetCode } from 'warp-js'
+import { spyGetCode } from '@Evrynetlabs/warp-js'
 import WarpContent from 'Components/warp/warp-content/WarpContent'
 
 describe('WarpContent', () => {
