@@ -2,6 +2,7 @@ import { createStore, applyMiddleware } from 'redux'
 import createReducer from '@/reducers'
 import { warpReducer } from 'Components/warp'
 import { loadingReducer } from 'Components/hoc/loading'
+import { healthCheckReducer } from 'Components/healthcheck'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { connectRouter, routerMiddleware } from 'connected-react-router'
@@ -12,6 +13,7 @@ export const history = createBrowserHistory()
 const rootReducer = createReducer({
   warp: warpReducer,
   loading: loadingReducer,
+  healthCheck: healthCheckReducer,
   router: connectRouter(history),
 })
 

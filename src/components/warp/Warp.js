@@ -5,7 +5,8 @@ import WarpChainTitle from 'Components/warp/warp-chain-title/WarpChainTitle'
 import WarpContent from 'Components/warp/warp-content/WarpContent'
 import { Container, Row, Col } from 'react-bootstrap'
 import PropTypes from 'prop-types'
-import 'Components/warp/warp.scss'
+import { Header } from 'Components/header'
+import { Footer } from 'Components/footer'
 
 export default class Warp extends Component {
   constructor(props) {
@@ -24,16 +25,20 @@ export default class Warp extends Component {
 
   render() {
     return (
-      <Container fluid className={this.state.styles.main}>
-        <Row>
-          <Col>
-            <Card className={this.state.styles.content}>
-              <WarpChainTitle {...this.props}></WarpChainTitle>
-              <WarpContent {...this.props}></WarpContent>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
+      <React.Fragment>
+        <Header></Header>
+        <Container fluid className={this.state.styles.main}>
+          <Row>
+            <Col>
+              <Card className={this.state.styles.content}>
+                <WarpChainTitle {...this.props}></WarpChainTitle>
+                <WarpContent {...this.props}></WarpContent>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
+        <Footer></Footer>
+      </React.Fragment>
     )
   }
 }

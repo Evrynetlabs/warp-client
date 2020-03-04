@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Card from 'react-bootstrap/Card'
 import classNames from 'classnames'
 import { Container, Row, Col, Button, Form } from 'react-bootstrap'
-import 'Components/warp/warp-content/warpContent.scss'
+import { MaskPasswordInput } from 'Components/shared'
 import { removeTrailingDot, removeLeadingZero } from '@/utils/format'
 import PropTypes from 'prop-types'
 import { getWarpInstance } from '@/utils/singleton'
@@ -488,7 +488,7 @@ export default class WarpContent extends Component {
                     >
                       <span>From</span>
                     </Form.Label>
-                    <Form.Control
+                    <MaskPasswordInput
                       className={classNames(
                         `${this.state.stylesMain}__form__content__input__src`,
                         `${this.state.stylesMain}__form__content__input`,
@@ -512,7 +512,13 @@ export default class WarpContent extends Component {
                       }
                     />
                     <Form.Control.Feedback
-                      className="position-absolute"
+                      className={classNames(
+                        'position-absolute',
+                        this.state.formControls.sourceAccount.touched &&
+                          !this.state.formControls.sourceAccount.valid
+                          ? 'd-block'
+                          : '',
+                      )}
                       type="invalid"
                     >
                       <div
@@ -549,7 +555,7 @@ export default class WarpContent extends Component {
                     >
                       <span>To</span>
                     </Form.Label>
-                    <Form.Control
+                    <MaskPasswordInput
                       className={classNames(
                         `${this.state.stylesMain}__form__content__input__dest`,
                         `${this.state.stylesMain}__form__content__input`,
@@ -573,7 +579,13 @@ export default class WarpContent extends Component {
                       }
                     />
                     <Form.Control.Feedback
-                      className="position-absolute"
+                      className={classNames(
+                        'position-absolute',
+                        this.state.formControls.destinationAccount.touched &&
+                          !this.state.formControls.destinationAccount.valid
+                          ? 'd-block'
+                          : '',
+                      )}
                       type="invalid"
                     >
                       <div
@@ -657,7 +669,10 @@ export default class WarpContent extends Component {
                             type="invalid"
                           >
                             <div
-                              className={`${this.state.stylesMain}__form__content__errorFeedback__form`}
+                              className={classNames(
+                                `${this.state.stylesMain}__form__content__errorFeedback__form`,
+                                `${this.state.stylesMain}__form__content__errorFeedback__amount`,
+                              )}
                             >
                               {this.state.formControls.amount.errorMessage}
                             </div>

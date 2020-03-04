@@ -6,7 +6,6 @@ import PropTypes from 'prop-types'
 import { ReactComponent as EvrynetIcon } from '@/assets/icons/evrynet.svg'
 import { ReactComponent as StellarIcon } from '@/assets/icons/stellar.svg'
 import { ReactComponent as SwapIcon } from '@/assets/icons/swap.svg'
-import 'Components/warp/warp-chain-title/warpChainTitle.scss'
 
 export default class WarpChainTitle extends Component {
   constructor(props) {
