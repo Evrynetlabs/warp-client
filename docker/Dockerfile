@@ -42,7 +42,7 @@ COPY yarn.lock ./
 
 RUN yarn install
 RUN yarn add node-sass --force
-RUN yarn link warp-js
+RUN yarn link @Evrynetlabs/warp-js
 
 COPY . .
 
