@@ -33,13 +33,13 @@ Available flags:
 
 | Flag | Environment | Description |
 | --- | --- | --- |
-| `warp_address` | `WARP_ADDRESS` |address of warp contract|
+| `stellar_credit_custodian_address` | `STELLAR_CREDIT_CUSTODIAN_ADDRESS` |address of warp contract|
 | `grpc_host` | `WARP_GRPC_HOST` | grpc host from warp client to grpc proxy|
 | `http_provider_host` | `WARP_HTTP_PROVIDER_HOST` |host of evrynet http provider |
 
 Example:
 
-> ### `make compose-dev warp_address=foo grpc_host=http://localhost:8080 http_provider_host=http://localhost:8080`
+> ### `make compose-dev stellar_credit_custodian_address=0xfoo grpc_host=http://localhost:8080 http_provider_host=http://localhost:22001`
 
 
 
