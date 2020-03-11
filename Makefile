@@ -22,6 +22,7 @@ compose-build-nocache:
 .PHONY: compose-run
 compose-run: 
 	docker-compose -f docker/docker-compose.yml run --service-ports \
+	-e NATIVE_ASSET_CUSTODIAN_ADDRESS=$(native_asset_custodian_address) \
 	-e STELLAR_CREDIT_CUSTODIAN_ADDRESS=$(stellar_credit_custodian_address) \
 	-e WARP_GRPC_HOST=$(grpc_host) \
 	-e WARP_HTTP_PROVIDER_HOST=$(http_provider_host) \
