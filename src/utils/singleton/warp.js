@@ -5,7 +5,7 @@ export default function getWarpInstance() {
   if (!warpInstance) {
     let config = new WarpConfig()
     if (process.env.NATIVE_ASSET_CUSTODIAN_ADDRESS) {
-      config.evrynet.contract.nativeCustodian =
+      config.evrynet.contract.nativeCustodian.address =
         process.env.NATIVE_ASSET_CUSTODIAN_ADDRESS
     }
     if (process.env.STELLAR_CREDIT_CUSTODIAN_ADDRESS) {
