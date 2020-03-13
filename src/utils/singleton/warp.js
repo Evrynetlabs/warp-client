@@ -4,13 +4,13 @@ let warpInstance
 export default function getWarpInstance() {
   if (!warpInstance) {
     let config = new WarpConfig()
-    if (process.env.NATIVE_ASSET_CUSTODIAN_ADDRESS) {
+    if (process.env.WARP_NATIVE_ASSET_CUSTODIAN_ADDRESS) {
       config.evrynet.contract.nativeCustodian.address =
-        process.env.NATIVE_ASSET_CUSTODIAN_ADDRESS
+        process.env.WARP_NATIVE_ASSET_CUSTODIAN_ADDRESS
     }
-    if (process.env.STELLAR_CREDIT_CUSTODIAN_ADDRESS) {
+    if (process.env.WARP_STELLAR_CREDIT_CUSTODIAN_ADDRESS) {
       config.evrynet.contract.stellarCustodian.address =
-        process.env.STELLAR_CREDIT_CUSTODIAN_ADDRESS
+        process.env.WARP_STELLAR_CREDIT_CUSTODIAN_ADDRESS
     }
     if (process.env.WARP_GRPC_HOST) {
       config.grpc.host = process.env.WARP_GRPC_HOST
@@ -19,6 +19,7 @@ export default function getWarpInstance() {
       config.evrynet.provider = process.env.WARP_HTTP_PROVIDER_HOST
     }
     initWarpConfig(config)
+    console.log(config)
     warpInstance = new Warp()
   }
   return warpInstance
