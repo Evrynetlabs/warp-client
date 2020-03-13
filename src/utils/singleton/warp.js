@@ -19,7 +19,6 @@ export default function getWarpInstance() {
       config.evrynet.provider = process.env.WARP_HTTP_PROVIDER_HOST
     }
     initWarpConfig(config)
-    console.log(config)
     warpInstance = new Warp()
   }
   return warpInstance
