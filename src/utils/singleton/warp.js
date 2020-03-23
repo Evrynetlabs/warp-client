@@ -12,6 +12,10 @@ export default function getWarpInstance() {
       config.evrynet.contract.stellarCustodian.address =
         process.env.WARP_STELLAR_CREDIT_CUSTODIAN_ADDRESS
     }
+    if (process.env.WARP_EVRYNET_CREDIT_CUSTODIAN_ADDRESS) {
+      config.evrynet.contract.evrynetCustodian.address =
+        process.env.WARP_EVRYNET_CREDIT_CUSTODIAN_ADDRESS
+    }
     if (process.env.WARP_GRPC_HOST) {
       config.grpc.host = process.env.WARP_GRPC_HOST
     }
