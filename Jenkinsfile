@@ -136,6 +136,35 @@ pipeline {
                 }
             }
         }
+
+        stage('Move production config to build directory') {
+            when { branch 'master' }
+            steps {
+                sh '''
+                    rm -f .env
+                    cp evry-app-configs/production/${appName}/configuration/app.properties .env
+                '''
+            }
+        }
+
+        stage('Build and Push production image to Registry') {
+            when { branch 'master' }
+            environment{
+                dockerTag="${env.BUILD_NUMBER}"
+                dockerImage="${env.CONTAINER_IMAGE}:${env.dockerTag}"
+            }
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'devopsautomate', passwordVariable: 'gitlabPassword', usernameVariable: 'gitlabUsername')]) {
+                    sh '''
+                        echo "Push to Registry"
+                        docker login -u ${gitlabUsername} -p ${gitlabPassword} registry.gitlab.com
+                        docker build --pull -t ${dockerImage} -f docker/Dockerfile .
+                        docker push ${dockerImage}
+                    '''
+                }
+            }
+        }
+
         stage('Trigger to Deployment job') {
             parallel {
                 stage ('Deploy to Develop Environment') {
@@ -159,7 +188,11 @@ pipeline {
                         branch 'master'
                     }
                     steps {
-                        build job: 'warp-client-deploy', parameters: [string(name: 'dockerVersion', value: env.dockerTag),string(name: 'environment', value: 'staging')]
+                        build job: 'warp-client-deploy',
+                        parameters: [string(name: 'dockerVersion', value: env.dockerTag),
+                                     string(name: 'dockerProdVersion', value: env.BUILD_NUMBER),
+                                     string(name: 'environment', value: 'staging')
+                        ]
                     }
                 }
             }
