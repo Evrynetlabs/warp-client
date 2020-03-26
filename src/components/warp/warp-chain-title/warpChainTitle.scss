@@ -1,0 +1,47 @@
+$radius-size: 4px;
+
+.WarpChainTitle {
+    &.card-header {
+        background: map-get($gradient, 'title');
+        border-top-left-radius: $radius-size!important;
+        border-top-right-radius: $radius-size!important;
+    }
+    &__row {
+        &__asset, &__swap {
+            text-align: center;
+        }
+    
+        &__asset {
+            font-size: $font-size-h4;
+            &__text {
+                span {
+                    padding-right: $space-16;
+                }
+            }
+        }
+    
+        &__swap {
+            cursor: pointer;
+            font-size: $font-size-h6;
+            &:hover {
+                .speech-bubble {
+                    visibility: visible;
+                    opacity: 1;
+                }
+            }
+            .speech-bubble {
+                position: absolute;
+                bottom: 36px;
+                right: -99px;
+                visibility: hidden;
+                opacity: 0;
+                transition: visibility 0s, opacity 0.5s linear;
+            }
+            &__bubble {
+                width: 104px;
+                height: 20px;
+                display: block;
+            }
+        }
+    }
+}

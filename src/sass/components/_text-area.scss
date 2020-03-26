@@ -1,0 +1,18 @@
+/**
+    THIS FILE CONTAINS TEXT-AREA COMPONENT STYLE
+**/
+
+.label {
+    font-size: $font-size-small;
+    color: $light-grey;
+    &--dark {
+        font-size: $font-size-small;
+        color: $dark-grey
+    }
+}
+
+.ellipsis {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}

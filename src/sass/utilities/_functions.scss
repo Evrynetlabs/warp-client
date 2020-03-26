@@ -1,0 +1,127 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass functions.
+// -----------------------------------------------------------------------------
+
+/// Native `url(..)` function wrapper
+/// @param {String} $base - base URL for the asset
+/// @param {String} $type - asset type folder (e.g. `fonts/`)
+/// @param {String} $path - asset path
+/// @return {Url} - return url
+@function asset($base, $type, $path) {
+    @return url($base + $type + $path);
+}
+
+/// Returns URL to an image based on its path
+/// @param {String} $path - image path
+/// @param {String} $base [$base-url] - base URL
+/// @return {Url}
+/// @require $base-url
+@function image($path, $base: $base-url) {
+  @return asset($base, 'images/', $path);
+}
+
+/// Returns URL to a font based on its path
+/// @param {String} $path - font path
+/// @param {String} $base [$base-url] - base URL
+/// @return {Url}
+/// @require $base-url
+@function font($path, $base: $base-url) {
+  @return asset($base, 'fonts/', $path);
+}
+
+@function palette-color($key) {
+  @return map-get($palette-colors, $key);
+}
+
+@function palette-color-level($color-name, $level) {
+  $color: palette-color($color-name + '-' + $level);
+  @return $color;
+}
+
+@function map-deep-set($map, $keys, $value) {
+  $maps: ($map,);
+  $result: null;
+
+  // If the last key is a map already
+  // Warn the user we will be overriding it with $value
+  @if type-of(nth($keys, -1)) == "map" {
+    @warn "The last key you specified is a map; it will be overrided with `#{$value}`.";
+  }
+  // If $keys is a single key
+  // Just merge and return
+  @if length($keys) == 1 {
+    @return map-merge($map, ( $keys: $value ));
+  } 
+
+  // Loop from the first to the second to last key from $keys
+  // Store the associated map to this key in the $maps list
+  // If the key doesn't exist, throw an error
+  @for $i from 1 through length($keys) - 1 {
+    $current-key: nth($keys, $i);
+    $current-map: nth($maps, -1);
+    $current-get: map-get($current-map, $current-key);
+
+    @if $current-get == null {
+      @error "Key `#{$key}` doesn't exist at current level in map.";
+    }
+
+    $maps: append($maps, $current-get);
+  }
+
+  // Loop from the last map to the first one
+  // Merge it with the previous one
+  @for $i from length($maps) through 1 {
+    $current-map: nth($maps, $i);
+    $current-key: nth($keys, $i);
+    $current-val: if($i == length($maps), $value, $result);
+    $result: map-merge($current-map, ($current-key: $current-val));
+  }
+
+  // Return result
+  @return $result;
+}
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}
+
+@function breakpoint-min($name, $breakpoints: $grid-breakpoints){
+  $min: map-get($breakpoints, $name);
+  @return if($min != 0, $min, null);
+}
+
+@function breakpoint-infix($name, $breakpoints: $grid-breakpoints) {
+  @return if(breakpoint-min($name, $breakpoints) == null, "", "-#{$name}");
+}
+
+@function map-deep-merge($parent-map, $child-map) {
+  $result: $parent-map;
+
+  @each $key, $child in $child-map {
+    $parent-has-key: map-has-key($result, $key);
+    $parent-value: map-get($result, $key);
+    $parent-type: type-of($parent-value);
+    $child-type: type-of($child);
+    $parent-is-map: $parent-type == map;
+    $child-is-map: $child-type == map;
+
+    @if (not $parent-has-key) or ($parent-type != $child-type) or (not ($parent-is-map and $child-is-map)) {
+      $result: map-merge($result, ( $key: $child ));
+    } @else {
+      $result: map-merge($result, ( $key: map-deep-merge($parent-value, $child) ));
+    }
+  }
+  @return $result;
+}
+
+@function map-deep-flat-merge($map) {
+  $result: ();
+  @each $color_name, $color_type in $map {
+    @each $color_type_name, $value in $color_type {
+      $result: map-merge($result, ("#{$color_name}-#{$color_type_name}": $value ));
+    }
+  }
+  @return $result;
+}

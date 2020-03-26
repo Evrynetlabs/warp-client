@@ -1,0 +1,4874 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WarpContent When clicking a transfer button When isToEvrynet is false When asset is in the destination account trustlines should show a valid feedback 1`] = `
+<Fragment>
+  <Form
+    className="WarpContent__form"
+    inline={false}
+    name="form"
+    onSubmit={[Function]}
+  >
+    <CardBody
+      className="WarpContent__form__content"
+    >
+      <Container
+        className="px-0"
+        fluid={true}
+      >
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="flex-grow-1 px-0 WarpContent__form__content__col"
+          >
+            <FormGroup
+              controlId="sourceAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  From
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
+                isInvalid={true}
+                maskiconprops={Object {}}
+                name="sourceAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute d-block"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                >
+                  Evrynet secret key is required.
+                </div>
+              </Feedback>
+            </FormGroup>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col px-0"
+          >
+            <span>
+              <i
+                className="fas fa-arrow-right"
+              />
+            </span>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col flex-grow-1 px-0"
+          >
+            <FormGroup
+              controlId="destinationAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  To
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="destinationAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="text-center py-5"
+          >
+            <span
+              className="text-format-title-light font-weight-bold"
+            >
+              Amount
+            </span>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="justify-content-start mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="px-0"
+            xs={8}
+          >
+            <FormGroup
+              controlId="assetAmount"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  Credit
+                </span>
+              </FormLabel>
+              <Container
+                className="px-0"
+                fluid={true}
+              >
+                <ForwardRef
+                  className="mx-auto my-0"
+                  noGutters={false}
+                >
+                  <Col
+                    className="px-0 flex-grow-0"
+                  >
+                    <Select
+                      onChange={[Function]}
+                      options={
+                        Array [
+                          Object {
+                            "label": "foo1",
+                            "name": "asset",
+                            "value": "foo1",
+                          },
+                        ]
+                      }
+                      selectedItem="EVRY"
+                    />
+                  </Col>
+                  <Col
+                    className="px-0"
+                  >
+                    <FormControl
+                      className="WarpContent__form__content__input WarpContent__form__content__input__amount input-form"
+                      isInvalid={true}
+                      name="amount"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      placeholder="0.00"
+                      type="text"
+                      value=""
+                    />
+                    <Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div
+                        className="WarpContent__form__content__errorFeedback__form WarpContent__form__content__errorFeedback__amount"
+                      >
+                        Insufficient Amount
+                      </div>
+                    </Feedback>
+                  </Col>
+                </ForwardRef>
+              </Container>
+            </FormGroup>
+          </Col>
+          <Col
+            className="pl-5 pr-0 col-4"
+            xs={4}
+          >
+            <Button
+              active={false}
+              className="w-100 input-form WarpContent__form__content__btn"
+              disabled={true}
+              type="submit"
+              variant="primary"
+            >
+              TRANSFER
+            </Button>
+          </Col>
+        </ForwardRef>
+      </Container>
+    </CardBody>
+  </Form>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="WarpContent__resultModal__item"
+    closeTimeoutMS={0}
+    isOpen={false}
+    overlayClassName="WarpContent__resultModal__overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  />
+</Fragment>
+`;
+
+exports[`WarpContent When clicking a transfer button When isToEvrynet is false When asset is not in the destination account trustlines should show an invalid feedback 1`] = `
+<Fragment>
+  <Form
+    className="WarpContent__form"
+    inline={false}
+    name="form"
+    onSubmit={[Function]}
+  >
+    <CardBody
+      className="WarpContent__form__content"
+    >
+      <Container
+        className="px-0"
+        fluid={true}
+      >
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="flex-grow-1 px-0 WarpContent__form__content__col"
+          >
+            <FormGroup
+              controlId="sourceAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  From
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
+                isInvalid={true}
+                maskiconprops={Object {}}
+                name="sourceAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute d-block"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                >
+                  Evrynet secret key is required.
+                </div>
+              </Feedback>
+            </FormGroup>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col px-0"
+          >
+            <span>
+              <i
+                className="fas fa-arrow-right"
+              />
+            </span>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col flex-grow-1 px-0"
+          >
+            <FormGroup
+              controlId="destinationAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  To
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
+                isInvalid={true}
+                maskiconprops={Object {}}
+                name="destinationAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute d-block"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                >
+                  The recipient Stellar account has no foo trustline.
+                </div>
+              </Feedback>
+            </FormGroup>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="text-center py-5"
+          >
+            <span
+              className="text-format-title-light font-weight-bold"
+            >
+              Amount
+            </span>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="justify-content-start mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="px-0"
+            xs={8}
+          >
+            <FormGroup
+              controlId="assetAmount"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  Credit
+                </span>
+              </FormLabel>
+              <Container
+                className="px-0"
+                fluid={true}
+              >
+                <ForwardRef
+                  className="mx-auto my-0"
+                  noGutters={false}
+                >
+                  <Col
+                    className="px-0 flex-grow-0"
+                  >
+                    <Select
+                      onChange={[Function]}
+                      options={
+                        Array [
+                          Object {
+                            "label": "foo",
+                            "name": "asset",
+                            "value": "foo",
+                          },
+                        ]
+                      }
+                      selectedItem="EVRY"
+                    />
+                  </Col>
+                  <Col
+                    className="px-0"
+                  >
+                    <FormControl
+                      className="WarpContent__form__content__input WarpContent__form__content__input__amount input-form"
+                      isInvalid={true}
+                      name="amount"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      placeholder="0.00"
+                      type="text"
+                      value=""
+                    />
+                    <Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div
+                        className="WarpContent__form__content__errorFeedback__form WarpContent__form__content__errorFeedback__amount"
+                      >
+                        Insufficient Amount
+                      </div>
+                    </Feedback>
+                  </Col>
+                </ForwardRef>
+              </Container>
+            </FormGroup>
+          </Col>
+          <Col
+            className="pl-5 pr-0 col-4"
+            xs={4}
+          >
+            <Button
+              active={false}
+              className="w-100 input-form WarpContent__form__content__btn"
+              disabled={true}
+              type="submit"
+              variant="primary"
+            >
+              TRANSFER
+            </Button>
+          </Col>
+        </ForwardRef>
+      </Container>
+    </CardBody>
+  </Form>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="WarpContent__resultModal__item"
+    closeTimeoutMS={0}
+    isOpen={false}
+    overlayClassName="WarpContent__resultModal__overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  />
+</Fragment>
+`;
+
+exports[`WarpContent When clicking a transfer button When isToEvrynet is false When source account balance is invalid should match an invalid feedback snapshot 1`] = `
+<Fragment>
+  <Form
+    className="WarpContent__form"
+    inline={false}
+    name="form"
+    onSubmit={[Function]}
+  >
+    <CardBody
+      className="WarpContent__form__content"
+    >
+      <Container
+        className="px-0"
+        fluid={true}
+      >
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="flex-grow-1 px-0 WarpContent__form__content__col"
+          >
+            <FormGroup
+              controlId="sourceAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  From
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
+                isInvalid={true}
+                maskiconprops={Object {}}
+                name="sourceAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute d-block"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                >
+                  Evrynet secret key is required.
+                </div>
+              </Feedback>
+            </FormGroup>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col px-0"
+          >
+            <span>
+              <i
+                className="fas fa-arrow-right"
+              />
+            </span>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col flex-grow-1 px-0"
+          >
+            <FormGroup
+              controlId="destinationAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  To
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
+                isInvalid={true}
+                maskiconprops={Object {}}
+                name="destinationAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute d-block"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                >
+                  The recipient Stellar account has no undefined trustline.
+                </div>
+              </Feedback>
+            </FormGroup>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="text-center py-5"
+          >
+            <span
+              className="text-format-title-light font-weight-bold"
+            >
+              Amount
+            </span>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="justify-content-start mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="px-0"
+            xs={8}
+          >
+            <FormGroup
+              controlId="assetAmount"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  Credit
+                </span>
+              </FormLabel>
+              <Container
+                className="px-0"
+                fluid={true}
+              >
+                <ForwardRef
+                  className="mx-auto my-0"
+                  noGutters={false}
+                >
+                  <Col
+                    className="px-0 flex-grow-0"
+                  >
+                    <Select
+                      onChange={[Function]}
+                      options={
+                        Array [
+                          Object {
+                            "label": "EVRY",
+                            "name": "asset",
+                            "value": "EVRY",
+                          },
+                        ]
+                      }
+                      selectedItem="EVRY"
+                    />
+                  </Col>
+                  <Col
+                    className="px-0"
+                  >
+                    <FormControl
+                      className="WarpContent__form__content__input WarpContent__form__content__input__amount input-form"
+                      isInvalid={true}
+                      name="amount"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      placeholder="0.00"
+                      type="text"
+                      value="1"
+                    />
+                    <Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div
+                        className="WarpContent__form__content__errorFeedback__form WarpContent__form__content__errorFeedback__amount"
+                      >
+                        Insufficient Amount
+                      </div>
+                    </Feedback>
+                  </Col>
+                </ForwardRef>
+              </Container>
+            </FormGroup>
+          </Col>
+          <Col
+            className="pl-5 pr-0 col-4"
+            xs={4}
+          >
+            <Button
+              active={false}
+              className="w-100 input-form WarpContent__form__content__btn"
+              disabled={true}
+              type="submit"
+              variant="primary"
+            >
+              TRANSFER
+            </Button>
+          </Col>
+        </ForwardRef>
+      </Container>
+    </CardBody>
+  </Form>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="WarpContent__resultModal__item"
+    closeTimeoutMS={0}
+    isOpen={false}
+    overlayClassName="WarpContent__resultModal__overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  />
+</Fragment>
+`;
+
+exports[`WarpContent When clicking a transfer button When isToEvrynet is false When source account balance is valid should match a valid feedback snapshot 1`] = `
+<Fragment>
+  <Form
+    className="WarpContent__form"
+    inline={false}
+    name="form"
+    onSubmit={[Function]}
+  >
+    <CardBody
+      className="WarpContent__form__content"
+    >
+      <Container
+        className="px-0"
+        fluid={true}
+      >
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="flex-grow-1 px-0 WarpContent__form__content__col"
+          >
+            <FormGroup
+              controlId="sourceAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  From
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
+                isInvalid={true}
+                maskiconprops={Object {}}
+                name="sourceAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute d-block"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                >
+                  Evrynet secret key is required.
+                </div>
+              </Feedback>
+            </FormGroup>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col px-0"
+          >
+            <span>
+              <i
+                className="fas fa-arrow-right"
+              />
+            </span>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col flex-grow-1 px-0"
+          >
+            <FormGroup
+              controlId="destinationAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  To
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
+                isInvalid={true}
+                maskiconprops={Object {}}
+                name="destinationAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute d-block"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                >
+                  The recipient Stellar account has no undefined trustline.
+                </div>
+              </Feedback>
+            </FormGroup>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="text-center py-5"
+          >
+            <span
+              className="text-format-title-light font-weight-bold"
+            >
+              Amount
+            </span>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="justify-content-start mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="px-0"
+            xs={8}
+          >
+            <FormGroup
+              controlId="assetAmount"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  Credit
+                </span>
+              </FormLabel>
+              <Container
+                className="px-0"
+                fluid={true}
+              >
+                <ForwardRef
+                  className="mx-auto my-0"
+                  noGutters={false}
+                >
+                  <Col
+                    className="px-0 flex-grow-0"
+                  >
+                    <Select
+                      onChange={[Function]}
+                      options={
+                        Array [
+                          Object {
+                            "label": "EVRY",
+                            "name": "asset",
+                            "value": "EVRY",
+                          },
+                        ]
+                      }
+                      selectedItem="EVRY"
+                    />
+                  </Col>
+                  <Col
+                    className="px-0"
+                  >
+                    <FormControl
+                      className="WarpContent__form__content__input WarpContent__form__content__input__amount input-form"
+                      isInvalid={false}
+                      name="amount"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      placeholder="0.00"
+                      type="text"
+                      value="1"
+                    />
+                    <Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div
+                        className="WarpContent__form__content__errorFeedback__form WarpContent__form__content__errorFeedback__amount"
+                      />
+                    </Feedback>
+                  </Col>
+                </ForwardRef>
+              </Container>
+            </FormGroup>
+          </Col>
+          <Col
+            className="pl-5 pr-0 col-4"
+            xs={4}
+          >
+            <Button
+              active={false}
+              className="w-100 input-form WarpContent__form__content__btn"
+              disabled={true}
+              type="submit"
+              variant="primary"
+            >
+              TRANSFER
+            </Button>
+          </Col>
+        </ForwardRef>
+      </Container>
+    </CardBody>
+  </Form>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="WarpContent__resultModal__item"
+    closeTimeoutMS={0}
+    isOpen={false}
+    overlayClassName="WarpContent__resultModal__overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  />
+</Fragment>
+`;
+
+exports[`WarpContent When clicking a transfer button When isToEvrynet is true When source account balance is invalid should match an invalid feedback snapshot 1`] = `
+<Fragment>
+  <Form
+    className="WarpContent__form"
+    inline={false}
+    name="form"
+    onSubmit={[Function]}
+  >
+    <CardBody
+      className="WarpContent__form__content"
+    >
+      <Container
+        className="px-0"
+        fluid={true}
+      >
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="flex-grow-1 px-0 WarpContent__form__content__col"
+          >
+            <FormGroup
+              controlId="sourceAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  From
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="sourceAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col px-0"
+          >
+            <span>
+              <i
+                className="fas fa-arrow-right"
+              />
+            </span>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col flex-grow-1 px-0"
+          >
+            <FormGroup
+              controlId="destinationAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  To
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
+                isInvalid={true}
+                maskiconprops={Object {}}
+                name="destinationAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute d-block"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="text-center py-5"
+          >
+            <span
+              className="text-format-title-light font-weight-bold"
+            >
+              Amount
+            </span>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="justify-content-start mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="px-0"
+            xs={8}
+          >
+            <FormGroup
+              controlId="assetAmount"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  Credit
+                </span>
+              </FormLabel>
+              <Container
+                className="px-0"
+                fluid={true}
+              >
+                <ForwardRef
+                  className="mx-auto my-0"
+                  noGutters={false}
+                >
+                  <Col
+                    className="px-0 flex-grow-0"
+                  >
+                    <Select
+                      onChange={[Function]}
+                      options={
+                        Array [
+                          Object {
+                            "label": "EVRY",
+                            "name": "asset",
+                            "value": "EVRY",
+                          },
+                        ]
+                      }
+                      selectedItem="EVRY"
+                    />
+                  </Col>
+                  <Col
+                    className="px-0"
+                  >
+                    <FormControl
+                      className="WarpContent__form__content__input WarpContent__form__content__input__amount input-form"
+                      isInvalid={true}
+                      name="amount"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      placeholder="0.00"
+                      type="text"
+                      value="1"
+                    />
+                    <Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div
+                        className="WarpContent__form__content__errorFeedback__form WarpContent__form__content__errorFeedback__amount"
+                      >
+                        Insufficient Amount
+                      </div>
+                    </Feedback>
+                  </Col>
+                </ForwardRef>
+              </Container>
+            </FormGroup>
+          </Col>
+          <Col
+            className="pl-5 pr-0 col-4"
+            xs={4}
+          >
+            <Button
+              active={false}
+              className="w-100 input-form WarpContent__form__content__btn"
+              disabled={true}
+              type="submit"
+              variant="primary"
+            >
+              TRANSFER
+            </Button>
+          </Col>
+        </ForwardRef>
+      </Container>
+    </CardBody>
+  </Form>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="WarpContent__resultModal__item"
+    closeTimeoutMS={0}
+    isOpen={false}
+    overlayClassName="WarpContent__resultModal__overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  />
+</Fragment>
+`;
+
+exports[`WarpContent When clicking a transfer button When isToEvrynet is true When source account balance is valid should match a valid feedback snapshot 1`] = `
+<Fragment>
+  <Form
+    className="WarpContent__form"
+    inline={false}
+    name="form"
+    onSubmit={[Function]}
+  >
+    <CardBody
+      className="WarpContent__form__content"
+    >
+      <Container
+        className="px-0"
+        fluid={true}
+      >
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="flex-grow-1 px-0 WarpContent__form__content__col"
+          >
+            <FormGroup
+              controlId="sourceAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  From
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="sourceAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col px-0"
+          >
+            <span>
+              <i
+                className="fas fa-arrow-right"
+              />
+            </span>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col flex-grow-1 px-0"
+          >
+            <FormGroup
+              controlId="destinationAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  To
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
+                isInvalid={true}
+                maskiconprops={Object {}}
+                name="destinationAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute d-block"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="text-center py-5"
+          >
+            <span
+              className="text-format-title-light font-weight-bold"
+            >
+              Amount
+            </span>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="justify-content-start mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="px-0"
+            xs={8}
+          >
+            <FormGroup
+              controlId="assetAmount"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  Credit
+                </span>
+              </FormLabel>
+              <Container
+                className="px-0"
+                fluid={true}
+              >
+                <ForwardRef
+                  className="mx-auto my-0"
+                  noGutters={false}
+                >
+                  <Col
+                    className="px-0 flex-grow-0"
+                  >
+                    <Select
+                      onChange={[Function]}
+                      options={
+                        Array [
+                          Object {
+                            "label": "EVRY",
+                            "name": "asset",
+                            "value": "EVRY",
+                          },
+                        ]
+                      }
+                      selectedItem="EVRY"
+                    />
+                  </Col>
+                  <Col
+                    className="px-0"
+                  >
+                    <FormControl
+                      className="WarpContent__form__content__input WarpContent__form__content__input__amount input-form"
+                      isInvalid={false}
+                      name="amount"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      placeholder="0.00"
+                      type="text"
+                      value="1"
+                    />
+                    <Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div
+                        className="WarpContent__form__content__errorFeedback__form WarpContent__form__content__errorFeedback__amount"
+                      />
+                    </Feedback>
+                  </Col>
+                </ForwardRef>
+              </Container>
+            </FormGroup>
+          </Col>
+          <Col
+            className="pl-5 pr-0 col-4"
+            xs={4}
+          >
+            <Button
+              active={false}
+              className="w-100 input-form WarpContent__form__content__btn"
+              disabled={true}
+              type="submit"
+              variant="primary"
+            >
+              TRANSFER
+            </Button>
+          </Col>
+        </ForwardRef>
+      </Container>
+    </CardBody>
+  </Form>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="WarpContent__resultModal__item"
+    closeTimeoutMS={0}
+    isOpen={false}
+    overlayClassName="WarpContent__resultModal__overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  />
+</Fragment>
+`;
+
+exports[`WarpContent When input an amount When input an invalid amount When amount is empty should display an invalid feedback 1`] = `
+<Fragment>
+  <Form
+    className="WarpContent__form"
+    inline={false}
+    name="form"
+    onSubmit={[Function]}
+  >
+    <CardBody
+      className="WarpContent__form__content"
+    >
+      <Container
+        className="px-0"
+        fluid={true}
+      >
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="flex-grow-1 px-0 WarpContent__form__content__col"
+          >
+            <FormGroup
+              controlId="sourceAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  From
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="sourceAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col px-0"
+          >
+            <span>
+              <i
+                className="fas fa-arrow-right"
+              />
+            </span>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col flex-grow-1 px-0"
+          >
+            <FormGroup
+              controlId="destinationAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  To
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="destinationAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="text-center py-5"
+          >
+            <span
+              className="text-format-title-light font-weight-bold"
+            >
+              Amount
+            </span>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="justify-content-start mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="px-0"
+            xs={8}
+          >
+            <FormGroup
+              controlId="assetAmount"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  Credit
+                </span>
+              </FormLabel>
+              <Container
+                className="px-0"
+                fluid={true}
+              >
+                <ForwardRef
+                  className="mx-auto my-0"
+                  noGutters={false}
+                >
+                  <Col
+                    className="px-0 flex-grow-0"
+                  >
+                    <Select
+                      onChange={[Function]}
+                      options={
+                        Array [
+                          Object {
+                            "label": "EVRY",
+                            "name": "asset",
+                            "value": "EVRY",
+                          },
+                        ]
+                      }
+                      selectedItem="EVRY"
+                    />
+                  </Col>
+                  <Col
+                    className="px-0"
+                  >
+                    <FormControl
+                      className="WarpContent__form__content__input WarpContent__form__content__input__amount input-form"
+                      isInvalid={true}
+                      name="amount"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      placeholder="0.00"
+                      type="text"
+                      value=""
+                    />
+                    <Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div
+                        className="WarpContent__form__content__errorFeedback__form WarpContent__form__content__errorFeedback__amount"
+                      >
+                        Amount is required.
+                      </div>
+                    </Feedback>
+                  </Col>
+                </ForwardRef>
+              </Container>
+            </FormGroup>
+          </Col>
+          <Col
+            className="pl-5 pr-0 col-4"
+            xs={4}
+          >
+            <Button
+              active={false}
+              className="w-100 input-form WarpContent__form__content__btn"
+              disabled={true}
+              type="submit"
+              variant="primary"
+            >
+              TRANSFER
+            </Button>
+          </Col>
+        </ForwardRef>
+      </Container>
+    </CardBody>
+  </Form>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="WarpContent__resultModal__item"
+    closeTimeoutMS={0}
+    isOpen={false}
+    overlayClassName="WarpContent__resultModal__overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  />
+</Fragment>
+`;
+
+exports[`WarpContent When input an amount When input an invalid amount When amount is less than zero should save an invalid state with a desired error message 1`] = `
+<Fragment>
+  <Form
+    className="WarpContent__form"
+    inline={false}
+    name="form"
+    onSubmit={[Function]}
+  >
+    <CardBody
+      className="WarpContent__form__content"
+    >
+      <Container
+        className="px-0"
+        fluid={true}
+      >
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="flex-grow-1 px-0 WarpContent__form__content__col"
+          >
+            <FormGroup
+              controlId="sourceAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  From
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="sourceAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col px-0"
+          >
+            <span>
+              <i
+                className="fas fa-arrow-right"
+              />
+            </span>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col flex-grow-1 px-0"
+          >
+            <FormGroup
+              controlId="destinationAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  To
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="destinationAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="text-center py-5"
+          >
+            <span
+              className="text-format-title-light font-weight-bold"
+            >
+              Amount
+            </span>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="justify-content-start mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="px-0"
+            xs={8}
+          >
+            <FormGroup
+              controlId="assetAmount"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  Credit
+                </span>
+              </FormLabel>
+              <Container
+                className="px-0"
+                fluid={true}
+              >
+                <ForwardRef
+                  className="mx-auto my-0"
+                  noGutters={false}
+                >
+                  <Col
+                    className="px-0 flex-grow-0"
+                  >
+                    <Select
+                      onChange={[Function]}
+                      selectedItem="EVRY"
+                    />
+                  </Col>
+                  <Col
+                    className="px-0"
+                  >
+                    <FormControl
+                      className="WarpContent__form__content__input WarpContent__form__content__input__amount input-form"
+                      isInvalid={true}
+                      name="amount"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      placeholder="0.00"
+                      type="text"
+                      value="-1"
+                    />
+                    <Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div
+                        className="WarpContent__form__content__errorFeedback__form WarpContent__form__content__errorFeedback__amount"
+                      >
+                        Amount must be greater than zero.
+                      </div>
+                    </Feedback>
+                  </Col>
+                </ForwardRef>
+              </Container>
+            </FormGroup>
+          </Col>
+          <Col
+            className="pl-5 pr-0 col-4"
+            xs={4}
+          >
+            <Button
+              active={false}
+              className="w-100 input-form WarpContent__form__content__btn"
+              disabled={true}
+              type="submit"
+              variant="primary"
+            >
+              TRANSFER
+            </Button>
+          </Col>
+        </ForwardRef>
+      </Container>
+    </CardBody>
+  </Form>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="WarpContent__resultModal__item"
+    closeTimeoutMS={0}
+    isOpen={false}
+    overlayClassName="WarpContent__resultModal__overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  />
+</Fragment>
+`;
+
+exports[`WarpContent When input an amount When input an invalid amount When amount is less than zero should save an invalid state with a desired error message 2`] = `
+<Fragment>
+  <Form
+    className="WarpContent__form"
+    inline={false}
+    name="form"
+    onSubmit={[Function]}
+  >
+    <CardBody
+      className="WarpContent__form__content"
+    >
+      <Container
+        className="px-0"
+        fluid={true}
+      >
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="flex-grow-1 px-0 WarpContent__form__content__col"
+          >
+            <FormGroup
+              controlId="sourceAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  From
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="sourceAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col px-0"
+          >
+            <span>
+              <i
+                className="fas fa-arrow-right"
+              />
+            </span>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col flex-grow-1 px-0"
+          >
+            <FormGroup
+              controlId="destinationAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  To
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="destinationAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="text-center py-5"
+          >
+            <span
+              className="text-format-title-light font-weight-bold"
+            >
+              Amount
+            </span>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="justify-content-start mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="px-0"
+            xs={8}
+          >
+            <FormGroup
+              controlId="assetAmount"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  Credit
+                </span>
+              </FormLabel>
+              <Container
+                className="px-0"
+                fluid={true}
+              >
+                <ForwardRef
+                  className="mx-auto my-0"
+                  noGutters={false}
+                >
+                  <Col
+                    className="px-0 flex-grow-0"
+                  >
+                    <Select
+                      onChange={[Function]}
+                      selectedItem="EVRY"
+                    />
+                  </Col>
+                  <Col
+                    className="px-0"
+                  >
+                    <FormControl
+                      className="WarpContent__form__content__input WarpContent__form__content__input__amount input-form"
+                      isInvalid={true}
+                      name="amount"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      placeholder="0.00"
+                      type="text"
+                      value="-0.01"
+                    />
+                    <Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div
+                        className="WarpContent__form__content__errorFeedback__form WarpContent__form__content__errorFeedback__amount"
+                      >
+                        Amount must be greater than zero.
+                      </div>
+                    </Feedback>
+                  </Col>
+                </ForwardRef>
+              </Container>
+            </FormGroup>
+          </Col>
+          <Col
+            className="pl-5 pr-0 col-4"
+            xs={4}
+          >
+            <Button
+              active={false}
+              className="w-100 input-form WarpContent__form__content__btn"
+              disabled={true}
+              type="submit"
+              variant="primary"
+            >
+              TRANSFER
+            </Button>
+          </Col>
+        </ForwardRef>
+      </Container>
+    </CardBody>
+  </Form>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="WarpContent__resultModal__item"
+    closeTimeoutMS={0}
+    isOpen={false}
+    overlayClassName="WarpContent__resultModal__overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  />
+</Fragment>
+`;
+
+exports[`WarpContent When input an amount When input an invalid amount When amount is less than zero should save an invalid state with a desired error message 3`] = `
+<Fragment>
+  <Form
+    className="WarpContent__form"
+    inline={false}
+    name="form"
+    onSubmit={[Function]}
+  >
+    <CardBody
+      className="WarpContent__form__content"
+    >
+      <Container
+        className="px-0"
+        fluid={true}
+      >
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="flex-grow-1 px-0 WarpContent__form__content__col"
+          >
+            <FormGroup
+              controlId="sourceAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  From
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="sourceAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col px-0"
+          >
+            <span>
+              <i
+                className="fas fa-arrow-right"
+              />
+            </span>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col flex-grow-1 px-0"
+          >
+            <FormGroup
+              controlId="destinationAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  To
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="destinationAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="text-center py-5"
+          >
+            <span
+              className="text-format-title-light font-weight-bold"
+            >
+              Amount
+            </span>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="justify-content-start mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="px-0"
+            xs={8}
+          >
+            <FormGroup
+              controlId="assetAmount"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  Credit
+                </span>
+              </FormLabel>
+              <Container
+                className="px-0"
+                fluid={true}
+              >
+                <ForwardRef
+                  className="mx-auto my-0"
+                  noGutters={false}
+                >
+                  <Col
+                    className="px-0 flex-grow-0"
+                  >
+                    <Select
+                      onChange={[Function]}
+                      selectedItem="EVRY"
+                    />
+                  </Col>
+                  <Col
+                    className="px-0"
+                  >
+                    <FormControl
+                      className="WarpContent__form__content__input WarpContent__form__content__input__amount input-form"
+                      isInvalid={true}
+                      name="amount"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      placeholder="0.00"
+                      type="text"
+                      value="-1.2222"
+                    />
+                    <Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div
+                        className="WarpContent__form__content__errorFeedback__form WarpContent__form__content__errorFeedback__amount"
+                      >
+                        Amount must be greater than zero.
+                      </div>
+                    </Feedback>
+                  </Col>
+                </ForwardRef>
+              </Container>
+            </FormGroup>
+          </Col>
+          <Col
+            className="pl-5 pr-0 col-4"
+            xs={4}
+          >
+            <Button
+              active={false}
+              className="w-100 input-form WarpContent__form__content__btn"
+              disabled={true}
+              type="submit"
+              variant="primary"
+            >
+              TRANSFER
+            </Button>
+          </Col>
+        </ForwardRef>
+      </Container>
+    </CardBody>
+  </Form>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="WarpContent__resultModal__item"
+    closeTimeoutMS={0}
+    isOpen={false}
+    overlayClassName="WarpContent__resultModal__overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  />
+</Fragment>
+`;
+
+exports[`WarpContent When input an amount When input an invalid amount When amount is less than zero should save an invalid state with a desired error message 4`] = `
+<Fragment>
+  <Form
+    className="WarpContent__form"
+    inline={false}
+    name="form"
+    onSubmit={[Function]}
+  >
+    <CardBody
+      className="WarpContent__form__content"
+    >
+      <Container
+        className="px-0"
+        fluid={true}
+      >
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="flex-grow-1 px-0 WarpContent__form__content__col"
+          >
+            <FormGroup
+              controlId="sourceAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  From
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="sourceAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col px-0"
+          >
+            <span>
+              <i
+                className="fas fa-arrow-right"
+              />
+            </span>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col flex-grow-1 px-0"
+          >
+            <FormGroup
+              controlId="destinationAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  To
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="destinationAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="text-center py-5"
+          >
+            <span
+              className="text-format-title-light font-weight-bold"
+            >
+              Amount
+            </span>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="justify-content-start mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="px-0"
+            xs={8}
+          >
+            <FormGroup
+              controlId="assetAmount"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  Credit
+                </span>
+              </FormLabel>
+              <Container
+                className="px-0"
+                fluid={true}
+              >
+                <ForwardRef
+                  className="mx-auto my-0"
+                  noGutters={false}
+                >
+                  <Col
+                    className="px-0 flex-grow-0"
+                  >
+                    <Select
+                      onChange={[Function]}
+                      selectedItem="EVRY"
+                    />
+                  </Col>
+                  <Col
+                    className="px-0"
+                  >
+                    <FormControl
+                      className="WarpContent__form__content__input WarpContent__form__content__input__amount input-form"
+                      isInvalid={true}
+                      name="amount"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      placeholder="0.00"
+                      type="text"
+                      value="0"
+                    />
+                    <Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div
+                        className="WarpContent__form__content__errorFeedback__form WarpContent__form__content__errorFeedback__amount"
+                      >
+                        Amount must be greater than zero.
+                      </div>
+                    </Feedback>
+                  </Col>
+                </ForwardRef>
+              </Container>
+            </FormGroup>
+          </Col>
+          <Col
+            className="pl-5 pr-0 col-4"
+            xs={4}
+          >
+            <Button
+              active={false}
+              className="w-100 input-form WarpContent__form__content__btn"
+              disabled={true}
+              type="submit"
+              variant="primary"
+            >
+              TRANSFER
+            </Button>
+          </Col>
+        </ForwardRef>
+      </Container>
+    </CardBody>
+  </Form>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="WarpContent__resultModal__item"
+    closeTimeoutMS={0}
+    isOpen={false}
+    overlayClassName="WarpContent__resultModal__overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  />
+</Fragment>
+`;
+
+exports[`WarpContent When input an amount When input an invalid amount When amount is less than zero should save an invalid state with a desired error message 5`] = `
+<Fragment>
+  <Form
+    className="WarpContent__form"
+    inline={false}
+    name="form"
+    onSubmit={[Function]}
+  >
+    <CardBody
+      className="WarpContent__form__content"
+    >
+      <Container
+        className="px-0"
+        fluid={true}
+      >
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="flex-grow-1 px-0 WarpContent__form__content__col"
+          >
+            <FormGroup
+              controlId="sourceAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  From
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="sourceAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col px-0"
+          >
+            <span>
+              <i
+                className="fas fa-arrow-right"
+              />
+            </span>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col flex-grow-1 px-0"
+          >
+            <FormGroup
+              controlId="destinationAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  To
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="destinationAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="text-center py-5"
+          >
+            <span
+              className="text-format-title-light font-weight-bold"
+            >
+              Amount
+            </span>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="justify-content-start mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="px-0"
+            xs={8}
+          >
+            <FormGroup
+              controlId="assetAmount"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  Credit
+                </span>
+              </FormLabel>
+              <Container
+                className="px-0"
+                fluid={true}
+              >
+                <ForwardRef
+                  className="mx-auto my-0"
+                  noGutters={false}
+                >
+                  <Col
+                    className="px-0 flex-grow-0"
+                  >
+                    <Select
+                      onChange={[Function]}
+                      selectedItem="EVRY"
+                    />
+                  </Col>
+                  <Col
+                    className="px-0"
+                  >
+                    <FormControl
+                      className="WarpContent__form__content__input WarpContent__form__content__input__amount input-form"
+                      isInvalid={true}
+                      name="amount"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      placeholder="0.00"
+                      type="text"
+                      value="0.000"
+                    />
+                    <Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div
+                        className="WarpContent__form__content__errorFeedback__form WarpContent__form__content__errorFeedback__amount"
+                      >
+                        Amount must be greater than zero.
+                      </div>
+                    </Feedback>
+                  </Col>
+                </ForwardRef>
+              </Container>
+            </FormGroup>
+          </Col>
+          <Col
+            className="pl-5 pr-0 col-4"
+            xs={4}
+          >
+            <Button
+              active={false}
+              className="w-100 input-form WarpContent__form__content__btn"
+              disabled={true}
+              type="submit"
+              variant="primary"
+            >
+              TRANSFER
+            </Button>
+          </Col>
+        </ForwardRef>
+      </Container>
+    </CardBody>
+  </Form>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="WarpContent__resultModal__item"
+    closeTimeoutMS={0}
+    isOpen={false}
+    overlayClassName="WarpContent__resultModal__overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  />
+</Fragment>
+`;
+
+exports[`WarpContent When input an amount When input an invalid amount When amount is not a number should save an invalid state with a desired error message 1`] = `
+<Fragment>
+  <Form
+    className="WarpContent__form"
+    inline={false}
+    name="form"
+    onSubmit={[Function]}
+  >
+    <CardBody
+      className="WarpContent__form__content"
+    >
+      <Container
+        className="px-0"
+        fluid={true}
+      >
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="flex-grow-1 px-0 WarpContent__form__content__col"
+          >
+            <FormGroup
+              controlId="sourceAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  From
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="sourceAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col px-0"
+          >
+            <span>
+              <i
+                className="fas fa-arrow-right"
+              />
+            </span>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col flex-grow-1 px-0"
+          >
+            <FormGroup
+              controlId="destinationAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  To
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="destinationAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="text-center py-5"
+          >
+            <span
+              className="text-format-title-light font-weight-bold"
+            >
+              Amount
+            </span>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="justify-content-start mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="px-0"
+            xs={8}
+          >
+            <FormGroup
+              controlId="assetAmount"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  Credit
+                </span>
+              </FormLabel>
+              <Container
+                className="px-0"
+                fluid={true}
+              >
+                <ForwardRef
+                  className="mx-auto my-0"
+                  noGutters={false}
+                >
+                  <Col
+                    className="px-0 flex-grow-0"
+                  >
+                    <Select
+                      onChange={[Function]}
+                      options={
+                        Array [
+                          Object {
+                            "label": "EVRY",
+                            "name": "asset",
+                            "value": "EVRY",
+                          },
+                        ]
+                      }
+                      selectedItem="EVRY"
+                    />
+                  </Col>
+                  <Col
+                    className="px-0"
+                  >
+                    <FormControl
+                      className="WarpContent__form__content__input WarpContent__form__content__input__amount input-form"
+                      isInvalid={true}
+                      name="amount"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      placeholder="0.00"
+                      type="text"
+                      value="--1.000"
+                    />
+                    <Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div
+                        className="WarpContent__form__content__errorFeedback__form WarpContent__form__content__errorFeedback__amount"
+                      >
+                        Amount must be a number.
+                      </div>
+                    </Feedback>
+                  </Col>
+                </ForwardRef>
+              </Container>
+            </FormGroup>
+          </Col>
+          <Col
+            className="pl-5 pr-0 col-4"
+            xs={4}
+          >
+            <Button
+              active={false}
+              className="w-100 input-form WarpContent__form__content__btn"
+              disabled={true}
+              type="submit"
+              variant="primary"
+            >
+              TRANSFER
+            </Button>
+          </Col>
+        </ForwardRef>
+      </Container>
+    </CardBody>
+  </Form>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="WarpContent__resultModal__item"
+    closeTimeoutMS={0}
+    isOpen={false}
+    overlayClassName="WarpContent__resultModal__overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  />
+</Fragment>
+`;
+
+exports[`WarpContent When input an amount When input an invalid amount When amount is not a number should save an invalid state with a desired error message 2`] = `
+<Fragment>
+  <Form
+    className="WarpContent__form"
+    inline={false}
+    name="form"
+    onSubmit={[Function]}
+  >
+    <CardBody
+      className="WarpContent__form__content"
+    >
+      <Container
+        className="px-0"
+        fluid={true}
+      >
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="flex-grow-1 px-0 WarpContent__form__content__col"
+          >
+            <FormGroup
+              controlId="sourceAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  From
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="sourceAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col px-0"
+          >
+            <span>
+              <i
+                className="fas fa-arrow-right"
+              />
+            </span>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col flex-grow-1 px-0"
+          >
+            <FormGroup
+              controlId="destinationAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  To
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="destinationAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="text-center py-5"
+          >
+            <span
+              className="text-format-title-light font-weight-bold"
+            >
+              Amount
+            </span>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="justify-content-start mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="px-0"
+            xs={8}
+          >
+            <FormGroup
+              controlId="assetAmount"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  Credit
+                </span>
+              </FormLabel>
+              <Container
+                className="px-0"
+                fluid={true}
+              >
+                <ForwardRef
+                  className="mx-auto my-0"
+                  noGutters={false}
+                >
+                  <Col
+                    className="px-0 flex-grow-0"
+                  >
+                    <Select
+                      onChange={[Function]}
+                      options={
+                        Array [
+                          Object {
+                            "label": "EVRY",
+                            "name": "asset",
+                            "value": "EVRY",
+                          },
+                        ]
+                      }
+                      selectedItem="EVRY"
+                    />
+                  </Col>
+                  <Col
+                    className="px-0"
+                  >
+                    <FormControl
+                      className="WarpContent__form__content__input WarpContent__form__content__input__amount input-form"
+                      isInvalid={true}
+                      name="amount"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      placeholder="0.00"
+                      type="text"
+                      value="1.00--0000000"
+                    />
+                    <Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div
+                        className="WarpContent__form__content__errorFeedback__form WarpContent__form__content__errorFeedback__amount"
+                      >
+                        Amount must be a number.
+                      </div>
+                    </Feedback>
+                  </Col>
+                </ForwardRef>
+              </Container>
+            </FormGroup>
+          </Col>
+          <Col
+            className="pl-5 pr-0 col-4"
+            xs={4}
+          >
+            <Button
+              active={false}
+              className="w-100 input-form WarpContent__form__content__btn"
+              disabled={true}
+              type="submit"
+              variant="primary"
+            >
+              TRANSFER
+            </Button>
+          </Col>
+        </ForwardRef>
+      </Container>
+    </CardBody>
+  </Form>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="WarpContent__resultModal__item"
+    closeTimeoutMS={0}
+    isOpen={false}
+    overlayClassName="WarpContent__resultModal__overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  />
+</Fragment>
+`;
+
+exports[`WarpContent When input an amount When input an invalid amount When amount is not a number should save an invalid state with a desired error message 3`] = `
+<Fragment>
+  <Form
+    className="WarpContent__form"
+    inline={false}
+    name="form"
+    onSubmit={[Function]}
+  >
+    <CardBody
+      className="WarpContent__form__content"
+    >
+      <Container
+        className="px-0"
+        fluid={true}
+      >
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="flex-grow-1 px-0 WarpContent__form__content__col"
+          >
+            <FormGroup
+              controlId="sourceAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  From
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="sourceAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col px-0"
+          >
+            <span>
+              <i
+                className="fas fa-arrow-right"
+              />
+            </span>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col flex-grow-1 px-0"
+          >
+            <FormGroup
+              controlId="destinationAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  To
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="destinationAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="text-center py-5"
+          >
+            <span
+              className="text-format-title-light font-weight-bold"
+            >
+              Amount
+            </span>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="justify-content-start mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="px-0"
+            xs={8}
+          >
+            <FormGroup
+              controlId="assetAmount"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  Credit
+                </span>
+              </FormLabel>
+              <Container
+                className="px-0"
+                fluid={true}
+              >
+                <ForwardRef
+                  className="mx-auto my-0"
+                  noGutters={false}
+                >
+                  <Col
+                    className="px-0 flex-grow-0"
+                  >
+                    <Select
+                      onChange={[Function]}
+                      options={
+                        Array [
+                          Object {
+                            "label": "EVRY",
+                            "name": "asset",
+                            "value": "EVRY",
+                          },
+                        ]
+                      }
+                      selectedItem="EVRY"
+                    />
+                  </Col>
+                  <Col
+                    className="px-0"
+                  >
+                    <FormControl
+                      className="WarpContent__form__content__input WarpContent__form__content__input__amount input-form"
+                      isInvalid={true}
+                      name="amount"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      placeholder="0.00"
+                      type="text"
+                      value="foo"
+                    />
+                    <Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div
+                        className="WarpContent__form__content__errorFeedback__form WarpContent__form__content__errorFeedback__amount"
+                      >
+                        Amount must be a number.
+                      </div>
+                    </Feedback>
+                  </Col>
+                </ForwardRef>
+              </Container>
+            </FormGroup>
+          </Col>
+          <Col
+            className="pl-5 pr-0 col-4"
+            xs={4}
+          >
+            <Button
+              active={false}
+              className="w-100 input-form WarpContent__form__content__btn"
+              disabled={true}
+              type="submit"
+              variant="primary"
+            >
+              TRANSFER
+            </Button>
+          </Col>
+        </ForwardRef>
+      </Container>
+    </CardBody>
+  </Form>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="WarpContent__resultModal__item"
+    closeTimeoutMS={0}
+    isOpen={false}
+    overlayClassName="WarpContent__resultModal__overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  />
+</Fragment>
+`;
+
+exports[`WarpContent When input an amount When input an invalid amount When amount is not a number should save an invalid state with a desired error message 4`] = `
+<Fragment>
+  <Form
+    className="WarpContent__form"
+    inline={false}
+    name="form"
+    onSubmit={[Function]}
+  >
+    <CardBody
+      className="WarpContent__form__content"
+    >
+      <Container
+        className="px-0"
+        fluid={true}
+      >
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="flex-grow-1 px-0 WarpContent__form__content__col"
+          >
+            <FormGroup
+              controlId="sourceAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  From
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="sourceAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col px-0"
+          >
+            <span>
+              <i
+                className="fas fa-arrow-right"
+              />
+            </span>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col flex-grow-1 px-0"
+          >
+            <FormGroup
+              controlId="destinationAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  To
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="destinationAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="text-center py-5"
+          >
+            <span
+              className="text-format-title-light font-weight-bold"
+            >
+              Amount
+            </span>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="justify-content-start mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="px-0"
+            xs={8}
+          >
+            <FormGroup
+              controlId="assetAmount"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  Credit
+                </span>
+              </FormLabel>
+              <Container
+                className="px-0"
+                fluid={true}
+              >
+                <ForwardRef
+                  className="mx-auto my-0"
+                  noGutters={false}
+                >
+                  <Col
+                    className="px-0 flex-grow-0"
+                  >
+                    <Select
+                      onChange={[Function]}
+                      options={
+                        Array [
+                          Object {
+                            "label": "EVRY",
+                            "name": "asset",
+                            "value": "EVRY",
+                          },
+                        ]
+                      }
+                      selectedItem="EVRY"
+                    />
+                  </Col>
+                  <Col
+                    className="px-0"
+                  >
+                    <FormControl
+                      className="WarpContent__form__content__input WarpContent__form__content__input__amount input-form"
+                      isInvalid={true}
+                      name="amount"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      placeholder="0.00"
+                      type="text"
+                      value="bar"
+                    />
+                    <Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div
+                        className="WarpContent__form__content__errorFeedback__form WarpContent__form__content__errorFeedback__amount"
+                      >
+                        Amount must be a number.
+                      </div>
+                    </Feedback>
+                  </Col>
+                </ForwardRef>
+              </Container>
+            </FormGroup>
+          </Col>
+          <Col
+            className="pl-5 pr-0 col-4"
+            xs={4}
+          >
+            <Button
+              active={false}
+              className="w-100 input-form WarpContent__form__content__btn"
+              disabled={true}
+              type="submit"
+              variant="primary"
+            >
+              TRANSFER
+            </Button>
+          </Col>
+        </ForwardRef>
+      </Container>
+    </CardBody>
+  </Form>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="WarpContent__resultModal__item"
+    closeTimeoutMS={0}
+    isOpen={false}
+    overlayClassName="WarpContent__resultModal__overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  />
+</Fragment>
+`;
+
+exports[`WarpContent When input an amount When input an invalid amount When amount is not a number should save an invalid state with a desired error message 5`] = `
+<Fragment>
+  <Form
+    className="WarpContent__form"
+    inline={false}
+    name="form"
+    onSubmit={[Function]}
+  >
+    <CardBody
+      className="WarpContent__form__content"
+    >
+      <Container
+        className="px-0"
+        fluid={true}
+      >
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="flex-grow-1 px-0 WarpContent__form__content__col"
+          >
+            <FormGroup
+              controlId="sourceAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  From
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="sourceAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col px-0"
+          >
+            <span>
+              <i
+                className="fas fa-arrow-right"
+              />
+            </span>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col flex-grow-1 px-0"
+          >
+            <FormGroup
+              controlId="destinationAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  To
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="destinationAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="text-center py-5"
+          >
+            <span
+              className="text-format-title-light font-weight-bold"
+            >
+              Amount
+            </span>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="justify-content-start mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="px-0"
+            xs={8}
+          >
+            <FormGroup
+              controlId="assetAmount"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  Credit
+                </span>
+              </FormLabel>
+              <Container
+                className="px-0"
+                fluid={true}
+              >
+                <ForwardRef
+                  className="mx-auto my-0"
+                  noGutters={false}
+                >
+                  <Col
+                    className="px-0 flex-grow-0"
+                  >
+                    <Select
+                      onChange={[Function]}
+                      options={
+                        Array [
+                          Object {
+                            "label": "EVRY",
+                            "name": "asset",
+                            "value": "EVRY",
+                          },
+                        ]
+                      }
+                      selectedItem="EVRY"
+                    />
+                  </Col>
+                  <Col
+                    className="px-0"
+                  >
+                    <FormControl
+                      className="WarpContent__form__content__input WarpContent__form__content__input__amount input-form"
+                      isInvalid={true}
+                      name="amount"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      placeholder="0.00"
+                      type="text"
+                      value="-."
+                    />
+                    <Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div
+                        className="WarpContent__form__content__errorFeedback__form WarpContent__form__content__errorFeedback__amount"
+                      >
+                        Amount must be a number.
+                      </div>
+                    </Feedback>
+                  </Col>
+                </ForwardRef>
+              </Container>
+            </FormGroup>
+          </Col>
+          <Col
+            className="pl-5 pr-0 col-4"
+            xs={4}
+          >
+            <Button
+              active={false}
+              className="w-100 input-form WarpContent__form__content__btn"
+              disabled={true}
+              type="submit"
+              variant="primary"
+            >
+              TRANSFER
+            </Button>
+          </Col>
+        </ForwardRef>
+      </Container>
+    </CardBody>
+  </Form>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="WarpContent__resultModal__item"
+    closeTimeoutMS={0}
+    isOpen={false}
+    overlayClassName="WarpContent__resultModal__overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  />
+</Fragment>
+`;
+
+exports[`WarpContent When input an amount When input an invalid amount When amount is not a number should save an invalid state with a desired error message 6`] = `
+<Fragment>
+  <Form
+    className="WarpContent__form"
+    inline={false}
+    name="form"
+    onSubmit={[Function]}
+  >
+    <CardBody
+      className="WarpContent__form__content"
+    >
+      <Container
+        className="px-0"
+        fluid={true}
+      >
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="flex-grow-1 px-0 WarpContent__form__content__col"
+          >
+            <FormGroup
+              controlId="sourceAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  From
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="sourceAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col px-0"
+          >
+            <span>
+              <i
+                className="fas fa-arrow-right"
+              />
+            </span>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col flex-grow-1 px-0"
+          >
+            <FormGroup
+              controlId="destinationAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  To
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="destinationAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="text-center py-5"
+          >
+            <span
+              className="text-format-title-light font-weight-bold"
+            >
+              Amount
+            </span>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="justify-content-start mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="px-0"
+            xs={8}
+          >
+            <FormGroup
+              controlId="assetAmount"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  Credit
+                </span>
+              </FormLabel>
+              <Container
+                className="px-0"
+                fluid={true}
+              >
+                <ForwardRef
+                  className="mx-auto my-0"
+                  noGutters={false}
+                >
+                  <Col
+                    className="px-0 flex-grow-0"
+                  >
+                    <Select
+                      onChange={[Function]}
+                      options={
+                        Array [
+                          Object {
+                            "label": "EVRY",
+                            "name": "asset",
+                            "value": "EVRY",
+                          },
+                        ]
+                      }
+                      selectedItem="EVRY"
+                    />
+                  </Col>
+                  <Col
+                    className="px-0"
+                  >
+                    <FormControl
+                      className="WarpContent__form__content__input WarpContent__form__content__input__amount input-form"
+                      isInvalid={true}
+                      name="amount"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      placeholder="0.00"
+                      type="text"
+                      value="0.--1"
+                    />
+                    <Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div
+                        className="WarpContent__form__content__errorFeedback__form WarpContent__form__content__errorFeedback__amount"
+                      >
+                        Amount must be a number.
+                      </div>
+                    </Feedback>
+                  </Col>
+                </ForwardRef>
+              </Container>
+            </FormGroup>
+          </Col>
+          <Col
+            className="pl-5 pr-0 col-4"
+            xs={4}
+          >
+            <Button
+              active={false}
+              className="w-100 input-form WarpContent__form__content__btn"
+              disabled={true}
+              type="submit"
+              variant="primary"
+            >
+              TRANSFER
+            </Button>
+          </Col>
+        </ForwardRef>
+      </Container>
+    </CardBody>
+  </Form>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="WarpContent__resultModal__item"
+    closeTimeoutMS={0}
+    isOpen={false}
+    overlayClassName="WarpContent__resultModal__overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  />
+</Fragment>
+`;
+
+exports[`WarpContent When input an amount When input an invalid amount When amount is zero should save an invalid state with a desired error message 1`] = `
+<Fragment>
+  <Form
+    className="WarpContent__form"
+    inline={false}
+    name="form"
+    onSubmit={[Function]}
+  >
+    <CardBody
+      className="WarpContent__form__content"
+    >
+      <Container
+        className="px-0"
+        fluid={true}
+      >
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="flex-grow-1 px-0 WarpContent__form__content__col"
+          >
+            <FormGroup
+              controlId="sourceAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  From
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="sourceAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col px-0"
+          >
+            <span>
+              <i
+                className="fas fa-arrow-right"
+              />
+            </span>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col flex-grow-1 px-0"
+          >
+            <FormGroup
+              controlId="destinationAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  To
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="destinationAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="text-center py-5"
+          >
+            <span
+              className="text-format-title-light font-weight-bold"
+            >
+              Amount
+            </span>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="justify-content-start mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="px-0"
+            xs={8}
+          >
+            <FormGroup
+              controlId="assetAmount"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  Credit
+                </span>
+              </FormLabel>
+              <Container
+                className="px-0"
+                fluid={true}
+              >
+                <ForwardRef
+                  className="mx-auto my-0"
+                  noGutters={false}
+                >
+                  <Col
+                    className="px-0 flex-grow-0"
+                  >
+                    <Select
+                      onChange={[Function]}
+                      selectedItem="EVRY"
+                    />
+                  </Col>
+                  <Col
+                    className="px-0"
+                  >
+                    <FormControl
+                      className="WarpContent__form__content__input WarpContent__form__content__input__amount input-form"
+                      isInvalid={true}
+                      name="amount"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      placeholder="0.00"
+                      type="text"
+                      value="0"
+                    />
+                    <Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div
+                        className="WarpContent__form__content__errorFeedback__form WarpContent__form__content__errorFeedback__amount"
+                      >
+                        Amount must be greater than zero.
+                      </div>
+                    </Feedback>
+                  </Col>
+                </ForwardRef>
+              </Container>
+            </FormGroup>
+          </Col>
+          <Col
+            className="pl-5 pr-0 col-4"
+            xs={4}
+          >
+            <Button
+              active={false}
+              className="w-100 input-form WarpContent__form__content__btn"
+              disabled={true}
+              type="submit"
+              variant="primary"
+            >
+              TRANSFER
+            </Button>
+          </Col>
+        </ForwardRef>
+      </Container>
+    </CardBody>
+  </Form>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="WarpContent__resultModal__item"
+    closeTimeoutMS={0}
+    isOpen={false}
+    overlayClassName="WarpContent__resultModal__overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  />
+</Fragment>
+`;
+
+exports[`WarpContent When input an amount When input an invalid amount When amount precision exceeds limit decimal should save an invalid state with a desired error message 1`] = `
+<Fragment>
+  <Form
+    className="WarpContent__form"
+    inline={false}
+    name="form"
+    onSubmit={[Function]}
+  >
+    <CardBody
+      className="WarpContent__form__content"
+    >
+      <Container
+        className="px-0"
+        fluid={true}
+      >
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="flex-grow-1 px-0 WarpContent__form__content__col"
+          >
+            <FormGroup
+              controlId="sourceAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  From
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="sourceAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col px-0"
+          >
+            <span>
+              <i
+                className="fas fa-arrow-right"
+              />
+            </span>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col flex-grow-1 px-0"
+          >
+            <FormGroup
+              controlId="destinationAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  To
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="destinationAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="text-center py-5"
+          >
+            <span
+              className="text-format-title-light font-weight-bold"
+            >
+              Amount
+            </span>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="justify-content-start mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="px-0"
+            xs={8}
+          >
+            <FormGroup
+              controlId="assetAmount"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  Credit
+                </span>
+              </FormLabel>
+              <Container
+                className="px-0"
+                fluid={true}
+              >
+                <ForwardRef
+                  className="mx-auto my-0"
+                  noGutters={false}
+                >
+                  <Col
+                    className="px-0 flex-grow-0"
+                  >
+                    <Select
+                      onChange={[Function]}
+                      options={
+                        Array [
+                          Object {
+                            "label": "EVRY",
+                            "name": "asset",
+                            "value": "EVRY",
+                          },
+                        ]
+                      }
+                      selectedItem="EVRY"
+                    />
+                  </Col>
+                  <Col
+                    className="px-0"
+                  >
+                    <FormControl
+                      className="WarpContent__form__content__input WarpContent__form__content__input__amount input-form"
+                      isInvalid={true}
+                      name="amount"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      placeholder="0.00"
+                      type="text"
+                      value="1.000"
+                    />
+                    <Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div
+                        className="WarpContent__form__content__errorFeedback__form WarpContent__form__content__errorFeedback__amount"
+                      >
+                        Amount can only support a precision of 2 decimals.
+                      </div>
+                    </Feedback>
+                  </Col>
+                </ForwardRef>
+              </Container>
+            </FormGroup>
+          </Col>
+          <Col
+            className="pl-5 pr-0 col-4"
+            xs={4}
+          >
+            <Button
+              active={false}
+              className="w-100 input-form WarpContent__form__content__btn"
+              disabled={true}
+              type="submit"
+              variant="primary"
+            >
+              TRANSFER
+            </Button>
+          </Col>
+        </ForwardRef>
+      </Container>
+    </CardBody>
+  </Form>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="WarpContent__resultModal__item"
+    closeTimeoutMS={0}
+    isOpen={false}
+    overlayClassName="WarpContent__resultModal__overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  />
+</Fragment>
+`;
+
+exports[`WarpContent When input an amount When input an invalid amount When amount precision exceeds limit decimal should save an invalid state with a desired error message 2`] = `
+<Fragment>
+  <Form
+    className="WarpContent__form"
+    inline={false}
+    name="form"
+    onSubmit={[Function]}
+  >
+    <CardBody
+      className="WarpContent__form__content"
+    >
+      <Container
+        className="px-0"
+        fluid={true}
+      >
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="flex-grow-1 px-0 WarpContent__form__content__col"
+          >
+            <FormGroup
+              controlId="sourceAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  From
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="sourceAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col px-0"
+          >
+            <span>
+              <i
+                className="fas fa-arrow-right"
+              />
+            </span>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col flex-grow-1 px-0"
+          >
+            <FormGroup
+              controlId="destinationAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  To
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="destinationAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="text-center py-5"
+          >
+            <span
+              className="text-format-title-light font-weight-bold"
+            >
+              Amount
+            </span>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="justify-content-start mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="px-0"
+            xs={8}
+          >
+            <FormGroup
+              controlId="assetAmount"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  Credit
+                </span>
+              </FormLabel>
+              <Container
+                className="px-0"
+                fluid={true}
+              >
+                <ForwardRef
+                  className="mx-auto my-0"
+                  noGutters={false}
+                >
+                  <Col
+                    className="px-0 flex-grow-0"
+                  >
+                    <Select
+                      onChange={[Function]}
+                      options={
+                        Array [
+                          Object {
+                            "label": "EVRY",
+                            "name": "asset",
+                            "value": "EVRY",
+                          },
+                        ]
+                      }
+                      selectedItem="EVRY"
+                    />
+                  </Col>
+                  <Col
+                    className="px-0"
+                  >
+                    <FormControl
+                      className="WarpContent__form__content__input WarpContent__form__content__input__amount input-form"
+                      isInvalid={true}
+                      name="amount"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      placeholder="0.00"
+                      type="text"
+                      value="1.00000000"
+                    />
+                    <Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div
+                        className="WarpContent__form__content__errorFeedback__form WarpContent__form__content__errorFeedback__amount"
+                      >
+                        Amount can only support a precision of 7 decimals.
+                      </div>
+                    </Feedback>
+                  </Col>
+                </ForwardRef>
+              </Container>
+            </FormGroup>
+          </Col>
+          <Col
+            className="pl-5 pr-0 col-4"
+            xs={4}
+          >
+            <Button
+              active={false}
+              className="w-100 input-form WarpContent__form__content__btn"
+              disabled={true}
+              type="submit"
+              variant="primary"
+            >
+              TRANSFER
+            </Button>
+          </Col>
+        </ForwardRef>
+      </Container>
+    </CardBody>
+  </Form>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="WarpContent__resultModal__item"
+    closeTimeoutMS={0}
+    isOpen={false}
+    overlayClassName="WarpContent__resultModal__overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  />
+</Fragment>
+`;
+
+exports[`WarpContent should render correspondingly 1`] = `
+<Fragment>
+  <Form
+    className="WarpContent__form"
+    inline={false}
+    name="form"
+    onSubmit={[Function]}
+  >
+    <CardBody
+      className="WarpContent__form__content"
+    >
+      <Container
+        className="px-0"
+        fluid={true}
+      >
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="flex-grow-1 px-0 WarpContent__form__content__col"
+          >
+            <FormGroup
+              controlId="sourceAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  From
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="sourceAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col px-0"
+          >
+            <span>
+              <i
+                className="fas fa-arrow-right"
+              />
+            </span>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col flex-grow-1 px-0"
+          >
+            <FormGroup
+              controlId="destinationAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  To
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="destinationAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="text-center py-5"
+          >
+            <span
+              className="text-format-title-light font-weight-bold"
+            >
+              Amount
+            </span>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="justify-content-start mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="px-0"
+            xs={8}
+          >
+            <FormGroup
+              controlId="assetAmount"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  Credit
+                </span>
+              </FormLabel>
+              <Container
+                className="px-0"
+                fluid={true}
+              >
+                <ForwardRef
+                  className="mx-auto my-0"
+                  noGutters={false}
+                >
+                  <Col
+                    className="px-0 flex-grow-0"
+                  >
+                    <Select
+                      onChange={[Function]}
+                      selectedItem="EVRY"
+                    />
+                  </Col>
+                  <Col
+                    className="px-0"
+                  >
+                    <FormControl
+                      className="WarpContent__form__content__input WarpContent__form__content__input__amount input-form"
+                      isInvalid={false}
+                      name="amount"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      placeholder="0.00"
+                      type="text"
+                      value=""
+                    />
+                    <Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div
+                        className="WarpContent__form__content__errorFeedback__form WarpContent__form__content__errorFeedback__amount"
+                      />
+                    </Feedback>
+                  </Col>
+                </ForwardRef>
+              </Container>
+            </FormGroup>
+          </Col>
+          <Col
+            className="pl-5 pr-0 col-4"
+            xs={4}
+          >
+            <Button
+              active={false}
+              className="w-100 input-form WarpContent__form__content__btn"
+              disabled={true}
+              type="submit"
+              variant="primary"
+            >
+              TRANSFER
+            </Button>
+          </Col>
+        </ForwardRef>
+      </Container>
+    </CardBody>
+  </Form>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="WarpContent__resultModal__item"
+    closeTimeoutMS={0}
+    isOpen={false}
+    overlayClassName="WarpContent__resultModal__overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  />
+</Fragment>
+`;

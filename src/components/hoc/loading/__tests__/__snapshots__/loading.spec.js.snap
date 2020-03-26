@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Warp When is loading is true should render correspondingly 1`] = `
+<ContextProvider
+  value={null}
+>
+  <Loading
+    isLoading={true}
+    startLoading={[Function]}
+    stopLoading={[Function]}
+    store={
+      Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      }
+    }
+  />
+</ContextProvider>
+`;
+
+exports[`Warp When is stop loading should render correspondingly 1`] = `
+<ContextProvider
+  value={null}
+>
+  <Loading
+    isLoading={true}
+    startLoading={[Function]}
+    stopLoading={[Function]}
+    store={
+      Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      }
+    }
+  />
+</ContextProvider>
+`;

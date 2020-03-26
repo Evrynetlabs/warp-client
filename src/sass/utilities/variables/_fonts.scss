@@ -1,0 +1,74 @@
+
+/// Regular font family
+/// @type List
+$text-font-stack: 'Open Sans', 'Helvetica Neue Light', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif !default;
+
+/// Code (monospace) font family
+/// @type List
+$code-font-stack: 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Monaco', monospace !default;
+
+$brand-font-stack: 'Proxima Nova', 'Font Awesome 5 Free', sans-serif;
+
+/* Font Sizes */
+$font-size-small: 80%;
+$font-size: 1.6rem;
+$font-size-h1: 4.8rem;
+$font-size-h2: 3.2rem;
+$font-size-h3: 2.4rem;
+$font-size-h4: 2rem;
+$font-size-h5: 1.6rem;
+$font-size-h6: 1.4rem;
+
+/* Font Weights */
+$font-weight-light: 200;
+$font-weight-regular: 400;
+$font-weight-bold: 600;
+$font-weight-h1: $font-weight-regular;
+$font-weight-h2: $font-weight-regular;
+$font-weight-h3: $font-weight-regular;
+$font-weight-h4: $font-weight-regular;
+$font-weight-h5: $font-weight-regular;
+$font-weight-h6: $font-weight-regular;
+$link-font-weight: $font-weight-regular;
+
+/* Line Heights */
+$line-height: $font-size + $space-8;
+$line-height-h1: $font-size-h1 + $space-8;
+$line-height-h2: $font-size-h2 + $space-8;
+$line-height-h3: $font-size-h3 + $space-8;
+$line-height-h4: $font-size-h4 + $space-8;
+$line-height-h5: $font-size-h5 + $space-8;
+$line-height-h6: $font-size-h6 + $space-8;
+
+/* Letter Spacings */
+$letter-spacing: normal;
+$letter-spacing-h1: normal;
+$letter-spacing-h2: normal;
+$letter-spacing-h3: normal;
+$letter-spacing-h4: normal;
+$letter-spacing-h5: normal;
+$letter-spacing-h6: normal;
+
+/// font-weights map
+/// @prop {String} keys - Keys are identifiers mapped to a given length
+/// @prop {Map} values - Values are actual font sizes expressed in pixels
+$font-weights: (
+  light: 200px,
+  normal: 400px,
+  medium: 500px,
+  semibold: 600px,
+  bold: 700px,
+) !default;
+
+$font-sizes: (
+  normal: 1.6rem,
+  h1: 4.8rem,
+  h2: 3.2rem,
+  h3: 2.4rem,
+  h4: 2rem,
+  h5: 1.6rem,
+  h6: 1.4rem,
+  medium: 5rem,
+  large: 7.5rem,
+  very-large: 10rem
+) !default;

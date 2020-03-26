@@ -1,0 +1,531 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Result When the transfer process is success When isToEverynet should render correspondingly 1`] = `
+<Container
+  className="Result p-0"
+  fluid={false}
+>
+  <ForwardRef
+    noGutters={false}
+  >
+    <Col
+      className="Result__content"
+    >
+      <Card
+        body={false}
+        className="Result__content__card"
+      >
+        <CardBody
+          className="p-0"
+        >
+          <div
+            className="Result__content__body"
+          >
+            <Container
+              className="p-0"
+              fluid={false}
+            >
+              <ForwardRef
+                className="m-0 Result__content__body__row"
+                noGutters={false}
+              >
+                <Col
+                  className="Result__content__body__status"
+                >
+                  <span>
+                    Transfer Complete
+                  </span>
+                </Col>
+              </ForwardRef>
+              <ForwardRef
+                className="m-0 Result__content__body__row justify-content-start"
+                noGutters={false}
+              >
+                <Col
+                  className="Result__content__body__title"
+                >
+                  <span
+                    className="label--dark text-format-title Result__content__body__title__text"
+                  >
+                    From
+                  </span>
+                  <ForwardRef(SvgStellarDark) />
+                </Col>
+                <Col
+                  className="Result__content__body__title text-right"
+                >
+                  <span
+                    className="label--dark text-format-title Result__content__body__title__text"
+                  >
+                    To
+                  </span>
+                  <ForwardRef(SvgEvrynetDark) />
+                </Col>
+              </ForwardRef>
+              <ForwardRef
+                className="m-0 Result__content__body__row justify-content-start"
+                noGutters={false}
+              >
+                <Col
+                  className="Result__content__body__account"
+                >
+                  <div
+                    className="text-left ellipsis"
+                  >
+                    <span
+                      className="Result__content__body__account__text text-format-input"
+                    >
+                      foo
+                    </span>
+                  </div>
+                </Col>
+                <Col
+                  className="Result__content__body__swap"
+                >
+                  <i
+                    className="fas fa-arrow-right"
+                  />
+                </Col>
+                <Col
+                  className="Result__content__body__account"
+                >
+                  <div
+                    className="text-right ellipsis"
+                  >
+                    <span
+                      className="Result__content__body__account__text text-format-input"
+                    >
+                      bar
+                    </span>
+                  </div>
+                </Col>
+              </ForwardRef>
+              <ForwardRef
+                className="m-0 Result__content__body__row justify-content-start"
+                noGutters={false}
+              >
+                <Col
+                  className="Result__content__body__title"
+                >
+                  <span
+                    className="label--dark text-format-title Result__content__body__title__text"
+                  >
+                    Amount
+                  </span>
+                </Col>
+              </ForwardRef>
+              <ForwardRef
+                className="m-0 Result__content__body__row"
+                noGutters={false}
+              >
+                <Col
+                  className="Result__content__body__amount text-format-title-bold"
+                >
+                  <span>
+                    1,000 EVRY
+                  </span>
+                </Col>
+              </ForwardRef>
+              <hr />
+              <ForwardRef
+                className="m-0 Result__content__body__row"
+                noGutters={false}
+              >
+                <Col
+                  className="Result__content__hash"
+                >
+                  <Card
+                    body={false}
+                  >
+                    <CardBody
+                      className="Result__content__hash__content"
+                    >
+                      <span
+                        className="text-format-label d-block"
+                      >
+                        For Stellar
+                      </span>
+                      <Container
+                        className="m-0"
+                        fluid={false}
+                      >
+                        <ForwardRef
+                          className="p-0 justify-content-between"
+                          noGutters={false}
+                        >
+                          <Col>
+                            <span
+                              className="text-format-input"
+                            >
+                              foo
+                            </span>
+                          </Col>
+                          <Col
+                            className="text-right"
+                          >
+                            <CopyToClipboard
+                              text="foo"
+                            >
+                              <Button
+                                active={false}
+                                disabled={false}
+                                type="button"
+                                variant="primary"
+                              >
+                                Copy
+                              </Button>
+                            </CopyToClipboard>
+                          </Col>
+                        </ForwardRef>
+                      </Container>
+                    </CardBody>
+                  </Card>
+                </Col>
+              </ForwardRef>
+              <ForwardRef
+                className="m-0 Result__content__body__row"
+                noGutters={false}
+              >
+                <Col
+                  className="Result__content__hash"
+                >
+                  <Card
+                    body={false}
+                  >
+                    <CardBody
+                      className="Result__content__hash__content"
+                    >
+                      <span
+                        className="text-format-label d-block"
+                      >
+                        For E^vrynet
+                      </span>
+                      <Container
+                        className="m-0"
+                        fluid={false}
+                      >
+                        <ForwardRef
+                          className="p-0 justify-content-between"
+                          noGutters={false}
+                        >
+                          <Col>
+                            <span
+                              className="text-format-input"
+                            >
+                              bar
+                            </span>
+                          </Col>
+                          <Col
+                            className="text-right"
+                          >
+                            <CopyToClipboard
+                              text="bar"
+                            >
+                              <Button
+                                active={false}
+                                disabled={false}
+                                type="button"
+                                variant="primary"
+                              >
+                                Copy
+                              </Button>
+                            </CopyToClipboard>
+                          </Col>
+                        </ForwardRef>
+                      </Container>
+                    </CardBody>
+                  </Card>
+                </Col>
+              </ForwardRef>
+              <ForwardRef
+                className="m-0 Result__content__body__row"
+                noGutters={false}
+              >
+                <Col
+                  className="Result__close"
+                >
+                  <Button
+                    active={false}
+                    className="Result__close__btn"
+                    disabled={false}
+                    onClick={[Function]}
+                    type="button"
+                    variant="secondary"
+                  >
+                    Done
+                  </Button>
+                </Col>
+              </ForwardRef>
+            </Container>
+          </div>
+        </CardBody>
+      </Card>
+    </Col>
+  </ForwardRef>
+</Container>
+`;
+
+exports[`Result When the transfer process is success When isToStellar should render correspondingly 1`] = `
+<Container
+  className="Result p-0"
+  fluid={false}
+>
+  <ForwardRef
+    noGutters={false}
+  >
+    <Col
+      className="Result__content"
+    >
+      <Card
+        body={false}
+        className="Result__content__card"
+      >
+        <CardBody
+          className="p-0"
+        >
+          <div
+            className="Result__content__body"
+          >
+            <Container
+              className="p-0"
+              fluid={false}
+            >
+              <ForwardRef
+                className="m-0 Result__content__body__row"
+                noGutters={false}
+              >
+                <Col
+                  className="Result__content__body__status"
+                >
+                  <span>
+                    Transfer Complete
+                  </span>
+                </Col>
+              </ForwardRef>
+              <ForwardRef
+                className="m-0 Result__content__body__row justify-content-start"
+                noGutters={false}
+              >
+                <Col
+                  className="Result__content__body__title"
+                >
+                  <span
+                    className="label--dark text-format-title Result__content__body__title__text"
+                  >
+                    From
+                  </span>
+                  <ForwardRef(SvgEvrynetDark) />
+                </Col>
+                <Col
+                  className="Result__content__body__title text-right"
+                >
+                  <span
+                    className="label--dark text-format-title Result__content__body__title__text"
+                  >
+                    To
+                  </span>
+                  <ForwardRef(SvgStellarDark) />
+                </Col>
+              </ForwardRef>
+              <ForwardRef
+                className="m-0 Result__content__body__row justify-content-start"
+                noGutters={false}
+              >
+                <Col
+                  className="Result__content__body__account"
+                >
+                  <div
+                    className="text-left ellipsis"
+                  >
+                    <span
+                      className="Result__content__body__account__text text-format-input"
+                    >
+                      foo
+                    </span>
+                  </div>
+                </Col>
+                <Col
+                  className="Result__content__body__swap"
+                >
+                  <i
+                    className="fas fa-arrow-right"
+                  />
+                </Col>
+                <Col
+                  className="Result__content__body__account"
+                >
+                  <div
+                    className="text-right ellipsis"
+                  >
+                    <span
+                      className="Result__content__body__account__text text-format-input"
+                    >
+                      bar
+                    </span>
+                  </div>
+                </Col>
+              </ForwardRef>
+              <ForwardRef
+                className="m-0 Result__content__body__row justify-content-start"
+                noGutters={false}
+              >
+                <Col
+                  className="Result__content__body__title"
+                >
+                  <span
+                    className="label--dark text-format-title Result__content__body__title__text"
+                  >
+                    Amount
+                  </span>
+                </Col>
+              </ForwardRef>
+              <ForwardRef
+                className="m-0 Result__content__body__row"
+                noGutters={false}
+              >
+                <Col
+                  className="Result__content__body__amount text-format-title-bold"
+                >
+                  <span>
+                    1,000 EVRY
+                  </span>
+                </Col>
+              </ForwardRef>
+              <hr />
+              <ForwardRef
+                className="m-0 Result__content__body__row"
+                noGutters={false}
+              >
+                <Col
+                  className="Result__content__hash"
+                >
+                  <Card
+                    body={false}
+                  >
+                    <CardBody
+                      className="Result__content__hash__content"
+                    >
+                      <span
+                        className="text-format-label d-block"
+                      >
+                        For Stellar
+                      </span>
+                      <Container
+                        className="m-0"
+                        fluid={false}
+                      >
+                        <ForwardRef
+                          className="p-0 justify-content-between"
+                          noGutters={false}
+                        >
+                          <Col>
+                            <span
+                              className="text-format-input"
+                            >
+                              foo
+                            </span>
+                          </Col>
+                          <Col
+                            className="text-right"
+                          >
+                            <CopyToClipboard
+                              text="foo"
+                            >
+                              <Button
+                                active={false}
+                                disabled={false}
+                                type="button"
+                                variant="primary"
+                              >
+                                Copy
+                              </Button>
+                            </CopyToClipboard>
+                          </Col>
+                        </ForwardRef>
+                      </Container>
+                    </CardBody>
+                  </Card>
+                </Col>
+              </ForwardRef>
+              <ForwardRef
+                className="m-0 Result__content__body__row"
+                noGutters={false}
+              >
+                <Col
+                  className="Result__content__hash"
+                >
+                  <Card
+                    body={false}
+                  >
+                    <CardBody
+                      className="Result__content__hash__content"
+                    >
+                      <span
+                        className="text-format-label d-block"
+                      >
+                        For E^vrynet
+                      </span>
+                      <Container
+                        className="m-0"
+                        fluid={false}
+                      >
+                        <ForwardRef
+                          className="p-0 justify-content-between"
+                          noGutters={false}
+                        >
+                          <Col>
+                            <span
+                              className="text-format-input"
+                            >
+                              bar
+                            </span>
+                          </Col>
+                          <Col
+                            className="text-right"
+                          >
+                            <CopyToClipboard
+                              text="bar"
+                            >
+                              <Button
+                                active={false}
+                                disabled={false}
+                                type="button"
+                                variant="primary"
+                              >
+                                Copy
+                              </Button>
+                            </CopyToClipboard>
+                          </Col>
+                        </ForwardRef>
+                      </Container>
+                    </CardBody>
+                  </Card>
+                </Col>
+              </ForwardRef>
+              <ForwardRef
+                className="m-0 Result__content__body__row"
+                noGutters={false}
+              >
+                <Col
+                  className="Result__close"
+                >
+                  <Button
+                    active={false}
+                    className="Result__close__btn"
+                    disabled={false}
+                    onClick={[Function]}
+                    type="button"
+                    variant="secondary"
+                  >
+                    Done
+                  </Button>
+                </Col>
+              </ForwardRef>
+            </Container>
+          </div>
+        </CardBody>
+      </Card>
+    </Col>
+  </ForwardRef>
+</Container>
+`;

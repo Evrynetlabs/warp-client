@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WarpChainTitle When clicking toggle button should change source and destination of warp title 1`] = `
+<CardHeader
+  className="WarpChainTitle"
+>
+  <Container
+    fluid={true}
+  >
+    <ForwardRef
+      className="WarpChainTitle__row"
+      noGutters={false}
+    >
+      <Col
+        className="WarpChainTitle__row__asset text-format-title-light px-0"
+      >
+        <div
+          className="WarpChainTitle__row__asset__text"
+        >
+          <span>
+            From
+          </span>
+           
+          <ForwardRef(SvgEvrynet) />
+        </div>
+      </Col>
+      <Col
+        className="WarpChainTitle__row__swap px-0 flex-grow-0"
+        onClick={[Function]}
+      >
+        <div
+          className="speech-bubble"
+        >
+          <span
+            className="WarpChainTitle__row__swap__bubble"
+          >
+            Swap account
+          </span>
+        </div>
+        <ForwardRef(SvgSwap) />
+      </Col>
+      <Col
+        className="WarpChainTitle__row__asset text-format-title-light px-0"
+      >
+        <div
+          className="WarpChainTitle__row__asset__text"
+        >
+          <span>
+            To
+          </span>
+           
+          <ForwardRef(SvgStellar) />
+        </div>
+      </Col>
+    </ForwardRef>
+  </Container>
+</CardHeader>
+`;
+
+exports[`WarpChainTitle should render correspondingly 1`] = `
+<CardHeader
+  className="WarpChainTitle"
+>
+  <Container
+    fluid={true}
+  >
+    <ForwardRef
+      className="WarpChainTitle__row"
+      noGutters={false}
+    >
+      <Col
+        className="WarpChainTitle__row__asset text-format-title-light px-0"
+      >
+        <div
+          className="WarpChainTitle__row__asset__text"
+        >
+          <span>
+            From
+          </span>
+           
+          <ForwardRef(SvgStellar) />
+        </div>
+      </Col>
+      <Col
+        className="WarpChainTitle__row__swap px-0 flex-grow-0"
+        onClick={[Function]}
+      >
+        <div
+          className="speech-bubble"
+        >
+          <span
+            className="WarpChainTitle__row__swap__bubble"
+          >
+            Swap account
+          </span>
+        </div>
+        <ForwardRef(SvgSwap) />
+      </Col>
+      <Col
+        className="WarpChainTitle__row__asset text-format-title-light px-0"
+      >
+        <div
+          className="WarpChainTitle__row__asset__text"
+        >
+          <span>
+            To
+          </span>
+           
+          <ForwardRef(SvgEvrynet) />
+        </div>
+      </Col>
+    </ForwardRef>
+  </Container>
+</CardHeader>
+`;

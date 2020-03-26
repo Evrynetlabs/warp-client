@@ -1,0 +1,18 @@
+.Warp {
+    height: calc(100% - #{$navbar-height * 2});
+    .row {
+        height:100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    &__content {
+        width: 1050px;
+        margin: 0 auto;
+        &.card {
+            color: $light-grey;
+            background: none;
+            border: none
+        }
+    }
+}

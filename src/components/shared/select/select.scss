@@ -1,0 +1,48 @@
+$select-height: 50px;
+$select-width: 120px;
+$border-color: #dedede;
+
+@mixin selection-size {
+  height: $select-height;
+  width: $select-width;
+}
+
+.ui-select {
+  box-sizing: border-box;
+  cursor: pointer;
+  @include text($light-grey, $font-size-h5);
+  text-align: center;
+
+  &__value-display {
+    @include selection-size;
+    font-size: 1em;
+    line-height: $select-height;
+    padding: 0 1rem;
+    background-color: $brand-secondary;
+    &__text {
+      padding: $space-12;
+    }
+  }
+  
+  &__options {
+    display: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    background-color: $brand-secondary;
+    &--opened {
+      display: block;
+    }
+  }
+  
+  &__option {
+    @include selection-size;
+    line-height: $select-height;
+    padding: 0 1rem;
+    list-style-type: none;
+    color: palette-color-level('blue', '30');
+    &--selected {
+      color: $light-grey;
+    }
+  }
+}
