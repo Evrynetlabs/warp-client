@@ -763,12 +763,12 @@ describe('WarpContent', () => {
     })
   })
 
-  describe('When toggle disabled form', () => {
+  describe('When toggle a disable submission form', () => {
     it('should set a deterministic state', () => {
-      component.instance()._toggleSubmitBtnDisable()
+      component.instance()._toggleDisableSubmissionBtn()
       component.update()
       expect(component.state().formControls.form.disabled).toBe(true)
-      component.instance()._toggleSubmitBtnDisable()
+      component.instance()._toggleDisableSubmissionBtn()
       component.update()
       expect(component.state().formControls.form.disabled).toBe(false)
     })

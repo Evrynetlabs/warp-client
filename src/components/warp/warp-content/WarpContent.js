@@ -274,7 +274,7 @@ export default class WarpContent extends Component {
     return e
   }
 
-  _toggleSubmitBtnDisable() {
+  _toggleDisableSubmissionBtn() {
     this.setState(
       produce((draft) => {
         draft.formControls.form.disabled = !draft.formControls.form.disabled
@@ -337,11 +337,11 @@ export default class WarpContent extends Component {
     try {
       if (this._isTransferDisabled()) return
       this.props.startLoading()
-      this._toggleSubmitBtnDisable()
+      this._toggleDisableSubmissionBtn()
       await this._onSubmit({ name })
       await this._transfer()
       this.props.stopLoading()
-      this._toggleSubmitBtnDisable()
+      this._toggleDisableSubmissionBtn()
     } catch (err) {
       this.setState({
         error: err.toString(),
