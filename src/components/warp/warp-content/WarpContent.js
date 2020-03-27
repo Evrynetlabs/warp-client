@@ -19,6 +19,7 @@ import min from 'lodash/min'
 import isNaN from 'lodash/isNaN'
 import { Select } from 'Components/shared'
 import { ResultComponent } from 'Components/result'
+import produce from 'immer'
 import Modal from 'react-modal'
 const {
   evrynet: { ATOMIC_STELLAR_DECIMAL_UNIT },
@@ -76,6 +77,7 @@ export default class WarpContent extends Component {
           ],
         },
         form: {
+          disabled: false,
           effects: [
             { name: 'amount', funcs: [this._validateAvailableAmounts] },
             { name: 'destinationAccount', funcs: [this._validateTrustlines] },
@@ -124,7 +126,6 @@ export default class WarpContent extends Component {
   }
 
   async _transfer() {
-    if (this._disabledTransfer()) return
     const asset = this._getWhitelistedAssetByCode(
       this.state.formControls.asset.value,
     )
@@ -134,9 +135,7 @@ export default class WarpContent extends Component {
       src: this.state.formControls.sourceAccount.value,
       dest: this.state.formControls.destinationAccount.value,
     }
-    this.props.startLoading()
     await this.state.transferFunc(payload)
-    this.props.stopLoading()
     if (this.props.txHashes.state) {
       const result = {
         ...payload,
@@ -275,6 +274,14 @@ export default class WarpContent extends Component {
     return e
   }
 
+  _toggleSubmitBtnDisable() {
+    this.setState(
+      produce((draft) => {
+        draft.formControls.form.disabled = !draft.formControls.form.disabled
+      }),
+    )
+  }
+
   /*
     handler functions
    */
@@ -328,8 +335,13 @@ export default class WarpContent extends Component {
 
   async _submitHandler({ name }) {
     try {
+      if (this._isTransferDisabled()) return
+      this.props.startLoading()
+      this._toggleSubmitBtnDisable()
       await this._onSubmit({ name })
       await this._transfer()
+      this.props.stopLoading()
+      this._toggleSubmitBtnDisable()
     } catch (err) {
       this.setState({
         error: err.toString(),
@@ -362,15 +374,16 @@ export default class WarpContent extends Component {
     })
   }
 
-  _disabledTransfer() {
-    let result = reduce(
-      this.state.formControls,
-      (res, ech) => {
-        if (has(ech, 'valid')) return res || !ech.valid
-        return res
-      },
-      false,
-    )
+  _isTransferDisabled() {
+    let result =
+      reduce(
+        this.state.formControls,
+        (res, ech) => {
+          if (has(ech, 'valid')) return res || !ech.valid
+          return res
+        },
+        false,
+      ) || this.state.formControls.form.disabled
     return result
   }
 
@@ -685,7 +698,7 @@ export default class WarpContent extends Component {
                 <Col xs={4} className={classNames('pl-5', 'pr-0', 'col-4')}>
                   <Button
                     type="submit"
-                    disabled={this._disabledTransfer()}
+                    disabled={this._isTransferDisabled()}
                     className={classNames(
                       'w-100',
                       'input-form',

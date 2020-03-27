@@ -528,7 +528,6 @@ describe('WarpContent', () => {
           })
           await component.update()
           await component.instance()._onSubmit(mockEvent.target)
-
           expect(component.state().formControls.amount.valid).toBe(true)
           expect(component.state().formControls.amount.errorMessage).toBe(null)
         })
@@ -761,6 +760,17 @@ describe('WarpContent', () => {
           expect(component).toMatchSnapshot()
         })
       })
+    })
+  })
+
+  describe('When toggle disabled form', () => {
+    it('should set a deterministic state', () => {
+      component.instance()._toggleSubmitBtnDisable()
+      component.update()
+      expect(component.state().formControls.form.disabled).toBe(true)
+      component.instance()._toggleSubmitBtnDisable()
+      component.update()
+      expect(component.state().formControls.form.disabled).toBe(false)
     })
   })
 })
