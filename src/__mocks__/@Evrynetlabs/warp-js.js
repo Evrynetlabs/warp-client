@@ -6,6 +6,7 @@ export const spyGetAccountBalance = jest.fn()
 export const spyGetPublickeyFromPrivateKey = jest.fn()
 export const spyGetTrustlines = jest.fn()
 export const spyIsListening = jest.fn()
+
 const mock = jest.fn().mockImplementation(() => {
   return {
     toEvrynet: spyToEvrynet,
@@ -29,9 +30,23 @@ const mock = jest.fn().mockImplementation(() => {
       getEvryAsset: jest.fn().mockReturnValue({
         getCode: spyGetCode,
       }),
+      WhitelistedAsset: {
+        NATIVE_ASSET: 1,
+      },
     },
   }
 })
-export const WarpConfig = jest.fn()
+export const WarpConfig = jest.fn().mockImplementation(() => {
+  return {
+    evrynet: {
+      gasLimit: 2000000,
+      atomicEvryDecimalUnit: 18,
+      atomicStellarDecimalUnit: 7,
+    },
+  }
+})
+
+export const warpConfigInstance = WarpConfig()
+
 export const initWarpConfig = jest.fn()
 export default mock

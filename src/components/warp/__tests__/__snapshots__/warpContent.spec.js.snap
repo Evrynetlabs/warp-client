@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`WarpContent When clicking a transfer button When isToEvrynet is false When asset is in the destination account trustlines should show a valid feedback 1`] = `
+exports[`WarpContent When clicking a transfer button calling _onsubmit function 1`] = `
 <Fragment>
   <Form
     className="WarpContent__form"
@@ -36,7 +36,7 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is false W
               </FormLabel>
               <MaskPasswordInput
                 className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
-                isInvalid={true}
+                isInvalid={false}
                 maskiconprops={Object {}}
                 name="sourceAccount"
                 onBlur={[Function]}
@@ -46,14 +46,12 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is false W
                 value=""
               />
               <Feedback
-                className="position-absolute d-block"
+                className="position-absolute"
                 type="invalid"
               >
                 <div
                   className="WarpContent__form__content__errorFeedback__form"
-                >
-                  Evrynet secret key is required.
-                </div>
+                />
               </Feedback>
             </FormGroup>
           </Col>
@@ -173,462 +171,6 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is false W
                       onChange={[Function]}
                       placeholder="0.00"
                       type="text"
-                      value=""
-                    />
-                    <Feedback
-                      className="position-absolute"
-                      type="invalid"
-                    >
-                      <div
-                        className="WarpContent__form__content__errorFeedback__form WarpContent__form__content__errorFeedback__amount"
-                      >
-                        Insufficient Amount
-                      </div>
-                    </Feedback>
-                  </Col>
-                </ForwardRef>
-              </Container>
-            </FormGroup>
-          </Col>
-          <Col
-            className="pl-5 pr-0 col-4"
-            xs={4}
-          >
-            <Button
-              active={false}
-              className="w-100 input-form WarpContent__form__content__btn"
-              disabled={true}
-              type="submit"
-              variant="primary"
-            >
-              TRANSFER
-            </Button>
-          </Col>
-        </ForwardRef>
-      </Container>
-    </CardBody>
-  </Form>
-  <Modal
-    ariaHideApp={true}
-    bodyOpenClassName="ReactModal__Body--open"
-    className="WarpContent__resultModal__item"
-    closeTimeoutMS={0}
-    isOpen={false}
-    overlayClassName="WarpContent__resultModal__overlay"
-    parentSelector={[Function]}
-    portalClassName="ReactModalPortal"
-    role="dialog"
-    shouldCloseOnEsc={true}
-    shouldCloseOnOverlayClick={true}
-    shouldFocusAfterRender={true}
-    shouldReturnFocusAfterClose={true}
-  />
-</Fragment>
-`;
-
-exports[`WarpContent When clicking a transfer button When isToEvrynet is false When asset is not in the destination account trustlines should show an invalid feedback 1`] = `
-<Fragment>
-  <Form
-    className="WarpContent__form"
-    inline={false}
-    name="form"
-    onSubmit={[Function]}
-  >
-    <CardBody
-      className="WarpContent__form__content"
-    >
-      <Container
-        className="px-0"
-        fluid={true}
-      >
-        <ForwardRef
-          className="mx-auto my-0"
-          noGutters={false}
-        >
-          <Col
-            className="flex-grow-1 px-0 WarpContent__form__content__col"
-          >
-            <FormGroup
-              controlId="sourceAccountNumber"
-            >
-              <FormLabel
-                className="text-format-label-light WarpContent__form__content__label"
-                column={false}
-                srOnly={false}
-              >
-                <span>
-                  From
-                </span>
-              </FormLabel>
-              <MaskPasswordInput
-                className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
-                isInvalid={true}
-                maskiconprops={Object {}}
-                name="sourceAccount"
-                onBlur={[Function]}
-                onChange={[Function]}
-                placeholder="Account Number"
-                type="text"
-                value=""
-              />
-              <Feedback
-                className="position-absolute d-block"
-                type="invalid"
-              >
-                <div
-                  className="WarpContent__form__content__errorFeedback__form"
-                >
-                  Evrynet secret key is required.
-                </div>
-              </Feedback>
-            </FormGroup>
-          </Col>
-          <Col
-            className="WarpContent__form__content__col px-0"
-          >
-            <span>
-              <i
-                className="fas fa-arrow-right"
-              />
-            </span>
-          </Col>
-          <Col
-            className="WarpContent__form__content__col flex-grow-1 px-0"
-          >
-            <FormGroup
-              controlId="destinationAccountNumber"
-            >
-              <FormLabel
-                className="text-format-label-light WarpContent__form__content__label"
-                column={false}
-                srOnly={false}
-              >
-                <span>
-                  To
-                </span>
-              </FormLabel>
-              <MaskPasswordInput
-                className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
-                isInvalid={true}
-                maskiconprops={Object {}}
-                name="destinationAccount"
-                onBlur={[Function]}
-                onChange={[Function]}
-                placeholder="Account Number"
-                type="text"
-                value=""
-              />
-              <Feedback
-                className="position-absolute d-block"
-                type="invalid"
-              >
-                <div
-                  className="WarpContent__form__content__errorFeedback__form"
-                >
-                  The recipient Stellar account has no foo trustline.
-                </div>
-              </Feedback>
-            </FormGroup>
-          </Col>
-        </ForwardRef>
-        <ForwardRef
-          className="mx-auto my-0"
-          noGutters={false}
-        >
-          <Col
-            className="text-center py-5"
-          >
-            <span
-              className="text-format-title-light font-weight-bold"
-            >
-              Amount
-            </span>
-          </Col>
-        </ForwardRef>
-        <ForwardRef
-          className="justify-content-start mx-auto my-0"
-          noGutters={false}
-        >
-          <Col
-            className="px-0"
-            xs={8}
-          >
-            <FormGroup
-              controlId="assetAmount"
-            >
-              <FormLabel
-                className="text-format-label-light WarpContent__form__content__label"
-                column={false}
-                srOnly={false}
-              >
-                <span>
-                  Credit
-                </span>
-              </FormLabel>
-              <Container
-                className="px-0"
-                fluid={true}
-              >
-                <ForwardRef
-                  className="mx-auto my-0"
-                  noGutters={false}
-                >
-                  <Col
-                    className="px-0 flex-grow-0"
-                  >
-                    <Select
-                      onChange={[Function]}
-                      options={
-                        Array [
-                          Object {
-                            "label": "foo",
-                            "name": "asset",
-                            "value": "foo",
-                          },
-                        ]
-                      }
-                      selectedItem="EVRY"
-                    />
-                  </Col>
-                  <Col
-                    className="px-0"
-                  >
-                    <FormControl
-                      className="WarpContent__form__content__input WarpContent__form__content__input__amount input-form"
-                      isInvalid={true}
-                      name="amount"
-                      onBlur={[Function]}
-                      onChange={[Function]}
-                      placeholder="0.00"
-                      type="text"
-                      value=""
-                    />
-                    <Feedback
-                      className="position-absolute"
-                      type="invalid"
-                    >
-                      <div
-                        className="WarpContent__form__content__errorFeedback__form WarpContent__form__content__errorFeedback__amount"
-                      >
-                        Insufficient Amount
-                      </div>
-                    </Feedback>
-                  </Col>
-                </ForwardRef>
-              </Container>
-            </FormGroup>
-          </Col>
-          <Col
-            className="pl-5 pr-0 col-4"
-            xs={4}
-          >
-            <Button
-              active={false}
-              className="w-100 input-form WarpContent__form__content__btn"
-              disabled={true}
-              type="submit"
-              variant="primary"
-            >
-              TRANSFER
-            </Button>
-          </Col>
-        </ForwardRef>
-      </Container>
-    </CardBody>
-  </Form>
-  <Modal
-    ariaHideApp={true}
-    bodyOpenClassName="ReactModal__Body--open"
-    className="WarpContent__resultModal__item"
-    closeTimeoutMS={0}
-    isOpen={false}
-    overlayClassName="WarpContent__resultModal__overlay"
-    parentSelector={[Function]}
-    portalClassName="ReactModalPortal"
-    role="dialog"
-    shouldCloseOnEsc={true}
-    shouldCloseOnOverlayClick={true}
-    shouldFocusAfterRender={true}
-    shouldReturnFocusAfterClose={true}
-  />
-</Fragment>
-`;
-
-exports[`WarpContent When clicking a transfer button When isToEvrynet is false When source account balance is invalid should match an invalid feedback snapshot 1`] = `
-<Fragment>
-  <Form
-    className="WarpContent__form"
-    inline={false}
-    name="form"
-    onSubmit={[Function]}
-  >
-    <CardBody
-      className="WarpContent__form__content"
-    >
-      <Container
-        className="px-0"
-        fluid={true}
-      >
-        <ForwardRef
-          className="mx-auto my-0"
-          noGutters={false}
-        >
-          <Col
-            className="flex-grow-1 px-0 WarpContent__form__content__col"
-          >
-            <FormGroup
-              controlId="sourceAccountNumber"
-            >
-              <FormLabel
-                className="text-format-label-light WarpContent__form__content__label"
-                column={false}
-                srOnly={false}
-              >
-                <span>
-                  From
-                </span>
-              </FormLabel>
-              <MaskPasswordInput
-                className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
-                isInvalid={true}
-                maskiconprops={Object {}}
-                name="sourceAccount"
-                onBlur={[Function]}
-                onChange={[Function]}
-                placeholder="Account Number"
-                type="text"
-                value=""
-              />
-              <Feedback
-                className="position-absolute d-block"
-                type="invalid"
-              >
-                <div
-                  className="WarpContent__form__content__errorFeedback__form"
-                >
-                  Evrynet secret key is required.
-                </div>
-              </Feedback>
-            </FormGroup>
-          </Col>
-          <Col
-            className="WarpContent__form__content__col px-0"
-          >
-            <span>
-              <i
-                className="fas fa-arrow-right"
-              />
-            </span>
-          </Col>
-          <Col
-            className="WarpContent__form__content__col flex-grow-1 px-0"
-          >
-            <FormGroup
-              controlId="destinationAccountNumber"
-            >
-              <FormLabel
-                className="text-format-label-light WarpContent__form__content__label"
-                column={false}
-                srOnly={false}
-              >
-                <span>
-                  To
-                </span>
-              </FormLabel>
-              <MaskPasswordInput
-                className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
-                isInvalid={true}
-                maskiconprops={Object {}}
-                name="destinationAccount"
-                onBlur={[Function]}
-                onChange={[Function]}
-                placeholder="Account Number"
-                type="text"
-                value=""
-              />
-              <Feedback
-                className="position-absolute d-block"
-                type="invalid"
-              >
-                <div
-                  className="WarpContent__form__content__errorFeedback__form"
-                >
-                  The recipient Stellar account has no undefined trustline.
-                </div>
-              </Feedback>
-            </FormGroup>
-          </Col>
-        </ForwardRef>
-        <ForwardRef
-          className="mx-auto my-0"
-          noGutters={false}
-        >
-          <Col
-            className="text-center py-5"
-          >
-            <span
-              className="text-format-title-light font-weight-bold"
-            >
-              Amount
-            </span>
-          </Col>
-        </ForwardRef>
-        <ForwardRef
-          className="justify-content-start mx-auto my-0"
-          noGutters={false}
-        >
-          <Col
-            className="px-0"
-            xs={8}
-          >
-            <FormGroup
-              controlId="assetAmount"
-            >
-              <FormLabel
-                className="text-format-label-light WarpContent__form__content__label"
-                column={false}
-                srOnly={false}
-              >
-                <span>
-                  Credit
-                </span>
-              </FormLabel>
-              <Container
-                className="px-0"
-                fluid={true}
-              >
-                <ForwardRef
-                  className="mx-auto my-0"
-                  noGutters={false}
-                >
-                  <Col
-                    className="px-0 flex-grow-0"
-                  >
-                    <Select
-                      onChange={[Function]}
-                      options={
-                        Array [
-                          Object {
-                            "label": "EVRY",
-                            "name": "asset",
-                            "value": "EVRY",
-                          },
-                        ]
-                      }
-                      selectedItem="EVRY"
-                    />
-                  </Col>
-                  <Col
-                    className="px-0"
-                  >
-                    <FormControl
-                      className="WarpContent__form__content__input WarpContent__form__content__input__amount input-form"
-                      isInvalid={true}
-                      name="amount"
-                      onBlur={[Function]}
-                      onChange={[Function]}
-                      placeholder="0.00"
-                      type="text"
                       value="1"
                     />
                     <Feedback
@@ -682,7 +224,7 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is false W
 </Fragment>
 `;
 
-exports[`WarpContent When clicking a transfer button When isToEvrynet is false When source account balance is valid should match a valid feedback snapshot 1`] = `
+exports[`WarpContent When clicking a transfer button calling _onsubmit function 2`] = `
 <Fragment>
   <Form
     className="WarpContent__form"
@@ -718,7 +260,7 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is false W
               </FormLabel>
               <MaskPasswordInput
                 className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
-                isInvalid={true}
+                isInvalid={false}
                 maskiconprops={Object {}}
                 name="sourceAccount"
                 onBlur={[Function]}
@@ -728,14 +270,12 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is false W
                 value=""
               />
               <Feedback
-                className="position-absolute d-block"
+                className="position-absolute"
                 type="invalid"
               >
                 <div
                   className="WarpContent__form__content__errorFeedback__form"
-                >
-                  Evrynet secret key is required.
-                </div>
+                />
               </Feedback>
             </FormGroup>
           </Col>
@@ -765,7 +305,7 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is false W
               </FormLabel>
               <MaskPasswordInput
                 className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
-                isInvalid={true}
+                isInvalid={false}
                 maskiconprops={Object {}}
                 name="destinationAccount"
                 onBlur={[Function]}
@@ -775,14 +315,12 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is false W
                 value=""
               />
               <Feedback
-                className="position-absolute d-block"
+                className="position-absolute"
                 type="invalid"
               >
                 <div
                   className="WarpContent__form__content__errorFeedback__form"
-                >
-                  The recipient Stellar account has no undefined trustline.
-                </div>
+                />
               </Feedback>
             </FormGroup>
           </Col>
@@ -837,9 +375,9 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is false W
                       options={
                         Array [
                           Object {
-                            "label": "EVRY",
+                            "label": "foo1",
                             "name": "asset",
-                            "value": "EVRY",
+                            "value": "foo1",
                           },
                         ]
                       }
@@ -908,7 +446,677 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is false W
 </Fragment>
 `;
 
-exports[`WarpContent When clicking a transfer button When isToEvrynet is true When source account balance is invalid should match an invalid feedback snapshot 1`] = `
+exports[`WarpContent When clicking a transfer button calling _onsubmit function 3`] = `
+<Fragment>
+  <Form
+    className="WarpContent__form"
+    inline={false}
+    name="form"
+    onSubmit={[Function]}
+  >
+    <CardBody
+      className="WarpContent__form__content"
+    >
+      <Container
+        className="px-0"
+        fluid={true}
+      >
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="flex-grow-1 px-0 WarpContent__form__content__col"
+          >
+            <FormGroup
+              controlId="sourceAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  From
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="sourceAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col px-0"
+          >
+            <span>
+              <i
+                className="fas fa-arrow-right"
+              />
+            </span>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col flex-grow-1 px-0"
+          >
+            <FormGroup
+              controlId="destinationAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  To
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="destinationAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="text-center py-5"
+          >
+            <span
+              className="text-format-title-light font-weight-bold"
+            >
+              Amount
+            </span>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="justify-content-start mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="px-0"
+            xs={8}
+          >
+            <FormGroup
+              controlId="assetAmount"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  Credit
+                </span>
+              </FormLabel>
+              <Container
+                className="px-0"
+                fluid={true}
+              >
+                <ForwardRef
+                  className="mx-auto my-0"
+                  noGutters={false}
+                >
+                  <Col
+                    className="px-0 flex-grow-0"
+                  >
+                    <Select
+                      onChange={[Function]}
+                      options={
+                        Array [
+                          Object {
+                            "label": "foo1",
+                            "name": "asset",
+                            "value": "foo1",
+                          },
+                        ]
+                      }
+                      selectedItem="EVRY"
+                    />
+                  </Col>
+                  <Col
+                    className="px-0"
+                  >
+                    <FormControl
+                      className="WarpContent__form__content__input WarpContent__form__content__input__amount input-form"
+                      isInvalid={false}
+                      name="amount"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      placeholder="0.00"
+                      type="text"
+                      value="1"
+                    />
+                    <Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div
+                        className="WarpContent__form__content__errorFeedback__form WarpContent__form__content__errorFeedback__amount"
+                      />
+                    </Feedback>
+                  </Col>
+                </ForwardRef>
+              </Container>
+            </FormGroup>
+          </Col>
+          <Col
+            className="pl-5 pr-0 col-4"
+            xs={4}
+          >
+            <Button
+              active={false}
+              className="w-100 input-form WarpContent__form__content__btn"
+              disabled={true}
+              type="submit"
+              variant="primary"
+            >
+              TRANSFER
+            </Button>
+          </Col>
+        </ForwardRef>
+      </Container>
+    </CardBody>
+  </Form>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="WarpContent__resultModal__item"
+    closeTimeoutMS={0}
+    isOpen={false}
+    overlayClassName="WarpContent__resultModal__overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  />
+</Fragment>
+`;
+
+exports[`WarpContent When clicking a transfer button calling _onsubmit function 4`] = `
+<Fragment>
+  <Form
+    className="WarpContent__form"
+    inline={false}
+    name="form"
+    onSubmit={[Function]}
+  >
+    <CardBody
+      className="WarpContent__form__content"
+    >
+      <Container
+        className="px-0"
+        fluid={true}
+      >
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="flex-grow-1 px-0 WarpContent__form__content__col"
+          >
+            <FormGroup
+              controlId="sourceAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  From
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="sourceAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col px-0"
+          >
+            <span>
+              <i
+                className="fas fa-arrow-right"
+              />
+            </span>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col flex-grow-1 px-0"
+          >
+            <FormGroup
+              controlId="destinationAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  To
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
+                isInvalid={true}
+                maskiconprops={Object {}}
+                name="destinationAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute d-block"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                >
+                  The recipient Stellar account has no foo1 trustline.
+                </div>
+              </Feedback>
+            </FormGroup>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="text-center py-5"
+          >
+            <span
+              className="text-format-title-light font-weight-bold"
+            >
+              Amount
+            </span>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="justify-content-start mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="px-0"
+            xs={8}
+          >
+            <FormGroup
+              controlId="assetAmount"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  Credit
+                </span>
+              </FormLabel>
+              <Container
+                className="px-0"
+                fluid={true}
+              >
+                <ForwardRef
+                  className="mx-auto my-0"
+                  noGutters={false}
+                >
+                  <Col
+                    className="px-0 flex-grow-0"
+                  >
+                    <Select
+                      onChange={[Function]}
+                      options={
+                        Array [
+                          Object {
+                            "label": "foo1",
+                            "name": "asset",
+                            "value": "foo1",
+                          },
+                        ]
+                      }
+                      selectedItem="EVRY"
+                    />
+                  </Col>
+                  <Col
+                    className="px-0"
+                  >
+                    <FormControl
+                      className="WarpContent__form__content__input WarpContent__form__content__input__amount input-form"
+                      isInvalid={false}
+                      name="amount"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      placeholder="0.00"
+                      type="text"
+                      value="1"
+                    />
+                    <Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div
+                        className="WarpContent__form__content__errorFeedback__form WarpContent__form__content__errorFeedback__amount"
+                      />
+                    </Feedback>
+                  </Col>
+                </ForwardRef>
+              </Container>
+            </FormGroup>
+          </Col>
+          <Col
+            className="pl-5 pr-0 col-4"
+            xs={4}
+          >
+            <Button
+              active={false}
+              className="w-100 input-form WarpContent__form__content__btn"
+              disabled={true}
+              type="submit"
+              variant="primary"
+            >
+              TRANSFER
+            </Button>
+          </Col>
+        </ForwardRef>
+      </Container>
+    </CardBody>
+  </Form>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="WarpContent__resultModal__item"
+    closeTimeoutMS={0}
+    isOpen={false}
+    overlayClassName="WarpContent__resultModal__overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  />
+</Fragment>
+`;
+
+exports[`WarpContent When clicking a transfer button calling _onsubmit function 5`] = `
+<Fragment>
+  <Form
+    className="WarpContent__form"
+    inline={false}
+    name="form"
+    onSubmit={[Function]}
+  >
+    <CardBody
+      className="WarpContent__form__content"
+    >
+      <Container
+        className="px-0"
+        fluid={true}
+      >
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="flex-grow-1 px-0 WarpContent__form__content__col"
+          >
+            <FormGroup
+              controlId="sourceAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  From
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="sourceAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col px-0"
+          >
+            <span>
+              <i
+                className="fas fa-arrow-right"
+              />
+            </span>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col flex-grow-1 px-0"
+          >
+            <FormGroup
+              controlId="destinationAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  To
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
+                isInvalid={true}
+                maskiconprops={Object {}}
+                name="destinationAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute d-block"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                >
+                  The recipient Stellar account has no foo1 trustline.
+                </div>
+              </Feedback>
+            </FormGroup>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="text-center py-5"
+          >
+            <span
+              className="text-format-title-light font-weight-bold"
+            >
+              Amount
+            </span>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="justify-content-start mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="px-0"
+            xs={8}
+          >
+            <FormGroup
+              controlId="assetAmount"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  Credit
+                </span>
+              </FormLabel>
+              <Container
+                className="px-0"
+                fluid={true}
+              >
+                <ForwardRef
+                  className="mx-auto my-0"
+                  noGutters={false}
+                >
+                  <Col
+                    className="px-0 flex-grow-0"
+                  >
+                    <Select
+                      onChange={[Function]}
+                      options={
+                        Array [
+                          Object {
+                            "label": "foo1",
+                            "name": "asset",
+                            "value": "foo1",
+                          },
+                        ]
+                      }
+                      selectedItem="EVRY"
+                    />
+                  </Col>
+                  <Col
+                    className="px-0"
+                  >
+                    <FormControl
+                      className="WarpContent__form__content__input WarpContent__form__content__input__amount input-form"
+                      isInvalid={false}
+                      name="amount"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      placeholder="0.00"
+                      type="text"
+                      value="1"
+                    />
+                    <Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div
+                        className="WarpContent__form__content__errorFeedback__form WarpContent__form__content__errorFeedback__amount"
+                      />
+                    </Feedback>
+                  </Col>
+                </ForwardRef>
+              </Container>
+            </FormGroup>
+          </Col>
+          <Col
+            className="pl-5 pr-0 col-4"
+            xs={4}
+          >
+            <Button
+              active={false}
+              className="w-100 input-form WarpContent__form__content__btn"
+              disabled={true}
+              type="submit"
+              variant="primary"
+            >
+              TRANSFER
+            </Button>
+          </Col>
+        </ForwardRef>
+      </Container>
+    </CardBody>
+  </Form>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="WarpContent__resultModal__item"
+    closeTimeoutMS={0}
+    isOpen={false}
+    overlayClassName="WarpContent__resultModal__overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  />
+</Fragment>
+`;
+
+exports[`WarpContent When clicking a transfer button calling _onsubmit function 6`] = `
 <Fragment>
   <Form
     className="WarpContent__form"
@@ -1059,9 +1267,9 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is true Wh
                       options={
                         Array [
                           Object {
-                            "label": "EVRY",
+                            "label": "foo1",
                             "name": "asset",
-                            "value": "EVRY",
+                            "value": "foo1",
                           },
                         ]
                       }
@@ -1132,7 +1340,7 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is true Wh
 </Fragment>
 `;
 
-exports[`WarpContent When clicking a transfer button When isToEvrynet is true When source account balance is valid should match a valid feedback snapshot 1`] = `
+exports[`WarpContent When clicking a transfer button calling _onsubmit function 7`] = `
 <Fragment>
   <Form
     className="WarpContent__form"
@@ -1283,9 +1491,455 @@ exports[`WarpContent When clicking a transfer button When isToEvrynet is true Wh
                       options={
                         Array [
                           Object {
-                            "label": "EVRY",
+                            "label": "foo1",
                             "name": "asset",
-                            "value": "EVRY",
+                            "value": "foo1",
+                          },
+                        ]
+                      }
+                      selectedItem="EVRY"
+                    />
+                  </Col>
+                  <Col
+                    className="px-0"
+                  >
+                    <FormControl
+                      className="WarpContent__form__content__input WarpContent__form__content__input__amount input-form"
+                      isInvalid={true}
+                      name="amount"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      placeholder="0.00"
+                      type="text"
+                      value="1"
+                    />
+                    <Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div
+                        className="WarpContent__form__content__errorFeedback__form WarpContent__form__content__errorFeedback__amount"
+                      >
+                        Insufficient Amount
+                      </div>
+                    </Feedback>
+                  </Col>
+                </ForwardRef>
+              </Container>
+            </FormGroup>
+          </Col>
+          <Col
+            className="pl-5 pr-0 col-4"
+            xs={4}
+          >
+            <Button
+              active={false}
+              className="w-100 input-form WarpContent__form__content__btn"
+              disabled={true}
+              type="submit"
+              variant="primary"
+            >
+              TRANSFER
+            </Button>
+          </Col>
+        </ForwardRef>
+      </Container>
+    </CardBody>
+  </Form>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="WarpContent__resultModal__item"
+    closeTimeoutMS={0}
+    isOpen={false}
+    overlayClassName="WarpContent__resultModal__overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  />
+</Fragment>
+`;
+
+exports[`WarpContent When clicking a transfer button calling _onsubmit function 8`] = `
+<Fragment>
+  <Form
+    className="WarpContent__form"
+    inline={false}
+    name="form"
+    onSubmit={[Function]}
+  >
+    <CardBody
+      className="WarpContent__form__content"
+    >
+      <Container
+        className="px-0"
+        fluid={true}
+      >
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="flex-grow-1 px-0 WarpContent__form__content__col"
+          >
+            <FormGroup
+              controlId="sourceAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  From
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="sourceAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col px-0"
+          >
+            <span>
+              <i
+                className="fas fa-arrow-right"
+              />
+            </span>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col flex-grow-1 px-0"
+          >
+            <FormGroup
+              controlId="destinationAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  To
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
+                isInvalid={true}
+                maskiconprops={Object {}}
+                name="destinationAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute d-block"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="text-center py-5"
+          >
+            <span
+              className="text-format-title-light font-weight-bold"
+            >
+              Amount
+            </span>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="justify-content-start mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="px-0"
+            xs={8}
+          >
+            <FormGroup
+              controlId="assetAmount"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  Credit
+                </span>
+              </FormLabel>
+              <Container
+                className="px-0"
+                fluid={true}
+              >
+                <ForwardRef
+                  className="mx-auto my-0"
+                  noGutters={false}
+                >
+                  <Col
+                    className="px-0 flex-grow-0"
+                  >
+                    <Select
+                      onChange={[Function]}
+                      options={
+                        Array [
+                          Object {
+                            "label": "foo1",
+                            "name": "asset",
+                            "value": "foo1",
+                          },
+                        ]
+                      }
+                      selectedItem="EVRY"
+                    />
+                  </Col>
+                  <Col
+                    className="px-0"
+                  >
+                    <FormControl
+                      className="WarpContent__form__content__input WarpContent__form__content__input__amount input-form"
+                      isInvalid={false}
+                      name="amount"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      placeholder="0.00"
+                      type="text"
+                      value="1"
+                    />
+                    <Feedback
+                      className="position-absolute"
+                      type="invalid"
+                    >
+                      <div
+                        className="WarpContent__form__content__errorFeedback__form WarpContent__form__content__errorFeedback__amount"
+                      />
+                    </Feedback>
+                  </Col>
+                </ForwardRef>
+              </Container>
+            </FormGroup>
+          </Col>
+          <Col
+            className="pl-5 pr-0 col-4"
+            xs={4}
+          >
+            <Button
+              active={false}
+              className="w-100 input-form WarpContent__form__content__btn"
+              disabled={true}
+              type="submit"
+              variant="primary"
+            >
+              TRANSFER
+            </Button>
+          </Col>
+        </ForwardRef>
+      </Container>
+    </CardBody>
+  </Form>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="WarpContent__resultModal__item"
+    closeTimeoutMS={0}
+    isOpen={false}
+    overlayClassName="WarpContent__resultModal__overlay"
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  />
+</Fragment>
+`;
+
+exports[`WarpContent When clicking a transfer button calling _onsubmit function 9`] = `
+<Fragment>
+  <Form
+    className="WarpContent__form"
+    inline={false}
+    name="form"
+    onSubmit={[Function]}
+  >
+    <CardBody
+      className="WarpContent__form__content"
+    >
+      <Container
+        className="px-0"
+        fluid={true}
+      >
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="flex-grow-1 px-0 WarpContent__form__content__col"
+          >
+            <FormGroup
+              controlId="sourceAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  From
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__src WarpContent__form__content__input input-form"
+                isInvalid={false}
+                maskiconprops={Object {}}
+                name="sourceAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col px-0"
+          >
+            <span>
+              <i
+                className="fas fa-arrow-right"
+              />
+            </span>
+          </Col>
+          <Col
+            className="WarpContent__form__content__col flex-grow-1 px-0"
+          >
+            <FormGroup
+              controlId="destinationAccountNumber"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  To
+                </span>
+              </FormLabel>
+              <MaskPasswordInput
+                className="WarpContent__form__content__input__dest WarpContent__form__content__input input-form"
+                isInvalid={true}
+                maskiconprops={Object {}}
+                name="destinationAccount"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Account Number"
+                type="text"
+                value=""
+              />
+              <Feedback
+                className="position-absolute d-block"
+                type="invalid"
+              >
+                <div
+                  className="WarpContent__form__content__errorFeedback__form"
+                />
+              </Feedback>
+            </FormGroup>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="text-center py-5"
+          >
+            <span
+              className="text-format-title-light font-weight-bold"
+            >
+              Amount
+            </span>
+          </Col>
+        </ForwardRef>
+        <ForwardRef
+          className="justify-content-start mx-auto my-0"
+          noGutters={false}
+        >
+          <Col
+            className="px-0"
+            xs={8}
+          >
+            <FormGroup
+              controlId="assetAmount"
+            >
+              <FormLabel
+                className="text-format-label-light WarpContent__form__content__label"
+                column={false}
+                srOnly={false}
+              >
+                <span>
+                  Credit
+                </span>
+              </FormLabel>
+              <Container
+                className="px-0"
+                fluid={true}
+              >
+                <ForwardRef
+                  className="mx-auto my-0"
+                  noGutters={false}
+                >
+                  <Col
+                    className="px-0 flex-grow-0"
+                  >
+                    <Select
+                      onChange={[Function]}
+                      options={
+                        Array [
+                          Object {
+                            "label": "foo1",
+                            "name": "asset",
+                            "value": "foo1",
                           },
                         ]
                       }
