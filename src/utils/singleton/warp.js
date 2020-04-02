@@ -22,6 +22,15 @@ export default function getWarpInstance() {
     if (process.env.WARP_HTTP_PROVIDER_HOST) {
       config.evrynet.provider = process.env.WARP_HTTP_PROVIDER_HOST
     }
+    if (process.env.WARP_STELLAR_ESCROW_ACCOUNT) {
+      config.stellar.escrowAccount = process.env.WARP_STELLAR_ESCROW_ACCOUNT
+    }
+    if (process.env.WARP_STELLAR_ISSUER) {
+      config.stellar.issuer = process.env.WARP_STELLAR_ISSUER
+    }
+    if (process.env.WARP_STELLAR_NETWORK) {
+      config.stellar.network = process.env.WARP_STELLAR_NETWORK
+    }
     initWarpConfig(config)
     warpInstance = new Warp()
   }
