@@ -29,7 +29,7 @@ compose-run:
 	-e WARP_HTTP_PROVIDER_HOST=$(http_provider_host) \
 	-e WARP_STELLAR_ESCROW_ACCOUNT=$(stellar_escrow_account) \
 	-e WARP_STELLAR_ISSUER=$(stellar_issuer) \
-	-e WARP_STELLAR_NETWORK=$(stellar_network) \
+	-e WARP_STELLAR_NETWORK="$(stellar_network)" \
 	$(app_name)
 
 .PHONY: compose-up
