@@ -19,6 +19,7 @@ import min from 'lodash/min'
 import isNaN from 'lodash/isNaN'
 import { Select } from 'Components/shared'
 import { ResultComponent } from 'Components/result'
+import produce from 'immer'
 import Modal from 'react-modal'
 const {
   evrynet: { ATOMIC_STELLAR_DECIMAL_UNIT },
@@ -76,6 +77,7 @@ export default class WarpContent extends Component {
           ],
         },
         form: {
+          disabled: false,
           effects: [
             { name: 'amount', funcs: [this._validateAvailableAmounts] },
             { name: 'destinationAccount', funcs: [this._validateTrustlines] },
@@ -94,6 +96,13 @@ export default class WarpContent extends Component {
   /*
     core state functions
    */
+  _disableButton(isDisable) {
+    this.setState(
+      produce((draft) => {
+        draft.formControls.form.disabled = isDisable
+      }),
+    )
+  }
 
   async _validate(e, formControls) {
     if (has(e, 'validations')) {
@@ -105,26 +114,23 @@ export default class WarpContent extends Component {
         }
       })
     }
-    return e
   }
 
   async _effect(sourceElement, formControls) {
-    let updatedFormControls = { ...formControls }
+    const promises = []
     if (has(sourceElement, 'effects')) {
       for (const effected of sourceElement.effects) {
-        let updatedElement = updatedFormControls[effected.name]
-        updatedElement.touched = true
+        formControls[effected.name].touched = true
         for (const effect of effected.funcs) {
-          await effect(updatedElement, formControls)
+          promises.push(effect(formControls[effected.name], formControls))
         }
-        updatedFormControls[effected.name] = updatedElement
       }
     }
-    return updatedFormControls
+    await Promise.all(promises)
   }
 
   async _transfer() {
-    if (this._disabledTransfer()) return
+    if (this._isTransferDisabled()) return
     const asset = this._getWhitelistedAssetByCode(
       this.state.formControls.asset.value,
     )
@@ -134,9 +140,7 @@ export default class WarpContent extends Component {
       src: this.state.formControls.sourceAccount.value,
       dest: this.state.formControls.destinationAccount.value,
     }
-    this.props.startLoading()
     await this.state.transferFunc(payload)
-    this.props.stopLoading()
     if (this.props.txHashes.state) {
       const result = {
         ...payload,
@@ -235,6 +239,10 @@ export default class WarpContent extends Component {
     const whitelistedAsset = this._getWhitelistedAssetByCode(
       formControls.asset.value,
     )
+    await this.props.getTrustlines({
+      privateKey: formControls.sourceAccount.value,
+    })
+    const trustlinesCount = this.props.trustlines.state.length
     await this.props.getAccountBalance({
       asset: whitelistedAsset,
       privateKey: formControls.sourceAccount.value,
@@ -242,11 +250,20 @@ export default class WarpContent extends Component {
     const decimal = this.props.isToEvrynet
       ? ATOMIC_STELLAR_DECIMAL_UNIT
       : whitelistedAsset.getDecimal()
-    e.valid = new BigNumber(
+    const stellarMinBalance = new BigNumber(
+      (2 + trustlinesCount) * 0.5,
+    ).shiftedBy(decimal)
+    const isGreaterThanOrEqual = new BigNumber(
       this.props.accountBalance.state,
     ).isGreaterThanOrEqualTo(
       new BigNumber(formControls.amount.value).shiftedBy(decimal),
     )
+    const hasMinimumBalance = this.props.isToEvrynet
+      ? new BigNumber(this.props.accountBalance.state)
+          .minus(new BigNumber(formControls.amount.value).shiftedBy(decimal))
+          .isGreaterThanOrEqualTo(stellarMinBalance)
+      : true
+    e.valid = isGreaterThanOrEqual && hasMinimumBalance
     e.errorMessage = e.valid ? null : 'Insufficient Amount'
     return e
   }
@@ -280,56 +297,38 @@ export default class WarpContent extends Component {
    */
 
   async _changeHandler({ name, value }) {
-    let updatedControls = {
-      ...this.state.formControls,
+    const updater = async (state) => {
+      return await produce(state, async (draft) => {
+        draft.formControls[name].touched = true
+        draft.formControls[name].value = value
+        await this._validate(draft.formControls[name], draft.formControls)
+        await this._effect(draft.formControls[name], draft.formControls)
+      })
     }
-
-    // update changing element
-    let updatedFormElement = {
-      ...updatedControls[name],
-    }
-    // update element state
-    // touch-update-validate
-    updatedFormElement.touched = true
-    updatedFormElement.value = value
-    updatedFormElement = await this._validate(
-      updatedFormElement,
-      updatedControls,
-    )
-    updatedControls[name] = updatedFormElement
-
-    // update the effected elements
-    updatedControls = await this._effect(updatedFormElement, updatedControls)
-
-    this.setState({
-      formControls: updatedControls,
-    })
+    const nextState = await updater(this.state)
+    this.setState(nextState)
   }
 
   async _blurHandler({ name }) {
-    const updatedControls = {
-      ...this.state.formControls,
+    const updater = async (state) => {
+      return await produce(state, async (draft) => {
+        draft.formControls[name].touched = true
+        await this._validate(draft.formControls[name], draft.formControls)
+        this._format(draft.formControls[name])
+      })
     }
-    let updatedFormElement = {
-      ...updatedControls[name],
-    }
-    // update element state
-    // touch-validate-format
-    updatedFormElement.touched = true
-    updatedFormElement = await this._validate(
-      updatedFormElement,
-      updatedControls,
-    )
-    updatedControls[name] = this._format(updatedFormElement)
-    this.setState({
-      formControls: updatedControls,
-    })
+    const nextState = await updater(this.state)
+    this.setState(nextState)
   }
 
   async _submitHandler({ name }) {
     try {
+      this.props.startLoading()
+      this._disableButton(true)
       await this._onSubmit({ name })
       await this._transfer()
+      this.props.stopLoading()
+      this._disableButton(false)
     } catch (err) {
       this.setState({
         error: err.toString(),
@@ -362,62 +361,28 @@ export default class WarpContent extends Component {
     })
   }
 
-  _disabledTransfer() {
-    let result = reduce(
-      this.state.formControls,
-      (res, ech) => {
-        if (has(ech, 'valid')) return res || !ech.valid
-        return res
-      },
-      false,
-    )
+  _isTransferDisabled() {
+    let result =
+      reduce(
+        this.state.formControls,
+        (res, ech) => {
+          if (has(ech, 'valid')) return res || !ech.valid
+          return res
+        },
+        false,
+      ) || this.state.formControls.form.disabled
     return result
   }
 
-  _updateTransferFunction() {
-    return this.props.isToEvrynet ? this.props.toEvrynet : this.props.toStellar
-  }
-
-  _switchAccounts(updatedFormControls) {
-    const temp = updatedFormControls.sourceAccount
-    updatedFormControls.sourceAccount = {
-      ...updatedFormControls.destinationAccount,
-    }
-    updatedFormControls.destinationAccount = { ...temp }
-    return updatedFormControls
-  }
-
-  async _updateAddressError(updatedFormControls) {
-    const elements = ['sourceAccount', 'destinationAccount', 'amount']
-    for (const e of elements) {
-      updatedFormControls[e].touched = true
-      // eslint-disable-next-line require-atomic-updates
-      updatedFormControls[e] = await this._validate(
-        updatedFormControls[e],
-        updatedFormControls,
-      )
-    }
-    return updatedFormControls
-  }
-
   async _onSubmit({ name }) {
-    let updatedControls = {
-      ...this.state.formControls,
+    const updater = async (state) => {
+      return await produce(state, async (draft) => {
+        draft.formControls[name].touched = true
+        await this._effect(draft.formControls[name], draft.formControls)
+      })
     }
-    let updatedFormElement = {
-      ...updatedControls[name],
-    }
-
-    // update element state
-    // touch-effect
-    updatedFormElement.touched = true
-    updatedControls[name] = updatedFormElement
-
-    // update the effected elements
-    updatedControls = await this._effect(updatedFormElement, updatedControls)
-    this.setState({
-      formControls: updatedControls,
-    })
+    const nextState = await updater(this.state)
+    this.setState(nextState)
   }
 
   _removeResult() {
@@ -429,13 +394,19 @@ export default class WarpContent extends Component {
 
   async _handleIsToEvrynet(prevProps) {
     if (prevProps.isToEvrynet === this.props.isToEvrynet) return
-    const updatedState = this.state
-    updatedState.transferFunc = this._updateTransferFunction()
-    updatedState.formControls = this._switchAccounts(updatedState.formControls)
-    updatedState.formControls = await this._updateAddressError(
-      updatedState.formControls,
-    )
-    this.setState(updatedState)
+    const elements = ['sourceAccount', 'destinationAccount', 'amount']
+    const validationPromises = []
+    const switchAccount = produce((draft, props) => {
+      draft.transferFunc = props.isToEvrynet ? props.toEvrynet : props.toStellar
+      const temp = draft.formControls.sourceAccount
+      draft.formControls.sourceAccount = draft.formControls.destinationAccount
+      draft.formControls.destinationAccount = temp
+      for (const e of elements) {
+        validationPromises.push(this._validate(draft[e], draft))
+      }
+      Promise.all(validationPromises)
+    })
+    this.setState(switchAccount)
   }
 
   _handleResult(prevState) {
@@ -685,7 +656,7 @@ export default class WarpContent extends Component {
                 <Col xs={4} className={classNames('pl-5', 'pr-0', 'col-4')}>
                   <Button
                     type="submit"
-                    disabled={this._disabledTransfer()}
+                    disabled={this._isTransferDisabled()}
                     className={classNames(
                       'w-100',
                       'input-form',
