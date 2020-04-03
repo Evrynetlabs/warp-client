@@ -16,47 +16,45 @@
 
 ![Flows](./public/warp-deep-big-picture.png)
 
-    Warp client is responsible providing in interface for end-users to interact our warp contract with Warp SDK as a core logic for scaffolding a raw transaction. Warp API is only responsible for validating a raw transaction sent by warp SDK and submit to each chains (either Stellar or Evrynet)
+#### Summary of flows
+
+Warp client is responsible providing an interface for end-users to interact our warp contract with Warp SDK as a core logic for scaffolding the raw transaction and Warp API for validating a raw transaction sent by warp SDK and submit to each chains (either Stellar or Evrynet).
 
 ## Prerequisites
 - Knowledge of Warp Contract [here](https://github.com/evrynetlabs/warp-contract)
-- Knowledge of EER2 (Evrynet) [here](https://github.com/evrynetlabs/credit-contract)
+- Knowledge of EER-2 (Evrynet Enhancement Request) [here](https://github.com/evrynetlabs/credit-contract)
     - User needs to `setApprovalForAll(address _operator, bool _approved)` and let a custodian contract as an operator
      - For custom credit contract, user needs to `SetMinter(uint256 indexed _typeID, address _minter);` and let let a custodian contract as a minter
 
 # QuickStart
 
-> This repository already provided you an easy steps for starting the project. You can start the project through `make` commands
+> This repository already provided you easy steps for starting the project. You can start the project through `make` commands
 
 ## Available Commands
 
 In the project directory, you can run:
 
-`make compose-dev`
+> `make compose-dev`
 
 For full docker-compose local run, or
 
-`make compose-build`
+> `make compose-build`
 
 For only building a docker compose images.
 
 And if you only want to run the application with existing build services as well, run:
 
-`make compose-run`
+> `make compose-run`
 
 For unit testing, run:
 
-`make test`
+> `make test`
 
 For Lint check, run:
 
-`make lint`
+> `make lint`
 
 On `make compose-run` and `make compose-build`, you can specify warp configuration environments through flags
-
-`make compose-up`
-
-You can use `make compose-up` instead of `make compose-dev`, but don't forget to specify environment as stated in 
 
 Available flags: 
 
@@ -70,6 +68,10 @@ Available flags:
 | `stellar_escrow_account` | `WARP_STELLAR_ESCROW_ACCOUNT` | stellar custodian account for collecting tokens | required | - |
 | `stellar_issuer` | `WARP_STELLAR_ISSUER` | issuer account for evry credit on stellar chain | required | - |
 | `stellar_network` | `WARP_STELLAR_NETWORK` | stellar network | optional | 'Test SDF Network ; September 2015' |
+
+> `make compose-up`
+
+You can use `make compose-up` instead of `make compose-dev`, but don't forget to specify environment as stated in available flags
 
 Example:
 
