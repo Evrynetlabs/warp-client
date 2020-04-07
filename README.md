@@ -41,12 +41,10 @@ git clone https://github.com/Evrynetlabs/warp-client.git
 ```
 
 ## Installing / Getting started
-----
 
 > This repository already provided you easy steps for starting the project. You can start the project through `make` commands
 
 ## Developing
-----
 
 ### Build With
 - create-react-app
@@ -99,7 +97,6 @@ Example:
     stellar_network='Test SDF Network ; September 2015'
 ```
 ## Configuration
-----
 
 ### Available flags: 
 
@@ -115,7 +112,6 @@ Example:
 | `stellar_network` | `WARP_STELLAR_NETWORK` | stellar network | optional | 'Test SDF Network ; September 2015' |
 
 ## Tests
-----
 
 For unit testing, run:
 
@@ -124,13 +120,11 @@ For unit testing, run:
 Jest as well as Enzyme has been used for testing libraries.
 
 ## Api Reference
-----
 
 Please see [this link](https://github.com/Evrynetlabs/warp)
 
 
 ## Licensing
-----
 
 Warp client is licensed under the OSL Open Software License v3.0, also included in our repository in the LICENSE file.
 
