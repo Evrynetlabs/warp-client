@@ -262,6 +262,7 @@ export default class WarpContent extends Component {
     const hasMinimumBalance =
       this.props.isToEvrynet && isLumens
         ? new BigNumber(this.props.accountBalance.state)
+            .minus(StellarBase.BASE_FEE)
             .minus(new BigNumber(formControls.amount.value).shiftedBy(decimal))
             .isGreaterThanOrEqualTo(stellarMinBalance)
         : true

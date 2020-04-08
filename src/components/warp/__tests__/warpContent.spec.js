@@ -544,7 +544,7 @@ describe('WarpContent', () => {
       [
         {
           isToEvrynet: true,
-          minimumBalance: 15000000,
+          minimumBalance: 15000100,
           accountBalanceState: new BigNumber('1').shiftedBy(
             warpConfigInstance.evrynet.atomicStellarDecimalUnit,
           ),
@@ -570,7 +570,7 @@ describe('WarpContent', () => {
       [
         {
           isToEvrynet: true,
-          minimumBalance: 10000000,
+          minimumBalance: 10000100,
           accountBalanceState: new BigNumber('1').shiftedBy(
             warpConfigInstance.evrynet.atomicStellarDecimalUnit,
           ),
@@ -608,7 +608,7 @@ describe('WarpContent', () => {
       [
         {
           isToEvrynet: true,
-          minimumBalance: 14000000,
+          minimumBalance: 15000099,
           accountBalanceState: new BigNumber('1').shiftedBy(
             warpConfigInstance.evrynet.atomicStellarDecimalUnit,
           ),
