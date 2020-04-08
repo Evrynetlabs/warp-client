@@ -49,5 +49,5 @@ lint:
 	yarn eslint:check
 
 .PHONY: format
-lint:
+format:
 	yarn format

@@ -14,7 +14,7 @@ Warp client is responsible providing an interface for end-users to interact our 
 
 #### Develop Roadmap
 - [x] Support warp process from stellar to evrynet
-- [X] Supprot warp process from evrynet to stellar  
+- [X] Support warp process from evrynet to stellar  
 - [x] Custodian Smart Contracts
 - [x] Credit Contracts 
 - [x] Whitelist Contracts
@@ -33,9 +33,9 @@ git clone https://github.com/Evrynetlabs/warp-client.git
 
 ## Installing / Getting started
 
-```console
-    This repository already provided you easy steps for starting the project. You can start the project through `make` comm
-```
+
+This repository already provided you easy steps for starting the project. You can start the project through `make` command
+
 
 ## Developing
 
@@ -140,5 +140,4 @@ Please see [this link](https://github.com/Evrynetlabs/warp)
 ## Licensing
 
 Warp client is licensed under the OSL Open Software License v3.0, also included in our repository in the LICENSE file.
-
 
