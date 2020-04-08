@@ -47,3 +47,7 @@ test:
 .PHONY: lint
 lint:
 	yarn eslint:check
+
+.PHONY: format
+lint:
+	yarn format

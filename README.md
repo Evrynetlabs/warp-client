@@ -4,18 +4,9 @@
 > This project has been bootstrapped with [Create React App](https://github.com/facebook/create-react-app), 
 > [Warp-js](https://github.com/Evrynetlabs/warp-js), and [Evrynet](https://evrynet.io).
 
-Warp Protocol is a rotocol that utilized the custodian concept to move credits between chains. The credit is basically exist on two chain at the same time but, only single chain at a time can do the credit transaction. Which means, on the the other chain, the credit will be locked.
+Warp Protocol is a protocol that utilized the custodian concept to move credits between chains. The credit is basically exist on two chain at the same time but, only single chain at a time can do the credit transaction. Which means, on the the other chain, the credit will be locked.
 
 The public testnet version of warp client is [here](https://warp-client.evrynet.io)
-
-### Overview
-
-![Overview](./public/warp-overview-big-picture.png)
-
-
-### Flows
-
-![Flows](./public/warp-deep-big-picture.png)
 
 #### Summary of flows
 
@@ -42,7 +33,9 @@ git clone https://github.com/Evrynetlabs/warp-client.git
 
 ## Installing / Getting started
 
-> This repository already provided you easy steps for starting the project. You can start the project through `make` commands
+```console
+    This repository already provided you easy steps for starting the project. You can start the project through `make` comm
+```
 
 ## Developing
 
@@ -61,25 +54,29 @@ git clone https://github.com/Evrynetlabs/warp-client.git
 
 In the project directory, you can run:
 
-> `make compose-dev`
+```console 
+make compose-dev
+```
 
 For full docker-compose local run, or
 
-> `make compose-build`
+```console 
+make compose-build
+```
 
 For only building a docker compose images.
 
 And if you only want to run the application with existing build services as well, run:
 
-> `make compose-run`
-
-For Lint check, run:
-
-> `make lint`
+```console 
+make compose-run
+```
 
 On `make compose-run` and `make compose-build`, you can specify warp configuration environments through flags
 
-> `make compose-up`
+```console 
+make compose-up
+```
 
 You can use `make compose-up` instead of `make compose-dev`, but don't forget to specify environment as stated in available flags
 
@@ -96,6 +93,10 @@ Example:
     stellar_issuer=GARBMXW7IQBII2TX7YQLXI24YUYR5QYRH2UF36HLHFUGCZSTG24QB6JN \
     stellar_network='Test SDF Network ; September 2015'
 ```
+## Versioning
+
+We use a [SemVer](https://semver.org/) for versioning. Please see the [release](https://github.com/Evrynetlabs/warp-client/releases).
+
 ## Configuration
 
 ### Available flags: 
@@ -115,14 +116,26 @@ Example:
 
 For unit testing, run:
 
-> `make test`
+```console 
+make test
+```
 
 Jest as well as Enzyme has been used for testing libraries.
+
+## Style guide
+Eslint has been used for linting as well as prettier
+- For Lint check, run:
+```console 
+make lint
+```
+- For prettier format, run:
+```console
+make format
+```
 
 ## Api Reference
 
 Please see [this link](https://github.com/Evrynetlabs/warp)
-
 
 ## Licensing
 
