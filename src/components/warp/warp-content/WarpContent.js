@@ -258,11 +258,13 @@ export default class WarpContent extends Component {
     ).isGreaterThanOrEqualTo(
       new BigNumber(formControls.amount.value).shiftedBy(decimal),
     )
-    const hasMinimumBalance = this.props.isToEvrynet
-      ? new BigNumber(this.props.accountBalance.state)
-          .minus(new BigNumber(formControls.amount.value).shiftedBy(decimal))
-          .isGreaterThanOrEqualTo(stellarMinBalance)
-      : true
+    const isLumens = whitelistedAsset.toStellarFormat().isNative()
+    const hasMinimumBalance =
+      this.props.isToEvrynet && isLumens
+        ? new BigNumber(this.props.accountBalance.state)
+            .minus(new BigNumber(formControls.amount.value).shiftedBy(decimal))
+            .isGreaterThanOrEqualTo(stellarMinBalance)
+        : true
     e.valid = isGreaterThanOrEqual && hasMinimumBalance
     e.errorMessage = e.valid ? null : 'Insufficient Amount'
     return e
