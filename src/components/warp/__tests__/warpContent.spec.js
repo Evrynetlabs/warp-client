@@ -1,6 +1,11 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { spyGetCode, warpConfigInstance } from '@Evrynetlabs/warp-js'
+import StellarBase from 'stellar-base'
+import {
+  spyGetCode,
+  warpConfigInstance,
+  spyToStellarFormat,
+} from '@Evrynetlabs/warp-js'
 import WarpContent from 'Components/warp/warp-content/WarpContent'
 import BigNumber from 'bignumber.js'
 
@@ -41,7 +46,6 @@ describe('WarpContent', () => {
   }
   spyGetCode.mockReturnValue('EVRY')
   let component
-
   beforeEach(() => {
     component = shallow(
       <WarpContent
@@ -349,11 +353,18 @@ describe('WarpContent', () => {
           minimumBalance: 0,
           accountBalanceState: new BigNumber('0'),
           creditOriginValue: 2,
-          issuerValue: 'bar1',
+          issuerValue:
+            'GD3LCO22AM4NUGJ3GBKISNL4LDRZN44YTZAUDXBUKA6UG67B2RGWNQOQ',
           codeValue: 'foo1',
           decimalValue: 1,
           amountValue: '1',
-          trustlines: [{ code: 'foo1', issuer: 'bar1' }],
+          trustlines: [
+            {
+              code: 'foo1',
+              issuer:
+                'GD3LCO22AM4NUGJ3GBKISNL4LDRZN44YTZAUDXBUKA6UG67B2RGWNQOQ',
+            },
+          ],
         },
         {
           valid: false,
@@ -366,11 +377,18 @@ describe('WarpContent', () => {
           minimumBalance: 0,
           accountBalanceState: new BigNumber('1').shiftedBy(18),
           creditOriginValue: 1,
-          issuerValue: 'bar1',
+          issuerValue:
+            'GD3LCO22AM4NUGJ3GBKISNL4LDRZN44YTZAUDXBUKA6UG67B2RGWNQOQ',
           codeValue: 'foo1',
           decimalValue: warpConfigInstance.evrynet.atomicEvryDecimalUnit,
           amountValue: '1',
-          trustlines: [{ code: 'foo1', issuer: 'bar1' }],
+          trustlines: [
+            {
+              code: 'foo1',
+              issuer:
+                'GD3LCO22AM4NUGJ3GBKISNL4LDRZN44YTZAUDXBUKA6UG67B2RGWNQOQ',
+            },
+          ],
         },
         {
           valid: true,
@@ -383,11 +401,18 @@ describe('WarpContent', () => {
           minimumBalance: 0,
           accountBalanceState: new BigNumber('1').shiftedBy(1),
           creditOriginValue: 2,
-          issuerValue: 'bar1',
+          issuerValue:
+            'GD3LCO22AM4NUGJ3GBKISNL4LDRZN44YTZAUDXBUKA6UG67B2RGWNQOQ',
           codeValue: 'foo1',
           decimalValue: 1,
           amountValue: '1',
-          trustlines: [{ code: 'foo1', issuer: 'bar1' }],
+          trustlines: [
+            {
+              code: 'foo1',
+              issuer:
+                'GD3LCO22AM4NUGJ3GBKISNL4LDRZN44YTZAUDXBUKA6UG67B2RGWNQOQ',
+            },
+          ],
         },
         {
           valid: true,
@@ -400,7 +425,8 @@ describe('WarpContent', () => {
           minimumBalance: 15000000,
           accountBalanceState: new BigNumber('1').shiftedBy(1),
           creditOriginValue: 2,
-          issuerValue: 'bar1',
+          issuerValue:
+            'GD3LCO22AM4NUGJ3GBKISNL4LDRZN44YTZAUDXBUKA6UG67B2RGWNQOQ',
           codeValue: 'foo1',
           decimalValue: 1,
           amountValue: '1',
@@ -417,7 +443,8 @@ describe('WarpContent', () => {
           minimumBalance: 15000000,
           accountBalanceState: new BigNumber('1').shiftedBy(1),
           creditOriginValue: 2,
-          issuerValue: 'bar1',
+          issuerValue:
+            'GD3LCO22AM4NUGJ3GBKISNL4LDRZN44YTZAUDXBUKA6UG67B2RGWNQOQ',
           codeValue: 'foo1',
           decimalValue: 1,
           amountValue: '1',
@@ -434,7 +461,8 @@ describe('WarpContent', () => {
           minimumBalance: 0,
           accountBalanceState: new BigNumber('0'),
           creditOriginValue: 2,
-          issuerValue: 'bar1',
+          issuerValue:
+            'GD3LCO22AM4NUGJ3GBKISNL4LDRZN44YTZAUDXBUKA6UG67B2RGWNQOQ',
           codeValue: 'foo1',
           decimalValue: 1,
           amountValue: '1',
@@ -453,7 +481,8 @@ describe('WarpContent', () => {
             warpConfigInstance.evrynet.atomicStellarDecimalUnit,
           ),
           creditOriginValue: 1,
-          issuerValue: 'bar1',
+          issuerValue:
+            'GD3LCO22AM4NUGJ3GBKISNL4LDRZN44YTZAUDXBUKA6UG67B2RGWNQOQ',
           codeValue: 'foo1',
           decimalValue: warpConfigInstance.evrynet.atomicStellarDecimalUnit,
           amountValue: '1',
@@ -461,7 +490,7 @@ describe('WarpContent', () => {
         },
         {
           input: 'amount',
-          valid: false,
+          valid: true,
         },
       ],
       [
@@ -472,7 +501,8 @@ describe('WarpContent', () => {
             warpConfigInstance.evrynet.atomicStellarDecimalUnit,
           ),
           creditOriginValue: 1,
-          issuerValue: 'bar1',
+          issuerValue:
+            'GD3LCO22AM4NUGJ3GBKISNL4LDRZN44YTZAUDXBUKA6UG67B2RGWNQOQ',
           codeValue: 'foo1',
           decimalValue: warpConfigInstance.evrynet.atomicStellarDecimalUnit,
           amountValue: '1',
@@ -491,15 +521,114 @@ describe('WarpContent', () => {
             warpConfigInstance.evrynet.atomicStellarDecimalUnit,
           ),
           creditOriginValue: 1,
-          issuerValue: 'bar1',
+          issuerValue:
+            'GD3LCO22AM4NUGJ3GBKISNL4LDRZN44YTZAUDXBUKA6UG67B2RGWNQOQ',
           codeValue: 'foo1',
           decimalValue: warpConfigInstance.evrynet.atomicStellarDecimalUnit,
           amountValue: '1',
-          trustlines: [[{ code: 'foo1', issuer: 'bar1' }]],
+          trustlines: [
+            [
+              {
+                code: 'foo1',
+                issuer:
+                  'GD3LCO22AM4NUGJ3GBKISNL4LDRZN44YTZAUDXBUKA6UG67B2RGWNQOQ',
+              },
+            ],
+          ],
         },
         {
           input: 'amount',
           valid: true,
+        },
+      ],
+      [
+        {
+          isToEvrynet: true,
+          minimumBalance: 15000100,
+          accountBalanceState: new BigNumber('1').shiftedBy(
+            warpConfigInstance.evrynet.atomicStellarDecimalUnit,
+          ),
+          creditOriginValue: 1,
+          issuerValue: '',
+          codeValue: 'xlm',
+          decimalValue: warpConfigInstance.evrynet.atomicStellarDecimalUnit,
+          amountValue: '1',
+          trustlines: [
+            [
+              {
+                code: 'xlm',
+                issuer: '',
+              },
+            ],
+          ],
+        },
+        {
+          input: 'amount',
+          valid: true,
+        },
+      ],
+      [
+        {
+          isToEvrynet: true,
+          minimumBalance: 10000100,
+          accountBalanceState: new BigNumber('1').shiftedBy(
+            warpConfigInstance.evrynet.atomicStellarDecimalUnit,
+          ),
+          creditOriginValue: 1,
+          issuerValue: '',
+          codeValue: 'xlm',
+          decimalValue: warpConfigInstance.evrynet.atomicStellarDecimalUnit,
+          amountValue: '1',
+          trustlines: [],
+        },
+        {
+          input: 'amount',
+          valid: true,
+        },
+      ],
+      [
+        {
+          isToEvrynet: true,
+          minimumBalance: 0,
+          accountBalanceState: new BigNumber('1').shiftedBy(
+            warpConfigInstance.evrynet.atomicStellarDecimalUnit,
+          ),
+          creditOriginValue: 1,
+          issuerValue: '',
+          codeValue: 'xlm',
+          decimalValue: warpConfigInstance.evrynet.atomicStellarDecimalUnit,
+          amountValue: '1',
+          trustlines: [],
+        },
+        {
+          input: 'amount',
+          valid: false,
+        },
+      ],
+      [
+        {
+          isToEvrynet: true,
+          minimumBalance: 15000099,
+          accountBalanceState: new BigNumber('1').shiftedBy(
+            warpConfigInstance.evrynet.atomicStellarDecimalUnit,
+          ),
+          creditOriginValue: 1,
+          issuerValue: '',
+          codeValue: 'xlm',
+          decimalValue: warpConfigInstance.evrynet.atomicStellarDecimalUnit,
+          amountValue: '1',
+          trustlines: [
+            [
+              {
+                code: 'xlm',
+                issuer: '',
+              },
+            ],
+          ],
+        },
+        {
+          input: 'amount',
+          valid: false,
         },
       ],
     ])('calling _onsubmit function', async (fields, expected) => {
@@ -512,6 +641,9 @@ describe('WarpContent', () => {
         issuer: fields.issuerValue,
         decimal: fields.decimalValue,
         creditOrigin: fields.creditOriginValue,
+        toStellarFormat: jest.fn().mockImplementation(() => {
+          return new StellarBase.Asset(fields.codeValue, fields.issuerValue)
+        }),
       }
       component.setProps({
         isToEvrynet: fields.isToEvrynet,
