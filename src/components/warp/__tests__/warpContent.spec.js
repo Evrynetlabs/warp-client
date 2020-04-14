@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import StellarBase from 'stellar-base'
-import { spyGetCode, warpConfigInstance } from '@Evrynetlabs/warp-js'
+import { spyGetCode, warpConfigInstance } from '@evrynetlabs/warp-js'
 import WarpContent from 'Components/warp/warp-content/WarpContent'
 import BigNumber from 'bignumber.js'
 
