@@ -1,4 +1,4 @@
-import Warp, { WarpConfig, initWarpConfig } from '@Evrynetlabs/warp-js'
+import Warp, { WarpConfig, initWarpConfig } from '@evrynetlabs/warp-js'
 let warpInstance
 
 export default function getWarpInstance() {

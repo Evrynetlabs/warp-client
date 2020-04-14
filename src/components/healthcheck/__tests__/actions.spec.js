@@ -9,7 +9,7 @@ import { initState } from 'Components/healthcheck/healthCheckReducer'
 import thunk from 'redux-thunk'
 import configureMockStore from 'redux-mock-store'
 import { HealthCheckException } from '@/exceptions'
-import { spyIsListening } from '@Evrynetlabs/warp-js'
+import { spyIsListening } from '@evrynetlabs/warp-js'
 
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
