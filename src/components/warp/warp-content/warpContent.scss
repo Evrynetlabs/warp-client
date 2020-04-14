@@ -54,6 +54,7 @@ $radius-size: 4px;
                 }
 
                 &__options {
+                    z-index: 1;
                     top: 44px;
                     border-bottom-left-radius: $radius-size;
                     border-bottom-right-radius: $radius-size;
