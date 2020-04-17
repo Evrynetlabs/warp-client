@@ -16,7 +16,7 @@ import {
   spyGetAccountBalance,
   spyGetPublickeyFromPrivateKey,
   spyGetTrustlines,
-} from '@Evrynetlabs/warp-js'
+} from '@evrynetlabs/warp-js'
 
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
