@@ -948,10 +948,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-9.0.1.tgz#c27b391d8457d1e893f1eddeaf5e5412d12ffbb5"
   integrity sha512-6It2EVfGskxZCQhuykrfnALg7oVeiI6KclWSmGDqB0AiInVrTGB9Jp9i4/Ad21u9Jde/voVQz6eFX/eSg/UsPA==
 
-"@evrynetlabs/warp-js@2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@evrynetlabs/warp-js/-/warp-js-2.0.1.tgz#5a2156456970fb67a99616d271afb51c01a625d2"
-  integrity sha512-3geV98nrzX8anwof9YyzwE5+JjPob0wAdHgBriUi6OK+Ki/OYm70hd8Jdi3hqtL4m8/63sMztAa9rdi5PCiayg==
+"@evrynetlabs/warp-js@2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@evrynetlabs/warp-js/-/warp-js-2.0.2.tgz#7407bdfec25d0328ec94f76933ebe7be5cb70a1b"
+  integrity sha512-C8jwjMqpM81KBJRnDH47fHTbM7Osq1gnSw2wY7vj1d4GT7ApUkAh5cexQMA77DVdc2L2vvqV8l2i6A/0DSkymA==
   dependencies:
     "@babel/plugin-transform-runtime" "^7.4.4"
     "@babel/runtime" "^7.4.5"
@@ -5939,10 +5939,10 @@ immer@1.10.0:
   resolved "https://registry.yarnpkg.com/immer/-/immer-1.10.0.tgz#bad67605ba9c810275d91e1c2a47d4582e98286d"
   integrity sha512-O3sR1/opvCDGLEVcvrGTMtLac8GJ5IwZC4puPrLuRj3l7ICKvkmA0vGuU9OW8mV9WIBRnaxp5GJh9IEAaNOoYg==
 
-immer@^6.0.2:
-  version "6.0.2"
-  resolved "https://registry.yarnpkg.com/immer/-/immer-6.0.2.tgz#5bc08dc4930c756d0749533a2afbd88c8de0cd19"
-  integrity sha512-56CMvUMZl4kkWJFFUe1TjBgGbyb9ibzpLyHD+RSKSVdytuDXgT/HXO1S+GJVywMVl5neGTdAogoR15eRVEd10Q==
+immer@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-8.0.1.tgz#9c73db683e2b3975c424fb0572af5889877ae656"
+  integrity sha512-aqXhGP7//Gui2+UrEtvxZxSquQVXTpZ7KDxfCcKAF3Vysvw0CViVaW9RZ1j1xlIYqaaaipBoqdqeibkc18PNvA==
 
 immutable@^3.8.1:
   version "3.8.2"
