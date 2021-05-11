@@ -948,10 +948,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-9.0.1.tgz#c27b391d8457d1e893f1eddeaf5e5412d12ffbb5"
   integrity sha512-6It2EVfGskxZCQhuykrfnALg7oVeiI6KclWSmGDqB0AiInVrTGB9Jp9i4/Ad21u9Jde/voVQz6eFX/eSg/UsPA==
 
-"@evrynetlabs/warp-js@2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@evrynetlabs/warp-js/-/warp-js-2.0.1.tgz#5a2156456970fb67a99616d271afb51c01a625d2"
-  integrity sha512-3geV98nrzX8anwof9YyzwE5+JjPob0wAdHgBriUi6OK+Ki/OYm70hd8Jdi3hqtL4m8/63sMztAa9rdi5PCiayg==
+"@evrynetlabs/warp-js@2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@evrynetlabs/warp-js/-/warp-js-2.0.2.tgz#7407bdfec25d0328ec94f76933ebe7be5cb70a1b"
+  integrity sha512-C8jwjMqpM81KBJRnDH47fHTbM7Osq1gnSw2wY7vj1d4GT7ApUkAh5cexQMA77DVdc2L2vvqV8l2i6A/0DSkymA==
   dependencies:
     "@babel/plugin-transform-runtime" "^7.4.4"
     "@babel/runtime" "^7.4.5"
@@ -7405,10 +7405,10 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-"lodash@>=3.5 <5", lodash@^4.0.0, lodash@^4.15.0, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.5, lodash@^4.2.0, lodash@~4.17.10:
-  version "4.17.15"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
-  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
+"lodash@>=3.5 <5", lodash@^4.0.0, lodash@^4.15.0, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.21, lodash@^4.17.5, lodash@^4.2.0, lodash@~4.17.10:
+  version "4.17.21"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
+  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
 
 loglevel@^1.4.1:
   version "1.6.4"
